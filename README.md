@@ -73,7 +73,17 @@ The result must be similar to:
 ```
 ### Using Docker
 
+```
+docker run -p 4061:4061 ioeari/iotagent-lora
+```
+
 ### Using Docker-compose
+
+This project contains an example to deploy the IoTA and all the requirement using docker-compose.
+
+```
+docker-compose -f docker/docker-compose.yml up
+```
 
 ## Users manual
 
