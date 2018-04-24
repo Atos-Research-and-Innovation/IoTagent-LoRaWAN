@@ -25,6 +25,56 @@ As it is explained in [What is LoRaWAN™](https://lora-alliance.org/sites/defau
 
 ## Installation
 
+### Requirements
+- [Node.js](https://nodejs.org/en/)
+- [MongoDB](https://docs.mongodb.com/manual/installation/)
+- [FIWARE Orion Context Broker](https://github.com/telefonicaid/fiware-orion)
+
+### Cloning the Github repository
+
+1. Clone the repository with the following command:
+```
+https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN.git
+```
+
+2. Once the repository is cloned, from the root folder of the project execute:
+```
+npm install
+```
+This will download the dependencies for the project, and let it ready to the execution.
+
+3. Launch the IoT Agent with the default configuration
+```
+node bin/iotagent-lora
+```
+
+You can use a custom configuration file:
+
+```
+node bin/iotagent-lora custom_config.js
+```
+The bootstrap process should finish with:
+
+```
+info: Loading devices from registry
+info: LoRaWAN IoT Agent started
+```
+
+4. Check that the IoTA is running correctly:
+
+```
+curl -v http://localhost:4061/iot/about
+```
+
+The result must be similar to:
+
+```
+{"libVersion":"2.6.0-next","port":4061,"baseRoot":"/"}
+```
+### Using Docker
+
+### Using Docker-compose
+
 ## Users manual
 
 ## Development documentation
