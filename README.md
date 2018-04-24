@@ -87,7 +87,11 @@ docker-compose -f docker/docker-compose.yml up
 
 ## Users manual
 
-## Development documentation
+Please check [Users manual wiki page](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/wiki/Users-manual)
+
+## Development manual
+
+Please check [Development manual wiki page](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/wiki/Development-manual)
 
 ## License 
 
