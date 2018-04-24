@@ -8,10 +8,18 @@ branches:
   only:
     - master
 
+services:
+  - mongodb
+  - docker
+
 install:
  - npm install
 
 before_install:
+ - docker pull fiware/orion:latest
+ - docker run -d --net host -l orion fiware/orion:latest
+ - docker pull ansi/mosquitto
+ - docker run -d --net host -l mosquitto ansi/mosquitto
  - npm update -q  
  - npm install -g grunt-cli
 
