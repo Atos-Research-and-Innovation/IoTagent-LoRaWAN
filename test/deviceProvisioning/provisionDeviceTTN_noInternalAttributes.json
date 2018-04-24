@@ -1,0 +1,37 @@
+{
+  "devices": [
+    {
+      "device_id": "lora_n_003",
+      "entity_name": "LORA-N-003",
+      "entity_type": "LoraDevice",
+      "timezone": "America/Santiago",
+      "attributes": [
+        {
+          "object_id": "bp0",
+          "name": "barometric_pressure_0",
+          "type": "Number"
+        },
+        {
+          "object_id": "di3",
+          "name": "digital_in_3",
+          "type": "Number"
+        },
+        {
+          "object_id": "do4",
+          "name": "digital_out_4",
+          "type": "Number"
+        },  
+        {
+          "object_id": "rh2",
+          "name": "relative_humidity_2",
+          "type": "Number"
+        }, 
+        {
+          "object_id": "t1",
+          "name": "temperature_1",
+          "type": "Number"
+        }       
+      ]
+    }
+  ]
+}

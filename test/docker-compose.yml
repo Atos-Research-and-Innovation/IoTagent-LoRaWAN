@@ -1,0 +1,46 @@
+version: '2'
+
+services:
+
+  mongodb:
+    expose:
+      - "27017"
+    hostname: mongodb
+    image: mongo:3.2
+    stdin_open: true
+    tty: true
+
+  orion:
+    command:  -dbhost mongodb -port 1026 -logLevel DEBUG
+    depends_on:
+      - mongodb
+    expose:
+        - "1026"
+    hostname: orion
+    image: fiware/orion:latest
+    stdin_open: true
+    tty: true
+
+  mosquitto:
+    expose:
+        - "1883"
+    hostname: mosquitto
+    image: eclipse-mosquitto:latest
+    stdin_open: true
+    tty: true
+  
+  iotagent-lora:
+    depends_on:
+      - mongodb
+      - mosquitto
+      - orion
+    entrypoint: bin/iotagent-lora test/config-test.js
+    environment:
+      - IOTA_CB_HOST=orion
+      - IOTA_CB_PORT=1026
+      - TEST_MOSQUITTO_HOST=mosquitto
+      - TEST_MONGODB_HOST=mongodb
+    hostname: iotagent-lora
+    image: ioeari/iotagent-lora:${CI_BUILD_REF}
+    stdin_open: true
+    tty: true

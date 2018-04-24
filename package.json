@@ -1,0 +1,41 @@
+{
+  "name": "iotagent-lora",
+  "version": "1.0.0",
+  "description": "IoT Agent for LoRaWAN protocol",
+  "main": "lib/iotagent-lora",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.atosresearch.eu/ari/iotagent-lora.git"
+  },
+  "author": "ATOS SPAIN S.A. IoE Lab, Resarch and Innovation department",
+  "dependencies": {
+    "async": "^2.6.0",
+    "cbor-sync": "^1.0.2",
+    "iotagent-node-lib": "git://github.com/dcalvoalonso/iotagent-node-lib.git#task/activeAttsNgsi2",
+    "mqtt": "^2.15.3",
+    "request": "^2.83.0",
+    "winston": "^2.4.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.18.1",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-mocha": "^4.11.0",
+    "eslint-plugin-node": "^6.0.0",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "grunt": "^1.0.2",
+    "grunt-eslint": "^20.1.0",
+    "grunt-mocha-istanbul": "^5.0.2",
+    "grunt-mocha-test": "^0.13.3",
+    "istanbul": "^0.4.5",
+    "load-grunt-tasks": "^3.5.2",
+    "mocha": "^5.0.1",
+    "nock": "^9.1.6",
+    "unit.js": "^2.0.0"
+  }
+}

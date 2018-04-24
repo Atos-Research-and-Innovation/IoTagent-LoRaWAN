@@ -1,0 +1,34 @@
+#!/usr/bin/env node
+
+/*
+ * Copyright 2018 ATOS SPAIN S.A
+ *
+ * This file is part of iotagent-lora
+ *
+ */
+
+'use strict';
+
+var iotAgentLora = require('../lib/iotagent-lora');
+var winston = require('winston');
+
+function start () {
+    var config;
+
+    if (process.argv.length === 3) {
+        config = require('../' + process.argv[2]);
+    } else {
+        config = require('../config');
+    }
+
+    iotAgentLora.start(config, function (error) {
+        if (error) {
+            winston.error('Error starting LoRaWAN IoT Agent: %s',
+                JSON.stringify(error));
+        } else {
+            winston.info('LoRaWAN IoT Agent started');
+        }
+    });
+}
+
+start();
