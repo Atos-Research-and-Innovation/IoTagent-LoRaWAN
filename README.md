@@ -73,6 +73,8 @@ The result must be similar to:
 ```
 ### Using Docker
 
+A ready to use Docker image is [provided](https://hub.docker.com/r/ioeari/iotagent-lora/)
+
 ```
 docker run -p 4061:4061 ioeari/iotagent-lora
 ```
