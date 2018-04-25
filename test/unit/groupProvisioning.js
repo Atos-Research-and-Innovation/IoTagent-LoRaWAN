@@ -218,8 +218,7 @@ describe('Configuration provisioning API: Provision groups', function () {
                 async.apply(iotagentLora.start, iotAgentConfig)
             ], function (err) {
                 test.should.not.exist(err);
-                var attributesExample = utils.readExampleFile('./test/activeAttributes/cayenneLpp.json');
-                attributesExample.payload_fields.temperature_1 = 28;
+                var attributesExample = utils.readExampleFile('./test/activeAttributes/cayenneLpp3.json');
                 attributesExample['dev_id'] = devId;
                 var client = mqtt.connect('mqtt://' + testMosquittoHost);
                 client.on('connect', function () {

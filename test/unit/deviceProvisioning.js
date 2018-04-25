@@ -361,40 +361,21 @@ describe('Device provisioning API: Provision devices', function () {
         });
     });
 
-    describe('Active attributes are reported using attributes alias', function () {
+    describe('Active attributes are reported but bad payload is received', function () {
         it('Should process correctly active attributes', function (done) {
-            var optionsCB = {
-                url: 'http://' + orionServer + '/v2/entities/LORA-N-003',
-                method: 'GET',
-                json: true,
-                headers: {
-                    'fiware-service': service,
-                    'fiware-servicepath': subservice
-                }
-            };
-            var attributesExample = utils.readExampleFile('./test/activeAttributes/cayenneLpp_alias.json');
+            var attributesExample = utils.readExampleFile('./test/activeAttributes/cayenneLpp_bad_json.json', true);
             var client = mqtt.connect('mqtt://' + testMosquittoHost);
             client.on('connect', function () {
                 client.publish('ari_ioe_app_demo1/devices/lora_n_003/up', JSON.stringify(attributesExample));
                 setTimeout(function () {
-                    request(optionsCB, function (error, response, body) {
-                        test.should.not.exist(error);
-                        test.object(response).hasProperty('statusCode', 200);
-                        test.object(body).hasProperty('id', 'LORA-N-003');
-                        test.object(body).hasProperty('temperature_1');
-                        test.object(body['temperature_1']).hasProperty('type', 'Number');
-                        test.object(body['temperature_1']).hasProperty('value', 28.2);
-                        client.end();
-                        done();
-                    });
+                    client.end();
+                    done();
                 }, 500);
             });
         });
-    });
 
-    describe('Active attributes are reported but bad payload is received', function () {
         it('Should process correctly active attributes', function (done) {
-            var attributesExample = utils.readExampleFile('./test/activeAttributes/cayenneLpp_bad_json.json', true);
+            var attributesExample = utils.readExampleFile('./test/activeAttributes/cayenneLpp_bad_raw.json', true);
             var client = mqtt.connect('mqtt://' + testMosquittoHost);
             client.on('connect', function () {
                 client.publish('ari_ioe_app_demo1/devices/lora_n_003/up', JSON.stringify(attributesExample));
@@ -417,8 +398,7 @@ describe('Device provisioning API: Provision devices', function () {
                     'fiware-servicepath': subservice
                 }
             };
-            var attributesExample = utils.readExampleFile('./test/activeAttributes/cayenneLpp_alias.json');
-            attributesExample.payload_fields.t1 = 28;
+            var attributesExample = utils.readExampleFile('./test/activeAttributes/cayenneLpp3.json');
             async.waterfall([
                 iotagentLora.stop,
                 async.apply(iotagentLora.start, iotAgentConfig)
