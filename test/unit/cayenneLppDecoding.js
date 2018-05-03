@@ -36,6 +36,13 @@ describe('CayenneLpp decoding', function () {
         return done();
     });
 
+    it('Should decode a payload with temperature', function (done) {
+        var cayenneLppMessageBase64 = 'AWf/1w==';
+        var decodedMessage = decoder.decodeCayenneLpp(cayenneLppMessageBase64);
+        test.object(decodedMessage).hasProperty('temperature_1', -4.1);
+        return done();
+    });
+
     it('Should decode a payload with analog input and analog output', function (done) {
         var cayenneLppMessageBase64 = 'DQL63gADEkU=';
         var decodedMessage = decoder.decodeCayenneLpp(cayenneLppMessageBase64);
@@ -53,12 +60,12 @@ describe('CayenneLpp decoding', function () {
     });
 
     it('Should decode a payload with accelerometer', function (done) {
-        var cayenneLppMessageBase64 = 'IXFTwBtOIzI=';
+        var cayenneLppMessageBase64 = 'BnEE0vsuAAA==';
         var decodedMessage = decoder.decodeCayenneLpp(cayenneLppMessageBase64);
-        test.object(decodedMessage).hasProperty('accelerometer_33');
-        test.object(decodedMessage['accelerometer_33']).hasProperty('x', 21.44);
-        test.object(decodedMessage['accelerometer_33']).hasProperty('y', 6.99);
-        test.object(decodedMessage['accelerometer_33']).hasProperty('z', 9.01);
+        test.object(decodedMessage).hasProperty('accelerometer_6');
+        test.object(decodedMessage['accelerometer_6']).hasProperty('x', 1.234);
+        test.object(decodedMessage['accelerometer_6']).hasProperty('y', -1.234);
+        test.object(decodedMessage['accelerometer_6']).hasProperty('z', 0);
         return done();
     });
 
@@ -73,12 +80,12 @@ describe('CayenneLpp decoding', function () {
     });
 
     it('Should decode a payload with GPS', function (done) {
-        var cayenneLppMessageBase64 = 'FIgAqigBGhIATwA=';
+        var cayenneLppMessageBase64 = 'AYgGdl/ylgoAA+g=';
         var decodedMessage = decoder.decodeCayenneLpp(cayenneLppMessageBase64);
-        test.object(decodedMessage).hasProperty('gps_20');
-        test.object(decodedMessage['gps_20']).hasProperty('latitude', 43.56);
-        test.object(decodedMessage['gps_20']).hasProperty('longitude', 72.21);
-        test.object(decodedMessage['gps_20']).hasProperty('altitude', 202.24);
+        test.object(decodedMessage).hasProperty('gps_1');
+        test.object(decodedMessage['gps_1']).hasProperty('latitude', 42.3519);
+        test.object(decodedMessage['gps_1']).hasProperty('longitude', -87.9094);
+        test.object(decodedMessage['gps_1']).hasProperty('altitude', 10);
         return done();
     });
 });
