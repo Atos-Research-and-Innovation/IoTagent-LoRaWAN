@@ -1,0 +1,33 @@
+{
+    "applicationID": "1",
+    "applicationName": "temperature-sensor",
+    "deviceName": "garden-sensor",
+    "devEUI": "3339343752356A14",
+    "deviceStatusBattery": 200,
+    "deviceStatusMargin": 6,
+    "rxInfo": [
+        {
+            "mac": "0303030303030303",
+            "name": "rooftop-gateway",
+            "latitude": 52.3740364,
+            "longitude": 4.9144401,
+            "altitude": 10.5,
+            "time": "2016-11-25T16:24:37.295915988Z",
+            "rssi": -57,
+            "loRaSNR": 10
+        }
+    ],
+    "txInfo": {
+        "frequency": 868100000,
+        "dataRate": {
+            "modulation": "LORA",
+            "bandwidth": 250,    
+            "spreadFactor": 5
+        },
+        "adr": false,
+        "codeRate": "4/6"
+    },
+    "fCnt": 10,
+    "fPort": 5,
+    "data": "AWcA1A=="
+}

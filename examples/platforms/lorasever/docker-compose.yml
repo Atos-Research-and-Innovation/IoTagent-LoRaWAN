@@ -1,0 +1,47 @@
+version: "2"
+
+volumes:
+  postgresql_data:
+  redis_data:
+
+services:
+
+  loraserver:
+    build:
+      context: ./
+      dockerfile: Dockerfile_nw_server
+
+  appserver:
+    build:
+      context: ./
+      dockerfile: Dockerfile_app_server
+    ports:
+      - 8080:8080
+
+  gatewaybridge:
+    build:
+      context: ./
+      dockerfile: Dockerfile_gw_bridge
+    ports:
+      - 1700:1700/udp
+
+  postgresql:
+    build:
+      context: ./
+      dockerfile: Dockerfile_postgresql
+    ports:
+      - 5432
+    volumes:
+      - postgresql_data:/var/lib/postgresql/data
+
+  redis:
+    ports:
+      - 6379
+    image: redis:4-alpine
+    volumes:
+      - redis_data:/data
+
+  mosquitto:
+    image: eclipse-mosquitto
+    ports:
+      - 1883:1883

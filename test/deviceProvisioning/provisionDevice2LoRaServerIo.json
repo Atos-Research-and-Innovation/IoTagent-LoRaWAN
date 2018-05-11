@@ -1,0 +1,44 @@
+{
+  "devices": [
+    {
+      "device_id": "lora_n_001",
+      "entity_name": "LORA-N-001",
+      "entity_type": "LoraDevice",
+      "timezone": "America/Santiago",
+      "attributes": [
+        {
+          "name": "barometric_pressure_0",
+          "type": "Number"
+        },
+        {
+          "name": "digital_in_3",
+          "type": "Number"
+        },
+        {
+          "name": "digital_out_4",
+          "type": "Number"
+        },  
+        {
+          "name": "relative_humidity_2",
+          "type": "Number"
+        }, 
+        {
+          "name": "temperature_1",
+          "type": "Number"
+        }       
+      ],
+      "internal_attributes": {
+        "lorawan": {
+          "application_server": {
+            "host": "localhost",
+            "provider": "loraserver.io"
+          },
+          "dev_eui": "4339343752356A15",
+          "app_eui": "70B3D57ED000985F",
+          "application_id": "1",
+          "application_key": "9BE6B8EF16415B5F6ED4FBEAFE695C49"
+        }
+      }
+    }
+  ]
+}
