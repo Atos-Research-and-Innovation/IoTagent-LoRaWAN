@@ -1,0 +1,2 @@
+FROM loraserver/lora-app-server:latest
+COPY /configuration/lora-app-server /etc/lora-app-server

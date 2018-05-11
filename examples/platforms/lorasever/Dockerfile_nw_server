@@ -1,0 +1,2 @@
+FROM loraserver/loraserver:latest
+COPY /configuration/loraserver /etc/loraserver
