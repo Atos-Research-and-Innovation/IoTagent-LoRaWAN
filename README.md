@@ -22,6 +22,7 @@ As it is explained in [What is LoRaWAN™](https://lora-alliance.org/sites/defau
 ### Supported stacks
 
 - [The Things Network](https://www.thethingsnetwork.org/)
+- [LoRaServer](https://www.loraserver.io/)
 
 ### Data models
 
