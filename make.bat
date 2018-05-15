@@ -7,7 +7,7 @@ REM Command file for Sphinx documentation
 if "%SPHINXBUILD%" == "" (
 	set SPHINXBUILD=sphinx-build
 )
-set SOURCEDIR=.
+set SOURCEDIR=docs
 set BUILDDIR=_build
 set SPHINXPROJ=IoTAgentLoRaWAN
 
