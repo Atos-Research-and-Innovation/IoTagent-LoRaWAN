@@ -1,3 +1,4 @@
+
 FIWARE IoT Agent for LoRaWAN protocol
 =====================================
 
@@ -132,14 +133,12 @@ requirement using docker-compose.
 Users manual
 ------------
 
-Please check `Users manual wiki
-page <https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/wiki/Users-manual>`__
+Please check :ref:`users_manual`.
 
 Development manual
 ------------------
 
-Please check `Development manual wiki
-page <https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/wiki/Development-manual>`__
+Please check :ref:`dev_manual`.
 
 License
 -------
