@@ -84,28 +84,28 @@ Cloning the Github repository
 
        node bin/iotagent-lora
 
-You can use a custom configuration file:
+   You can use a custom configuration file:
 
-::
+   ::
 
     node bin/iotagent-lora custom_config.js
 
-The bootstrap process should finish with:
+   The bootstrap process should finish with:
 
-::
+   ::
 
     info: Loading devices from registry
     info: LoRaWAN IoT Agent started
 
 4. Check that the IoTA is running correctly:
 
-::
+   ::
 
     curl -v http://localhost:4061/iot/about
 
-The result must be similar to:
+   The result must be similar to:
 
-::
+   ::
 
     {"libVersion":"2.6.0-next","port":4061,"baseRoot":"/"}
 
