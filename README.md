@@ -43,40 +43,34 @@ As it is explained in [What is LoRaWAN™](https://lora-alliance.org/sites/defau
 https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN.git
 ```
 
-2. Once the repository is cloned, from the root folder of the project execute:
+2. Once the repository is cloned, you have to download the dependencies for the project, and let it ready to the execution. From the root folder of the project execute:
 ```
 npm install
 ```
-This will download the dependencies for the project, and let it ready to the execution.
 
 3. Launch the IoT Agent with the default configuration
 ```
 node bin/iotagent-lora
 ```
-
 You can use a custom configuration file:
-
 ```
 node bin/iotagent-lora custom_config.js
 ```
 The bootstrap process should finish with:
-
 ```
 info: Loading devices from registry
 info: LoRaWAN IoT Agent started
 ```
 
 4. Check that the IoTA is running correctly:
-
-```
+ ```
 curl -v http://localhost:4061/iot/about
 ```
-
 The result must be similar to:
-
 ```
 {"libVersion":"2.6.0-next","port":4061,"baseRoot":"/"}
 ```
+
 ### Using Docker
 
 A ready to use Docker image is [provided](https://hub.docker.com/r/ioeari/iotagent-lora/)
@@ -101,6 +95,6 @@ Please check [Users manual wiki page](users_manual.md)
 
 Please check [Development manual wiki page](development_manual.md)
 
-## License 
+## License
 
 FIWARE IoT Agent for LoRaWAN protocol is licensed under Affero General Public License (GPL) version 3.
