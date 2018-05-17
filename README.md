@@ -6,6 +6,8 @@
 [![Support badge](https://img.shields.io/badge/support-sof-yellowgreen.svg)](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/issues)
 [![Build Status](https://img.shields.io/travis/Atos-Research-and-Innovation/IoTagent-LoRaWAN.svg?branch=master)](https://travis-ci.org/Atos-Research-and-Innovation/IoTagent-LoRaWAN/branches)
 
+Copyright 2018 Atos Spain S.A
+
 FIWARE *Internet of Things* Agent for LoRaWAN protocol enables data and commands to be exchanged between IoT devices and [FIWARE NGSI Context Brokers](https://forge.fiware.org/plugins/mediawiki/wiki/fiware/index.php/FIWARE.OpenSpecification.Data.ContextBroker) using [LoRaWAN](https://lora-alliance.org/about-lorawan) protocol.
 
 It is based on the [FIWARE IoT Agent Node.js Library](https://github.com/telefonicaid/iotagent-node-lib). Further general information about FIWARE IoT Agents framework, its architecture and interaction model can be found in this repository.
@@ -99,3 +101,5 @@ Please check [Development manual](docs/development_manual.md)
 ## License
 
 FIWARE IoT Agent for LoRaWAN protocol is licensed under Affero General Public License (GPL) version 3.
+
+Copyright 2018 Atos Spain S.A
