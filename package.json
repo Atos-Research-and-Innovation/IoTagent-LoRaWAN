@@ -15,7 +15,7 @@
   "dependencies": {
     "async": "^2.6.0",
     "cbor-sync": "^1.0.2",
-    "iotagent-node-lib": "git://github.com/dcalvoalonso/iotagent-node-lib.git#task/activeAttsNgsi2",
+    "iotagent-node-lib": "git://github.com/telefonicaid/iotagent-node-lib.git#master",
     "mqtt": "^2.15.3",
     "request": "^2.83.0",
     "winston": "^2.4.0"
