@@ -1,6 +1,7 @@
 # FIWARE IoT Agent for LoRaWAN protocol
 
 [![License badge](https://img.shields.io/badge/license-AGPL-blue.svg)](https://opensource.org/licenses/AGPL-3.0)
+[![Documentation badge](https://readthedocs.org/projects/iot-agent-lorawan/badge/?version=latest)](http://iot-agent-lorawan.readthedocs.io/en/latest/?badge=latest)
 [![Docker badge](https://img.shields.io/docker/pulls/ioeari/iotagent-lora.svg)](https://hub.docker.com/r/ioeari/iotagent-lora/)
 [![Support badge](https://img.shields.io/badge/support-sof-yellowgreen.svg)](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/issues)
 [![Build Status](https://img.shields.io/travis/Atos-Research-and-Innovation/IoTagent-LoRaWAN.svg?branch=master)](https://travis-ci.org/Atos-Research-and-Innovation/IoTagent-LoRaWAN/branches)
