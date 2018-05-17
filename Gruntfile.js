@@ -50,6 +50,14 @@ module.exports = function(grunt) {
     },
     eslint: {
       target: ['lib/**/*.js','test/**/*.js']
+    },
+    mkdocs: {
+      dist: {
+        src: '.',
+        options: {
+          clean: true
+        }
+      }
     }
   });
 
@@ -59,7 +67,7 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-mocha-istanbul');
-
+  grunt.loadNpmTasks('grunt-mkdocs');
 
   grunt.registerTask('test', 'Run tests', ['mochaTest']);
   grunt.registerTask('lint', 'Check source code style', ['eslint']);
