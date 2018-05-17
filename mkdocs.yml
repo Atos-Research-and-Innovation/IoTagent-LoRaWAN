@@ -11,3 +11,4 @@ pages:
     - Home: index.md
     - Users maual: users_manual.md
     - Development manual: development_manual.md
+    - Contributing: CONTRIBUTING.md

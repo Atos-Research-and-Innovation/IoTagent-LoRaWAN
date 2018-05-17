@@ -90,11 +90,11 @@ docker-compose -f docker/docker-compose.yml up
 
 ## Users manual
 
-Please check [Users manual wiki page](docs/users_manual.md)
+Please check [Users manual](docs/users_manual.md)
 
 ## Development manual
 
-Please check [Development manual wiki page](docs/development_manual.md)
+Please check [Development manual](docs/development_manual.md)
 
 ## License
 

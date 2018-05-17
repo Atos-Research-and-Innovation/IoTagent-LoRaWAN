@@ -1,6 +1,6 @@
 # Contributions
 
-Please check [contribution guidelines](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/master/CONTRIBUTING.md).
+Please check [contribution guidelines](CONTRIBUTING.md).
 
 # Testing
 

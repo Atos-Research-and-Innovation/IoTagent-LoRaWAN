@@ -39,17 +39,16 @@ As it is explained in [What is LoRaWAN™](https://lora-alliance.org/sites/defau
 
 ### Cloning the Github repository
 
-1. Clone the repository with the following command:
+- Clone the repository with the following command:
 ```
 https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN.git
 ```
-
-2. Once the repository is cloned, you have to download the dependencies for the project, and let it ready to the execution. From the root folder of the project execute:
+- Once the repository is cloned, you have to download the dependencies for the project, and let it ready to the execution. From the root folder of the project execute:
 ```
 npm install
 ```
 
-3. Launch the IoT Agent with the default configuration
+- Launch the IoT Agent with the default configuration
 ```
 node bin/iotagent-lora
 ```
@@ -63,8 +62,8 @@ info: Loading devices from registry
 info: LoRaWAN IoT Agent started
 ```
 
-4. Check that the IoTA is running correctly:
- ```
+- Check that the IoTA is running correctly:
+```
 curl -v http://localhost:4061/iot/about
 ```
 The result must be similar to:
@@ -90,11 +89,11 @@ docker-compose -f docker/docker-compose.yml up
 
 ## Users manual
 
-Please check [Users manual wiki page](users_manual.md)
+Please check [Users manual](users_manual.md)
 
 ## Development manual
 
-Please check [Development manual wiki page](development_manual.md)
+Please check [Development manual](development_manual.md)
 
 ## License
 
