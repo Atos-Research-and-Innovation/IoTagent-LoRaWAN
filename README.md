@@ -20,7 +20,7 @@ This project is part of [FIWARE](https://www.fiware.org/). Check also the FIWARE
 
 As it is explained in [What is LoRaWAN™](https://lora-alliance.org/sites/default/files/2018-04/what-is-lorawan.pdf), the proposed *Network Architecture* for a LoRaWAN based system relies on a mesh network architecture composed of *End nodes*, *Concentrators*, *Network Servers* and *Application Servers*. This IoTA is fully compliant with this architecture, providing interoperability between FIWARE NGSI Context Brokers and LoRaWAN devices.
 
-![General](https://raw.githubusercontent.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/master/docs/img/iotagent_lorawan_arch.png )
+![General](https://raw.githubusercontent.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/master/docs/img/iotagent_lorawan_arch.png)
 
 ### Supported stacks
 
