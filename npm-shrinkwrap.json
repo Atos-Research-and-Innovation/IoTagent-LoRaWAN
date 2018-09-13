@@ -1992,7 +1992,7 @@
       }
     },
     "iotagent-node-lib": {
-      "version": "git://github.com/dcalvoalonso/iotagent-node-lib.git#ad30fa9d35c5d9f5262be4e49e37a2dc6aeaebb8",
+      "version": "git://github.com/telefonicaid/iotagent-node-lib.git#fb1c50b6060ad9a7829713c115b497ed1cd73662",
       "requires": {
         "async": "1.5.2",
         "body-parser": "1.18.3",
@@ -2050,13 +2050,8 @@
             "stringstream": "0.0.5",
             "tough-cookie": "2.3.4",
             "tunnel-agent": "0.6.0",
-            "uuid": "3.2.1"
+            "uuid": "3.3.2"
           }
-        },
-        "uuid": {
-          "version": "3.2.1",
-          "resolved": "https://registry.npmjs.org/uuid/-/uuid-3.2.1.tgz",
-          "integrity": "sha512-jZnMwlb9Iku/O3smGWvZhauCf6cvvpKi4BKRiliS3cxnI+Gz9j5MEpTz2UFuXiKPJocb7gnsLHwiS05ige5BEA=="
         }
       }
     },
@@ -4519,6 +4514,11 @@
       "version": "1.0.1",
       "resolved": "https://registry.npmjs.org/utils-merge/-/utils-merge-1.0.1.tgz",
       "integrity": "sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM="
+    },
+    "uuid": {
+      "version": "3.3.2",
+      "resolved": "https://registry.npmjs.org/uuid/-/uuid-3.3.2.tgz",
+      "integrity": "sha512-yXJmeNaw3DnnKAOKJE51sL/ZaYfWJRl1pK9dr19YFCu0ObS231AB1/LbqTKRAQ5kw8A90rA6fr4riOUpTZvQZA=="
     },
     "validate-npm-package-license": {
       "version": "3.0.3",
