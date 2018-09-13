@@ -138,8 +138,11 @@ describe('Configuration provisioning API: Provision groups', function () {
                     request(optionsGetService, function (error, response, body) {
                         test.should.not.exist(error);
                         test.object(response).hasProperty('statusCode', 200);
-                        test.object(body).hasProperty('entity_type', options.json.services[0]['entity_type']);
-                        test.object(body).hasProperty('_id');
+                        test.object(body).hasProperty('count', 1);
+                        test.object(body).hasProperty('services');
+                        test.array(body.services).hasLength(1);
+                        test.object(body.services[0]).hasProperty('entity_type', options.json.services[0]['entity_type']);
+                        test.object(body.services[0]).hasProperty('_id');
                         done();
                     });
                 }, 500);

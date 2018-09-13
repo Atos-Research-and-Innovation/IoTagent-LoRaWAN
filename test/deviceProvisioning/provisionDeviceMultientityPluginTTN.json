@@ -28,7 +28,6 @@
           "type": "Number"
         }, 
         {
-          "object_id": "t1",
           "name": "temperature_1",
           "type": "Number",
           "entity_name": "Mote001",

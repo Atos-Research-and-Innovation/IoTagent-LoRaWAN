@@ -101,10 +101,32 @@ describe('NGSI translation', function (done) {
 
     };
 
+    var deviceGps = {
+        active: [
+            {
+                name: 'gps_1',
+                type: 'geo:point'
+            }
+        ]
+
+    };
+
     it('Should translate a CayenneLpp payload to NGSI', function (done) {
         var cayenneLppMessageBase64 = 'AHMAAAFnARACaAADAGQEAQA=';
         var decodedMessage = decoder.toNgsi(cayenneLppMessageBase64, device);
         test.array(decodedMessage);
+        return done();
+    });
+
+    it('Should translate a CayenneLpp payload including GPS to NGSI', function (done) {
+        var cayenneLppMessageBase64 = 'AYgGdl/ylgoAA+g=';
+        var decodedMessage = decoder.toNgsi(cayenneLppMessageBase64, deviceGps);
+        test.array(decodedMessage);
+        test.array(decodedMessage).hasLength(1);
+        test.object(decodedMessage[0]);
+        test.object(decodedMessage[0]).hasProperty('name', 'gps_1');
+        test.object(decodedMessage[0]).hasProperty('type', 'geo:point');
+        test.object(decodedMessage[0]).hasProperty('value', '42.3519,-87.9094');
         return done();
     });
 });
