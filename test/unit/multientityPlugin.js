@@ -168,62 +168,62 @@ describe('Multientity plugin', function () {
             });
         });
 
-        // it('Should process correctly active attributes represented in CBOR model', function (done) {
-        //     var rawJSONPayload = {
-        //         barometric_pressure_0: 0,
-        //         digital_in_3: 101,
-        //         digital_out_4: 0,
-        //         relative_humidity_2: 0,
-        //         temperature_1: 27.2
-        //     };
+        it('Should process correctly active attributes represented in CBOR model', function (done) {
+            var rawJSONPayload = {
+                barometric_pressure_0: 0,
+                digital_in_3: 101,
+                digital_out_4: 0,
+                relative_humidity_2: 0,
+                temperature_1: 27.2
+            };
 
-        //     var optionsCB = {
-        //         url: 'http://' + orionServer + '/v2/entities/' + options.json.devices[0]['entity_name'],
-        //         method: 'GET',
-        //         json: true,
-        //         headers: {
-        //             'fiware-service': service,
-        //             'fiware-servicepath': subservice
-        //         }
-        //     };
+            var optionsCB = {
+                url: 'http://' + orionServer + '/v2/entities/' + options.json.devices[0]['entity_name'],
+                method: 'GET',
+                json: true,
+                headers: {
+                    'fiware-service': service,
+                    'fiware-servicepath': subservice
+                }
+            };
 
-        //     var optionsCBMultiEntity = {
-        //         url: 'http://' + orionServer + '/v2/entities/' + multientityName,
-        //         method: 'GET',
-        //         json: true,
-        //         headers: {
-        //             'fiware-service': service,
-        //             'fiware-servicepath': subservice
-        //         }
-        //     };
+            var optionsCBMultiEntity = {
+                url: 'http://' + orionServer + '/v2/entities/' + multientityName,
+                method: 'GET',
+                json: true,
+                headers: {
+                    'fiware-service': service,
+                    'fiware-servicepath': subservice
+                }
+            };
 
-        //     var encodedBuffer = CBOR.encode(rawJSONPayload);
-        //     var attributesExample = utils.readExampleFile('./test/activeAttributes/emptyCbor.json');
-        //     attributesExample['payload_raw'] = encodedBuffer.toString('base64');
-        //     var client = mqtt.connect('mqtt://' + testMosquittoHost);
-        //     client.on('connect', function () {
-        //         client.publish(options.json.devices[0]['internal_attributes']['lorawan']['application_id'] + '/devices/' + options.json.devices[0]['device_id'] + '/up', JSON.stringify(attributesExample));
-        //         setTimeout(function () {
-        //             request(optionsCB, function (error, response, body) {
-        //                 test.should.not.exist(error);
-        //                 test.object(response).hasProperty('statusCode', 200);
-        //                 test.object(body).hasProperty('id', options.json.devices[0]['entity_name']);
-        //                 test.object(body).hasProperty('digital_in_3');
-        //                 test.object(body['digital_in_3']).hasProperty('type', 'Number');
-        //                 test.object(body['digital_in_3']).hasProperty('value', 101);
-        //                 request(optionsCBMultiEntity, function (error, response, body) {
-        //                     test.should.not.exist(error);
-        //                     test.object(response).hasProperty('statusCode', 200);
-        //                     test.object(body).hasProperty('id', multientityName);
-        //                     test.object(body).hasProperty('temperature_1');
-        //                     test.object(body['temperature_1']).hasProperty('type', 'Number');
-        //                     test.object(body['temperature_1']).hasProperty('value', 27.2);
-        //                     client.end();
-        //                     done();
-        //                 });
-        //             });
-        //         }, 500);
-        //     });
-        // });
+            var encodedBuffer = CBOR.encode(rawJSONPayload);
+            var attributesExample = utils.readExampleFile('./test/activeAttributes/emptyCbor.json');
+            attributesExample['payload_raw'] = encodedBuffer.toString('base64');
+            var client = mqtt.connect('mqtt://' + testMosquittoHost);
+            client.on('connect', function () {
+                client.publish(options.json.devices[0]['internal_attributes']['lorawan']['application_id'] + '/devices/' + options.json.devices[0]['device_id'] + '/up', JSON.stringify(attributesExample));
+                setTimeout(function () {
+                    request(optionsCB, function (error, response, body) {
+                        test.should.not.exist(error);
+                        test.object(response).hasProperty('statusCode', 200);
+                        test.object(body).hasProperty('id', options.json.devices[0]['entity_name']);
+                        test.object(body).hasProperty('digital_in_3');
+                        test.object(body['digital_in_3']).hasProperty('type', 'Number');
+                        test.object(body['digital_in_3']).hasProperty('value', 101);
+                        request(optionsCBMultiEntity, function (error, response, body) {
+                            test.should.not.exist(error);
+                            test.object(response).hasProperty('statusCode', 200);
+                            test.object(body).hasProperty('id', multientityName);
+                            test.object(body).hasProperty('temperature_1');
+                            test.object(body['temperature_1']).hasProperty('type', 'Number');
+                            test.object(body['temperature_1']).hasProperty('value', 27.2);
+                            client.end();
+                            done();
+                        });
+                    });
+                }, 500);
+            });
+        });
     });
 });
