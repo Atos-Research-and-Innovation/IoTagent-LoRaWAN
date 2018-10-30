@@ -7,6 +7,7 @@
 <br>
 [![Documentation badge](https://img.shields.io/readthedocs/fiware-lorawan.svg)](http://fiware-lorawan.readthedocs.io/en/latest/?badge=latest)
 [![Build Status](https://img.shields.io/travis/Atos-Research-and-Innovation/IoTagent-LoRaWAN.svg?branch=master)](https://travis-ci.org/Atos-Research-and-Innovation/IoTagent-LoRaWAN/branches)
+![Status](https://nexus.lab.fiware.org/static/badges/statuses/iot-lorawan.svg)
 
 The Internet of Things Agent for LoRaWAN protocol enables data and commands to
 be exchanged between IoT devices and the
@@ -135,7 +136,7 @@ docker-compose -f docker/docker-compose.yml up
 Information about how to use the IoT Agent can be found in the
 [User & Programmers Manual](https://fiware-lorawan.readthedocs.io/en/latest/users_manual/index.html).
 
-## API Reference
+## API
 
 Apiary reference for the Configuration API can be found
 [here](http://docs.telefonicaiotiotagents.apiary.io/#reference/configuration-api).
