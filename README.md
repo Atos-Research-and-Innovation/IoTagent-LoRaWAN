@@ -173,4 +173,5 @@ License (GPL) version 3.
 
 The following third-party library is used under license:
 
-1. [iotagent-node-lib](https://github.com/telefonicaid/iotagent-node-lib) - **AGPL** © 2014-2018 Telefonica Investigación y Desarrollo
+1. [iotagent-node-lib](https://github.com/telefonicaid/iotagent-node-lib) -
+   **AGPL** © 2014-2018 Telefonica Investigación y Desarrollo
