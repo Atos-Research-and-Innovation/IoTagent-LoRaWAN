@@ -16,7 +16,7 @@ The following requirements must be installed and executed in order to launch the
 To run the tests:
 
 ```
-grunt test
+npm test
 ```
 
 # Code coverage
@@ -24,7 +24,7 @@ grunt test
 In addition, the project is configured to provide source code coverage statistics reached thanks to the tests.
 
 ```
-grunt coverage
+grunt run test:coverage
 ```
 
 This command will produce an HTML coverage report under *coverage* folder.
