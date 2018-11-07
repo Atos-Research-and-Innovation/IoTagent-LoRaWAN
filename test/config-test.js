@@ -23,7 +23,7 @@ var config = {};
 
 config.iota = {
     timestamp: false,
-    logLevel: 'DEBUG',
+    logLevel: 'FATAL',
     contextBroker: {
         host: 'localhost',
         port: '1026',
