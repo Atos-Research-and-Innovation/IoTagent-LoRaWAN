@@ -43,7 +43,7 @@ All of them use a relatively simple device or node reporting the following measu
 
 This option allows provisioning a specific device, describing its attributes and LoRaWAN information. **Thus, using a single Application Server, we can provision devices reporting different types of measurements.**
 
-```
+```bash
 curl localhost:4061/iot/devices -s -S --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'fiware-service: smartgondor' --header 'fiware-servicepath: /gardens' -d @- <<EOF
 {
   "devices": [
@@ -67,17 +67,17 @@ curl localhost:4061/iot/devices -s -S --header 'Content-Type: application/json' 
           "object_id": "do4",
           "name": "digital_out_4",
           "type": "Number"
-        },  
+        },
         {
           "object_id": "rh2",
           "name": "relative_humidity_2",
           "type": "Number"
-        }, 
+        },
         {
           "object_id": "t1",
           "name": "temperature_1",
           "type": "Number"
-        }       
+        }
       ],
       "internal_attributes": {
         "lorawan": {
@@ -107,7 +107,7 @@ The IoTa will automatically subscribe to new observation notifications from the 
 
 You can query the corresponding entity in the Context Broker with:
 
-```
+```bash
 curl localhost:1026/v2/entities/LORA-N-003 -s -S -H 'Accept: application/json' --header 'fiware-service: smartgondor' --header 'fiware-servicepath: /gardens' | python -mjson.tool
 ```
 
@@ -115,14 +115,14 @@ curl localhost:1026/v2/entities/LORA-N-003 -s -S -H 'Accept: application/json' -
 
 If a group of devices reports the same observations (i.e., smart meters for a neighborhood or building), the *configuration API* can be used to pre-provision all of them with a single request.**With this approach, all the devices sharing the same configuration must be registered under the same Application Server.**
 
-```
+```bash
 curl localhost:4061/iot/services -s -S --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'fiware-service: smartgondor' --header 'fiware-servicepath: /gardens' -d @- <<EOF
 {
 	"services": [
    {
     "entity_type": "LoraDeviceGroup",
     "apikey": "",
-    "resource": "4569343567897875",        
+    "resource": "4569343567897875",
     "attributes": [
       {
         "object_id": "bp0",
@@ -138,17 +138,17 @@ curl localhost:4061/iot/services -s -S --header 'Content-Type: application/json'
         "object_id": "do4",
         "name": "digital_out_4",
         "type": "Number"
-      },  
+      },
       {
         "object_id": "rh2",
         "name": "relative_humidity_2",
         "type": "Number"
-      }, 
+      },
       {
         "object_id": "t1",
         "name": "temperature_1",
         "type": "Number"
-      }       
+      }
     ],
     "internal_attributes": {
         "lorawan": {
@@ -177,7 +177,7 @@ In this case, the IoTA will subscribe to any observation coming from the LoRaWAN
 
 Finally, it is also possible to provide a static configuration for the IoTa. As it happens with the previous alternative, this approach is useful for groups of devices which report the same observations. Again, **all the devices sharing the same _Type_ must be registered under the same Application Server.**
 
-```
+```javascript
 var config = {};
 
 config.iota = {
@@ -224,17 +224,17 @@ config.iota = {
                   "object_id": "do4",
                   "name": "digital_out_4",
                   "type": "Number"
-                },  
+                },
                 {
                   "object_id": "rh2",
                   "name": "relative_humidity_2",
                   "type": "Number"
-                }, 
+                },
                 {
                   "object_id": "t1",
                   "name": "temperature_1",
                   "type": "Number"
-                }       
+                }
             ]
         }
     }

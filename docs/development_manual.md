@@ -15,7 +15,7 @@ The following requirements must be installed and executed in order to launch the
 
 To run the tests:
 
-```
+```bash
 npm test
 ```
 
@@ -23,7 +23,7 @@ npm test
 
 In addition, the project is configured to provide source code coverage statistics reached thanks to the tests.
 
-```
+```bash
 npm run test:coverage
 ```
 
@@ -33,6 +33,6 @@ This command will produce an HTML coverage report under *coverage* folder.
 
 [ESLint](https://eslint.org/) is used to check code linting:
 
-```
+```bash
 npn run lint
 ```
