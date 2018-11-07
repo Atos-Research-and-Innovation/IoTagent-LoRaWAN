@@ -1,0 +1,7 @@
+docs/
+examples/
+test/
+tools/
+README.md
+contributing.md
+mkdocs.yml
