@@ -24,7 +24,7 @@ npm test
 In addition, the project is configured to provide source code coverage statistics reached thanks to the tests.
 
 ```
-grunt run test:coverage
+npm run test:coverage
 ```
 
 This command will produce an HTML coverage report under *coverage* folder.
@@ -34,5 +34,5 @@ This command will produce an HTML coverage report under *coverage* folder.
 [ESLint](https://eslint.org/) is used to check code linting:
 
 ```
-grunt lint
+npn run lint
 ```
