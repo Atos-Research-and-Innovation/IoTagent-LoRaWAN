@@ -1,4 +1,4 @@
-# FIWARE IoT Agent for the LoRaWaN Protocol
+# FIWARE IoT Agent for the LoRaWaN Protocol (test)
 
 [![FIWARE IoT Agents](https://nexus.lab.fiware.org/static/badges/chapters/iot-agents.svg)](https://www.fiware.org/developers/catalogue/)
 [![License: APGL](https://img.shields.io/github/license/Atos-Research-and-Innovation/IoTagent-LoRaWAN.svg)](https://opensource.org/licenses/AGPL-3.0)
