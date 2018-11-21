@@ -1,5 +1,6 @@
 docs/
 examples/
+node_modules/
 test/
 tools/
 README.md
