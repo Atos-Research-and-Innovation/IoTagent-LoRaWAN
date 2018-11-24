@@ -27,16 +27,16 @@ The IoT Agent must be instantiated and connected to an instance of the [Orion Co
 ```yml
 version: '3.1'
 
-services:
+volumes:
+  mongodb:
 
+services:
   iot-agent:
     image: ioeari/iotagent-lora
     hostname: iot-agent
     container_name: fiware-iot-agent
     depends_on:
         - mongo-db
-    networks:
-        - default
     expose:
         - "4041"
     ports:
@@ -53,15 +53,13 @@ services:
 
   mongodb:
     image: mongo:3.6
-    hostname: mongodb
+    hostname: mongo-db
     container_name: db-mongo
     ports:
         - "27017:27017"
-    networks:
-        - default
     command: --bind_ip_all --smallfiles
     volumes:
-       - mongodb:/data
+        - mongodb:/data
 
   orion:
     image: fiware/orion:2.0.0
