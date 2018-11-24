@@ -36,7 +36,7 @@ services:
     hostname: iot-agent
     container_name: fiware-iot-agent
     depends_on:
-        - mongo-db
+        - mongodb
     expose:
         - "4041"
     ports:
