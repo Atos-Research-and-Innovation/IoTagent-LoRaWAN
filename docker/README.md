@@ -21,8 +21,12 @@ check the FIWARE Catalogue entry for the
 
 ## How to use this image
 
-The IoT Agent must be instantiated and connected to an instance of the [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/), a sample `docker-compose` file can be found below. If the
-`IOTA_REGISTRY_TYPE=mongodb`, a [MongoDB](https://www.mongodb.com/) database instance is also required.
+The IoT Agent must be instantiated and connected to an instance of the [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/), a sample `docker-compose` file can be found below.
+
+If the `IOTA_REGISTRY_TYPE=mongodb`, a [MongoDB](https://www.mongodb.com/) database
+instance is also required - the example below assumes that you
+have a `/data` directory in your hosting system in order to hold database
+files - please amend the attached volume to suit your own configuration.
 
 ```yml
 version: '3.1'
@@ -62,13 +66,11 @@ services:
         - mongodb:/data
 
   orion:
-    image: fiware/orion:2.0.0
+    image: fiware/orion
     hostname: orion
     container_name: fiware-orion
     depends_on:
         - mongodb
-    networks:
-        - default
     expose:
         - "1026"
     ports:
@@ -76,43 +78,69 @@ services:
     command: -dbhost mongodb
 ```
 
-
-
-
 ## Configuration with environment variables
 
-Some of the more common variables can be configured using environment variables. The ones overriding general parameters
-in the `config.iota` set are described in the [IoTA Library Configuration manual](https://github.com/telefonicaid/iotagent-node-lib#configuration).
+Many settings can be configured using Docker environment variables. A typical IoT Agent
+Docker container is driven by environment variables such as those shown below:
 
+* `IOTA_CB_HOST`  - Hostname of the context broker to update context
+* `IOTA_CB_PORT`  - Port that context broker listens on to update context
+* `IOTA_NORTH_PORT` - Port used for configuring the IoT Agent and receiving context
+  updates from the context broker
+* `IOTA_REGISTRY_TYPE` - Whether to hold IoT device info in memory or in a database
+* `IOTA_MONGO_HOST` - The hostname of MongoDB - used for holding device and service
+  information
+* `IOTA_MONGO_PORT` - The port that MongoDB is listening on
+* `IOTA_MONGO_DB` - The name of the database used in MongoDB
+* `IOTA_PROVIDER_URL` - URL passed to the Context Broker when commands are registered,
+  used as a forwarding URL location when the Context Broker issues a command to a device
 
-More details, and further settings can be found within the IoT Agent for LoRaWAN [documentation](https://fiware-lorawan.readthedocs.io/en/latest/) itself.
+### Further Information
+
+The full set of overrides for the general parameters applicable to all IoT Agents are
+described in the Configuration section of the IoT Agent Library
+[Installation Guide](https://iotagent-node-lib.readthedocs.io/en/latest/installationguide/index.html#configuration).
+
+Further settings for the IoT Agent for the LoRaWaN Protocol itself - such as specific configurations
+for the LWM2M Port and Protocol - can be found in the IoT Agent for the LoRaWaN Protocol
+[Installation Guide](https://fiware-iotagent-lwm2m.readthedocs.io/en/latest/administrationGuide/index.html#configuration).
 
 ## How to build your own image
 
 The [Dockerfile](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/master/docker/Dockerfile) associated with this image can be used to build an image in several ways:
 
-* By default, the `Dockerfile` retrieves the **latest** version of the codebase direct from GitHub (the `build-arg` is optional):
+* By default, the `Dockerfile` retrieves the **latest** version of the codebase direct from
+  GitHub (the `build-arg` is optional):
 
 ```console
-docker build -t iot-agent . --build-arg DOWNLOAD_TYPE=latest
+docker build -t iot-agent . --build-arg DOWNLOAD=latest
 ```
 
-* You can alter this to obtain the last **stable** release run this `Dockerfile` with the build argument `DOWNLOAD_TYPE=stable`
+* You can alter this to obtain the last **stable** release run this `Dockerfile` with the build
+  argument `DOWNLOAD=stable`
 
 ```console
-docker build -t iot-agent . --build-arg DOWNLOAD_TYPE=stable
+docker build -t iot-agent . --build-arg DOWNLOAD=stable
 ```
 
-* You can also alter this to download code from your own fork of the GitHub repository by adding `GITHUB_ACCOUNT` and `GITHUB_REPOSITORY` arguments
+* You can also download a specific release by running this `Dockerfile` with the build argument
+  `DOWNLOAD=<version>`
+
+```console
+docker build -t iot-agent . --build-arg DOWNLOAD=1.7.0
+```
+
+* To download code from your own fork of the GitHub repository add the `GITHUB_ACCOUNT` and
+  `GITHUB_REPOSITORY` arguments to the `docker build` command.
 
 ```console
 docker build -t iot-agent . --build-arg GITHUB_ACCOUNT=<your account> --build-arg GITHUB_REPOSITORY=<your repo>
 ```
 
-If you want to build directly from your own sources, please copy the ` Dockerfile` into file the root of the repository and amend it to
-copy over your local source using :
+Alternatively, if you want to build directly from your own sources, please copy the existing
+`Dockerfile` into file the root of the repository and amend it to copy over your local source using :
 
-```
+```Dockerfile
 COPY . /opt/iotagent-lora/
 ```
 
