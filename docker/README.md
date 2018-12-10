@@ -102,8 +102,8 @@ described in the Configuration section of the IoT Agent Library
 [Installation Guide](https://iotagent-node-lib.readthedocs.io/en/latest/installationguide/index.html#configuration).
 
 Further settings for the IoT Agent for the LoRaWaN Protocol itself - such as specific configurations
-for the LWM2M Port and Protocol - can be found in the IoT Agent for the LoRaWaN Protocol
-[Installation Guide](https://fiware-iotagent-lwm2m.readthedocs.io/en/latest/administrationGuide/index.html#configuration).
+for the LoRaWaN Protocol - can be found in the IoT Agent for the LoRaWaN Protocol
+[Users Guide](https://fiware-lorawan.readthedocs.io/en/latest/users_manual/index.html#configuration-provisioning).
 
 ## How to build your own image
 
