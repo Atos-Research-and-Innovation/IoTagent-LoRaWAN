@@ -423,4 +423,75 @@ describe('Device provisioning API: Provision devices', function () {
             });
         });
     });
+
+    describe('When a device delete request arrives to the Agent', function () {
+        var options = {
+            url: 'http://localhost:' + iotAgentConfig.iota.server.port + '/iot/devices/lora_n_003',
+            headers: {
+                'fiware-service': service,
+                'fiware-servicepath': subservice
+            },
+            method: 'DELETE'
+        };
+
+        it('should return a 200 OK and no errors', function (done) {
+            request(options, function (error, response, body) {
+                test.should.not.exist(error);
+                test.object(response).hasProperty('statusCode', 204);
+                done();
+            });
+        });
+
+        it('should remove the device from the provisioned devices list', function (done) {
+            request(options, function (error, response, body) {
+                test.should.not.exist(error);
+                var options = {
+                    url: 'http://localhost:' + iotAgentConfig.iota.server.port + '/iot/devices',
+                    headers: {
+                        'fiware-service': service,
+                        'fiware-servicepath': subservice
+                    },
+                    json: true,
+                    method: 'GET'
+                };
+
+                request(options, function (error, response, body) {
+                    test.should.not.exist(error);
+                    test.object(response).hasProperty('statusCode', 200);
+                    test.object(body).hasProperty('count', 1);
+                    test.object(body).hasProperty('devices');
+                    done();
+                });
+            });
+        });
+
+        it('Should unsuscribe from the corresponding MQTT topic', function (done) {
+            var optionsCB = {
+                url: 'http://' + orionServer + '/v2/entities/LORA-N-003',
+                method: 'GET',
+                json: true,
+                headers: {
+                    'fiware-service': service,
+                    'fiware-servicepath': subservice
+                }
+            };
+            var attributesExample = utils.readExampleFile('./test/activeAttributes/cayenneLpp.json');
+            var client = mqtt.connect('mqtt://' + testMosquittoHost);
+            client.on('connect', function () {
+                client.publish('ari_ioe_app_demo1/devices/LORA-N-003/up', JSON.stringify(attributesExample));
+                setTimeout(function () {
+                    request(optionsCB, function (error, response, body) {
+                        test.should.not.exist(error);
+                        test.object(response).hasProperty('statusCode', 200);
+                        test.object(body).hasProperty('id', 'LORA-N-003');
+                        test.object(body).hasProperty('temperature_1');
+                        test.object(body['temperature_1']).hasProperty('type', 'Number');
+                        test.object(body['temperature_1']).hasProperty('value', 28);
+                        client.end();
+                        done();
+                    });
+                }, 500);
+            });
+        });
+    });
 });
