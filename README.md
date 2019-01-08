@@ -169,9 +169,9 @@ follows:
 FIWARE IoT Agent for LoRaWAN protocol is licensed under Affero General Public
 License (GPL) version 3.
 
-© 2018 Atos Spain S.A
+© 2019 Atos Spain S.A
 
 The following third-party library is used under license:
 
 1. [iotagent-node-lib](https://github.com/telefonicaid/iotagent-node-lib) -
-   **AGPL** © 2014-2018 Telefonica Investigación y Desarrollo
+   **AGPL** © 2014-2019 Telefonica Investigación y Desarrollo

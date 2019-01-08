@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Atos Spain S.A
+ * Copyright 2019 Atos Spain S.A
  *
  * This file is part of iotagent-lora
  *
