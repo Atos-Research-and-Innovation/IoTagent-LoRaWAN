@@ -29,6 +29,7 @@ var utils = require('../utils');
 var iotagentLora = require('../../');
 var iotAgentLib = require('iotagent-node-lib');
 var mqtt = require('mqtt');
+var CBOR = require('cbor-sync');
 
 describe('Configuration provisioning API: Provision groups', function () {
     var testMosquittoHost = 'localhost';
@@ -260,6 +261,93 @@ describe('Configuration provisioning API: Provision groups', function () {
                         });
                     }, 1000);
                 });
+            });
+        });
+    });
+
+    describe('When a configuration provisioning request with all the required data arrives to the IoT Agent. CBOR data model', function () {
+        var options = {
+            url: 'http://localhost:' + iotAgentConfig.iota.server.port + '/iot/services',
+            method: 'POST',
+            json: utils.readExampleFile('./test/groupProvisioning/provisionGroup1TTNCbor.json'),
+            headers: {
+                'fiware-service': service,
+                'fiware-servicepath': subservice
+            }
+        };
+        var devId = 'lora_unprovisioned_device3';
+        var cbEntityName = devId + ':' + options.json.services[0]['entity_type'];
+        var optionsCB = {
+            url: 'http://' + orionServer + '/v2/entities/' + cbEntityName,
+            method: 'GET',
+            json: true,
+            headers: {
+                'fiware-service': service,
+                'fiware-servicepath': subservice
+            }
+        };
+
+        if (testMosquittoHost) {
+            options.json.services[0]['internal_attributes']['lorawan']['application_server']['host'] = testMosquittoHost;
+        }
+
+        var optionsGetService = {
+            url: 'http://localhost:' + iotAgentConfig.iota.server.port + '/iot/services',
+            method: 'GET',
+            json: true,
+            headers: {
+                'fiware-service': service,
+                'fiware-servicepath': subservice
+            }
+        };
+
+        it('should add the group to the list', function (done) {
+            request(options, function (error, response, body) {
+                test.should.not.exist(error);
+                test.object(response).hasProperty('statusCode', 201);
+                setTimeout(function () {
+                    request(optionsGetService, function (error, response, body) {
+                        test.should.not.exist(error);
+                        test.object(response).hasProperty('statusCode', 200);
+                        test.object(body).hasProperty('count', 2);
+                        test.object(body).hasProperty('services');
+                        test.array(body.services).hasLength(2);
+                        test.object(body.services[1]).hasProperty('entity_type', options.json.services[0]['entity_type']);
+                        test.object(body.services[1]).hasProperty('_id');
+                        done();
+                    });
+                }, 500);
+            });
+        });
+
+        it('Should register correctly new devices for the group and process their active attributes', function (done) {
+            var rawJSONPayload = {
+                barometric_pressure_0: 0,
+                digital_in_3: 100,
+                digital_out_4: 0,
+                relative_humidity_2: 0,
+                temperature_1: 27.2
+            };
+
+            var encodedBuffer = CBOR.encode(rawJSONPayload);
+            var attributesExample = utils.readExampleFile('./test/activeAttributes/emptyCbor.json');
+            attributesExample['payload_raw'] = encodedBuffer.toString('base64');
+            attributesExample['dev_id'] = devId;
+            var client = mqtt.connect('mqtt://' + testMosquittoHost);
+            client.on('connect', function () {
+                client.publish(options.json.services[0]['internal_attributes']['lorawan']['application_id'] + '/devices/' + devId + '/up', JSON.stringify(attributesExample));
+                setTimeout(function () {
+                    request(optionsCB, function (error, response, body) {
+                        test.should.not.exist(error);
+                        test.object(response).hasProperty('statusCode', 200);
+                        test.object(body).hasProperty('id', cbEntityName);
+                        test.object(body).hasProperty('barometric_pressure_0');
+                        test.object(body['temperature_1']).hasProperty('type', 'Number');
+                        test.object(body['temperature_1']).hasProperty('value', 27.2);
+                        client.end();
+                        return done();
+                    });
+                }, 1000);
             });
         });
     });
