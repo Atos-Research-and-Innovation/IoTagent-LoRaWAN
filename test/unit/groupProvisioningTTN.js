@@ -170,6 +170,27 @@ describe('Configuration provisioning API: Provision groups', function () {
             });
         });
 
+        it('Should go on processing active attributes', function (done) {
+            var attributesExample = utils.readExampleFile('./test/activeAttributes/cayenneLpp2.json');
+            attributesExample['dev_id'] = devId;
+            var client = mqtt.connect('mqtt://' + testMosquittoHost);
+            client.on('connect', function () {
+                client.publish(options.json.services[0]['internal_attributes']['lorawan']['application_id'] + '/devices/' + devId + '/up', JSON.stringify(attributesExample));
+                setTimeout(function () {
+                    request(optionsCB, function (error, response, body) {
+                        test.should.not.exist(error);
+                        test.object(response).hasProperty('statusCode', 200);
+                        test.object(body).hasProperty('id', cbEntityName);
+                        test.object(body).hasProperty('temperature_1');
+                        test.object(body['temperature_1']).hasProperty('type', 'Number');
+                        test.object(body['temperature_1']).hasProperty('value', 21.2);
+                        client.end();
+                        return done();
+                    });
+                }, 1000);
+            });
+        });
+
         it('should add the device to the devices list', function (done) {
             var optionsGetDevice = {
                 url: 'http://localhost:' + iotAgentConfig.iota.server.port + '/iot/devices',
