@@ -242,4 +242,71 @@ describe('Configuration provisioning API: Provision groups', function () {
             });
         });
     });
+
+    describe('When a group delete request arrives to the Agent', function () {
+        var options = {
+            url: 'http://localhost:' + iotAgentConfig.iota.server.port + '/iot/services/',
+            headers: {
+                'fiware-service': service,
+                'fiware-servicepath': subservice
+            },
+            method: 'DELETE',
+            qs: {
+                resource: '70B3D57ED000985F',
+                apikey: ''
+            }
+        };
+
+        var optionsGetService = {
+            url: 'http://localhost:' + iotAgentConfig.iota.server.port + '/iot/services',
+            method: 'GET',
+            json: true,
+            headers: {
+                'fiware-service': service,
+                'fiware-servicepath': subservice
+            }
+        };
+
+        it('should return a 200 OK and no errors', function (done) {
+            request(options, function (error, response, body) {
+                test.should.not.exist(error);
+                test.object(response).hasProperty('statusCode', 204);
+                done();
+            });
+        });
+
+        it('should remove the group from the provisioned groups list', function (done) {
+            request(optionsGetService, function (error, response, body) {
+                test.should.not.exist(error);
+                test.object(response).hasProperty('statusCode', 200);
+                test.object(body).hasProperty('count', 0);
+                done();
+            });
+        });
+
+        it('Should unsuscribe from the corresponding MQTT topic', function (done) {
+            var optionsCB = {
+                url: 'http://' + orionServer + '/v2/entities/LORA-N-005',
+                method: 'GET',
+                json: true,
+                headers: {
+                    'fiware-service': service,
+                    'fiware-servicepath': subservice
+                }
+            };
+            var attributesExample = utils.readExampleFile('./test/activeAttributes/cayenneLpp.json');
+            var client = mqtt.connect('mqtt://' + testMosquittoHost);
+            client.on('connect', function () {
+                client.publish('ari_ioe_app_demo1/devices/LORA-N-005/up', JSON.stringify(attributesExample));
+                setTimeout(function () {
+                    request(optionsCB, function (error, response, body) {
+                        test.should.not.exist(error);
+                        test.object(response).hasProperty('statusCode', 404);
+                        client.end();
+                        done();
+                    });
+                }, 500);
+            });
+        });
+    });
 });
