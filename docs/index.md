@@ -4,7 +4,7 @@
 [![](https://img.shields.io/badge/tag-fiware+iot-orange.svg?logo=stackoverflow)](https://stackoverflow.com/questions/tagged/fiware+iot)
 
 
-Copyright 2018 Atos Spain S.A
+Copyright 2019 Atos Spain S.A
 
 FIWARE *Internet of Things* Agent for LoRaWAN protocol enables data and commands to be exchanged between IoT devices and [FIWARE NGSI Context Brokers](https://forge.fiware.org/plugins/mediawiki/wiki/fiware/index.php/FIWARE.OpenSpecification.Data.ContextBroker) using [LoRaWAN](https://lora-alliance.org/about-lorawan) protocol.
 
@@ -103,4 +103,4 @@ Please check [Development manual](development_manual.md)
 
 FIWARE IoT Agent for LoRaWAN protocol is licensed under Affero General Public License (GPL) version 3.
 
-Copyright 2018 Atos Spain S.A
+Copyright 2019 Atos Spain S.A
