@@ -23,7 +23,7 @@
 
 var request = require('request');
 var async = require('async');
-var test = require('unit.js');
+var should = require('chai').should();
 var iotAgentConfig = require('../config-test.js');
 var utils = require('../utils');
 var iotagentLora = require('../../');
@@ -88,8 +88,8 @@ describe('Configuration provisioning API: Provision groups', function () {
 
     //     it('should answer with error', function (done) {
     //         request(options, function (error, response, body) {
-    //             test.should.not.exist(error);
-    //             test.object(response).hasProperty('statusCode', 500);
+    //             should.not.exist(error);
+    //             response.should.have.property('statusCode', 500);
     //             done();
     //         });
     //     }); ;
@@ -133,17 +133,17 @@ describe('Configuration provisioning API: Provision groups', function () {
 
         it('should add the group to the list', function (done) {
             request(options, function (error, response, body) {
-                test.should.not.exist(error);
-                test.object(response).hasProperty('statusCode', 201);
+                should.not.exist(error);
+                response.should.have.property('statusCode', 201);
                 setTimeout(function () {
                     request(optionsGetService, function (error, response, body) {
-                        test.should.not.exist(error);
-                        test.object(response).hasProperty('statusCode', 200);
-                        test.object(body).hasProperty('count', 1);
-                        test.object(body).hasProperty('services');
-                        test.array(body.services).hasLength(1);
-                        test.object(body.services[0]).hasProperty('entity_type', options.json.services[0]['entity_type']);
-                        test.object(body.services[0]).hasProperty('_id');
+                        should.not.exist(error);
+                        response.should.have.property('statusCode', 200);
+                        body.should.have.property('count', 1);
+                        body.should.have.property('services');
+                        body.services.should.have.length(1);
+                        body.services[0].should.have.property('entity_type', options.json.services[0]['entity_type']);
+                        body.services[0].should.have.property('_id');
                         done();
                     });
                 }, 500);
@@ -158,12 +158,12 @@ describe('Configuration provisioning API: Provision groups', function () {
                 client.publish(options.json.services[0]['internal_attributes']['lorawan']['application_id'] + '/devices/' + devId + '/up', JSON.stringify(attributesExample));
                 setTimeout(function () {
                     request(optionsCB, function (error, response, body) {
-                        test.should.not.exist(error);
-                        test.object(response).hasProperty('statusCode', 200);
-                        test.object(body).hasProperty('id', cbEntityName);
-                        test.object(body).hasProperty('temperature_1');
-                        test.object(body['temperature_1']).hasProperty('type', 'Number');
-                        test.object(body['temperature_1']).hasProperty('value', 27.2);
+                        should.not.exist(error);
+                        response.should.have.property('statusCode', 200);
+                        body.should.have.property('id', cbEntityName);
+                        body.should.have.property('temperature_1');
+                        body.temperature_1.should.have.property('type', 'Number');
+                        body.temperature_1.should.have.property('value', 27.2);
                         client.end();
                         return done();
                     });
@@ -179,12 +179,12 @@ describe('Configuration provisioning API: Provision groups', function () {
                 client.publish(options.json.services[0]['internal_attributes']['lorawan']['application_id'] + '/devices/' + devId + '/up', JSON.stringify(attributesExample));
                 setTimeout(function () {
                     request(optionsCB, function (error, response, body) {
-                        test.should.not.exist(error);
-                        test.object(response).hasProperty('statusCode', 200);
-                        test.object(body).hasProperty('id', cbEntityName);
-                        test.object(body).hasProperty('temperature_1');
-                        test.object(body['temperature_1']).hasProperty('type', 'Number');
-                        test.object(body['temperature_1']).hasProperty('value', 21.2);
+                        should.not.exist(error);
+                        response.should.have.property('statusCode', 200);
+                        body.should.have.property('id', cbEntityName);
+                        body.should.have.property('temperature_1');
+                        body.temperature_1.should.have.property('type', 'Number');
+                        body.temperature_1.should.have.property('value', 21.2);
                         client.end();
                         return done();
                     });
@@ -203,13 +203,13 @@ describe('Configuration provisioning API: Provision groups', function () {
                 }
             };
             request(optionsGetDevice, function (error, response, body) {
-                test.should.not.exist(error);
-                test.object(response).hasProperty('statusCode', 200);
-                test.object(body).hasProperty('count', 1);
-                test.object(body).hasProperty('devices');
-                test.array(body.devices);
-                test.array(body.devices).hasLength(1);
-                test.object(body.devices[0]).hasProperty('device_id', devId);
+                should.not.exist(error);
+                response.should.have.property('statusCode', 200);
+                body.should.have.property('count', 1);
+                body.should.have.property('devices');
+                body.devices.should.be.an('array');
+                body.devices.should.have.length(1);
+                body.devices[0].should.have.property('device_id', devId);
                 done();
             });
         });
@@ -242,7 +242,7 @@ describe('Configuration provisioning API: Provision groups', function () {
                 iotagentLora.stop,
                 async.apply(iotagentLora.start, iotAgentConfig)
             ], function (err) {
-                test.should.not.exist(err);
+                should.not.exist(err);
                 var attributesExample = utils.readExampleFile('./test/activeAttributes/cayenneLpp3.json');
                 attributesExample['dev_id'] = devId;
                 var client = mqtt.connect('mqtt://' + testMosquittoHost);
@@ -250,12 +250,12 @@ describe('Configuration provisioning API: Provision groups', function () {
                     client.publish(options.json.services[0]['internal_attributes']['lorawan']['application_id'] + '/devices/' + devId + '/up', JSON.stringify(attributesExample));
                     setTimeout(function () {
                         request(optionsCB, function (error, response, body) {
-                            test.should.not.exist(error);
-                            test.object(response).hasProperty('statusCode', 200);
-                            test.object(body).hasProperty('id', cbEntityName);
-                            test.object(body).hasProperty('temperature_1');
-                            test.object(body['temperature_1']).hasProperty('type', 'Number');
-                            test.object(body['temperature_1']).hasProperty('value', 28);
+                            should.not.exist(error);
+                            response.should.have.property('statusCode', 200);
+                            body.should.have.property('id', cbEntityName);
+                            body.should.have.property('temperature_1');
+                            body.temperature_1.should.have.property('type', 'Number');
+                            body.temperature_1.should.have.property('value', 28);
                             client.end();
                             return done();
                         });
@@ -303,17 +303,17 @@ describe('Configuration provisioning API: Provision groups', function () {
 
         it('should add the group to the list', function (done) {
             request(options, function (error, response, body) {
-                test.should.not.exist(error);
-                test.object(response).hasProperty('statusCode', 201);
+                should.not.exist(error);
+                response.should.have.property('statusCode', 201);
                 setTimeout(function () {
                     request(optionsGetService, function (error, response, body) {
-                        test.should.not.exist(error);
-                        test.object(response).hasProperty('statusCode', 200);
-                        test.object(body).hasProperty('count', 2);
-                        test.object(body).hasProperty('services');
-                        test.array(body.services).hasLength(2);
-                        test.object(body.services[1]).hasProperty('entity_type', options.json.services[0]['entity_type']);
-                        test.object(body.services[1]).hasProperty('_id');
+                        should.not.exist(error);
+                        response.should.have.property('statusCode', 200);
+                        body.should.have.property('count', 2);
+                        body.should.have.property('services');
+                        body.services.should.have.length(2);
+                        body.services[1].should.have.property('entity_type', options.json.services[0]['entity_type']);
+                        body.services[1].should.have.property('_id');
                         done();
                     });
                 }, 500);
@@ -338,12 +338,12 @@ describe('Configuration provisioning API: Provision groups', function () {
                 client.publish(options.json.services[0]['internal_attributes']['lorawan']['application_id'] + '/devices/' + devId + '/up', JSON.stringify(attributesExample));
                 setTimeout(function () {
                     request(optionsCB, function (error, response, body) {
-                        test.should.not.exist(error);
-                        test.object(response).hasProperty('statusCode', 200);
-                        test.object(body).hasProperty('id', cbEntityName);
-                        test.object(body).hasProperty('barometric_pressure_0');
-                        test.object(body['temperature_1']).hasProperty('type', 'Number');
-                        test.object(body['temperature_1']).hasProperty('value', 27.2);
+                        should.not.exist(error);
+                        response.should.have.property('statusCode', 200);
+                        body.should.have.property('id', cbEntityName);
+                        body.should.have.property('barometric_pressure_0');
+                        body.temperature_1.should.have.property('type', 'Number');
+                        body.temperature_1.should.have.property('value', 27.2);
                         client.end();
                         return done();
                     });
