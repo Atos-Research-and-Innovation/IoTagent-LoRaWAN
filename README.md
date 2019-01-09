@@ -57,6 +57,7 @@ devices.
 
 -   [CayenneLpp](https://www.thethingsnetwork.org/docs/devices/arduino/api/cayennelpp.html)
 -   [CBOR](https://tools.ietf.org/html/rfc7049)
+-   Proprietary format decoded by LoRaWAN application server.
 
 ## Install
 
