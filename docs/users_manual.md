@@ -101,7 +101,7 @@ EOF
 ```
 
 - provider: Identifies the LoRaWAN stack. **Current possible value is TTN.**
-- data_model: Identifies the data model used by the device to report new observations. **Current possible values are cayennelpp and cbor.**
+- data_model: Identifies the data model used by the device to report new observations. **Current possible values are cayennelpp,cbor and application_server. The last one can be used in case the payload format decoding is done by the application server.**
 
 The IoTa will automatically subscribe to new observation notifications from the device. Whenever a new update is received, it will be translated to NGSI and forwarded to the Orion Context Broker.
 

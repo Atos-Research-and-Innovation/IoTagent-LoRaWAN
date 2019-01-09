@@ -22,6 +22,7 @@
 'use strict';
 
 var decoder = require('../../lib/dataModels/cayenneLpp');
+var translator = require('../../lib/dataTranslationService');
 require('chai').should();
 
 describe('CayenneLpp decoding', function () {
@@ -114,14 +115,14 @@ describe('NGSI translation', function (done) {
 
     it('Should translate a CayenneLpp payload to NGSI', function (done) {
         var cayenneLppMessageBase64 = 'AHMAAAFnARACaAADAGQEAQA=';
-        var decodedMessage = decoder.toNgsi(cayenneLppMessageBase64, device);
+        var decodedMessage = translator.toNgsi(cayenneLppMessageBase64, device);
         decodedMessage.should.be.an('array');
         return done();
     });
 
     it('Should translate a CayenneLpp payload including GPS to NGSI', function (done) {
         var cayenneLppMessageBase64 = 'AYgGdl/ylgoAA+g=';
-        var decodedMessage = decoder.toNgsi(cayenneLppMessageBase64, deviceGps);
+        var decodedMessage = translator.toNgsi(cayenneLppMessageBase64, deviceGps);
         decodedMessage.should.be.an('array');
         decodedMessage.should.have.length(1);
         decodedMessage[0].should.be.an('object');
