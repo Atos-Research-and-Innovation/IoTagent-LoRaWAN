@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Atos Spain S.A
+ * Copyright 2019 Atos Spain S.A
  *
  * This file is part of iotagent-lora
  *
@@ -23,12 +23,13 @@
 
 var request = require('request');
 var async = require('async');
-var test = require('unit.js');
+var should = require('chai').should();
 var iotAgentConfig = require('../config-test.js');
 var utils = require('../utils');
 var iotagentLora = require('../../');
 var iotAgentLib = require('iotagent-node-lib');
 var mqtt = require('mqtt');
+var CBOR = require('cbor-sync');
 
 describe('Configuration provisioning API: Provision groups', function () {
     var testMosquittoHost = 'localhost';
@@ -87,8 +88,8 @@ describe('Configuration provisioning API: Provision groups', function () {
 
     //     it('should answer with error', function (done) {
     //         request(options, function (error, response, body) {
-    //             test.should.not.exist(error);
-    //             test.object(response).hasProperty('statusCode', 500);
+    //             should.not.exist(error);
+    //             response.should.have.property('statusCode', 500);
     //             done();
     //         });
     //     }); ;
@@ -132,17 +133,17 @@ describe('Configuration provisioning API: Provision groups', function () {
 
         it('should add the group to the list', function (done) {
             request(options, function (error, response, body) {
-                test.should.not.exist(error);
-                test.object(response).hasProperty('statusCode', 201);
+                should.not.exist(error);
+                response.should.have.property('statusCode', 201);
                 setTimeout(function () {
                     request(optionsGetService, function (error, response, body) {
-                        test.should.not.exist(error);
-                        test.object(response).hasProperty('statusCode', 200);
-                        test.object(body).hasProperty('count', 1);
-                        test.object(body).hasProperty('services');
-                        test.array(body.services).hasLength(1);
-                        test.object(body.services[0]).hasProperty('entity_type', options.json.services[0]['entity_type']);
-                        test.object(body.services[0]).hasProperty('_id');
+                        should.not.exist(error);
+                        response.should.have.property('statusCode', 200);
+                        body.should.have.property('count', 1);
+                        body.should.have.property('services');
+                        body.services.should.have.length(1);
+                        body.services[0].should.have.property('entity_type', options.json.services[0]['entity_type']);
+                        body.services[0].should.have.property('_id');
                         done();
                     });
                 }, 500);
@@ -157,12 +158,33 @@ describe('Configuration provisioning API: Provision groups', function () {
                 client.publish(options.json.services[0]['internal_attributes']['lorawan']['application_id'] + '/devices/' + devId + '/up', JSON.stringify(attributesExample));
                 setTimeout(function () {
                     request(optionsCB, function (error, response, body) {
-                        test.should.not.exist(error);
-                        test.object(response).hasProperty('statusCode', 200);
-                        test.object(body).hasProperty('id', cbEntityName);
-                        test.object(body).hasProperty('temperature_1');
-                        test.object(body['temperature_1']).hasProperty('type', 'Number');
-                        test.object(body['temperature_1']).hasProperty('value', 27.2);
+                        should.not.exist(error);
+                        response.should.have.property('statusCode', 200);
+                        body.should.have.property('id', cbEntityName);
+                        body.should.have.property('temperature_1');
+                        body.temperature_1.should.have.property('type', 'Number');
+                        body.temperature_1.should.have.property('value', 27.2);
+                        client.end();
+                        return done();
+                    });
+                }, 1000);
+            });
+        });
+
+        it('Should go on processing active attributes', function (done) {
+            var attributesExample = utils.readExampleFile('./test/activeAttributes/cayenneLpp2.json');
+            attributesExample['dev_id'] = devId;
+            var client = mqtt.connect('mqtt://' + testMosquittoHost);
+            client.on('connect', function () {
+                client.publish(options.json.services[0]['internal_attributes']['lorawan']['application_id'] + '/devices/' + devId + '/up', JSON.stringify(attributesExample));
+                setTimeout(function () {
+                    request(optionsCB, function (error, response, body) {
+                        should.not.exist(error);
+                        response.should.have.property('statusCode', 200);
+                        body.should.have.property('id', cbEntityName);
+                        body.should.have.property('temperature_1');
+                        body.temperature_1.should.have.property('type', 'Number');
+                        body.temperature_1.should.have.property('value', 21.2);
                         client.end();
                         return done();
                     });
@@ -181,13 +203,13 @@ describe('Configuration provisioning API: Provision groups', function () {
                 }
             };
             request(optionsGetDevice, function (error, response, body) {
-                test.should.not.exist(error);
-                test.object(response).hasProperty('statusCode', 200);
-                test.object(body).hasProperty('count', 1);
-                test.object(body).hasProperty('devices');
-                test.array(body.devices);
-                test.array(body.devices).hasLength(1);
-                test.object(body.devices[0]).hasProperty('device_id', devId);
+                should.not.exist(error);
+                response.should.have.property('statusCode', 200);
+                body.should.have.property('count', 1);
+                body.should.have.property('devices');
+                body.devices.should.be.an('array');
+                body.devices.should.have.length(1);
+                body.devices[0].should.have.property('device_id', devId);
                 done();
             });
         });
@@ -220,7 +242,7 @@ describe('Configuration provisioning API: Provision groups', function () {
                 iotagentLora.stop,
                 async.apply(iotagentLora.start, iotAgentConfig)
             ], function (err) {
-                test.should.not.exist(err);
+                should.not.exist(err);
                 var attributesExample = utils.readExampleFile('./test/activeAttributes/cayenneLpp3.json');
                 attributesExample['dev_id'] = devId;
                 var client = mqtt.connect('mqtt://' + testMosquittoHost);
@@ -228,12 +250,12 @@ describe('Configuration provisioning API: Provision groups', function () {
                     client.publish(options.json.services[0]['internal_attributes']['lorawan']['application_id'] + '/devices/' + devId + '/up', JSON.stringify(attributesExample));
                     setTimeout(function () {
                         request(optionsCB, function (error, response, body) {
-                            test.should.not.exist(error);
-                            test.object(response).hasProperty('statusCode', 200);
-                            test.object(body).hasProperty('id', cbEntityName);
-                            test.object(body).hasProperty('temperature_1');
-                            test.object(body['temperature_1']).hasProperty('type', 'Number');
-                            test.object(body['temperature_1']).hasProperty('value', 28);
+                            should.not.exist(error);
+                            response.should.have.property('statusCode', 200);
+                            body.should.have.property('id', cbEntityName);
+                            body.should.have.property('temperature_1');
+                            body.temperature_1.should.have.property('type', 'Number');
+                            body.temperature_1.should.have.property('value', 28);
                             client.end();
                             return done();
                         });
@@ -243,6 +265,92 @@ describe('Configuration provisioning API: Provision groups', function () {
         });
     });
 
+    describe('When a configuration provisioning request with all the required data arrives to the IoT Agent. CBOR data model', function () {
+        var options = {
+            url: 'http://localhost:' + iotAgentConfig.iota.server.port + '/iot/services',
+            method: 'POST',
+            json: utils.readExampleFile('./test/groupProvisioning/provisionGroup1TTNCbor.json'),
+            headers: {
+                'fiware-service': service,
+                'fiware-servicepath': subservice
+            }
+        };
+        var devId = 'lora_unprovisioned_device3';
+        var cbEntityName = devId + ':' + options.json.services[0]['entity_type'];
+        var optionsCB = {
+            url: 'http://' + orionServer + '/v2/entities/' + cbEntityName,
+            method: 'GET',
+            json: true,
+            headers: {
+                'fiware-service': service,
+                'fiware-servicepath': subservice
+            }
+        };
+
+        if (testMosquittoHost) {
+            options.json.services[0]['internal_attributes']['lorawan']['application_server']['host'] = testMosquittoHost;
+        }
+
+        var optionsGetService = {
+            url: 'http://localhost:' + iotAgentConfig.iota.server.port + '/iot/services',
+            method: 'GET',
+            json: true,
+            headers: {
+                'fiware-service': service,
+                'fiware-servicepath': subservice
+            }
+        };
+
+        it('should add the group to the list', function (done) {
+            request(options, function (error, response, body) {
+                should.not.exist(error);
+                response.should.have.property('statusCode', 201);
+                setTimeout(function () {
+                    request(optionsGetService, function (error, response, body) {
+                        should.not.exist(error);
+                        response.should.have.property('statusCode', 200);
+                        body.should.have.property('count', 2);
+                        body.should.have.property('services');
+                        body.services.should.have.length(2);
+                        body.services[1].should.have.property('entity_type', options.json.services[0]['entity_type']);
+                        body.services[1].should.have.property('_id');
+                        done();
+                    });
+                }, 500);
+            });
+        });
+
+        it('Should register correctly new devices for the group and process their active attributes', function (done) {
+            var rawJSONPayload = {
+                barometric_pressure_0: 0,
+                digital_in_3: 100,
+                digital_out_4: 0,
+                relative_humidity_2: 0,
+                temperature_1: 27.2
+            };
+
+            var encodedBuffer = CBOR.encode(rawJSONPayload);
+            var attributesExample = utils.readExampleFile('./test/activeAttributes/emptyCbor.json');
+            attributesExample['payload_raw'] = encodedBuffer.toString('base64');
+            attributesExample['dev_id'] = devId;
+            var client = mqtt.connect('mqtt://' + testMosquittoHost);
+            client.on('connect', function () {
+                client.publish(options.json.services[0]['internal_attributes']['lorawan']['application_id'] + '/devices/' + devId + '/up', JSON.stringify(attributesExample));
+                setTimeout(function () {
+                    request(optionsCB, function (error, response, body) {
+                        should.not.exist(error);
+                        response.should.have.property('statusCode', 200);
+                        body.should.have.property('id', cbEntityName);
+                        body.should.have.property('barometric_pressure_0');
+                        body.temperature_1.should.have.property('type', 'Number');
+                        body.temperature_1.should.have.property('value', 27.2);
+                        client.end();
+                        return done();
+                    });
+                }, 1000);
+            });
+        });
+    });
     describe('When a group delete request arrives to the Agent', function () {
         var options = {
             url: 'http://localhost:' + iotAgentConfig.iota.server.port + '/iot/services/',
@@ -267,19 +375,19 @@ describe('Configuration provisioning API: Provision groups', function () {
             }
         };
 
-        it('should return a 200 OK and no errors', function (done) {
+        it('should return a 204 OK and no errors', function (done) {
             request(options, function (error, response, body) {
-                test.should.not.exist(error);
-                test.object(response).hasProperty('statusCode', 204);
+                should.not.exist(error);
+                response.should.have.property('statusCode', 204);
                 done();
             });
         });
 
         it('should remove the group from the provisioned groups list', function (done) {
             request(optionsGetService, function (error, response, body) {
-                test.should.not.exist(error);
-                test.object(response).hasProperty('statusCode', 200);
-                test.object(body).hasProperty('count', 0);
+                should.not.exist(error);
+                response.should.have.property('statusCode', 200);
+                body.should.have.property('count', 1);
                 done();
             });
         });
@@ -300,8 +408,8 @@ describe('Configuration provisioning API: Provision groups', function () {
                 client.publish('ari_ioe_app_demo1/devices/LORA-N-005/up', JSON.stringify(attributesExample));
                 setTimeout(function () {
                     request(optionsCB, function (error, response, body) {
-                        test.should.not.exist(error);
-                        test.object(response).hasProperty('statusCode', 404);
+                        should.not.exist(error);
+                        response.should.have.property('statusCode', 404);
                         client.end();
                         done();
                     });

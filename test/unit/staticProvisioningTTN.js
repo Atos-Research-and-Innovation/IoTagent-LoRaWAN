@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Atos Spain S.A
+ * Copyright 2019 Atos Spain S.A
  *
  * This file is part of iotagent-lora
  *
@@ -23,7 +23,7 @@
 
 var request = require('request');
 var async = require('async');
-var test = require('unit.js');
+var should = require('chai').should();
 var iotAgentConfig = require('../config-test.js');
 var utils = require('../utils');
 var iotagentLora = require('../../');
@@ -89,7 +89,7 @@ describe('Static provisioning', function () {
 
             newConf.iota.types['Robot'] = sensorType;
             iotagentLora.start(newConf, function (error) {
-                test.should.not.exist(error);
+                should.not.exist(error);
                 return done();
             });
         });
@@ -166,7 +166,7 @@ describe('Static provisioning', function () {
             newConf.iota.types[type] = sensorType;
 
             iotagentLora.start(newConf, function (error) {
-                test.should.not.exist(error);
+                should.not.exist(error);
                 return done();
             });
         });
@@ -179,12 +179,12 @@ describe('Static provisioning', function () {
                 client.publish(sensorType['internalAttributes']['lorawan']['application_id'] + '/devices/' + devId + '/up', JSON.stringify(attributesExample));
                 setTimeout(function () {
                     request(optionsCB, function (error, response, body) {
-                        test.should.not.exist(error);
-                        test.object(response).hasProperty('statusCode', 200);
-                        test.object(body).hasProperty('id', cbEntityName);
-                        test.object(body).hasProperty('temperature_1');
-                        test.object(body['temperature_1']).hasProperty('type', 'Number');
-                        test.object(body['temperature_1']).hasProperty('value', 27.2);
+                        should.not.exist(error);
+                        response.should.have.property('statusCode', 200);
+                        body.should.have.property('id', cbEntityName);
+                        body.should.have.property('temperature_1');
+                        body.temperature_1.should.have.property('type', 'Number');
+                        body.temperature_1.should.have.property('value', 27.2);
                         client.end();
                         return done();
                     });
@@ -221,7 +221,7 @@ describe('Static provisioning', function () {
 
             newConf.iota.types['Robot2'] = sensorType;
             iotagentLora.start(newConf, function (error) {
-                test.should.exist(error);
+                should.exist(error);
                 return done();
             });
         });

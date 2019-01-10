@@ -26,6 +26,7 @@
     "winston": "^3.1.0"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
     "eslint": "^5.8.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.14.0",
@@ -35,7 +36,6 @@
     "eslint-plugin-standard": "^4.0.0",
     "istanbul": "^0.4.5",
     "mocha": "^5.2.0",
-    "nock": "^10.0.2",
-    "unit.js": "^2.0.0"
+    "nock": "^10.0.2"
   }
 }

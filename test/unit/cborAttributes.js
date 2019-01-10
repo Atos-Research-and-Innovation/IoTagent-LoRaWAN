@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Atos Spain S.A
+ * Copyright 2019 Atos Spain S.A
  *
  * This file is part of iotagent-lora
  *
@@ -23,13 +23,13 @@
 
 var request = require('request');
 var async = require('async');
-var test = require('unit.js');
 var iotAgentConfig = require('../config-test.js');
 var utils = require('../utils');
 var iotagentLora = require('../../');
 var iotAgentLib = require('iotagent-node-lib');
 var mqtt = require('mqtt');
 var CBOR = require('cbor-sync');
+var should = require('chai').should();
 
 describe('CBOR Attributes', function () {
     var testMosquittoHost = 'localhost';
@@ -103,17 +103,18 @@ describe('CBOR Attributes', function () {
             }
 
             request(options, function (error, response, body) {
-                test.should.not.exist(error);
-                test.object(response).hasProperty('statusCode', 201);
+                should.not.exist(error);
+                response.should.be.an('object');
+                response.should.have.property('statusCode', 201);
                 setTimeout(function () {
                     request(optionsGetDevice, function (error, response, body) {
-                        test.should.not.exist(error);
-                        test.object(response).hasProperty('statusCode', 200);
-                        test.object(body).hasProperty('count', 1);
-                        test.object(body).hasProperty('devices');
-                        test.array(body.devices);
-                        test.array(body.devices).hasLength(1);
-                        test.object(body.devices[0]).hasProperty('device_id', options.json.devices[0]['device_id']);
+                        should.not.exist(error);
+                        response.should.have.property('statusCode', 200);
+                        body.should.have.property('count', 1);
+                        body.should.have.property('devices');
+                        body.devices.should.be.an('array');
+                        body.devices.should.have.length(1);
+                        body.devices[0].should.have.property('device_id', options.json.devices[0]['device_id']);
                         done();
                     });
                 }, 500);
@@ -132,9 +133,9 @@ describe('CBOR Attributes', function () {
             };
 
             request(optionsCB, function (error, response, body) {
-                test.should.not.exist(error);
-                test.object(response).hasProperty('statusCode', 200);
-                test.object(body).hasProperty('id', options.json.devices[0]['entity_name']);
+                should.not.exist(error);
+                response.should.have.property('statusCode', 200);
+                body.should.have.property('id', options.json.devices[0]['entity_name']);
                 done();
             });
         });
@@ -166,12 +167,12 @@ describe('CBOR Attributes', function () {
                 client.publish(options.json.devices[0]['internal_attributes']['lorawan']['application_id'] + '/devices/' + options.json.devices[0]['device_id'] + '/up', JSON.stringify(attributesExample));
                 setTimeout(function () {
                     request(optionsCB, function (error, response, body) {
-                        test.should.not.exist(error);
-                        test.object(response).hasProperty('statusCode', 200);
-                        test.object(body).hasProperty('id', options.json.devices[0]['entity_name']);
-                        test.object(body).hasProperty('temperature_1');
-                        test.object(body['temperature_1']).hasProperty('type', 'Number');
-                        test.object(body['temperature_1']).hasProperty('value', 27.2);
+                        should.not.exist(error);
+                        response.should.have.property('statusCode', 200);
+                        body.should.have.property('id', options.json.devices[0]['entity_name']);
+                        body.should.have.property('temperature_1');
+                        body.temperature_1.should.have.property('type', 'Number');
+                        body.temperature_1.should.have.property('value', 27.2);
                         client.end();
                         done();
                     });
@@ -207,12 +208,12 @@ describe('CBOR Attributes', function () {
                 client.publish('ari_ioe_app_demo1/devices/lora_n_003/up', JSON.stringify(attributesExample));
                 setTimeout(function () {
                     request(optionsCB, function (error, response, body) {
-                        test.should.not.exist(error);
-                        test.object(response).hasProperty('statusCode', 200);
-                        test.object(body).hasProperty('id', 'LORA-N-003');
-                        test.object(body).hasProperty('temperature_1');
-                        test.object(body['temperature_1']).hasProperty('type', 'Number');
-                        test.object(body['temperature_1']).hasProperty('value', 27.2);
+                        should.not.exist(error);
+                        response.should.have.property('statusCode', 200);
+                        body.should.have.property('id', 'LORA-N-003');
+                        body.should.have.property('temperature_1');
+                        body.temperature_1.should.have.property('type', 'Number');
+                        body.temperature_1.should.have.property('value', 27.2);
                         client.end();
                         done();
                     });

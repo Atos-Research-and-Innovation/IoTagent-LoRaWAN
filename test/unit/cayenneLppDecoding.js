@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Atos Spain S.A
+ * Copyright 2019 Atos Spain S.A
  *
  * This file is part of iotagent-lora
  *
@@ -22,70 +22,72 @@
 'use strict';
 
 var decoder = require('../../lib/dataModels/cayenneLpp');
-var test = require('unit.js');
+var translator = require('../../lib/dataTranslationService');
+require('chai').should();
 
 describe('CayenneLpp decoding', function () {
     it('Should decode a payload with digital input, digital output, temperature, relative humidity and barometric pressure', function (done) {
         var cayenneLppMessageBase64 = 'AHMAAAFnARACaAADAGQEAQA=';
         var decodedMessage = decoder.decodeCayenneLpp(cayenneLppMessageBase64);
-        test.object(decodedMessage).hasProperty('temperature_1', 27.2);
-        test.object(decodedMessage).hasProperty('barometric_pressure_0', 0);
-        test.object(decodedMessage).hasProperty('digital_in_3', 100);
-        test.object(decodedMessage).hasProperty('digital_out_4', 0);
-        test.object(decodedMessage).hasProperty('relative_humidity_2', 0);
+        decodedMessage.should.be.an('object');
+        decodedMessage.should.have.property('temperature_1', 27.2);
+        decodedMessage.should.have.property('barometric_pressure_0', 0);
+        decodedMessage.should.have.property('digital_in_3', 100);
+        decodedMessage.should.have.property('digital_out_4', 0);
+        decodedMessage.should.have.property('relative_humidity_2', 0);
         return done();
     });
 
     it('Should decode a payload with temperature', function (done) {
         var cayenneLppMessageBase64 = 'AWf/1w==';
         var decodedMessage = decoder.decodeCayenneLpp(cayenneLppMessageBase64);
-        test.object(decodedMessage).hasProperty('temperature_1', -4.1);
+        decodedMessage.should.have.property('temperature_1', -4.1);
         return done();
     });
 
     it('Should decode a payload with analog input and analog output', function (done) {
         var cayenneLppMessageBase64 = 'DQL63gADEkU=';
         var decodedMessage = decoder.decodeCayenneLpp(cayenneLppMessageBase64);
-        test.object(decodedMessage).hasProperty('analog_in_13', -13.14);
-        test.object(decodedMessage).hasProperty('analog_out_0', 46.77);
+        decodedMessage.should.have.property('analog_in_13', -13.14);
+        decodedMessage.should.have.property('analog_out_0', 46.77);
         return done();
     });
 
     it('Should decode a payload with luminosity and presence', function (done) {
         var cayenneLppMessageBase64 = 'FWUAFwdmLA==';
         var decodedMessage = decoder.decodeCayenneLpp(cayenneLppMessageBase64);
-        test.object(decodedMessage).hasProperty('luminosity_21', 23);
-        test.object(decodedMessage).hasProperty('presence_7', 44);
+        decodedMessage.should.have.property('luminosity_21', 23);
+        decodedMessage.should.have.property('presence_7', 44);
         return done();
     });
 
     it('Should decode a payload with accelerometer', function (done) {
         var cayenneLppMessageBase64 = 'BnEE0vsuAAA==';
         var decodedMessage = decoder.decodeCayenneLpp(cayenneLppMessageBase64);
-        test.object(decodedMessage).hasProperty('accelerometer_6');
-        test.object(decodedMessage['accelerometer_6']).hasProperty('x', 1.234);
-        test.object(decodedMessage['accelerometer_6']).hasProperty('y', -1.234);
-        test.object(decodedMessage['accelerometer_6']).hasProperty('z', 0);
+        decodedMessage.should.have.property('accelerometer_6');
+        decodedMessage.accelerometer_6.should.have.property('x', 1.234);
+        decodedMessage.accelerometer_6.should.have.property('y', -1.234);
+        decodedMessage.accelerometer_6.should.have.property('z', 0);
         return done();
     });
 
     it('Should decode a payload with gyrometer', function (done) {
         var cayenneLppMessageBase64 = 'EoYBxx7THds=';
         var decodedMessage = decoder.decodeCayenneLpp(cayenneLppMessageBase64);
-        test.object(decodedMessage).hasProperty('gyrometer_18');
-        test.object(decodedMessage['gyrometer_18']).hasProperty('x', 4.55);
-        test.object(decodedMessage['gyrometer_18']).hasProperty('y', 78.91);
-        test.object(decodedMessage['gyrometer_18']).hasProperty('z', 76.43);
+        decodedMessage.should.have.property('gyrometer_18');
+        decodedMessage.gyrometer_18.should.have.property('x', 4.55);
+        decodedMessage.gyrometer_18.should.have.property('y', 78.91);
+        decodedMessage.gyrometer_18.should.have.property('z', 76.43);
         return done();
     });
 
     it('Should decode a payload with GPS', function (done) {
         var cayenneLppMessageBase64 = 'AYgGdl/ylgoAA+g=';
         var decodedMessage = decoder.decodeCayenneLpp(cayenneLppMessageBase64);
-        test.object(decodedMessage).hasProperty('gps_1');
-        test.object(decodedMessage['gps_1']).hasProperty('latitude', 42.3519);
-        test.object(decodedMessage['gps_1']).hasProperty('longitude', -87.9094);
-        test.object(decodedMessage['gps_1']).hasProperty('altitude', 10);
+        decodedMessage.should.have.property('gps_1');
+        decodedMessage.gps_1.should.have.property('latitude', 42.3519);
+        decodedMessage.gps_1.should.have.property('longitude', -87.9094);
+        decodedMessage.gps_1.should.have.property('altitude', 10);
         return done();
     });
 });
@@ -113,20 +115,20 @@ describe('NGSI translation', function (done) {
 
     it('Should translate a CayenneLpp payload to NGSI', function (done) {
         var cayenneLppMessageBase64 = 'AHMAAAFnARACaAADAGQEAQA=';
-        var decodedMessage = decoder.toNgsi(cayenneLppMessageBase64, device);
-        test.array(decodedMessage);
+        var decodedMessage = translator.toNgsi(cayenneLppMessageBase64, device);
+        decodedMessage.should.be.an('array');
         return done();
     });
 
     it('Should translate a CayenneLpp payload including GPS to NGSI', function (done) {
         var cayenneLppMessageBase64 = 'AYgGdl/ylgoAA+g=';
-        var decodedMessage = decoder.toNgsi(cayenneLppMessageBase64, deviceGps);
-        test.array(decodedMessage);
-        test.array(decodedMessage).hasLength(1);
-        test.object(decodedMessage[0]);
-        test.object(decodedMessage[0]).hasProperty('name', 'gps_1');
-        test.object(decodedMessage[0]).hasProperty('type', 'geo:point');
-        test.object(decodedMessage[0]).hasProperty('value', '42.3519,-87.9094');
+        var decodedMessage = translator.toNgsi(cayenneLppMessageBase64, deviceGps);
+        decodedMessage.should.be.an('array');
+        decodedMessage.should.have.length(1);
+        decodedMessage[0].should.be.an('object');
+        decodedMessage[0].should.have.property('name', 'gps_1');
+        decodedMessage[0].should.have.property('type', 'geo:point');
+        decodedMessage[0].should.have.property('value', '42.3519,-87.9094');
         return done();
     });
 });
