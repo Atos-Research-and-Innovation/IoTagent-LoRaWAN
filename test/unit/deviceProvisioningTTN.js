@@ -434,17 +434,17 @@ describe('Device provisioning API: Provision devices', function () {
             method: 'DELETE'
         };
 
-        it('should return a 200 OK and no errors', function (done) {
+        it('should return a 204 OK and no errors', function (done) {
             request(options, function (error, response, body) {
-                test.should.not.exist(error);
-                test.object(response).hasProperty('statusCode', 204);
+                should.not.exist(error);
+                response.should.have.property('statusCode', 204);
                 done();
             });
         });
 
         it('should remove the device from the provisioned devices list', function (done) {
             request(options, function (error, response, body) {
-                test.should.not.exist(error);
+                should.not.exist(error);
                 var options = {
                     url: 'http://localhost:' + iotAgentConfig.iota.server.port + '/iot/devices',
                     headers: {
@@ -456,10 +456,11 @@ describe('Device provisioning API: Provision devices', function () {
                 };
 
                 request(options, function (error, response, body) {
-                    test.should.not.exist(error);
-                    test.object(response).hasProperty('statusCode', 200);
-                    test.object(body).hasProperty('count', 1);
-                    test.object(body).hasProperty('devices');
+                    should.not.exist(error);
+                    response.should.have.property('statusCode', 200);
+                    body.should.have.property('count', 1);
+                    body.should.have.property('devices');
+                    body.devices.should.have.length(1);
                     done();
                 });
             });
@@ -481,12 +482,13 @@ describe('Device provisioning API: Provision devices', function () {
                 client.publish('ari_ioe_app_demo1/devices/LORA-N-003/up', JSON.stringify(attributesExample));
                 setTimeout(function () {
                     request(optionsCB, function (error, response, body) {
-                        test.should.not.exist(error);
-                        test.object(response).hasProperty('statusCode', 200);
-                        test.object(body).hasProperty('id', 'LORA-N-003');
-                        test.object(body).hasProperty('temperature_1');
-                        test.object(body['temperature_1']).hasProperty('type', 'Number');
-                        test.object(body['temperature_1']).hasProperty('value', 28);
+                        should.not.exist(error);
+                        response.should.have.property('statusCode', 200);
+                        body.should.have.property('id', 'LORA-N-003');
+                        body.should.have.property('temperature_1');
+                        body.temperature_1.should.be.an('object');
+                        body.temperature_1.should.have.property('type', 'Number');
+                        body.temperature_1.should.have.property('value', 28);
                         client.end();
                         done();
                     });
