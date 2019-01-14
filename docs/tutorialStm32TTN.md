@@ -108,6 +108,12 @@ AppKey= 2B 7E 15 16 28 AE D2 A6 AB F7 15 88 09 CF 4F 3C
 
 ![TTN device resigster](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/task/tutorialStm32TTN/docs/img/stm32_ttn_tutorial/ttn_device_register.png)
 
+## Deploy FIWARE stack
+
+## Provision LoRaWAN board and query context data
+
+## Data visualization 
+
 ## FAQ
 
 ### Linux operating system using Oracle VirtualBox
