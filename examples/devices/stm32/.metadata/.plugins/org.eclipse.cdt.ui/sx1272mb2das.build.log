@@ -1,7 +1,0 @@
-09:36:31 **** Clean-only build of configuration Debug for project sx1272mb2das ****
-make clean 
-rm -rf *
- 
-
-09:36:31 Build Finished (took 121ms)
-
