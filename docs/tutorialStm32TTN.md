@@ -212,7 +212,7 @@ curl -X GET \
 		"device_id": "lora-n-006",
 		"service": "atosioe",
 		"service_path": "/lorattn",
-		"entity_name": "LORA-N-006",
+		"entity_name": "LORA-DEVICE",
 		"entity_type": "LoraDevice",
 		"attributes": [{
 			"object_id": "temperature_1",
@@ -225,9 +225,9 @@ curl -X GET \
 		"internal_attributes": {
 			"lorawan": {
 				"application_key": "2B7E151628AED2A6ABF7158809CF4F3C",
-				"application_id": "ari_ioe_app_demo1",
-				"app_eui": "70B3D57ED000985F",
-				"dev_eui": "3131353858378A18",
+				"application_id": "app_demo1",
+				"app_eui": "70B3D47ED440985F",
+				"dev_eui": "9931353858378A18",
 				"application_server": {
 					"provider": "TTN",
 					"host": "mosquitto"
@@ -237,6 +237,38 @@ curl -X GET \
 	}]
 }
 ```
+- When the endnode publishes temperature data periodically, the information will be received by the *FIWARE IoT Agent* through the *The Things Network MQTT API*. It will decode the CayenneLpp payload, transform it to NGSI data model and forward the result to the *FIWARE Context Broker*.
+- It is possible to check that the whole data flow is working correctly by calling the API of the *Context Broker*:
+```console
+curl -X GET \
+  http://localhost:1026/v2/entities \
+  -H 'fiware-service: atosioe' \
+  -H 'fiware-servicepath: /lorattn'
+```
+- The result should be similar to:
+```json
+[{
+	"id": "LORA-DEVICE",
+	"type": "LoraDevice",
+	"TimeInstant": {
+		"type": "DateTime",
+		"value": "2019-01-14T13:45:19.00Z",
+		"metadata": {}
+	},
+	"temperature_1": {
+		"type": "Number",
+		"value": 27.2,
+		"metadata": {
+			"TimeInstant": {
+				"type": "DateTime",
+				"value": "2019-01-14T13:45:19.00Z"
+			}
+		}
+	}
+}]
+```
+
+- As it can be seen, the data extracted from *FIWARE Context Broker* is represented using *NGSI data model*, being a standardized representation independent of the underlying LoRaWAN communication protocol and the payload encoding format.
 
 ## Data visualization 
 
