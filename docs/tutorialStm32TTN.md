@@ -19,6 +19,10 @@ It must be noted that although most of the process described in the tutorial is 
 ````console
 $ sudo apt-get install git
  ````
+ - Minicom
+````console
+$ sudo apt-get install minicom
+ ````
 
 ### *The Things Network* setup
  - The creation of an account in *The Things Network*: https://account.thethingsnetwork.org/
@@ -72,6 +76,37 @@ $ <sw4stm32_path>/SystemWorkbench/eclipse
 
 ![SW4STM32 build](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/task/tutorialStm32TTN/docs/img/stm32_ttn_tutorial/eclipse_build.gif)
 
+- Connect the *P-NUCLEO-LRWAN1* board to an available USB port of your machine. Run the following commands to check that it has been correctly recognized:
+
+````console
+$ lsusb
+````
+
+- The results should include a line similar to:
+
+```console
+Bus 002 Device 003: ID 0483:374b STMicroelectronics ST-LINK/V2.1 (Nucleo-F103RB)
+```
+
+- In the contextual menu of the project explorer, click on Target -> Erase chip ...
+- In the contextual menu of the project explorer, click on Target -> Program chip ...
+![SW4STM32 flash](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/task/tutorialStm32TTN/docs/img/stm32_ttn_tutorial/stm32_ttn_flash.gif)
+- Open a new terminal and run:
+````console
+$ sudo minicom -D /dev/ttyACM0
+````
+- Reset the board and the following data shall be showed:
+```console
+VERSION: 44251210
+OTAA
+DevEui= 31-31-35-38-58-37-8A-18
+AppEui= 70-B3-D5-7E-D0-00-98-5F
+AppKey= 2B 7E 15 16 28 AE D2 A6 AB F7 15 88 09 CF 4F 3C
+```
+- Copy the values of `DevEui` and `AppKey`.
+- Navigate to `https://console.thethingsnetwork.org/applications/test_fiware/devices/register` to register the device. Introduce the `Device ID`, the `Device EUI` (from previous step) and the `App Key` from previous step.
+
+![TTN device resigster](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/task/tutorialStm32TTN/docs/img/stm32_ttn_tutorial/ttn_device_register.png)
 
 ## FAQ
 
