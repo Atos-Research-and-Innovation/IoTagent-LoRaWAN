@@ -34,11 +34,11 @@ $ sudo apt-get install git
 
 The tutorial allows the deployment of the following system, comprising a basic FIWARE IoT stack:
 
-![Architecture](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/task/tutorialStm32TTN/docs/img/stm32_ttn_tutorial_architecture.png)
+![Architecture](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/task/tutorialStm32TTN/docs/img/stm32_ttn_tutorial/stm32_ttn_tutorial_architecture.png)
 
 - **A LoRaWAN end-node** based on an STM32 LoRaWAN development board. In particular, the B-L072Z-LRWAN1 model is used. The device will run an application reading the value from an onboard temperature sensor, encode the information using [CayenneLpp data model](https://www.thethingsnetwork.org/docs/devices/arduino/api/cayennelpp.html) and forward the result to **The Things Network** LoRaWAN stack through a *concentrator* or *gateway*.
 - **The LoRaWAN gateway** plays the role of a concentrator which forwards the messages to the *LoRaWAN network server*, included in **The Things Network* stack.*
-- ***The Things Network* stack** implements the functionalities of the *LoRaWAN network server* and *LoRaWAN application server*. Development of applications is allowed through a [MQTT broker based API](https://www.thethingsnetwork.org/docs/applications/mqtt/api.html).
+- **The Things Network* stack** implements the functionalities of the *LoRaWAN network server* and *LoRaWAN application server*. Development of applications is allowed through a [MQTT broker based API](https://www.thethingsnetwork.org/docs/applications/mqtt/api.html).
 - **FIWARE IoT Agent** enables the ingestion of data from *LoRaWAN application servers* in *NGSI context brokers*, subscribing to appropriate communication channels (i.e., MQTT topics), decoding payloads and translating them to NGSI data model. It relies on a *MongoDB database* to persist information.
 - **FIWARE Context Broker** manages large-scale context information abstracting the type of data source and the underlying communication technologies. It relies on a *MongoDB database* to persist information.
 
@@ -58,7 +58,10 @@ $ <sw4stm32_path>/SystemWorkbench/eclipse
 ```
 - When requested to select a directory as workspace, browse to: `examples/devices/stm32` folder.
 
-In the Project Explorer panel, right click and select Import ->General -> “Existing Projects into Workspace”. In the Import windows, click on Browse and on OK in the next window.
+In the Project Explorer panel, right click and select Import ->General -> Existing Projects into Workspace. In the Import windows, click on Browse and on OK in the next window. Two different projects shall be automatically selected. You can now click on Finish. The projects shall be imported.
+
+![SW4STM32 setup](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/task/tutorialStm32TTN/docs/img/stm32_ttn_tutorial/eclipse_setup.gif)
+
 
 ## FAQ
 
