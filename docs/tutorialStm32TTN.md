@@ -56,11 +56,13 @@ $ git clone https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN.git
 ```console
 $ <sw4stm32_path>/SystemWorkbench/eclipse
 ```
-- When requested to select a directory as workspace, browse to: `examples/devices/stm32` folder.
-
-In the Project Explorer panel, right click and select Import ->General -> Existing Projects into Workspace. In the Import windows, click on Browse and on OK in the next window. Two different projects shall be automatically selected. You can now click on Finish. The projects shall be imported.
+- When requested to select a directory as workspace, browse to: `examples/devices/stm32` folder. In the Project Explorer panel, right click and select Import ->General -> Existing Projects into Workspace. In the Import windows, click on Browse and on OK in the next window. Two different projects shall be automatically selected. You can now click on Finish. The projects shall be imported.
 
 ![SW4STM32 setup](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/task/tutorialStm32TTN/docs/img/stm32_ttn_tutorial/eclipse_setup.gif)
+
+- Select the project *mlm32l07x01* in the project explorer, and click on `Build Project` in the contextual menu. Please note that this project is valid for *B-L072Z-LRWAN1* board. *sx1272mb2das* project must be used for *P-NUCLEO-LRWAN1* board.
+
+![SW4STM32 build](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/task/tutorialStm32TTN/docs/img/stm32_ttn_tutorial/eclipse_build.gif)
 
 
 ## FAQ
