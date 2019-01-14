@@ -32,7 +32,7 @@
 /*!
  * CAYENNE_LPP is myDevices Application server.
  */
-//#define CAYENNE_LPP
+#define CAYENNE_LPP
 #define LPP_DATATYPE_DIGITAL_INPUT  0x0
 #define LPP_DATATYPE_DIGITAL_OUTPUT 0x1
 #define LPP_DATATYPE_HUMIDITY       0x68
@@ -263,11 +263,14 @@ static void Send( void* context )
 
 #ifdef CAYENNE_LPP
   uint8_t cchannel=0;
-  temperature = ( int16_t )( sensor_data.temperature * 10 );     /* in °C * 10 */
+  //temperature = ( int16_t )( sensor_data.temperature * 10 );     /* in ï¿½C * 10 */
   pressure    = ( uint16_t )( sensor_data.pressure * 100 / 10 );  /* in hPa / 10 */
   humidity    = ( uint16_t )( sensor_data.humidity * 2 );        /* in %*2     */
   uint32_t i = 0;
-
+  uint16_t temperatureDegreeC = HW_GetTemperatureLevel();
+  uint16_t temperatureDegreeC_Int= (temperatureDegreeC)>>8;
+  uint16_t temperatureDegreeC_Frac= ((temperatureDegreeC-(temperatureDegreeC_Int<<8))*100)>>8;
+  temperature = ( int16_t )( temperatureDegreeC_Int* 10 + temperatureDegreeC_Frac/10);
   batteryLevel = HW_GetBatteryLevel( );                     /* 1 (very low) to 254 (fully charged) */
 
   AppData.Port = LPP_APP_PORT;
@@ -295,7 +298,7 @@ static void Send( void* context )
 #endif  /* REGION_XX915 */
 #else  /* not CAYENNE_LPP */
 
-  temperature = ( int16_t )( sensor_data.temperature * 100 );     /* in °C * 100 */
+  temperature = ( int16_t )( sensor_data.temperature * 100 );     /* in ï¿½C * 100 */
   pressure    = ( uint16_t )( sensor_data.pressure * 100 / 10 );  /* in hPa / 10 */
   humidity    = ( uint16_t )( sensor_data.humidity * 10 );        /* in %*10     */
   latitude = sensor_data.latitude;

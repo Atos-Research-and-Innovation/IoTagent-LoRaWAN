@@ -1,4 +1,4 @@
-11:00:18 **** Build of configuration Debug for project mlm32l07x01 ****
+11:56:56 **** Build of configuration Debug for project mlm32l07x01 ****
 make all 
 Building file: /home/a620381/workspace/finext/IoTagent-LoRaWAN/examples/devices/stm32/Projects/B-L072Z-LRWAN1/Applications/LoRa/End_Node/LoRaWAN/App/src/bsp.c
 Invoking: MCU GCC Compiler
@@ -460,10 +460,10 @@ Generating binary and Printing size information:
 arm-none-eabi-objcopy -O binary "mlm32l07x01.elf" "mlm32l07x01.bin"
 arm-none-eabi-size "mlm32l07x01.elf"
    text	   data	    bss	    dec	    hex	filename
-  66240	    520	   6520	  73280	  11e40	mlm32l07x01.elf
+  67096	    520	   6520	  74136	  12198	mlm32l07x01.elf
  
-11:37:57 **** Programming project mlm32l07x01 on chip ****
-/home/a620381/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.openocd.linux64_1.21.0.201811131241/tools/openocd/bin/openocd -f stm32.flash.8190074006824427859.cfg -s /home/a620381/workspace/finext/IoTagent-LoRaWAN/examples/devices/stm32/Projects/B-L072Z-LRWAN1/Applications/LoRa/End_Node/SW4STM32/mlm32l07x01 -s /home/a620381/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.debug_2.3.1.201811131241/resources/openocd/st_scripts -c "program Debug/mlm32l07x01.elf verify exit" 
+11:57:50 **** Erasing chip ... ****
+/home/a620381/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.openocd.linux64_1.21.0.201811131241/tools/openocd/bin/openocd -f stm32.flash.8662213489898446673.cfg -s /home/a620381/workspace/finext/IoTagent-LoRaWAN/examples/devices/stm32/Projects/B-L072Z-LRWAN1/Applications/LoRa/End_Node/SW4STM32/mlm32l07x01 -s /home/a620381/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.debug_2.3.1.201811131241/resources/openocd/st_scripts "-c init" "-c reset halt" "-c flash erase_sector 0 0 last" "-c exit" 
 Open On-Chip Debugger 0.10.0-dev-00015-gaaf1808 (2018-11-13-12:51)
 Licensed under GNU GPL v2
 For bug reports, read
@@ -476,13 +476,63 @@ adapter_nsrst_delay: 100
 Info : clock speed 240 kHz
 Info : STLINK v2.1 JTAG v28 API v2 M18 VID 0x0483 PID 0x374B
 Info : using stlink api v2
-Info : Target voltage: 3.252632
+Info : Target voltage: 3.254211
 Info : Stlink adapter speed set to 240 kHz
 Info : STM32L072CZYx.cpu: hardware has 4 breakpoints, 2 watchpoints
 Info : Stlink adapter speed set to 240 kHz
 adapter speed: 240 kHz
 target halted due to debug-request, current mode: Thread 
 xPSR: 0xf1000000 pc: 0x08002da8 msp: 0x20005000
+Info : Device: STM32L0xx (Cat.5)
+Info : STM32L flash has dual banks. Bank (0) size is 96kb, base address is 0x8000000
+Error: failed erasing sectors 0 to 23
+
+11:58:19 **** Erasing chip ... ****
+/home/a620381/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.openocd.linux64_1.21.0.201811131241/tools/openocd/bin/openocd -f stm32.flash.5671474499778082822.cfg -s /home/a620381/workspace/finext/IoTagent-LoRaWAN/examples/devices/stm32/Projects/B-L072Z-LRWAN1/Applications/LoRa/End_Node/SW4STM32/mlm32l07x01 -s /home/a620381/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.debug_2.3.1.201811131241/resources/openocd/st_scripts "-c init" "-c reset halt" "-c flash erase_sector 0 0 last" "-c exit" 
+Open On-Chip Debugger 0.10.0-dev-00015-gaaf1808 (2018-11-13-12:51)
+Licensed under GNU GPL v2
+For bug reports, read
+	http://openocd.org/doc/doxygen/bugs.html
+Warn : Could not determine executable path, using configured BINDIR.
+srst_only separate srst_nogate srst_open_drain connect_assert_srst
+Info : The selected transport took over low-level target control. The results might differ compared to plain JTAG/SWD
+adapter speed: 240 kHz
+adapter_nsrst_delay: 100
+Info : clock speed 240 kHz
+Info : STLINK v2.1 JTAG v28 API v2 M18 VID 0x0483 PID 0x374B
+Info : using stlink api v2
+Info : Target voltage: 3.254211
+Info : Stlink adapter speed set to 240 kHz
+Info : STM32L072CZYx.cpu: hardware has 4 breakpoints, 2 watchpoints
+Info : Stlink adapter speed set to 240 kHz
+adapter speed: 240 kHz
+target halted due to debug-request, current mode: Thread 
+xPSR: 0xf0000000 pc: 00000000 msp: 00000000
+Info : Device: STM32L0xx (Cat.5)
+Info : STM32L flash has dual banks. Bank (0) size is 96kb, base address is 0x8000000
+Error: failed erasing sectors 0 to 23
+
+11:58:55 **** Programming project mlm32l07x01 on chip ****
+/home/a620381/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.openocd.linux64_1.21.0.201811131241/tools/openocd/bin/openocd -f stm32.flash.6662100909468958272.cfg -s /home/a620381/workspace/finext/IoTagent-LoRaWAN/examples/devices/stm32/Projects/B-L072Z-LRWAN1/Applications/LoRa/End_Node/SW4STM32/mlm32l07x01 -s /home/a620381/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.debug_2.3.1.201811131241/resources/openocd/st_scripts -c "program Debug/mlm32l07x01.elf verify exit" 
+Open On-Chip Debugger 0.10.0-dev-00015-gaaf1808 (2018-11-13-12:51)
+Licensed under GNU GPL v2
+For bug reports, read
+	http://openocd.org/doc/doxygen/bugs.html
+Warn : Could not determine executable path, using configured BINDIR.
+srst_only separate srst_nogate srst_open_drain connect_assert_srst
+Info : The selected transport took over low-level target control. The results might differ compared to plain JTAG/SWD
+adapter speed: 240 kHz
+adapter_nsrst_delay: 100
+Info : clock speed 240 kHz
+Info : STLINK v2.1 JTAG v28 API v2 M18 VID 0x0483 PID 0x374B
+Info : using stlink api v2
+Info : Target voltage: 3.255790
+Info : Stlink adapter speed set to 240 kHz
+Info : STM32L072CZYx.cpu: hardware has 4 breakpoints, 2 watchpoints
+Info : Stlink adapter speed set to 240 kHz
+adapter speed: 240 kHz
+target halted due to debug-request, current mode: Thread 
+xPSR: 0xf0000000 pc: 00000000 msp: 00000000
 STM32L0: Enabling HSI16
 Info : Stlink adapter speed set to 4000 kHz
 adapter speed: 4000 kHz
@@ -491,134 +541,126 @@ auto erase enabled
 Info : Device: STM32L0xx (Cat.5)
 Info : STM32L flash has dual banks. Bank (0) size is 96kb, base address is 0x8000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
-target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
-target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
-target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
-target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000000e msp: 0x20005000
-wrote 69632 bytes from file Debug/mlm32l07x01.elf in 53.629662s (1.268 KiB/s)
+xPSR: 0x61000000 pc: 0x2000000e msp: 00000000
+wrote 69632 bytes from file Debug/mlm32l07x01.elf in 53.431339s (1.273 KiB/s)
 ** Programming Finished **
 ** Verify Started **
 target halted due to breakpoint, current mode: Thread 
-xPSR: 0x61000000 pc: 0x2000002e msp: 0x20005000
-verified 66760 bytes in 0.880248s (74.065 KiB/s)
+xPSR: 0x61000000 pc: 0x2000002e msp: 00000000
+verified 67616 bytes in 0.887443s (74.406 KiB/s)
 ** Verified OK **
 shutdown command invoked

@@ -76,7 +76,7 @@ $ <sw4stm32_path>/SystemWorkbench/eclipse
 
 ![SW4STM32 build](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/task/tutorialStm32TTN/docs/img/stm32_ttn_tutorial/eclipse_build.gif)
 
-- Connect the *P-NUCLEO-LRWAN1* board to an available USB port of your machine. Run the following commands to check that it has been correctly recognized:
+- Connect the *P-NUCLEO-LRWAN1* board to an available USB port. Run the following commands to check that it has been correctly recognized:
 
 ````console
 $ lsusb
