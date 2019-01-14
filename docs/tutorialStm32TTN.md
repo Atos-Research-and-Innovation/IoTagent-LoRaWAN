@@ -52,13 +52,21 @@ $ git clone https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN.git
 
 ## Program the STM32 board
 
+- Navigate to *https://console.thethingsnetwork.org* and get logged. Copy the *Application EUI* of one of the application to be used in the tutorial.
+
+![TTN Application EUI](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/task/tutorialStm32TTN/docs/img/stm32_ttn_tutorial/ttn_application_eui.png)
+
 - Launch SW4STM32 from the installation folder:
 ```console
 $ <sw4stm32_path>/SystemWorkbench/eclipse
 ```
-- When requested to select a directory as workspace, browse to: `examples/devices/stm32` folder. In the Project Explorer panel, right click and select Import ->General -> Existing Projects into Workspace. In the Import windows, click on Browse and on OK in the next window. Two different projects shall be automatically selected. You can now click on Finish. The projects shall be imported.
+- When requested to select a directory as workspace, browse to: `examples/devices/stm32` folder. In the Project Explorer panel, right click and select Import ->General -> Existing Projects into Workspace. In the Import windows, click on Browse and on OK in the next window. Two different projects will be automatically selected. You can now click on Finish. The projects shall be imported.
 
 ![SW4STM32 setup](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/task/tutorialStm32TTN/docs/img/stm32_ttn_tutorial/eclipse_setup.gif)
+
+- Open the file *Commissioning.h* within `Projects/B-L072Z-LRWAN1/Applications/LoRa/End_Node/LoRaWAN/App/inc/` path. Replace the value of `LORAWAN_JOIN_EUI` with the one copied from `TTN console`:
+
+![Commissioning device](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/task/tutorialStm32TTN/docs/img/stm32_ttn_tutorial/stm32_ttn_commissioning.png)
 
 - Select the project *mlm32l07x01* in the project explorer, and click on `Build Project` in the contextual menu. Please note that this project is valid for *B-L072Z-LRWAN1* board. *sx1272mb2das* project must be used for *P-NUCLEO-LRWAN1* board.
 
