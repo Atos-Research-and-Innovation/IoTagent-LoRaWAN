@@ -13,15 +13,15 @@ It must be noted that although most of the process described in the tutorial is 
  - System Workbench for STM32 (aka SW4STM32). A free multi-OS software development environment based on Eclipse. Detailed installation instructions can be found [here](http://www.openstm32.org/HomePage).
  - Curl
  ````console
- $ sudo apt-get install curl
+ sudo apt-get install curl
  ````
  - Git
 ````console
-$ sudo apt-get install git
+sudo apt-get install git
  ````
  - Minicom
 ````console
-$ sudo apt-get install minicom
+sudo apt-get install minicom
  ````
 
 ### *The Things Network* setup
@@ -51,7 +51,7 @@ The tutorial allows the deployment of the following system, comprising a basic F
 All the code and files needed to follow this tutorial are included in [FIWARE LoRaWAN IoT Agent GitHub repository](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN). To clone the repository:
 
 ``` console
-$ git clone https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN.git
+git clone https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN.git
 ```
 
 ## Program the STM32 board
@@ -62,7 +62,7 @@ $ git clone https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN.git
 
 - Launch SW4STM32 from the installation folder:
 ```console
-$ <sw4stm32_path>/SystemWorkbench/eclipse
+<sw4stm32_path>/SystemWorkbench/eclipse
 ```
 - When requested to select a directory as the workspace, browse to: `examples/devices/stm32` folder. In the Project Explorer panel, right click and select Import ->General -> Existing Projects into Workspace. In the Import windows, click on Browse and on OK in the next window. Two different projects will be automatically selected. You can now click on Finish. The projects shall be imported.
 
@@ -79,7 +79,7 @@ $ <sw4stm32_path>/SystemWorkbench/eclipse
 - Connect the *P-NUCLEO-LRWAN1* board to an available USB port. Run the following commands to check that it has been correctly recognized:
 
 ````console
-$ lsusb
+lsusb
 ````
 
 - The results should include a line similar to:
@@ -93,7 +93,7 @@ Bus 002 Device 003: ID 0483:374b STMicroelectronics ST-LINK/V2.1 (Nucleo-F103RB)
 ![SW4STM32 flash](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/task/tutorialStm32TTN/docs/img/stm32_ttn_tutorial/stm32_ttn_flash.gif)
 - Open a new terminal and run:
 ````console
-$ sudo minicom -D /dev/ttyACM0
+sudo minicom -D /dev/ttyACM0
 ````
 - Reset the board and the following data shall be shown:
 ```console
@@ -113,7 +113,7 @@ AppKey= 2B 7E 15 16 28 AE D2 A6 AB F7 15 88 09 CF 4F 3C
 - From the root folder of the repository, run:
 
 ```console
-$ docker-compose -f examples/stm32_ttn_tutorial/docker-compose.yml up
+docker-compose -f examples/stm32_ttn_tutorial/docker-compose.yml up
 ```
 
 - The following results should be shown:
@@ -122,7 +122,7 @@ $ docker-compose -f examples/stm32_ttn_tutorial/docker-compose.yml up
 
 - In order to verify that the *FIWARE LoRaWAN IoT Agent* is running, execute:
 ```console
-$ curl -X GET   http://localhost:4061/iot/about
+curl -X GET   http://localhost:4061/iot/about
 ```
 - The output should be:
 ```json
@@ -130,7 +130,7 @@ $ curl -X GET   http://localhost:4061/iot/about
 ```
 - In order to verify that the *FIWARE context broker* is running, execute:
 ```console
-$ curl localhost:1026/version
+curl localhost:1026/version
 ```
 - The output should be:
 ```json
@@ -270,8 +270,101 @@ curl -X GET \
 
 - As it can be seen, the data extracted from *FIWARE Context Broker* is represented using *NGSI data model*, being a standardized representation independent of the underlying LoRaWAN communication protocol and the payload encoding format.
 
-## Data visualization 
+## Data storage and visualization 
 
+*FIWARE Orion Context Broker* stores the last value for each one of the attributes of the registered entities. To maintain a record of historic information, *FIWARE QuantumLeap* component is used. It is  based on *CrateDB* which can be easily integrated with *Grafana* for visualization purposes.
+
+- To check that *QuantumLeap* has been correctly launched execute:
+```console
+curl -X GET http://localhost:8668/v2/version
+```
+- The answer should be:
+```json
+{
+  "version": "0.5.0"
+}
+```
+- Create a subscription to process *FIWARE Context Broker* notifications when new data is available:
+```console
+curl -X POST \
+  'http://localhost:8668/v2/subscribe?orionUrl=http://orion:1026/v2&quantumleapUrl=http://quantumleap:8668/v2' \
+  -H 'Content-Type: application/json' \
+  -H 'fiware-service: atosioe' \
+  -H 'fiware-servicepath: /lorattn'
+```
+- Check that the subscription has been created correctly:
+```console
+curl -X GET \
+  http://localhost:1026/v2/subscriptions \
+  -H 'fiware-service: atosioe' \
+  -H 'fiware-servicepath: /lorattn'
+```
+- The result should be similar to:
+```json
+[{
+	"id": "5c3cad5cc337e68131030f65",
+	"description": "Created by QuantumLeap http://quantumleap:8668/v2.",
+	"status": "active",
+	"subject": {
+		"entities": [{
+			"idPattern": ".*"
+		}],
+		"condition": {
+			"attrs": []
+		}
+	},
+	"notification": {
+		"timesSent": 1,
+		"lastNotification": "2019-01-14T15:40:12.00Z",
+		"attrs": [],
+		"attrsFormat": "normalized",
+		"http": {
+			"url": "http://quantumleap:8668/v2/notify"
+		},
+		"metadata": ["dateCreated", "dateModified"],
+		"lastSuccess": "2019-01-14T15:40:13.00Z"
+	},
+	"throttling": 1
+}]
+```
+- When new data is send by the LoRaWAN endnode, it should be also received by QuantumLeap. Execute:
+```console
+curl -X GET \
+  http://localhost:8668/v2/entities/LORA-DEVICE \
+  -H 'Content-Type: application/json' \
+  -H 'fiware-service: atosioe' \
+  -H 'fiware-servicepath: /lorattn'
+```
+- The result should be similar to:
+```json
+{
+	"data": {
+		"attributes": [{
+				"attrName": "TimeInstant",
+				"values": [
+					"2019-01-14T14:30:00.000",
+					"2019-01-14T14:30:00.000",
+					"2019-01-14T14:43:28.000"
+				]
+			},
+			{
+				"attrName": "temperature_1",
+				"values": [
+					27.2,
+					27.2,
+					27.2
+				]
+			}
+		],
+		"entityId": "LORA-DEVICE",
+		"index": [
+			"2019-01-14T14:30:00.000",
+			"2019-01-14T14:30:00.000",
+			"2019-01-14T14:43:28.000"
+		]
+	}
+}
+```
 ## FAQ
 
 ### Linux operating system using Oracle VirtualBox

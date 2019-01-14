@@ -16,6 +16,8 @@ services:
     tty: true
     volumes:
       - mongo_data:/data/db
+    ports:
+      - "27017:27017"
 
   orion:
     command:  -dbhost mongodb -port 1026 -logLevel DEBUG
@@ -76,14 +78,14 @@ services:
     volumes:
       - cratedata:/data
 
-  grafana:
-    image: grafana/grafana
-    ports:
-      - "3000:3000"
-    environment:
-      - GF_INSTALL_PLUGINS=crate-datasource,grafana-clock-panel,grafana-worldmap-panel
-    depends_on:
-      - crate
+  # grafana:
+  #   image: grafana/grafana
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     - GF_INSTALL_PLUGINS=crate-datasource,grafana-clock-panel,grafana-worldmap-panel
+  #   depends_on:
+  #     - crate
 
   redis:
     image: redis
