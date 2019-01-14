@@ -34,7 +34,7 @@ $ sudo apt-get install git
 
 The tutorial allows the deployment of the following system, comprising a basic FIWARE IoT stack:
 
-![Architecture](https://raw.githubusercontent.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/master/docs/img/stm32_ttn_tutorial_architecture.png)
+![Architecture](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/task/tutorialStm32TTN/docs/img/stm32_ttn_tutorial_architecture.png)
 
 - **A LoRaWAN end-node** based on an STM32 LoRaWAN development board. In particular, the B-L072Z-LRWAN1 model is used. The device will run an application reading the value from an onboard temperature sensor, encode the information using [CayenneLpp data model](https://www.thethingsnetwork.org/docs/devices/arduino/api/cayennelpp.html) and forward the result to **The Things Network** LoRaWAN stack through a *concentrator* or *gateway*.
 - **The LoRaWAN gateway** plays the role of a concentrator which forwards the messages to the *LoRaWAN network server*, included in **The Things Network* stack.*
