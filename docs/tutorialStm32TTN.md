@@ -151,7 +151,7 @@ $ curl localhost:1026/version
 
 ## Provision LoRaWAN endnode and query context data
 
--In order to start using the IoTA, a new device must be provisioned. Execute the following command replacing *ApplicationId>, *ApplicationAccessKey*, *DeviceEUI* and *ApplicationEUI* with the appropriate values extracted in previous steps.
+-In order to start using the IoTA, a new device must be provisioned. Execute the following command replacing *ApplicationId*, *ApplicationAccessKey*, *DeviceEUI* and *ApplicationEUI* with the appropriate values extracted in previous steps.
 
 ```console
 curl -X POST \
