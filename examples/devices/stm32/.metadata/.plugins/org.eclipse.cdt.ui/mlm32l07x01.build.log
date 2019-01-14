@@ -1,0 +1,7 @@
+09:55:56 **** Clean-only build of configuration Debug for project mlm32l07x01 ****
+make clean 
+rm -rf *
+ 
+
+09:55:56 Build Finished (took 213ms)
+
