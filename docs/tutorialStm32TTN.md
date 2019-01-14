@@ -110,6 +110,45 @@ AppKey= 2B 7E 15 16 28 AE D2 A6 AB F7 15 88 09 CF 4F 3C
 
 ## Deploy FIWARE stack
 
+- From the root folder of the repository, run:
+
+```console
+$ docker-compose -f examples/stm32_ttn_tutorial/docker-compose.yml up
+```
+
+- The following results should be showed:
+
+![Docker-compose up](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/task/tutorialStm32TTN/docs/img/stm32_ttn_tutorial/docker-compose-up.gif)
+
+- In order to verify that the *FIWARE LoRaWAN IoT Agent* is running, execute:
+```console
+$ curl -X GET   http://localhost:4061/iot/about
+```
+- The output should be:
+```json
+{"libVersion":"2.6.0-next","port":4061,"baseRoot":"/"}
+```
+- In order to verify that the *FIWARE context broker* is running, execute:
+```console
+$ curl localhost:1026/version
+```
+- The output should be:
+```json
+{
+"orion" : {
+  "version" : "2.1.0-next",
+  "uptime" : "0 d, 0 h, 17 m, 57 s",
+  "git_hash" : "0f61fc575b869dcd26f2eae595424fa424f9bc28",
+  "compile_time" : "Wed Dec 19 17:07:33 UTC 2018",
+  "compiled_by" : "root",
+  "compiled_in" : "07ff8fcb03f5",
+  "release_date" : "Wed Dec 19 17:07:33 UTC 2018",
+  "doc" : "https://fiware-orion.rtfd.io/"
+}
+}
+
+```
+
 ## Provision LoRaWAN board and query context data
 
 ## Data visualization 
