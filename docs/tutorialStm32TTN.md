@@ -64,7 +64,7 @@ $ git clone https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN.git
 ```console
 $ <sw4stm32_path>/SystemWorkbench/eclipse
 ```
-- When requested to select a directory as workspace, browse to: `examples/devices/stm32` folder. In the Project Explorer panel, right click and select Import ->General -> Existing Projects into Workspace. In the Import windows, click on Browse and on OK in the next window. Two different projects will be automatically selected. You can now click on Finish. The projects shall be imported.
+- When requested to select a directory as the workspace, browse to: `examples/devices/stm32` folder. In the Project Explorer panel, right click and select Import ->General -> Existing Projects into Workspace. In the Import windows, click on Browse and on OK in the next window. Two different projects will be automatically selected. You can now click on Finish. The projects shall be imported.
 
 ![SW4STM32 setup](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/task/tutorialStm32TTN/docs/img/stm32_ttn_tutorial/eclipse_setup.gif)
 
@@ -95,7 +95,7 @@ Bus 002 Device 003: ID 0483:374b STMicroelectronics ST-LINK/V2.1 (Nucleo-F103RB)
 ````console
 $ sudo minicom -D /dev/ttyACM0
 ````
-- Reset the board and the following data shall be showed:
+- Reset the board and the following data shall be shown:
 ```console
 VERSION: 44251210
 OTAA
@@ -104,7 +104,7 @@ AppEui= 70-B3-D5-7E-D0-00-98-5F
 AppKey= 2B 7E 15 16 28 AE D2 A6 AB F7 15 88 09 CF 4F 3C
 ```
 - Copy the values of `DevEui` and `AppKey`.
-- Navigate to `https://console.thethingsnetwork.org/applications/test_fiware/devices/register` to register the device. Introduce the `Device ID`, the `Device EUI` (from previous step) and the `App Key` from previous step.
+- Navigate to `https://console.thethingsnetwork.org/applications/test_fiware/devices/register` to register the device. Introduce the `Device ID`, the `Device EUI` (from the previous step) and the `App Key` (from the previous step).
 
 ![TTN device resigster](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/task/tutorialStm32TTN/docs/img/stm32_ttn_tutorial/ttn_device_register.png)
 
@@ -116,7 +116,7 @@ AppKey= 2B 7E 15 16 28 AE D2 A6 AB F7 15 88 09 CF 4F 3C
 $ docker-compose -f examples/stm32_ttn_tutorial/docker-compose.yml up
 ```
 
-- The following results should be showed:
+- The following results should be shown:
 
 ![Docker-compose up](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/task/tutorialStm32TTN/docs/img/stm32_ttn_tutorial/docker-compose-up.gif)
 
@@ -149,7 +149,7 @@ $ curl localhost:1026/version
 
 ```
 
-## Provision LoRaWAN endnode and query context data
+## Provision LoRaWAN endnode and query FIWARE context data
 
 -In order to start using the IoTA, a new device must be provisioned. Execute the following command replacing *ApplicationId*, *ApplicationAccessKey*, *DeviceEUI* and *ApplicationEUI* with the appropriate values extracted in previous steps.
 
