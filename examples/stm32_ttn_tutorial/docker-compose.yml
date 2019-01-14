@@ -2,6 +2,8 @@ version: '2'
 
 volumes:
   mongo_data:
+  cratedata:
+  redisdata:
 
 services:
 
@@ -39,3 +41,53 @@ services:
       - "4061:4061"
     stdin_open: true
     tty: true
+
+  mosquitto:
+    ports:
+      - "1883:1883"
+    hostname: mosquitto
+    image: eclipse-mosquitto:latest
+    stdin_open: true
+    tty: true
+
+  quantumleap:
+    image: smartsdk/quantumleap
+    ports:
+      - "8668:8668"
+    depends_on:
+      - mongodb
+      - orion
+      - crate
+    environment:
+      - CRATE_HOST=crate
+      - USE_GEOCODING=True
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+
+  crate:
+    image: crate:3.0.5
+    command: crate -Clicense.enterprise=false -Cauth.host_based.enabled=false
+      -Ccluster.name=democluster -Chttp.cors.enabled=true -Chttp.cors.allow-origin="*"
+    ports:
+      # Admin UI
+      - "4200:4200"
+      # Transport protocol
+      - "4300:4300"
+    volumes:
+      - cratedata:/data
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_INSTALL_PLUGINS=crate-datasource,grafana-clock-panel,grafana-worldmap-panel
+    depends_on:
+      - crate
+
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redisdata:/data
