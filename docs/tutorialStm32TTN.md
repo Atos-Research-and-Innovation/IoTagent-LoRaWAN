@@ -149,7 +149,94 @@ $ curl localhost:1026/version
 
 ```
 
-## Provision LoRaWAN board and query context data
+## Provision LoRaWAN endnode and query context data
+
+-In order to start using the IoTA, a new device must be provisioned. Execute the following command replacing *<ApplicationId>*, *<ApplicationAccessKey>*, *<DeviceEUI>* and *<ApplicationEUI>* with the appropriate values extracted in previous steps.
+
+```javascript
+curl -X POST \
+  http://localhost:4061/iot/devices \
+  -H 'Content-Type: application/json' \
+  -H 'fiware-service: atosioe' \
+  -H 'fiware-servicepath: /lorattn' \
+  -d '{
+  "devices": [
+    {
+      "device_id": "<deviceID>",
+      "entity_name": "LORA-DEVICE",
+      "entity_type": "LoraDevice",
+      "timezone": "America/Santiago",
+      "attributes": [
+        {
+          "name": "temperature_1",
+          "type": "Number"
+        }
+      ],
+      "internal_attributes": {
+        "lorawan": {
+          "application_server": {
+            "host": "eu.thethings.network",
+            "username": "<ApplicationId>",
+            "password": "<ApplicationAccessKey>",
+            "provider": "TTN"
+          },
+          "dev_eui": "<DeviceEUI>",
+          "app_eui": "<ApplicationEUI>",
+          "application_id": "<ApplicationID>",
+          "application_key": "2B7E151628AED2A6ABF7158809CF4F3C"
+        }
+      }
+    }
+  ]
+}'
+```
+
+This command will create a simple LoRaWAN device, with just one declared active attributes: temperature.
+
+- The list of provisioned devices can be retrieved with:
+
+```console
+curl -X GET \
+  http://localhost:4061/iot/devices/ \
+  -H 'Content-Type: application/json' \
+  -H 'fiware-service: atosioe' \
+  -H 'fiware-servicepath: /lorattn'
+```
+
+- It should return something similar to:
+
+```json
+{
+	"count": 1,
+	"devices": [{
+		"device_id": "lora-n-006",
+		"service": "atosioe",
+		"service_path": "/lorattn",
+		"entity_name": "LORA-N-006",
+		"entity_type": "LoraDevice",
+		"attributes": [{
+			"object_id": "temperature_1",
+			"name": "temperature_1",
+			"type": "Number"
+		}],
+		"lazy": [],
+		"commands": [],
+		"static_attributes": [],
+		"internal_attributes": {
+			"lorawan": {
+				"application_key": "2B7E151628AED2A6ABF7158809CF4F3C",
+				"application_id": "ari_ioe_app_demo1",
+				"app_eui": "70B3D57ED000985F",
+				"dev_eui": "3131353858378A18",
+				"application_server": {
+					"provider": "TTN",
+					"host": "mosquitto"
+				}
+			}
+		}
+	}]
+}
+```
 
 ## Data visualization 
 
