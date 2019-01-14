@@ -191,7 +191,7 @@ curl -X POST \
 }'
 ```
 
-This command will create a simple LoRaWAN device, with just one declared active attributes: temperature.
+This command will create a simple LoRaWAN device, with just one declared active attribute: temperature.
 
 - The list of provisioned devices can be retrieved with:
 
