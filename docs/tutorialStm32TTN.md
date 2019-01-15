@@ -385,7 +385,7 @@ curl -X GET \
 
 ![Grafana import](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/task/tutorialStm32TTN/docs/img/stm32_ttn_tutorial/grafana_import.png)
 
-- The following dashboard should be created showing the temperature reported by the LoRaWAN endnode.
+- The following dashboard should be created showing the temperature reported by the LoRaWAN end-node.
 
 ![Grafana dashboard](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/task/tutorialStm32TTN/docs/img/stm32_ttn_tutorial/grafana_dashboard.png)
 
