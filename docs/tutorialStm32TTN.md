@@ -45,6 +45,8 @@ The tutorial allows the deployment of the following system, comprising a basic F
 - **The Things Network* stack** implements the functionalities of the *LoRaWAN network server* and *LoRaWAN application server*. Development of applications is allowed through a [MQTT broker based API](https://www.thethingsnetwork.org/docs/applications/mqtt/api.html).
 - **FIWARE IoT Agent** enables the ingestion of data from *LoRaWAN application servers* in *NGSI context brokers*, subscribing to appropriate communication channels (i.e., MQTT topics), decoding payloads and translating them to NGSI data model. It relies on a *MongoDB database* to persist information.
 - **FIWARE Context Broker** manages large-scale context information abstracting the type of data source and the underlying communication technologies. It relies on a *MongoDB database* to persist information.
+- **FIWARE Quantum Leap** subscribes to notifications of new data ingested by *FIWARE Context Brokers* and stores the historical information in time-series format. It relies on a *CrateDB database* to persist information.
+- **Grafana** provides an easy and intuitive mechanism to visualize and explore data by means of fashionable dashboards.
 
 ## Clone the GitHub repository
 
@@ -272,9 +274,11 @@ curl -X GET \
 
 ## Data storage and visualization 
 
-*FIWARE Orion Context Broker* stores the last value for each one of the attributes of the registered entities. To maintain a record of historic information, *FIWARE QuantumLeap* component is used. It is  based on *CrateDB* which can be easily integrated with *Grafana* for visualization purposes.
+*FIWARE Orion Context Broker* stores the last value for each one of the attributes of the registered entities. To maintain a record of historical information, *FIWARE Quantum Leap* component is used. It is based on *CrateDB* which can be easily integrated with *Grafana* for visualization purposes.
 
-- To check that *QuantumLeap* has been correctly launched execute:
+### Data storage using *FIWARE FIWARE Quantum Leap*
+
+- To check that *Quantum Leap* has been correctly launched execute:
 ```console
 curl -X GET http://localhost:8668/v2/version
 ```
@@ -365,6 +369,11 @@ curl -X GET \
 	}
 }
 ```
+
+### Data visualization using *Grafana*
+- Navigate to `http://localhost:3000`
+  - Default credentials are `admin/admin`
+- 
 ## FAQ
 
 ### Linux operating system using Oracle VirtualBox

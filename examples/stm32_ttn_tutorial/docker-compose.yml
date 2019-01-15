@@ -78,14 +78,14 @@ services:
     volumes:
       - cratedata:/data
 
-  # grafana:
-  #   image: grafana/grafana
-  #   ports:
-  #     - "3000:3000"
-  #   environment:
-  #     - GF_INSTALL_PLUGINS=crate-datasource,grafana-clock-panel,grafana-worldmap-panel
-  #   depends_on:
-  #     - crate
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_INSTALL_PLUGINS=crate-datasource,grafana-clock-panel,grafana-worldmap-panel
+    depends_on:
+      - crate
 
   redis:
     image: redis
