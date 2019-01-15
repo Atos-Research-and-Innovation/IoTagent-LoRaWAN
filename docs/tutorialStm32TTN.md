@@ -374,9 +374,21 @@ curl -X GET \
 ```
 
 ### Data visualization using *Grafana*
-- Navigate to `http://localhost:3000`
+- Navigate to `http://localhost:3000` and get logged
   - Default credentials are `admin/admin`
-- 
+
+![Grafana login](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/task/tutorialStm32TTN/docs/img/stm32_ttn_tutorial/grafana_login.png)
+- Create a new *CrateDB* datasource in `http://localhost:3000/datasources`.
+
+![Grafana datasource](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/task/tutorialStm32TTN/docs/img/stm32_ttn_tutorial/grafana_datasource.png)
+- From `http://localhost:3000/dashboards`, import the dashboard located at `examples/stm32_ttn_tutorial/grafana_dashboard.json`.
+
+![Grafana import](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/task/tutorialStm32TTN/docs/img/stm32_ttn_tutorial/grafana_import.png)
+
+- The following dashboard should be created showing the temperature reported by the LoRaWAN endnode.
+
+![Grafana dashboard](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/task/tutorialStm32TTN/docs/img/stm32_ttn_tutorial/grafana_dashboard.png)
+
 ## FAQ
 
 ### Linux operating system using Oracle VirtualBox

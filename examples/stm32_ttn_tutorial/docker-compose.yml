@@ -44,14 +44,6 @@ services:
     stdin_open: true
     tty: true
 
-  mosquitto:
-    ports:
-      - "1883:1883"
-    hostname: mosquitto
-    image: eclipse-mosquitto:latest
-    stdin_open: true
-    tty: true
-
   quantumleap:
     image: smartsdk/quantumleap
     ports:
