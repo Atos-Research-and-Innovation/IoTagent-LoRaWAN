@@ -97,7 +97,7 @@ Bus 002 Device 003: ID 0483:374b STMicroelectronics ST-LINK/V2.1 (Nucleo-F103RB)
 ````console
 sudo minicom -D /dev/ttyACM0
 ````
-- Reset the board and the following data shall be shown:
+- Reset the board by pressing the button with the label `RESET` and the following data shall be shown in the terminal:
 ```console
 VERSION: 44251210
 OTAA
