@@ -378,7 +378,13 @@ curl -X GET \
   - Default credentials are `admin/admin`
 
 ![Grafana login](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/task/tutorialStm32TTN/docs/img/stm32_ttn_tutorial/grafana_login.png)
-- Create a new *CrateDB* datasource in `http://localhost:3000/datasources`.
+- Create a new *CrateDB* datasource in `http://localhost:3000/datasources` using the following parameters:
+  - Url: http://crate:4200
+  - Access: Server(Default)
+  - Schema: mtatosioe
+  - Table: etloradevice
+  - Check Query Source: checked
+  - Time column: time_index
 
 ![Grafana datasource](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/task/tutorialStm32TTN/docs/img/stm32_ttn_tutorial/grafana_datasource.png)
 - From `http://localhost:3000/dashboards`, import the dashboard located at `examples/stm32_ttn_tutorial/grafana_dashboard.json`.
