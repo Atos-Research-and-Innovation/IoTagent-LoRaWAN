@@ -115,6 +115,12 @@ AppKey= 2B 7E 15 16 28 AE D2 A6 AB F7 15 88 09 CF 4F 3C
 
 ## Deploy FIWARE stack
 
+- The `FIWARE stack` include a `CrateDB instance`. This component requires to increase the virtual memory asigned by default to `mmap`. Execute:
+
+```console
+sudo sysctl -w vm.max_map_count=262144
+```
+
 - From the root folder of the repository, run:
 
 ```console

@@ -26,7 +26,7 @@ services:
     expose:
         - "1026"
     hostname: orion
-    image: fiware/orion:latest
+    image: fiware/orion:2.1.0
     ports:
       - "1026:1026"
     stdin_open: true
@@ -45,7 +45,7 @@ services:
     tty: true
 
   quantumleap:
-    image: smartsdk/quantumleap
+    image: smartsdk/quantumleap:0.5
     ports:
       - "8668:8668"
     depends_on:
@@ -71,7 +71,7 @@ services:
       - cratedata:/data
 
   grafana:
-    image: grafana/grafana
+    image: grafana/grafana:5.4.2
     ports:
       - "3000:3000"
     environment:
@@ -80,7 +80,7 @@ services:
       - crate
 
   redis:
-    image: redis
+    image: redis:5.0.3
     ports:
       - "6379:6379"
     volumes:
