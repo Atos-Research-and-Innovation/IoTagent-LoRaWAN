@@ -38,7 +38,7 @@ sudo apt-get install minicom
 
 The tutorial allows the deployment of the following system, comprising a basic FIWARE IoT stack:
 
-![Architecture](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/tree/master/docs/img/stm32_ttn_tutorial/stm32_ttn_tutorial_architecture.png)
+![Architecture](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/master/docs/img/stm32_ttn_tutorial/stm32_ttn_tutorial_architecture.png)
 
 - **A LoRaWAN end-node** based on an STM32 LoRaWAN development board. In particular, the B-L072Z-LRWAN1 model is used. The device will run an application reading the value from an onboard temperature sensor, encode the information using [CayenneLpp data model](https://www.thethingsnetwork.org/docs/devices/arduino/api/cayennelpp.html) and forward the result to **The Things Network** LoRaWAN stack through a *concentrator* or *gateway*.
 - **The LoRaWAN gateway** plays the role of a concentrator which forwards the messages to the *LoRaWAN network server*, included in **The Things Network* stack.*
@@ -60,7 +60,7 @@ git clone https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN.git
 
 - Navigate to *https://console.thethingsnetwork.org* and get logged. Copy the *Application EUI* of one of the application to be used in the tutorial.
 
-![TTN Application EUI](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/tree/master/docs/img/stm32_ttn_tutorial/ttn_application_eui.png)
+![TTN Application EUI](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/master/docs/img/stm32_ttn_tutorial/ttn_application_eui.png)
 
 - Launch SW4STM32 from the installation folder:
 ```console
@@ -68,15 +68,15 @@ git clone https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN.git
 ```
 - When requested to select a directory as the workspace, browse to: `examples/devices/stm32` folder. In the Project Explorer panel, right click and select Import ->General -> Existing Projects into Workspace. In the Import windows, click on Browse and on OK in the next window. Two different projects will be automatically selected. You can now click on Finish. The projects shall be imported.
 
-![SW4STM32 setup](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/tree/master/docs/img/stm32_ttn_tutorial/eclipse_setup.gif)
+![SW4STM32 setup](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/master/docs/img/stm32_ttn_tutorial/eclipse_setup.gif)
 
 - Open the file *Commissioning.h* within `Projects/B-L072Z-LRWAN1/Applications/LoRa/End_Node/LoRaWAN/App/inc/` path (in the Project Explorer, check last folder within `Includes`). Replace the value of `LORAWAN_JOIN_EUI` with the one copied from `TTN console`:
 
-![Commissioning device](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/tree/master/docs/img/stm32_ttn_tutorial/stm32_ttn_commissioning.png)
+![Commissioning device](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/master/docs/img/stm32_ttn_tutorial/stm32_ttn_commissioning.png)
 
 - Select the project *mlm32l07x01* in the project explorer, and click on `Build Project` in the contextual menu. Please note that this project is valid for *B-L072Z-LRWAN1* board. *sx1272mb2das* project must be used for *P-NUCLEO-LRWAN1* board.
 
-![SW4STM32 build](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/tree/master/docs/img/stm32_ttn_tutorial/eclipse_build.gif)
+![SW4STM32 build](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/master/docs/img/stm32_ttn_tutorial/eclipse_build.gif)
 
 - Connect the *P-NUCLEO-LRWAN1* board to an available USB port. Run the following commands to check that it has been correctly recognized:
 
@@ -92,7 +92,7 @@ Bus 002 Device 003: ID 0483:374b STMicroelectronics ST-LINK/V2.1 (Nucleo-F103RB)
 
 - In the contextual menu of the project explorer, click on Target -> Erase chip ...
 - In the contextual menu of the project explorer, click on Target -> Program chip ...
-![SW4STM32 flash](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/tree/master/docs/img/stm32_ttn_tutorial/stm32_ttn_flash.gif)
+![SW4STM32 flash](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/master/docs/img/stm32_ttn_tutorial/stm32_ttn_flash.gif)
 - Open a new terminal and run:
 ````console
 sudo minicom -D /dev/ttyACM0
@@ -108,10 +108,10 @@ AppKey= 2B 7E 15 16 28 AE D2 A6 AB F7 15 88 09 CF 4F 3C
 - Copy the values of `DevEui` and `AppKey`.
 - Navigate to `https://console.thethingsnetwork.org/applications/test_fiware/devices/register` to register the device. Introduce the `Device ID`, the `Device EUI` (from the previous step) and the `App Key` (from the previous step).
 
-![TTN device resigster](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/tree/master/docs/img/stm32_ttn_tutorial/ttn_device_register.png)
+![TTN device resigster](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/master/docs/img/stm32_ttn_tutorial/ttn_device_register.png)
 - If the endnode can get connected to a *LoRaWAN gateway*, after some time, data shall start being received by `The Things Network console`:
 
-![TTN device data](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/tree/master/docs/img/stm32_ttn_tutorial/ttn_console_data.png)
+![TTN device data](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/master/docs/img/stm32_ttn_tutorial/ttn_console_data.png)
 
 ## Deploy FIWARE stack
 
@@ -129,7 +129,7 @@ docker-compose -f examples/stm32_ttn_tutorial/docker-compose.yml up
 
 - The following results should be shown:
 
-![Docker-compose up](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/tree/master/docs/img/stm32_ttn_tutorial/docker-compose-up.gif)
+![Docker-compose up](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/master/docs/img/stm32_ttn_tutorial/docker-compose-up.gif)
 
 - In order to verify that the *FIWARE LoRaWAN IoT Agent* is running, execute:
 ```console
@@ -383,7 +383,7 @@ curl -X GET \
 - Navigate to `http://localhost:3000` and get logged
   - Default credentials are `admin/admin`
 
-![Grafana login](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/tree/master/docs/img/stm32_ttn_tutorial/grafana_login.png)
+![Grafana login](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/master/docs/img/stm32_ttn_tutorial/grafana_login.png)
 - Create a new *CrateDB* datasource in `http://localhost:3000/datasources` using the following parameters:
   - Url: http://crate:4200
   - Access: Server(Default)
@@ -392,14 +392,14 @@ curl -X GET \
   - Check Query Source: checked
   - Time column: time_index
 
-![Grafana datasource](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/tree/master/docs/img/stm32_ttn_tutorial/grafana_datasource.png)
+![Grafana datasource](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/master/docs/img/stm32_ttn_tutorial/grafana_datasource.png)
 - From `http://localhost:3000/dashboards`, import the dashboard located at `examples/stm32_ttn_tutorial/grafana_dashboard.json`.
 
-![Grafana import](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/tree/master/docs/img/stm32_ttn_tutorial/grafana_import.png)
+![Grafana import](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/master/docs/img/stm32_ttn_tutorial/grafana_import.png)
 
 - The following dashboard should be created showing the temperature reported by the LoRaWAN end-node.
 
-![Grafana dashboard](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/tree/master/docs/img/stm32_ttn_tutorial/grafana_dashboard.png)
+![Grafana dashboard](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/master/docs/img/stm32_ttn_tutorial/grafana_dashboard.png)
 
 ## FAQ
 
