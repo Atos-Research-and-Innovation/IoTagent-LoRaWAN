@@ -109,6 +109,8 @@ AppKey= 2B 7E 15 16 28 AE D2 A6 AB F7 15 88 09 CF 4F 3C
 - Navigate to `https://console.thethingsnetwork.org/applications/test_fiware/devices/register` to register the device. Introduce the `Device ID`, the `Device EUI` (from the previous step) and the `App Key` (from the previous step).
 
 ![TTN device resigster](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/task/tutorialStm32TTN/docs/img/stm32_ttn_tutorial/ttn_device_register.png)
+- If the endnode can get connected to a *LoRaWAN gateway*, after some time, data shall start being received by `The Things Network console`:
+![TTN device data](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/task/tutorialStm32TTN/docs/img/stm32_ttn_tutorial/ttn_console_data.png)
 
 ## Deploy FIWARE stack
 
