@@ -397,6 +397,17 @@ curl -X GET \
 
 ## FAQ
 
-### Linux operating system using Oracle VirtualBox
+### It is not possible to flash the device using Linux operating system with Oracle VirtualBox
 
 https://superuser.com/questions/683034/oracle-virtualbox-connecting-usb-device
+
+### Device data is not received in *The Things Network*
+
+- Check that `DevEui ` and `AppKey` of the device as registered in `The Things Network` match the ones obtained ithough the serial port using `minicom`.
+- Check that the `LORAWAN_JOIN_EUI ` field of `Commissioning.h` within `Projects/B-L072Z-LRWAN1/Applications/LoRa/End_Node/LoRaWAN/App/inc/` path matches the one provided in `The Things Network` for the `Application EUI`.
+- In SW4STM32, clean and build the project again. Flash the result in the device. Follow the instructions of [`Program the STM32 board section`](#program-the-stm32-board).
+
+### Temperature value in the `FIWARE Context Broker` is zero
+
+- The end-node sends periodically the temperature data. In order to force it, reset the board using the button with the label `RESET`.
+- Follow the steps of the previous point.
