@@ -70,7 +70,7 @@ git clone https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN.git
 
 ![SW4STM32 setup](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/task/tutorialStm32TTN/docs/img/stm32_ttn_tutorial/eclipse_setup.gif)
 
-- Open the file *Commissioning.h* within `Projects/B-L072Z-LRWAN1/Applications/LoRa/End_Node/LoRaWAN/App/inc/` path. Replace the value of `LORAWAN_JOIN_EUI` with the one copied from `TTN console`:
+- Open the file *Commissioning.h* within `Projects/B-L072Z-LRWAN1/Applications/LoRa/End_Node/LoRaWAN/App/inc/` path (in the Project Explorer, check last folder within `Includes`). Replace the value of `LORAWAN_JOIN_EUI` with the one copied from `TTN console`:
 
 ![Commissioning device](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/task/tutorialStm32TTN/docs/img/stm32_ttn_tutorial/stm32_ttn_commissioning.png)
 
