@@ -9,6 +9,7 @@
     "test:watch": "npm run test -- -w ./lib",
     "lint": "eslint ./lib ./test --ext .js",
     "test:coverage": "istanbul cover _mocha -- --recursive 'test/**/*.js' --reporter spec --exit",
+    "test:coveralls": "npm run test:coverage && && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage",
     "watch": "watch 'npm test && npm run lint' ./lib ./test"
   },
   "license": "GPL-3.0",

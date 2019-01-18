@@ -23,3 +23,5 @@ before_install:
  - docker run -d --net host -l mosquitto ansi/mosquitto
  - npm update -q
 
+after_script: 
+  - npm run test:coveralls
