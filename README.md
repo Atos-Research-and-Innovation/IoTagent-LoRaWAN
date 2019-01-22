@@ -7,6 +7,7 @@
 <br>
 [![Documentation badge](https://img.shields.io/readthedocs/fiware-lorawan.svg)](http://fiware-lorawan.readthedocs.io/en/latest/?badge=latest)
 [![Build Status](https://img.shields.io/travis/Atos-Research-and-Innovation/IoTagent-LoRaWAN.svg?branch=master)](https://travis-ci.org/Atos-Research-and-Innovation/IoTagent-LoRaWAN/branches)
+[![Coverage Status](https://coveralls.io/repos/github/Atos-Research-and-Innovation/IoTagent-LoRaWAN/badge.svg?branch=master)](https://coveralls.io/github/Atos-Research-and-Innovation/IoTagent-LoRaWAN?branch=master)
 ![Status](https://nexus.lab.fiware.org/static/badges/statuses/iot-lorawan.svg)
 
 The Internet of Things Agent for LoRaWAN protocol enables data and commands to
