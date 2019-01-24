@@ -26,12 +26,16 @@ This project is part of [FIWARE](https://www.fiware.org/). For more information
 check the FIWARE Catalogue entry for the
 [IoT Agents](https://github.com/Fiware/catalogue/tree/master/iot-agents).
 
+| :books: [Documentation](https://fiware-lorawan.readthedocs.io) | :whale: [Docker Hub](https://hub.docker.com/r/fiware/iotagent-lorawan/)| :dart: [Roadmap](docs/roadmap.md)
+|---|---|
+
 ## Contents
 
 -   [Background](#background)
 -   [Install](#install)
 -   [Usage](#usage)
 -   [API](#api)
+-   [Roadmap](#roadmap)
 -   [Quality Assurance](#quality-assurance)
 -   [License](#license)
 
