@@ -10,7 +10,9 @@ theme: readthedocs
 extra_css: ["https://fiware.org/style/fiware_readthedocs.css", "https://fiware.org/style/fiware_readthedocs_iot.css"]
 pages:
     - Home: index.md
+    - Installation guide: installationguide.md
     - Users manual: users_manual.md
     - Development manual: development_manual.md
     - Contributing: CONTRIBUTING.md
+    - Tutorial using The Things Network: tutorialStm32TTN.md
     

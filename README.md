@@ -26,12 +26,16 @@ This project is part of [FIWARE](https://www.fiware.org/). For more information
 check the FIWARE Catalogue entry for the
 [IoT Agents](https://github.com/Fiware/catalogue/tree/master/iot-agents).
 
+| :books: [Documentation](https://fiware-lorawan.readthedocs.io) | :whale: [Docker Hub](https://hub.docker.com/r/fiware/iotagent-lorawan/) | :dart: [Roadmap](docs/roadmap.md)
+|---|---|---|
+
 ## Contents
 
 -   [Background](#background)
 -   [Install](#install)
 -   [Usage](#usage)
 -   [API](#api)
+-   [Roadmap](#roadmap)
 -   [Quality Assurance](#quality-assurance)
 -   [License](#license)
 
@@ -62,76 +66,10 @@ devices.
 
 ## Install
 
-### Requirements
+Information about how to install the LoRaWAN IoT Agent can be found at the corresponding section of the
+[Installation & Administration Guide](docs/installationguide.md).
 
--   [Node.js](https://nodejs.org/en/)
--   [MongoDB](https://docs.mongodb.com/manual/installation/)
--   [FIWARE Orion Context Broker](https://github.com/telefonicaid/fiware-orion)
-
-### Cloning the Github repository
-
-1. Clone the repository with the following command:
-
-```console
-git clone https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN.git
-```
-
-2. Once the repository is cloned, you have to download the dependencies for the
-   project, and let it ready to the execution. From the root folder of the
-   project execute:
-
-```console
-npm install
-```
-
-3. Launch the IoT Agent with the default configuration
-
-```console
-node bin/iotagent-lora
-```
-
-You can use a custom configuration file:
-
-```console
-node bin/iotagent-lora custom_config.js
-```
-
-The bootstrap process should finish with:
-
-```bash
-info: Loading devices from registry
-info: LoRaWAN IoT Agent started
-```
-
-4. Check that the IoTA is running correctly:
-
-```console
-curl -v http://localhost:4061/iot/about
-```
-
-The result must be similar to:
-
-```json
-{ "libVersion": "2.6.0-next", "port": 4061, "baseRoot": "/" }
-```
-
-### Using Docker
-
-A ready to use Docker image is
-[provided](https://hub.docker.com/r/ioeari/iotagent-lora/)
-
-```console
-docker run -p 4061:4061 ioeari/iotagent-lora
-```
-
-### Using Docker-compose
-
-This project contains an example to deploy the IoTA and all the requirement
-using docker-compose.
-
-```console
-docker-compose -f docker/docker-compose.yml up
-```
+A `Dockerfile` is also available for your use - further information can be found [here](docker/README.md)
 
 ## Usage
 
