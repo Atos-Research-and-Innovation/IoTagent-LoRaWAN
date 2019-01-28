@@ -22,129 +22,129 @@
 var config = {};
 
 config.iota = {
+  /**
+   * Configures the log level. Appropriate values are: FATAL, ERROR, INFO, WARN and DEBUG.
+   */
+  logLevel: 'DEBUG',
+
+  /**
+   * When this flag is active, the IoTAgent will add the TimeInstant attribute to every entity created, as well
+   * as a TimeInstant metadata to each attribute, with the current timestamp.
+   */
+  timestamp: true,
+
+  /**
+   * Context Broker configuration. Defines the connection information to the instance of the Context Broker where
+   * the IoT Agent will send the device data.
+   */
+  contextBroker: {
     /**
-     * Configures the log level. Appropriate values are: FATAL, ERROR, INFO, WARN and DEBUG.
+     * Host where the Context Broker is located.
      */
-    logLevel: 'DEBUG',
-
-    /**
-     * When this flag is active, the IoTAgent will add the TimeInstant attribute to every entity created, as well
-     * as a TimeInstant metadata to each attribute, with the current timestamp.
-     */
-    timestamp: true,
-
-    /**
-     * Context Broker configuration. Defines the connection information to the instance of the Context Broker where
-     * the IoT Agent will send the device data.
-     */
-    contextBroker: {
-        /**
-         * Host where the Context Broker is located.
-         */
-        host: 'orion',
-
-        /**
-         * Port where the Context Broker is listening.
-         */
-        port: '1026',
-
-        /**
-         * Version of NGSI
-         */
-        ngsiVersion: 'v2'
-    },
+    host: 'orion',
 
     /**
-     * Configuration of the Northbound server of the IoT Agent.
+     * Port where the Context Broker is listening.
      */
-    server: {
-        /**
-         * Port where the IoT Agent will be listening for requests.
-         */
-        port: 4061
-    },
+    port: '1026',
 
     /**
-     * Default resource of the IoT Agent. This value must be different for every IoT Agent connecting to the IoT
-     * Manager.
+     * Version of NGSI
      */
-    defaultResource: '/iot/d',
+    ngsiVersion: 'v2',
+  },
+
+  /**
+   * Configuration of the Northbound server of the IoT Agent.
+   */
+  server: {
+    /**
+     * Port where the IoT Agent will be listening for requests.
+     */
+    port: 4061,
+  },
+
+  /**
+   * Default resource of the IoT Agent. This value must be different for every IoT Agent connecting to the IoT
+   * Manager.
+   */
+  defaultResource: '/iot/d',
+
+  /**
+   * Defines the configuration for the Device Registry, where all the information about devices and configuration
+   * groups will be stored. There are currently just two types of registries allowed:
+   *
+   * - 'memory': transient memory-based repository for testing purposes. All the information in the repository is
+   *             wiped out when the process is restarted.
+   *
+   * - 'mongodb': persistent MongoDB storage repository. All the details for the MongoDB configuration will be read
+   *             from the 'mongoDb' configuration property.
+   */
+  deviceRegistry: {
+    type: 'mongodb',
+  },
+
+  /**
+   * Mongo DB configuration section. This section will only be used if the deviceRegistry property has the type
+   * 'mongodb'.
+   */
+  mongodb: {
+    /**
+     * Host where MongoDB is located. If the MongoDB used is a replicaSet, this property will contain a
+     * comma-separated list of the instance names or IPs.
+     */
+    host: 'mongodb',
 
     /**
-     * Defines the configuration for the Device Registry, where all the information about devices and configuration
-     * groups will be stored. There are currently just two types of registries allowed:
-     *
-     * - 'memory': transient memory-based repository for testing purposes. All the information in the repository is
-     *             wiped out when the process is restarted.
-     *
-     * - 'mongodb': persistent MongoDB storage repository. All the details for the MongoDB configuration will be read
-     *             from the 'mongoDb' configuration property.
+     * Port where MongoDB is listening. In the case of a replicaSet, all the instances are supposed to be listening
+     * in the same port.
      */
-    deviceRegistry: {
-        type: 'mongodb'
-    },
+    port: '27017',
 
     /**
-     * Mongo DB configuration section. This section will only be used if the deviceRegistry property has the type
-     * 'mongodb'.
+     * Name of the Mongo database that will be created to store IOTAgent data.
      */
-    mongodb: {
-        /**
-         * Host where MongoDB is located. If the MongoDB used is a replicaSet, this property will contain a
-         * comma-separated list of the instance names or IPs.
-         */
-        host: 'mongodb',
-
-        /**
-         * Port where MongoDB is listening. In the case of a replicaSet, all the instances are supposed to be listening
-         * in the same port.
-         */
-        port: '27017',
-
-        /**
-         * Name of the Mongo database that will be created to store IOTAgent data.
-         */
-        db: 'iotagentlora'
-
-        /**
-         * Name of the set in case the Mongo database is configured as a Replica Set. Optional otherwise.
-         */
-        // replicaSet: ''
-    },
+    db: 'iotagentlora',
 
     /**
-     *  Types array for static configuration of services. Check documentation in the IoTAgent Library for Node.js for
-     *  further details:
-     *
-     *      https://github.com/telefonicaid/iotagent-node-lib#type-configuration
+     * Name of the set in case the Mongo database is configured as a Replica Set. Optional otherwise.
      */
-    types: {},
+    // replicaSet: ''
+  },
 
-    /**
-     * Default service, for IOTA installations that won't require preregistration.
-     */
-    service: 'howtoService',
+  /**
+   *  Types array for static configuration of services. Check documentation in the IoTAgent Library for Node.js for
+   *  further details:
+   *
+   *      https://github.com/telefonicaid/iotagent-node-lib#type-configuration
+   */
+  types: {},
 
-    /**
-     * Default subservice, for IOTA installations that won't require preregistration.
-     */
-    subservice: '/howto',
+  /**
+   * Default service, for IOTA installations that won't require preregistration.
+   */
+  service: 'howtoService',
 
-    /**
-     * URL Where the IOTA Will listen for incoming updateContext and queryContext requests (for commands and passive
-     * attributes). This URL will be sent in the Context Registration requests.
-     */
-    providerUrl: 'http://iotagent-lora:4061',
+  /**
+   * Default subservice, for IOTA installations that won't require preregistration.
+   */
+  subservice: '/howto',
 
-    /**
-     * Default maximum expire date for device registrations.
-     */
-    deviceRegistrationDuration: 'P1Y',
+  /**
+   * URL Where the IOTA Will listen for incoming updateContext and queryContext requests (for commands and passive
+   * attributes). This URL will be sent in the Context Registration requests.
+   */
+  providerUrl: 'http://iotagent-lora:4061',
 
-    /**
-     * Default type, for IOTA installations that won't require preregistration.
-     */
-    defaultType: 'Thing'
+  /**
+   * Default maximum expire date for device registrations.
+   */
+  deviceRegistrationDuration: 'P1Y',
+
+  /**
+   * Default type, for IOTA installations that won't require preregistration.
+   */
+  defaultType: 'Thing',
 };
 
 module.exports = config;
