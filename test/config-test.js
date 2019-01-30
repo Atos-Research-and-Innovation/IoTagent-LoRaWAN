@@ -27,10 +27,10 @@ config.iota = {
     contextBroker: {
         host: 'localhost',
         port: '1026',
-        ngsiVersion: 'v2'
+        ngsiVersion: 'v2',
     },
     server: {
-        port: 4041
+        port: 4041,
     },
     types: {},
     service: 'howtoService',
@@ -40,13 +40,13 @@ config.iota = {
     defaultType: 'Thing',
     defaultResource: '/iot/d',
     deviceRegistry: {
-        type: 'mongodb'
+        type: 'mongodb',
     },
     mongodb: {
         host: 'localhost',
         port: '27017',
-        db: 'iotagentLoraTest'
-    }
+        db: 'iotagentLoraTest',
+    },
 };
 
 module.exports = config;
