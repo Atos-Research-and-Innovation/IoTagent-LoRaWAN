@@ -72,7 +72,7 @@ git clone https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN.git
 
 - *mlm32l07x01* shall be used for *B-L072Z-LRWAN1*. *sx1272mb2das* must be used for *P-NUCLEO-LRWAN1* board.
 
-- Open the file *Commissioning.h* within `Includes` and `Projects/B-L072Z-LRWAN1/Applications/LoRa/End_Node/LoRaWAN/App/inc/` path (in the Project Explorer, check last folder within `Includes`). Replace the value of `LORAWAN_JOIN_EUI` with the one copied from `TTN console`:
+- In the Project Explorer, check last folder within `Includes`: `Projects/B-L072Z-LRWAN1/Applications/LoRa/End_Node/LoRaWAN/App/inc/`. Open the file *Commissioning.h* and replace the value of `LORAWAN_JOIN_EUI` with the one copied from `TTN console`:
 
 ![Commissioning device](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/master/docs/img/stm32_ttn_tutorial/stm32_ttn_commissioning.png)
 
