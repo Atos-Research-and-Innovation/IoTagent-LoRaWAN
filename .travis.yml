@@ -14,14 +14,17 @@ services:
   - docker
 
 install:
- - npm install
+  - npm install
 
 before_install:
- - docker pull fiware/orion:latest
- - docker run -d --net host -l orion fiware/orion:latest
- - docker pull ansi/mosquitto
- - docker run -d --net host -l mosquitto ansi/mosquitto
- - npm update -q
+  - docker pull fiware/orion:latest
+  - docker run -d --net host -l orion fiware/orion:latest
+  - docker pull ansi/mosquitto
+  - docker run -d --net host -l mosquitto ansi/mosquitto
+  - npm update -q
+
+before_script:
+  - npm run lint
 
 after_script: 
   - npm run test:coveralls
