@@ -5,8 +5,9 @@
     "extends": "standard",
     "rules": {
         "semi": [2, "always"],
-        "indent": ["error", 4],
-        "mocha/no-exclusive-tests": "error"
+        "indent": 0,
+        "mocha/no-exclusive-tests": "error",
+        "space-before-function-paren": 0
     },
     "env": {
     	"node": true,

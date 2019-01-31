@@ -30,7 +30,7 @@ var iotAgentLib = require('iotagent-node-lib');
 var mqtt = require('mqtt');
 var should = require('chai').should();
 
-describe('Device provisioning API: Provision devices', function () {
+describe('Device provisioning API: Provision devices', function() {
     var testMosquittoHost = 'localhost';
     var orionHost = iotAgentConfig.iota.contextBroker.host;
     var orionPort = iotAgentConfig.iota.contextBroker.port;
@@ -40,7 +40,7 @@ describe('Device provisioning API: Provision devices', function () {
 
     readEnvVariables();
 
-    function readEnvVariables () {
+    function readEnvVariables() {
         if (process.env.TEST_MOSQUITTO_HOST) {
             testMosquittoHost = process.env.TEST_MOSQUITTO_HOST;
         }
@@ -56,24 +56,30 @@ describe('Device provisioning API: Provision devices', function () {
         orionServer = orionHost + ':' + orionPort;
     }
 
-    before(function (done) {
-        async.series([
-            async.apply(utils.deleteEntityCB, iotAgentConfig.iota.contextBroker, service, subservice, 'LORA-N-003'),
-            async.apply(utils.deleteEntityCB, iotAgentConfig.iota.contextBroker, service, subservice, 'LORA-N-001'),
-            async.apply(iotagentLora.start, iotAgentConfig)
-        ], done);
+    before(function(done) {
+        async.series(
+            [
+                async.apply(utils.deleteEntityCB, iotAgentConfig.iota.contextBroker, service, subservice, 'LORA-N-003'),
+                async.apply(utils.deleteEntityCB, iotAgentConfig.iota.contextBroker, service, subservice, 'LORA-N-001'),
+                async.apply(iotagentLora.start, iotAgentConfig)
+            ],
+            done
+        );
     });
 
-    after(function (done) {
-        async.series([
-            iotAgentLib.clearAll,
-            iotagentLora.stop,
-            async.apply(utils.deleteEntityCB, iotAgentConfig.iota.contextBroker, service, subservice, 'LORA-N-003'),
-            async.apply(utils.deleteEntityCB, iotAgentConfig.iota.contextBroker, service, subservice, 'LORA-N-001')
-        ], done);
+    after(function(done) {
+        async.series(
+            [
+                iotAgentLib.clearAll,
+                iotagentLora.stop,
+                async.apply(utils.deleteEntityCB, iotAgentConfig.iota.contextBroker, service, subservice, 'LORA-N-003'),
+                async.apply(utils.deleteEntityCB, iotAgentConfig.iota.contextBroker, service, subservice, 'LORA-N-001')
+            ],
+            done
+        );
     });
 
-    describe('When a device provisioning request with all the required data arrives to the IoT Agent', function () {
+    describe('When a device provisioning request with all the required data arrives to the IoT Agent', function() {
         var options = {
             url: 'http://localhost:' + iotAgentConfig.iota.server.port + '/iot/devices',
             method: 'POST',
@@ -108,12 +114,12 @@ describe('Device provisioning API: Provision devices', function () {
             }
         };
 
-        it('should add the device to the devices list', function (done) {
-            request(options, function (error, response, body) {
+        it('should add the device to the devices list', function(done) {
+            request(options, function(error, response, body) {
                 should.not.exist(error);
                 response.should.have.property('statusCode', 201);
-                setTimeout(function () {
-                    request(optionsGetDevice, function (error, response, body) {
+                setTimeout(function() {
+                    request(optionsGetDevice, function(error, response, body) {
                         should.not.exist(error);
                         response.should.have.property('statusCode', 200);
                         body.should.have.property('count', 1);
@@ -127,8 +133,8 @@ describe('Device provisioning API: Provision devices', function () {
             });
         });
 
-        it('should register the entity in the CB', function (done) {
-            request(optionsCB, function (error, response, body) {
+        it('should register the entity in the CB', function(done) {
+            request(optionsCB, function(error, response, body) {
                 should.not.exist(error);
                 response.should.have.property('statusCode', 200);
                 body.should.have.property('id', options.json.devices[0]['entity_name']);
@@ -136,13 +142,20 @@ describe('Device provisioning API: Provision devices', function () {
             });
         });
 
-        it('Should process correctly active attributes', function (done) {
+        it('Should process correctly active attributes', function(done) {
             var attributesExample = utils.readExampleFile('./test/activeAttributes/cayenneLppLoRaServerIo.json');
             var client = mqtt.connect('mqtt://' + testMosquittoHost);
-            client.on('connect', function () {
-                client.publish('application/' + options.json.devices[0]['internal_attributes']['lorawan']['application_id'] + '/node/' + options.json.devices[0]['internal_attributes']['lorawan']['dev_eui'].toLowerCase() + '/rx', JSON.stringify(attributesExample));
-                setTimeout(function () {
-                    request(optionsCB, function (error, response, body) {
+            client.on('connect', function() {
+                client.publish(
+                    'application/' +
+                        options.json.devices[0]['internal_attributes']['lorawan']['application_id'] +
+                        '/node/' +
+                        options.json.devices[0]['internal_attributes']['lorawan']['dev_eui'].toLowerCase() +
+                        '/rx',
+                    JSON.stringify(attributesExample)
+                );
+                setTimeout(function() {
+                    request(optionsCB, function(error, response, body) {
                         should.not.exist(error);
                         response.should.have.property('statusCode', 200);
                         body.should.have.property('id', options.json.devices[0]['entity_name']);
@@ -157,7 +170,7 @@ describe('Device provisioning API: Provision devices', function () {
         });
     });
 
-    describe('When a device provisioning request with all the required data arrives to the IoT Agent and the Application Server already exists', function () {
+    describe('When a device provisioning request with all the required data arrives to the IoT Agent and the Application Server already exists', function() {
         var options = {
             url: 'http://localhost:' + iotAgentConfig.iota.server.port + '/iot/devices',
             method: 'POST',
@@ -192,12 +205,12 @@ describe('Device provisioning API: Provision devices', function () {
             }
         };
 
-        it('should add the device to the devices list', function (done) {
-            request(options, function (error, response, body) {
+        it('should add the device to the devices list', function(done) {
+            request(options, function(error, response, body) {
                 should.not.exist(error);
                 response.should.have.property('statusCode', 201);
-                setTimeout(function () {
-                    request(optionsGetDevice, function (error, response, body) {
+                setTimeout(function() {
+                    request(optionsGetDevice, function(error, response, body) {
                         should.not.exist(error);
                         response.should.have.property('statusCode', 200);
                         body.should.have.property('count', 2);
@@ -211,8 +224,8 @@ describe('Device provisioning API: Provision devices', function () {
             });
         });
 
-        it('should register the entity in the CB', function (done) {
-            request(optionsCB, function (error, response, body) {
+        it('should register the entity in the CB', function(done) {
+            request(optionsCB, function(error, response, body) {
                 should.not.exist(error);
                 response.should.have.property('statusCode', 200);
                 body.should.have.property('id', options.json.devices[0]['entity_name']);
@@ -220,13 +233,20 @@ describe('Device provisioning API: Provision devices', function () {
             });
         });
 
-        it('Should process correctly active attributes', function (done) {
+        it('Should process correctly active attributes', function(done) {
             var attributesExample = utils.readExampleFile('./test/activeAttributes/cayenneLppLoRaServerIo2.json');
             var client = mqtt.connect('mqtt://' + testMosquittoHost);
-            client.on('connect', function () {
-                client.publish('application/' + options.json.devices[0]['internal_attributes']['lorawan']['application_id'] + '/node/' + options.json.devices[0]['internal_attributes']['lorawan']['dev_eui'].toLowerCase() + '/rx', JSON.stringify(attributesExample));
-                setTimeout(function () {
-                    request(optionsCB, function (error, response, body) {
+            client.on('connect', function() {
+                client.publish(
+                    'application/' +
+                        options.json.devices[0]['internal_attributes']['lorawan']['application_id'] +
+                        '/node/' +
+                        options.json.devices[0]['internal_attributes']['lorawan']['dev_eui'].toLowerCase() +
+                        '/rx',
+                    JSON.stringify(attributesExample)
+                );
+                setTimeout(function() {
+                    request(optionsCB, function(error, response, body) {
                         should.not.exist(error);
                         response.should.have.property('statusCode', 200);
                         body.should.have.property('id', options.json.devices[0]['entity_name']);
@@ -241,25 +261,28 @@ describe('Device provisioning API: Provision devices', function () {
         });
     });
 
-    describe('Active attributes are reported but bad payload is received', function () {
-        it('Should process correctly active attributes', function (done) {
+    describe('Active attributes are reported but bad payload is received', function() {
+        it('Should process correctly active attributes', function(done) {
             var attributesExample = utils.readExampleFile('./test/activeAttributes/cayenneLpp_bad_json.json', true);
             var client = mqtt.connect('mqtt://' + testMosquittoHost);
-            client.on('connect', function () {
+            client.on('connect', function() {
                 client.publish('application/1/node/3339343752356A14/rx', JSON.stringify(attributesExample));
-                setTimeout(function () {
+                setTimeout(function() {
                     client.end();
                     done();
                 }, 500);
             });
         });
 
-        it('Should process correctly active attributes', function (done) {
-            var attributesExample = utils.readExampleFile('./test/activeAttributes/cayenneLpp_bad_rawLoRaServerIo.json', true);
+        it('Should process correctly active attributes', function(done) {
+            var attributesExample = utils.readExampleFile(
+                './test/activeAttributes/cayenneLpp_bad_rawLoRaServerIo.json',
+                true
+            );
             var client = mqtt.connect('mqtt://' + testMosquittoHost);
-            client.on('connect', function () {
+            client.on('connect', function() {
                 client.publish('application/1/node/3339343752356A14/rx', JSON.stringify(attributesExample));
-                setTimeout(function () {
+                setTimeout(function() {
                     client.end();
                     done();
                 }, 500);

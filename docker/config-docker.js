@@ -51,7 +51,7 @@ config.iota = {
         /**
          * Version of NGSI
          */
-        ngsiVersion: 'v2',
+        ngsiVersion: 'v2'
     },
 
     /**
@@ -61,7 +61,7 @@ config.iota = {
         /**
          * Port where the IoT Agent will be listening for requests.
          */
-        port: 4061,
+        port: 4061
     },
 
     /**
@@ -81,7 +81,7 @@ config.iota = {
      *             from the 'mongoDb' configuration property.
      */
     deviceRegistry: {
-        type: 'mongodb',
+        type: 'mongodb'
     },
 
     /**
@@ -104,7 +104,7 @@ config.iota = {
         /**
          * Name of the Mongo database that will be created to store IOTAgent data.
          */
-        db: 'iotagentlora',
+        db: 'iotagentlora'
 
         /**
          * Name of the set in case the Mongo database is configured as a Replica Set. Optional otherwise.
@@ -144,7 +144,7 @@ config.iota = {
     /**
      * Default type, for IOTA installations that won't require preregistration.
      */
-    defaultType: 'Thing',
+    defaultType: 'Thing'
 };
 
 module.exports = config;
