@@ -70,7 +70,9 @@ git clone https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN.git
 
 ![SW4STM32 setup](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/master/docs/img/stm32_ttn_tutorial/eclipse_setup.gif)
 
-- Open the file *Commissioning.h* within `Projects/B-L072Z-LRWAN1/Applications/LoRa/End_Node/LoRaWAN/App/inc/` path (in the Project Explorer, check last folder within `Includes`). Replace the value of `LORAWAN_JOIN_EUI` with the one copied from `TTN console`:
+- *mlm32l07x01* shall be used for *B-L072Z-LRWAN1*. *sx1272mb2das* must be used for *P-NUCLEO-LRWAN1* board.
+
+- In the Project Explorer, check last folder within `Includes`: `Projects/B-L072Z-LRWAN1/Applications/LoRa/End_Node/LoRaWAN/App/inc/`. Open the file *Commissioning.h* and replace the value of `LORAWAN_JOIN_EUI` with the one copied from `TTN console`:
 
 ![Commissioning device](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/master/docs/img/stm32_ttn_tutorial/stm32_ttn_commissioning.png)
 
@@ -78,7 +80,7 @@ git clone https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN.git
 
 ![SW4STM32 build](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/master/docs/img/stm32_ttn_tutorial/eclipse_build.gif)
 
-- Connect the *P-NUCLEO-LRWAN1* board to an available USB port. Run the following commands to check that it has been correctly recognized:
+- Connect the *P-NUCLEO-LRWAN1* board to an available USB port. In a terminal, run the following commands to check that it has been correctly recognized:
 
 ````console
 lsusb
@@ -106,7 +108,7 @@ AppEui= 70-B3-D5-7E-D0-00-98-5F
 AppKey= 2B 7E 15 16 28 AE D2 A6 AB F7 15 88 09 CF 4F 3C
 ```
 - Copy the values of `DevEui` and `AppKey`.
-- Navigate to `https://console.thethingsnetwork.org/applications/test_fiware/devices/register` to register the device. Introduce the `Device ID`, the `Device EUI` (from the previous step) and the `App Key` (from the previous step).
+- Navigate to `https://console.thethingsnetwork.org/applications` to register the device. Introduce the `Device ID`, the `Device EUI` (from the previous step) and the `App Key` (from the previous step).
 
 ![TTN device resigster](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/master/docs/img/stm32_ttn_tutorial/ttn_device_register.png)
 - If the endnode can get connected to a *LoRaWAN gateway*, after some time, data shall start being received by `The Things Network console`:
