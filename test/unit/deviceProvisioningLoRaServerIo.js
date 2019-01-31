@@ -61,7 +61,7 @@ describe('Device provisioning API: Provision devices', function() {
             [
                 async.apply(utils.deleteEntityCB, iotAgentConfig.iota.contextBroker, service, subservice, 'LORA-N-003'),
                 async.apply(utils.deleteEntityCB, iotAgentConfig.iota.contextBroker, service, subservice, 'LORA-N-001'),
-                async.apply(iotagentLora.start, iotAgentConfig),
+                async.apply(iotagentLora.start, iotAgentConfig)
             ],
             done
         );
@@ -73,7 +73,7 @@ describe('Device provisioning API: Provision devices', function() {
                 iotAgentLib.clearAll,
                 iotagentLora.stop,
                 async.apply(utils.deleteEntityCB, iotAgentConfig.iota.contextBroker, service, subservice, 'LORA-N-003'),
-                async.apply(utils.deleteEntityCB, iotAgentConfig.iota.contextBroker, service, subservice, 'LORA-N-001'),
+                async.apply(utils.deleteEntityCB, iotAgentConfig.iota.contextBroker, service, subservice, 'LORA-N-001')
             ],
             done
         );
@@ -86,8 +86,8 @@ describe('Device provisioning API: Provision devices', function() {
             json: utils.readExampleFile('./test/deviceProvisioning/provisionDevice1LoRaServerIo.json'),
             headers: {
                 'fiware-service': service,
-                'fiware-servicepath': subservice,
-            },
+                'fiware-servicepath': subservice
+            }
         };
 
         if (testMosquittoHost) {
@@ -100,8 +100,8 @@ describe('Device provisioning API: Provision devices', function() {
             json: true,
             headers: {
                 'fiware-service': service,
-                'fiware-servicepath': subservice,
-            },
+                'fiware-servicepath': subservice
+            }
         };
 
         var optionsCB = {
@@ -110,8 +110,8 @@ describe('Device provisioning API: Provision devices', function() {
             json: true,
             headers: {
                 'fiware-service': service,
-                'fiware-servicepath': subservice,
-            },
+                'fiware-servicepath': subservice
+            }
         };
 
         it('should add the device to the devices list', function(done) {
@@ -177,8 +177,8 @@ describe('Device provisioning API: Provision devices', function() {
             json: utils.readExampleFile('./test/deviceProvisioning/provisionDevice2LoRaServerIo.json'),
             headers: {
                 'fiware-service': service,
-                'fiware-servicepath': subservice,
-            },
+                'fiware-servicepath': subservice
+            }
         };
 
         if (testMosquittoHost) {
@@ -191,8 +191,8 @@ describe('Device provisioning API: Provision devices', function() {
             json: true,
             headers: {
                 'fiware-service': 'smartgondor',
-                'fiware-servicepath': '/gardens',
-            },
+                'fiware-servicepath': '/gardens'
+            }
         };
 
         var optionsCB = {
@@ -201,8 +201,8 @@ describe('Device provisioning API: Provision devices', function() {
             json: true,
             headers: {
                 'fiware-service': service,
-                'fiware-servicepath': subservice,
-            },
+                'fiware-servicepath': subservice
+            }
         };
 
         it('should add the device to the devices list', function(done) {

@@ -97,18 +97,18 @@ describe('NGSI translation', function(done) {
         active: [
             {
                 name: 'temperature_1',
-                type: 'number',
-            },
-        ],
+                type: 'number'
+            }
+        ]
     };
 
     var deviceGps = {
         active: [
             {
                 name: 'gps_1',
-                type: 'geo:point',
-            },
-        ],
+                type: 'geo:point'
+            }
+        ]
     };
 
     it('Should translate a CayenneLpp payload to NGSI', function(done) {

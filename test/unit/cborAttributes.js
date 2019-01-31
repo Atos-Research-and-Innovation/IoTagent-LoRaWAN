@@ -66,7 +66,7 @@ describe('CBOR Attributes', function() {
         async.series(
             [
                 async.apply(utils.deleteEntityCB, iotAgentConfig.iota.contextBroker, service, subservice, 'LORA-N-003'),
-                async.apply(iotagentLora.start, iotAgentConfig),
+                async.apply(iotagentLora.start, iotAgentConfig)
             ],
             done
         );
@@ -77,7 +77,7 @@ describe('CBOR Attributes', function() {
             [
                 iotAgentLib.clearAll,
                 iotagentLora.stop,
-                async.apply(utils.deleteEntityCB, iotAgentConfig.iota.contextBroker, service, subservice, 'LORA-N-003'),
+                async.apply(utils.deleteEntityCB, iotAgentConfig.iota.contextBroker, service, subservice, 'LORA-N-003')
             ],
             done
         );
@@ -90,8 +90,8 @@ describe('CBOR Attributes', function() {
             json: utils.readExampleFile('./test/deviceProvisioning/provisionDeviceCbor1TTN.json'),
             headers: {
                 'fiware-service': service,
-                'fiware-servicepath': subservice,
-            },
+                'fiware-servicepath': subservice
+            }
         };
         var optionsGetDevice = {
             url: 'http://localhost:' + iotAgentConfig.iota.server.port + '/iot/devices',
@@ -99,12 +99,13 @@ describe('CBOR Attributes', function() {
             json: true,
             headers: {
                 'fiware-service': service,
-                'fiware-servicepath': subservice,
-            },
+                'fiware-servicepath': subservice
+            }
         };
 
         it('should add the device to the devices list', function(done) {
             if (testMosquittoHost) {
+                /* eslint-disable-next-line  standard/computed-property-even-spacing */
                 options.json.devices[0]['internal_attributes']['lorawan']['application_server'][
                     'host'
                 ] = testMosquittoHost;
@@ -136,8 +137,8 @@ describe('CBOR Attributes', function() {
                 json: true,
                 headers: {
                     'fiware-service': service,
-                    'fiware-servicepath': subservice,
-                },
+                    'fiware-servicepath': subservice
+                }
             };
 
             request(optionsCB, function(error, response, body) {
@@ -154,7 +155,7 @@ describe('CBOR Attributes', function() {
                 digital_in_3: 100,
                 digital_out_4: 0,
                 relative_humidity_2: 0,
-                temperature_1: 27.2,
+                temperature_1: 27.2
             };
 
             var optionsCB = {
@@ -163,8 +164,8 @@ describe('CBOR Attributes', function() {
                 json: true,
                 headers: {
                     'fiware-service': service,
-                    'fiware-servicepath': subservice,
-                },
+                    'fiware-servicepath': subservice
+                }
             };
 
             var encodedBuffer = CBOR.encode(rawJSONPayload);
@@ -203,15 +204,15 @@ describe('CBOR Attributes', function() {
                 json: true,
                 headers: {
                     'fiware-service': service,
-                    'fiware-servicepath': subservice,
-                },
+                    'fiware-servicepath': subservice
+                }
             };
             var rawJSONPayload = {
                 bp0: 0,
                 dg3: 100,
                 do4: 0,
                 rh2: 0,
-                t1: 27.2,
+                t1: 27.2
             };
 
             var encodedBuffer = CBOR.encode(rawJSONPayload);

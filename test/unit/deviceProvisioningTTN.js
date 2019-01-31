@@ -61,7 +61,7 @@ describe('Device provisioning API: Provision devices', function() {
             [
                 async.apply(utils.deleteEntityCB, iotAgentConfig.iota.contextBroker, service, subservice, 'LORA-N-003'),
                 async.apply(utils.deleteEntityCB, iotAgentConfig.iota.contextBroker, service, subservice, 'LORA-N-001'),
-                async.apply(iotagentLora.start, iotAgentConfig),
+                async.apply(iotagentLora.start, iotAgentConfig)
             ],
             done
         );
@@ -73,7 +73,7 @@ describe('Device provisioning API: Provision devices', function() {
                 iotAgentLib.clearAll,
                 iotagentLora.stop,
                 async.apply(utils.deleteEntityCB, iotAgentConfig.iota.contextBroker, service, subservice, 'LORA-N-003'),
-                async.apply(utils.deleteEntityCB, iotAgentConfig.iota.contextBroker, service, subservice, 'LORA-N-001'),
+                async.apply(utils.deleteEntityCB, iotAgentConfig.iota.contextBroker, service, subservice, 'LORA-N-001')
             ],
             done
         );
@@ -86,8 +86,8 @@ describe('Device provisioning API: Provision devices', function() {
             json: utils.readExampleFile('./test/deviceProvisioning/provisionDeviceTTN_noInternalAttributes.json'),
             headers: {
                 'fiware-service': service,
-                'fiware-servicepath': subservice,
-            },
+                'fiware-servicepath': subservice
+            }
         };
 
         it('should answer with error', function(done) {
@@ -106,8 +106,8 @@ describe('Device provisioning API: Provision devices', function() {
             json: utils.readExampleFile('./test/deviceProvisioning/provisionDeviceTTN_noLorawan.json'),
             headers: {
                 'fiware-service': service,
-                'fiware-servicepath': subservice,
-            },
+                'fiware-servicepath': subservice
+            }
         };
 
         it('should answer with error', function(done) {
@@ -126,8 +126,8 @@ describe('Device provisioning API: Provision devices', function() {
             json: utils.readExampleFile('./test/deviceProvisioning/provisionDeviceTTN_noApplicationServer.json'),
             headers: {
                 'fiware-service': service,
-                'fiware-servicepath': subservice,
-            },
+                'fiware-servicepath': subservice
+            }
         };
 
         it('should answer with error', function(done) {
@@ -146,8 +146,8 @@ describe('Device provisioning API: Provision devices', function() {
             json: utils.readExampleFile('./test/deviceProvisioning/provisionDeviceTTN_noApplicationServerHost.json'),
             headers: {
                 'fiware-service': service,
-                'fiware-servicepath': subservice,
-            },
+                'fiware-servicepath': subservice
+            }
         };
 
         it('should answer with error', function(done) {
@@ -168,8 +168,8 @@ describe('Device provisioning API: Provision devices', function() {
             ),
             headers: {
                 'fiware-service': service,
-                'fiware-servicepath': subservice,
-            },
+                'fiware-servicepath': subservice
+            }
         };
 
         it('should answer with error', function(done) {
@@ -188,8 +188,8 @@ describe('Device provisioning API: Provision devices', function() {
             json: utils.readExampleFile('./test/deviceProvisioning/provisionDeviceTTN_noMandatoryProperties.json'),
             headers: {
                 'fiware-service': service,
-                'fiware-servicepath': subservice,
-            },
+                'fiware-servicepath': subservice
+            }
         };
 
         it('should answer with error', function(done) {
@@ -208,8 +208,8 @@ describe('Device provisioning API: Provision devices', function() {
             json: utils.readExampleFile('./test/deviceProvisioning/provisionDevice1TTN.json'),
             headers: {
                 'fiware-service': service,
-                'fiware-servicepath': subservice,
-            },
+                'fiware-servicepath': subservice
+            }
         };
 
         if (testMosquittoHost) {
@@ -222,8 +222,8 @@ describe('Device provisioning API: Provision devices', function() {
             json: true,
             headers: {
                 'fiware-service': service,
-                'fiware-servicepath': subservice,
-            },
+                'fiware-servicepath': subservice
+            }
         };
 
         var optionsCB = {
@@ -232,8 +232,8 @@ describe('Device provisioning API: Provision devices', function() {
             json: true,
             headers: {
                 'fiware-service': service,
-                'fiware-servicepath': subservice,
-            },
+                'fiware-servicepath': subservice
+            }
         };
 
         it('should add the device to the devices list', function(done) {
@@ -298,8 +298,8 @@ describe('Device provisioning API: Provision devices', function() {
             json: utils.readExampleFile('./test/deviceProvisioning/provisionDevice2TTN.json'),
             headers: {
                 'fiware-service': service,
-                'fiware-servicepath': subservice,
-            },
+                'fiware-servicepath': subservice
+            }
         };
 
         if (testMosquittoHost) {
@@ -312,8 +312,8 @@ describe('Device provisioning API: Provision devices', function() {
             json: true,
             headers: {
                 'fiware-service': 'smartgondor',
-                'fiware-servicepath': '/gardens',
-            },
+                'fiware-servicepath': '/gardens'
+            }
         };
 
         var optionsCB = {
@@ -322,8 +322,8 @@ describe('Device provisioning API: Provision devices', function() {
             json: true,
             headers: {
                 'fiware-service': service,
-                'fiware-servicepath': subservice,
-            },
+                'fiware-servicepath': subservice
+            }
         };
 
         it('should add the device to the devices list', function(done) {
@@ -415,8 +415,8 @@ describe('Device provisioning API: Provision devices', function() {
                 json: true,
                 headers: {
                     'fiware-service': service,
-                    'fiware-servicepath': subservice,
-                },
+                    'fiware-servicepath': subservice
+                }
             };
             var attributesExample = utils.readExampleFile('./test/activeAttributes/cayenneLpp3.json');
             async.waterfall([iotagentLora.stop, async.apply(iotagentLora.start, iotAgentConfig)], function(err) {
@@ -446,9 +446,9 @@ describe('Device provisioning API: Provision devices', function() {
             url: 'http://localhost:' + iotAgentConfig.iota.server.port + '/iot/devices/lora_n_003',
             headers: {
                 'fiware-service': service,
-                'fiware-servicepath': subservice,
+                'fiware-servicepath': subservice
             },
-            method: 'DELETE',
+            method: 'DELETE'
         };
 
         it('should return a 204 OK and no errors', function(done) {
@@ -466,10 +466,10 @@ describe('Device provisioning API: Provision devices', function() {
                     url: 'http://localhost:' + iotAgentConfig.iota.server.port + '/iot/devices',
                     headers: {
                         'fiware-service': service,
-                        'fiware-servicepath': subservice,
+                        'fiware-servicepath': subservice
                     },
                     json: true,
-                    method: 'GET',
+                    method: 'GET'
                 };
 
                 request(options, function(error, response, body) {
@@ -490,8 +490,8 @@ describe('Device provisioning API: Provision devices', function() {
                 json: true,
                 headers: {
                     'fiware-service': service,
-                    'fiware-servicepath': subservice,
-                },
+                    'fiware-servicepath': subservice
+                }
             };
             var attributesExample = utils.readExampleFile('./test/activeAttributes/cayenneLpp.json');
             var client = mqtt.connect('mqtt://' + testMosquittoHost);

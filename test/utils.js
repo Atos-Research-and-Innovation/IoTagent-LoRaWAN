@@ -42,8 +42,8 @@ function deleteEntityCB(cbConfig, service, servicePath, cbEntityName, callback) 
         json: true,
         headers: {
             'fiware-service': service,
-            'fiware-servicepath': servicePath,
-        },
+            'fiware-servicepath': servicePath
+        }
     };
 
     request(optionsCB, function(error, response, body) {

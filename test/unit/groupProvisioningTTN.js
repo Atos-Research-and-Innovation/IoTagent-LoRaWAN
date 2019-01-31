@@ -73,7 +73,7 @@ describe('Configuration provisioning API: Provision groups', function() {
                     subservice,
                     'lora_unprovisioned_device2:LoraDeviceGroup'
                 ),
-                async.apply(iotagentLora.start, iotAgentConfig),
+                async.apply(iotagentLora.start, iotAgentConfig)
             ],
             done
         );
@@ -97,7 +97,7 @@ describe('Configuration provisioning API: Provision groups', function() {
                     service,
                     subservice,
                     'lora_unprovisioned_device2:LoraDeviceGroup'
-                ),
+                )
             ],
             done
         );
@@ -132,8 +132,8 @@ describe('Configuration provisioning API: Provision groups', function() {
             json: utils.readExampleFile('./test/groupProvisioning/provisionGroup1TTN.json'),
             headers: {
                 'fiware-service': service,
-                'fiware-servicepath': subservice,
-            },
+                'fiware-servicepath': subservice
+            }
         };
         var devId = 'lora_unprovisioned_device';
         var cbEntityName = devId + ':' + options.json.services[0]['entity_type'];
@@ -143,11 +143,12 @@ describe('Configuration provisioning API: Provision groups', function() {
             json: true,
             headers: {
                 'fiware-service': service,
-                'fiware-servicepath': subservice,
-            },
+                'fiware-servicepath': subservice
+            }
         };
 
         if (testMosquittoHost) {
+            /* eslint-disable-next-line  standard/computed-property-even-spacing */
             options.json.services[0]['internal_attributes']['lorawan']['application_server'][
                 'host'
             ] = testMosquittoHost;
@@ -159,8 +160,8 @@ describe('Configuration provisioning API: Provision groups', function() {
             json: true,
             headers: {
                 'fiware-service': service,
-                'fiware-servicepath': subservice,
-            },
+                'fiware-servicepath': subservice
+            }
         };
 
         it('should add the group to the list', function(done) {
@@ -243,8 +244,8 @@ describe('Configuration provisioning API: Provision groups', function() {
                 json: true,
                 headers: {
                     'fiware-service': service,
-                    'fiware-servicepath': subservice,
-                },
+                    'fiware-servicepath': subservice
+                }
             };
             request(optionsGetDevice, function(error, response, body) {
                 should.not.exist(error);
@@ -266,8 +267,8 @@ describe('Configuration provisioning API: Provision groups', function() {
             json: utils.readExampleFile('./test/groupProvisioning/provisionGroup1TTN.json'),
             headers: {
                 'fiware-service': service,
-                'fiware-servicepath': subservice,
-            },
+                'fiware-servicepath': subservice
+            }
         };
         it('Should keep on listening to devices from provisioned groups', function(done) {
             var devId = 'lora_unprovisioned_device2';
@@ -278,8 +279,8 @@ describe('Configuration provisioning API: Provision groups', function() {
                 json: true,
                 headers: {
                     'fiware-service': service,
-                    'fiware-servicepath': subservice,
-                },
+                    'fiware-servicepath': subservice
+                }
             };
 
             async.waterfall([iotagentLora.stop, async.apply(iotagentLora.start, iotAgentConfig)], function(err) {
@@ -319,8 +320,8 @@ describe('Configuration provisioning API: Provision groups', function() {
             json: utils.readExampleFile('./test/groupProvisioning/provisionGroup1TTNCbor.json'),
             headers: {
                 'fiware-service': service,
-                'fiware-servicepath': subservice,
-            },
+                'fiware-servicepath': subservice
+            }
         };
         var devId = 'lora_unprovisioned_device3';
         var cbEntityName = devId + ':' + options.json.services[0]['entity_type'];
@@ -330,11 +331,12 @@ describe('Configuration provisioning API: Provision groups', function() {
             json: true,
             headers: {
                 'fiware-service': service,
-                'fiware-servicepath': subservice,
-            },
+                'fiware-servicepath': subservice
+            }
         };
 
         if (testMosquittoHost) {
+            /* eslint-disable-next-line  standard/computed-property-even-spacing */
             options.json.services[0]['internal_attributes']['lorawan']['application_server'][
                 'host'
             ] = testMosquittoHost;
@@ -346,8 +348,8 @@ describe('Configuration provisioning API: Provision groups', function() {
             json: true,
             headers: {
                 'fiware-service': service,
-                'fiware-servicepath': subservice,
-            },
+                'fiware-servicepath': subservice
+            }
         };
 
         it('should add the group to the list', function(done) {
@@ -375,7 +377,7 @@ describe('Configuration provisioning API: Provision groups', function() {
                 digital_in_3: 100,
                 digital_out_4: 0,
                 relative_humidity_2: 0,
-                temperature_1: 27.2,
+                temperature_1: 27.2
             };
 
             var encodedBuffer = CBOR.encode(rawJSONPayload);
@@ -411,13 +413,13 @@ describe('Configuration provisioning API: Provision groups', function() {
             url: 'http://localhost:' + iotAgentConfig.iota.server.port + '/iot/services/',
             headers: {
                 'fiware-service': service,
-                'fiware-servicepath': subservice,
+                'fiware-servicepath': subservice
             },
             method: 'DELETE',
             qs: {
                 resource: '70B3D57ED000985F',
-                apikey: '',
-            },
+                apikey: ''
+            }
         };
 
         var optionsGetService = {
@@ -426,8 +428,8 @@ describe('Configuration provisioning API: Provision groups', function() {
             json: true,
             headers: {
                 'fiware-service': service,
-                'fiware-servicepath': subservice,
-            },
+                'fiware-servicepath': subservice
+            }
         };
 
         it('should return a 204 OK and no errors', function(done) {
@@ -454,8 +456,8 @@ describe('Configuration provisioning API: Provision groups', function() {
                 json: true,
                 headers: {
                     'fiware-service': service,
-                    'fiware-servicepath': subservice,
-                },
+                    'fiware-servicepath': subservice
+                }
             };
             var attributesExample = utils.readExampleFile('./test/activeAttributes/cayenneLpp.json');
             var client = mqtt.connect('mqtt://' + testMosquittoHost);
