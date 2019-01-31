@@ -31,7 +31,7 @@ var iotAgentLib = require('iotagent-node-lib');
 var mqtt = require('mqtt');
 var CBOR = require('cbor-sync');
 
-describe('Multientity plugin', function () {
+describe('Multientity plugin', function() {
     var testMosquittoHost = 'localhost';
     var orionHost = iotAgentConfig.iota.contextBroker.host;
     var orionPort = iotAgentConfig.iota.contextBroker.port;
@@ -39,7 +39,7 @@ describe('Multientity plugin', function () {
     var service = 'smartgondor';
     var subservice = '/gardens';
 
-    function readEnvVariables () {
+    function readEnvVariables() {
         if (process.env.TEST_MOSQUITTO_HOST) {
             testMosquittoHost = process.env.TEST_MOSQUITTO_HOST;
         }
@@ -61,46 +61,52 @@ describe('Multientity plugin', function () {
         }
     }
 
-    before(function (done) {
+    before(function(done) {
         readEnvVariables();
-        async.series([
-            async.apply(utils.deleteEntityCB, iotAgentConfig.iota.contextBroker, service, subservice, 'LORA-N-003'),
-            async.apply(utils.deleteEntityCB, iotAgentConfig.iota.contextBroker, service, subservice, 'Mote001'),
-            async.apply(iotagentLora.start, iotAgentConfig)
-        ], done);
+        async.series(
+            [
+                async.apply(utils.deleteEntityCB, iotAgentConfig.iota.contextBroker, service, subservice, 'LORA-N-003'),
+                async.apply(utils.deleteEntityCB, iotAgentConfig.iota.contextBroker, service, subservice, 'Mote001'),
+                async.apply(iotagentLora.start, iotAgentConfig),
+            ],
+            done
+        );
     });
 
-    after(function (done) {
-        async.series([
-            iotAgentLib.clearAll,
-            iotagentLora.stop,
-            async.apply(utils.deleteEntityCB, iotAgentConfig.iota.contextBroker, service, subservice, 'LORA-N-003'),
-            async.apply(utils.deleteEntityCB, iotAgentConfig.iota.contextBroker, service, subservice, 'Mote001')
-        ], done);
+    after(function(done) {
+        async.series(
+            [
+                iotAgentLib.clearAll,
+                iotagentLora.stop,
+                async.apply(utils.deleteEntityCB, iotAgentConfig.iota.contextBroker, service, subservice, 'LORA-N-003'),
+                async.apply(utils.deleteEntityCB, iotAgentConfig.iota.contextBroker, service, subservice, 'Mote001'),
+            ],
+            done
+        );
     });
 
-    describe('When a device provisioning request with all the required data arrives to the IoT Agent. Multientity plugin', function () {
+    describe('When a device provisioning request with all the required data arrives to the IoT Agent. Multientity plugin', function() {
         var multientityName = 'Mote001';
         var multientityType = 'Mote';
-        before(function (done) {
+        before(function(done) {
             var createEntityCB = {
                 url: 'http://' + orionServer + '/v2/entities/',
                 method: 'POST',
                 json: {
-                    'id': multientityName,
-                    'type': multientityType,
-                    'temperature_1': {
-                        'type': 'Number',
-                        'value': 0
-                    }
+                    id: multientityName,
+                    type: multientityType,
+                    temperature_1: {
+                        type: 'Number',
+                        value: 0,
+                    },
                 },
                 headers: {
                     'fiware-service': service,
-                    'fiware-servicepath': subservice
-                }
+                    'fiware-servicepath': subservice,
+                },
             };
 
-            request(createEntityCB, function (error, response, body) {
+            request(createEntityCB, function(error, response, body) {
                 should.not.exist(error);
                 response.should.have.property('statusCode', 201);
                 done();
@@ -113,8 +119,8 @@ describe('Multientity plugin', function () {
             json: utils.readExampleFile('./test/deviceProvisioning/provisionDeviceMultientityPluginTTN.json'),
             headers: {
                 'fiware-service': service,
-                'fiware-servicepath': subservice
-            }
+                'fiware-servicepath': subservice,
+            },
         };
         var optionsGetDevice = {
             url: 'http://localhost:' + iotAgentConfig.iota.server.port + '/iot/devices',
@@ -122,20 +128,22 @@ describe('Multientity plugin', function () {
             json: true,
             headers: {
                 'fiware-service': service,
-                'fiware-servicepath': subservice
-            }
+                'fiware-servicepath': subservice,
+            },
         };
 
-        it('should add the device to the devices list', function (done) {
+        it('should add the device to the devices list', function(done) {
             if (testMosquittoHost) {
-                options.json.devices[0]['internal_attributes']['lorawan']['application_server']['host'] = testMosquittoHost;
+                options.json.devices[0]['internal_attributes']['lorawan']['application_server'][
+                    'host'
+                ] = testMosquittoHost;
             }
 
-            request(options, function (error, response, body) {
+            request(options, function(error, response, body) {
                 should.not.exist(error);
                 response.should.have.property('statusCode', 201);
-                setTimeout(function () {
-                    request(optionsGetDevice, function (error, response, body) {
+                setTimeout(function() {
+                    request(optionsGetDevice, function(error, response, body) {
                         should.not.exist(error);
                         response.should.have.property('statusCode', 200);
                         body.should.have.property('count', 1);
@@ -149,18 +157,18 @@ describe('Multientity plugin', function () {
             });
         });
 
-        it('should register the entity in the CB', function (done) {
+        it('should register the entity in the CB', function(done) {
             var optionsCB = {
                 url: 'http://' + orionServer + '/v2/entities/' + options.json.devices[0]['entity_name'],
                 method: 'GET',
                 json: true,
                 headers: {
                     'fiware-service': service,
-                    'fiware-servicepath': subservice
-                }
+                    'fiware-servicepath': subservice,
+                },
             };
 
-            request(optionsCB, function (error, response, body) {
+            request(optionsCB, function(error, response, body) {
                 should.not.exist(error);
                 response.should.have.property('statusCode', 200);
                 body.should.have.property('id', options.json.devices[0]['entity_name']);
@@ -168,13 +176,13 @@ describe('Multientity plugin', function () {
             });
         });
 
-        it('Should process correctly active attributes represented in CBOR model', function (done) {
+        it('Should process correctly active attributes represented in CBOR model', function(done) {
             var rawJSONPayload = {
                 barometric_pressure_0: 0,
                 digital_in_3: 101,
                 digital_out_4: 0,
                 relative_humidity_2: 0,
-                temperature_1: 27.2
+                temperature_1: 27.2,
             };
 
             var optionsCB = {
@@ -183,8 +191,8 @@ describe('Multientity plugin', function () {
                 json: true,
                 headers: {
                     'fiware-service': service,
-                    'fiware-servicepath': subservice
-                }
+                    'fiware-servicepath': subservice,
+                },
             };
 
             var optionsCBMultiEntity = {
@@ -193,25 +201,31 @@ describe('Multientity plugin', function () {
                 json: true,
                 headers: {
                     'fiware-service': service,
-                    'fiware-servicepath': subservice
-                }
+                    'fiware-servicepath': subservice,
+                },
             };
 
             var encodedBuffer = CBOR.encode(rawJSONPayload);
             var attributesExample = utils.readExampleFile('./test/activeAttributes/emptyCbor.json');
             attributesExample['payload_raw'] = encodedBuffer.toString('base64');
             var client = mqtt.connect('mqtt://' + testMosquittoHost);
-            client.on('connect', function () {
-                client.publish(options.json.devices[0]['internal_attributes']['lorawan']['application_id'] + '/devices/' + options.json.devices[0]['device_id'] + '/up', JSON.stringify(attributesExample));
-                setTimeout(function () {
-                    request(optionsCB, function (error, response, body) {
+            client.on('connect', function() {
+                client.publish(
+                    options.json.devices[0]['internal_attributes']['lorawan']['application_id'] +
+                        '/devices/' +
+                        options.json.devices[0]['device_id'] +
+                        '/up',
+                    JSON.stringify(attributesExample)
+                );
+                setTimeout(function() {
+                    request(optionsCB, function(error, response, body) {
                         should.not.exist(error);
                         response.should.have.property('statusCode', 200);
                         body.should.have.property('id', options.json.devices[0]['entity_name']);
                         body.should.have.property('digital_in_3');
                         body.digital_in_3.should.have.property('type', 'Number');
                         body.digital_in_3.should.have.property('value', 101);
-                        request(optionsCBMultiEntity, function (error, response, body) {
+                        request(optionsCBMultiEntity, function(error, response, body) {
                             should.not.exist(error);
                             response.should.have.property('statusCode', 200);
                             body.should.have.property('id', multientityName);

@@ -30,7 +30,7 @@ var iotagentLora = require('../../');
 var iotAgentLib = require('iotagent-node-lib');
 var mqtt = require('mqtt');
 
-describe('Static provisioning', function () {
+describe('Static provisioning', function() {
     var testMosquittoHost = 'localhost';
     var orionHost = iotAgentConfig.iota.contextBroker.host;
     var orionPort = iotAgentConfig.iota.contextBroker.port;
@@ -39,7 +39,7 @@ describe('Static provisioning', function () {
     var subservice = '/gardens';
     readEnvVariables();
 
-    function readEnvVariables () {
+    function readEnvVariables() {
         if (process.env.TEST_MOSQUITTO_HOST) {
             testMosquittoHost = process.env.TEST_MOSQUITTO_HOST;
         }
@@ -55,76 +55,94 @@ describe('Static provisioning', function () {
         orionServer = orionHost + ':' + orionPort;
     }
 
-    beforeEach(function (done) {
-        async.series([
-            async.apply(utils.deleteEntityCB, iotAgentConfig.iota.contextBroker, service, subservice, 'lora_unprovisioned_device:LoraDeviceGroup')
-        ], done);
+    beforeEach(function(done) {
+        async.series(
+            [
+                async.apply(
+                    utils.deleteEntityCB,
+                    iotAgentConfig.iota.contextBroker,
+                    service,
+                    subservice,
+                    'lora_unprovisioned_device:LoraDeviceGroup'
+                ),
+            ],
+            done
+        );
     });
 
-    afterEach(function (done) {
-        async.series([
-            iotAgentLib.clearAll,
-            iotagentLora.stop,
-            async.apply(utils.deleteEntityCB, iotAgentConfig.iota.contextBroker, service, subservice, 'lora_unprovisioned_device:LoraDeviceGroup')
-        ], done);
+    afterEach(function(done) {
+        async.series(
+            [
+                iotAgentLib.clearAll,
+                iotagentLora.stop,
+                async.apply(
+                    utils.deleteEntityCB,
+                    iotAgentConfig.iota.contextBroker,
+                    service,
+                    subservice,
+                    'lora_unprovisioned_device:LoraDeviceGroup'
+                ),
+            ],
+            done
+        );
     });
 
-    describe('When a new type is provisioned without LoRaWAN configuration', function () {
-        it('Should start the agent without error', function (done) {
+    describe('When a new type is provisioned without LoRaWAN configuration', function() {
+        it('Should start the agent without error', function(done) {
             var sensorType = {
                 service: 'factory',
                 subservice: '/robots',
                 attributes: [
                     {
-                        'name': 'Battery',
-                        'type': 'number'
-                    }
-                ]
+                        name: 'Battery',
+                        type: 'number',
+                    },
+                ],
             };
 
             iotAgentConfig.iota.types['Robot'] = sensorType;
-            iotagentLora.start(iotAgentConfig, function (error) {
+            iotagentLora.start(iotAgentConfig, function(error) {
                 should.not.exist(error);
                 return done();
             });
         });
     });
 
-    describe('When a new type is provisioned with LoRaWAN configuration', function () {
+    describe('When a new type is provisioned with LoRaWAN configuration', function() {
         var devId;
         var cbEntityName;
         var sensorType;
         var optionsCB;
-        it('Should start the agent without error', function (done) {
+        it('Should start the agent without error', function(done) {
             sensorType = {
                 service: 'factory',
                 subservice: '/robots',
                 attributes: [
                     {
-                        'object_id': 'bp0',
-                        'name': 'barometric_pressure_0',
-                        'type': 'hpa'
+                        object_id: 'bp0',
+                        name: 'barometric_pressure_0',
+                        type: 'hpa',
                     },
                     {
-                        'object_id': 'di3',
-                        'name': 'digital_in_3',
-                        'type': 'Number'
+                        object_id: 'di3',
+                        name: 'digital_in_3',
+                        type: 'Number',
                     },
                     {
-                        'object_id': 'do4',
-                        'name': 'digital_out_4',
-                        'type': 'Number'
+                        object_id: 'do4',
+                        name: 'digital_out_4',
+                        type: 'Number',
                     },
                     {
-                        'object_id': 'rh2',
-                        'name': 'relative_humidity_2',
-                        'type': 'Number'
+                        object_id: 'rh2',
+                        name: 'relative_humidity_2',
+                        type: 'Number',
                     },
                     {
-                        'object_id': 't1',
-                        'name': 'temperature_1',
-                        'type': 'Number'
-                    }
+                        object_id: 't1',
+                        name: 'temperature_1',
+                        type: 'Number',
+                    },
                 ],
                 internalAttributes: {
                     lorawan: {
@@ -132,13 +150,13 @@ describe('Static provisioning', function () {
                             host: 'localhost',
                             username: 'ari_ioe_app_demo1',
                             password: 'ttn-account-v2.UitfM5cPazqW52_zbtgUS6wM5vp1MeLC9Yu-Cozjfp0',
-                            provider: 'TTN'
+                            provider: 'TTN',
                         },
                         app_eui: '70B3D57ED000985F',
                         application_id: 'ari_ioe_app_demo1',
-                        application_key: '9BE6B8EF16415B5F6ED4FBEAFE695C49'
-                    }
-                }
+                        application_key: '9BE6B8EF16415B5F6ED4FBEAFE695C49',
+                    },
+                },
             };
 
             devId = 'lora_n_003';
@@ -150,8 +168,8 @@ describe('Static provisioning', function () {
                 json: true,
                 headers: {
                     'fiware-service': sensorType.service,
-                    'fiware-servicepath': sensorType.subservice
-                }
+                    'fiware-servicepath': sensorType.subservice,
+                },
             };
 
             if (testMosquittoHost) {
@@ -160,20 +178,23 @@ describe('Static provisioning', function () {
 
             iotAgentConfig.iota.types[type] = sensorType;
 
-            iotagentLora.start(iotAgentConfig, function (error) {
+            iotagentLora.start(iotAgentConfig, function(error) {
                 should.not.exist(error);
                 return done();
             });
         });
 
-        it('Should register correctly new devices for the type and process their active attributes', function (done) {
+        it('Should register correctly new devices for the type and process their active attributes', function(done) {
             var attributesExample = utils.readExampleFile('./test/activeAttributes/cayenneLpp.json');
             attributesExample['dev_id'] = devId;
             var client = mqtt.connect('mqtt://' + testMosquittoHost);
-            client.on('connect', function () {
-                client.publish(sensorType['internalAttributes']['lorawan']['application_id'] + '/devices/' + devId + '/up', JSON.stringify(attributesExample));
-                setTimeout(function () {
-                    request(optionsCB, function (error, response, body) {
+            client.on('connect', function() {
+                client.publish(
+                    sensorType['internalAttributes']['lorawan']['application_id'] + '/devices/' + devId + '/up',
+                    JSON.stringify(attributesExample)
+                );
+                setTimeout(function() {
+                    request(optionsCB, function(error, response, body) {
                         should.not.exist(error);
                         response.should.have.property('statusCode', 200);
                         body.should.have.property('id', cbEntityName);
@@ -188,16 +209,16 @@ describe('Static provisioning', function () {
         });
     });
 
-    describe('When a new type is provisioned with LoRaWAN configuration but the application server has been already used for other type', function () {
-        it('Should not start the agent', function (done) {
+    describe('When a new type is provisioned with LoRaWAN configuration but the application server has been already used for other type', function() {
+        it('Should not start the agent', function(done) {
             var sensorType = {
                 service: 'factory',
                 subservice: '/robots',
                 attributes: [
                     {
-                        'name': 'Battery',
-                        'type': 'number'
-                    }
+                        name: 'Battery',
+                        type: 'number',
+                    },
                 ],
                 internalAttributes: {
                     lorawan: {
@@ -205,17 +226,17 @@ describe('Static provisioning', function () {
                             host: 'localhost',
                             username: 'ari_ioe_app_demo1',
                             password: 'ttn-account-v2.UitfM5cPazqW52_zbtgUS6wM5vp1MeLC9Yu-Cozjfp0',
-                            provider: 'TTN'
+                            provider: 'TTN',
                         },
                         app_eui: '70B3D57ED000985F',
                         application_id: 'ari_ioe_app_demo1',
-                        application_key: '9BE6B8EF16415B5F6ED4FBEAFE695C49'
-                    }
-                }
+                        application_key: '9BE6B8EF16415B5F6ED4FBEAFE695C49',
+                    },
+                },
             };
 
             iotAgentConfig.iota.types['Robot2'] = sensorType;
-            iotagentLora.start(iotAgentConfig, function (error) {
+            iotagentLora.start(iotAgentConfig, function(error) {
                 should.exist(error);
                 return done();
             });
