@@ -24,11 +24,8 @@ If the `IOTA_REGISTRY_TYPE=mongodb`, a [MongoDB](https://www.mongodb.com/) datab
 example below assumes that you have a `/data` directory in your hosting system in order to hold database files - please
 amend the attached volume to suit your own configuration.
 
-```yml
+```yaml
 version: "3.1"
-
-volumes:
-    ? mongodb
 
 services:
     iot-agent:
@@ -72,6 +69,9 @@ services:
         ports:
             - "1026:1026"
         command: -dbhost mongodb
+
+    volumes:
+        mongo-db: ~
 ```
 
 ## Configuration with environment variables
@@ -107,27 +107,27 @@ associated with this image can be used to build an image in several ways:
 -   By default, the `Dockerfile` retrieves the **latest** version of the codebase direct from GitHub (the `build-arg` is
     optional):
 
-```console
+```bash
 docker build -t iot-agent . --build-arg DOWNLOAD=latest
 ```
 
 -   You can alter this to obtain the last **stable** release run this `Dockerfile` with the build argument
     `DOWNLOAD=stable`
 
-```console
+```bash
 docker build -t iot-agent . --build-arg DOWNLOAD=stable
 ```
 
 -   You can also download a specific release by running this `Dockerfile` with the build argument `DOWNLOAD=<version>`
 
-```console
+```bash
 docker build -t iot-agent . --build-arg DOWNLOAD=1.7.0
 ```
 
 -   To download code from your own fork of the GitHub repository add the `GITHUB_ACCOUNT` and `GITHUB_REPOSITORY`
     arguments to the `docker build` command.
 
-```console
+```bash
 docker build -t iot-agent . --build-arg GITHUB_ACCOUNT=<your account> --build-arg GITHUB_REPOSITORY=<your repo>
 ```
 
