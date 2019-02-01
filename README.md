@@ -10,24 +10,20 @@
 [![Coverage Status](https://coveralls.io/repos/github/Atos-Research-and-Innovation/IoTagent-LoRaWAN/badge.svg?branch=master)](https://coveralls.io/github/Atos-Research-and-Innovation/IoTagent-LoRaWAN?branch=master)
 ![Status](https://nexus.lab.fiware.org/static/badges/statuses/iot-lorawan.svg)
 
-The Internet of Things Agent for LoRaWAN protocol enables data and commands to
-be exchanged between IoT devices and the
+The Internet of Things Agent for LoRaWAN protocol enables data and commands to be exchanged between IoT devices and the
 [NGSI](https://swagger.lab.fiware.org/?url=https://raw.githubusercontent.com/Fiware/specifications/master/OpenAPI/ngsiv2/ngsiv2-openapi.json)
-interface of a context broker using the
-[LoRaWAN](https://lora-alliance.org/about-lorawan) protocol.
+interface of a context broker using the [LoRaWAN](https://lora-alliance.org/about-lorawan) protocol.
 
-It is based on the
-[IoT Agent Node.js Library](https://github.com/telefonicaid/iotagent-node-lib).
-Further general information about the FIWARE IoT Agents framework, its
-architecture and the common interaction model can be found in the library's
-GitHub repository.
+It is based on the [IoT Agent Node.js Library](https://github.com/telefonicaid/iotagent-node-lib). Further general
+information about the FIWARE IoT Agents framework, its architecture and the common interaction model can be found in the
+library's GitHub repository.
 
-This project is part of [FIWARE](https://www.fiware.org/). For more information
-check the FIWARE Catalogue entry for the
+This project is part of [FIWARE](https://www.fiware.org/). For more information check the FIWARE Catalogue entry for the
 [IoT Agents](https://github.com/Fiware/catalogue/tree/master/iot-agents).
 
-| :books: [Documentation](https://fiware-lorawan.readthedocs.io) | :mortar_board: [Academy](https://fiware-academy.readthedocs.io/en/latest/iot-agents/idas) | :whale: [Docker Hub](https://hub.docker.com/r/fiware/iotagent-lorawan/) | :dart: [Roadmap](docs/roadmap.md)
-|---|---|---|---|
+| :books: [Documentation](https://fiware-lorawan.readthedocs.io) | :mortar_board: [Academy](https://fiware-academy.readthedocs.io/en/latest/iot-agents/idas) | :whale: [Docker Hub](https://hub.docker.com/r/fiware/iotagent-lorawan/) | :dart: [Roadmap](docs/roadmap.md) |
+| -------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- | --------------------------------- |
+
 
 ## Contents
 
@@ -43,13 +39,10 @@ check the FIWARE Catalogue entry for the
 
 ### Architecture
 
-As explained in
-[What is LoRaWAN™](https://lora-alliance.org/sites/default/files/2018-04/what-is-lorawan.pdf),
-the proposed _Network Architecture_ for a LoRaWAN based system relies on a mesh
-network architecture composed of _End nodes_, _Concentrators_, _Network Servers_
-and _Application Servers_. This IoTA is fully compliant with this architecture,
-providing interoperability between FIWARE NGSI Context Brokers and LoRaWAN
-devices.
+As explained in [What is LoRaWAN™](https://lora-alliance.org/sites/default/files/2018-04/what-is-lorawan.pdf), the
+proposed _Network Architecture_ for a LoRaWAN based system relies on a mesh network architecture composed of _End
+nodes_, _Concentrators_, _Network Servers_ and _Application Servers_. This IoTA is fully compliant with this
+architecture, providing interoperability between FIWARE NGSI Context Brokers and LoRaWAN devices.
 
 ![General](https://raw.githubusercontent.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/master/docs/img/iotagent_lorawan_arch.png)
 
@@ -79,9 +72,8 @@ Information about how to use the IoT Agent can be found in the
 ## API
 
 Apiary reference for the Configuration API can be found
-[here](http://docs.telefonicaiotiotagents.apiary.io/#reference/configuration-api).
-More information about IoT Agents and their APIs can be found in the IoT Agent
-Library [documentation](https://iotagent-node-lib.rtfd.io/).
+[here](http://docs.telefonicaiotiotagents.apiary.io/#reference/configuration-api). More information about IoT Agents and
+their APIs can be found in the IoT Agent Library [documentation](https://iotagent-node-lib.rtfd.io/).
 
 ## Roadmap
 
@@ -89,8 +81,7 @@ The roadmap of this FIWARE GE is described [here](docs/roadmap.md)
 
 ## Quality Assurance
 
-This project is part of [FIWARE](https://fiware.org/) and has been rated as
-follows:
+This project is part of [FIWARE](https://fiware.org/) and has been rated as follows:
 
 -   **Version Tested:**
     ![ ](https://img.shields.io/badge/dynamic/json.svg?label=Version&url=https://fiware.github.io/catalogue/json/iotagent_LoRa.json&query=$.version&colorB=blue)
@@ -110,12 +101,11 @@ follows:
 
 ## License
 
-FIWARE IoT Agent for LoRaWAN protocol is licensed under Affero General Public
-License (GPL) version 3.
+FIWARE IoT Agent for LoRaWAN protocol is licensed under Affero General Public License (GPL) version 3.
 
 © 2019 Atos Spain S.A
 
 The following third-party library is used under license:
 
-1. [iotagent-node-lib](https://github.com/telefonicaid/iotagent-node-lib) -
-   **AGPL** © 2014-2019 Telefonica Investigación y Desarrollo
+1. [iotagent-node-lib](https://github.com/telefonicaid/iotagent-node-lib) - **AGPL** © 2014-2019 Telefonica
+   Investigación y Desarrollo
