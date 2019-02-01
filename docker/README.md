@@ -107,27 +107,27 @@ associated with this image can be used to build an image in several ways:
 -   By default, the `Dockerfile` retrieves the **latest** version of the codebase direct from GitHub (the `build-arg` is
     optional):
 
-```bash
+```console
 docker build -t iot-agent . --build-arg DOWNLOAD=latest
 ```
 
 -   You can alter this to obtain the last **stable** release run this `Dockerfile` with the build argument
     `DOWNLOAD=stable`
 
-```bash
+```console
 docker build -t iot-agent . --build-arg DOWNLOAD=stable
 ```
 
 -   You can also download a specific release by running this `Dockerfile` with the build argument `DOWNLOAD=<version>`
 
-```bash
+```console
 docker build -t iot-agent . --build-arg DOWNLOAD=1.7.0
 ```
 
 -   To download code from your own fork of the GitHub repository add the `GITHUB_ACCOUNT` and `GITHUB_REPOSITORY`
     arguments to the `docker build` command.
 
-```bash
+```console
 docker build -t iot-agent . --build-arg GITHUB_ACCOUNT=<your account> --build-arg GITHUB_REPOSITORY=<your repo>
 ```
 
