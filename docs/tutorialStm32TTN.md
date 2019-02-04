@@ -51,7 +51,7 @@ sudo apt-get install minicom
 ### Hardware
 
 -   An STM32 LoRa board:
-    https://www.st.com/en/wireless-connectivity/lorawan-technology.html?querycriteria=productId=SC2150 - Recommended
+    `https://www.st.com/en/wireless-connectivity/lorawan-technology.html?querycriteria=productId=SC2150` - Recommended
     board is [B-L072Z-LRWAN1](https://www.st.com/en/embedded-software/i-cube-lrwan.html), which is active and fully
     supported by STMicroelectronics.
 -   A LoRaWAN gateway (or access to it) compatible with _The Things Network_. Further information about this can be
@@ -95,7 +95,7 @@ git clone https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN.git
 
 ## Program the STM32 board
 
--   Navigate to _https://console.thethingsnetwork.org_ and get logged. Copy the _Application EUI_ of one of the
+-   Navigate to `https://console.thethingsnetwork.org` and get logged. Copy the _Application EUI_ of one of the
     application to be used in the tutorial.
 
 ![TTN Application EUI](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/master/docs/img/stm32_ttn_tutorial/ttn_application_eui.png)
@@ -497,7 +497,7 @@ curl -X GET \
 
 ### It is not possible to flash the device using Linux operating system with Oracle VirtualBox
 
-https://superuser.com/questions/683034/oracle-virtualbox-connecting-usb-device
+`https://superuser.com/questions/683034/oracle-virtualbox-connecting-usb-device`
 
 ### Device data is not received in _The Things Network_
 

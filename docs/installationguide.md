@@ -19,20 +19,20 @@ In order to install the LoRaWAN IoT Agent, just clone the project and install th
 
 #### Cloning the GitHub repository
 
-1. Clone the repository with the following command:
+1.  Clone the repository with the following command:
 
 ```bash
 git clone https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN.git
 ```
 
-2. Once the repository is cloned, you have to download the dependencies for the project, and let it ready to the
-   execution. From the root folder of the project execute:
+2.  Once the repository is cloned, you have to download the dependencies for the project, and let it ready to the
+    execution. From the root folder of the project execute:
 
 ```bash
 npm install
 ```
 
-3. Launch the IoT Agent with the default configuration
+3.  Launch the IoT Agent with the default configuration
 
 ```bash
 node bin/iotagent-lora
@@ -51,7 +51,7 @@ info: Loading devices from registry
 info: LoRaWAN IoT Agent started
 ```
 
-4. Check that the IoTA is running correctly:
+4.  Check that the IoTA is running correctly:
 
 ```bash
 curl -v http://localhost:4061/iot/about
@@ -84,7 +84,7 @@ docker-compose -f docker/docker-compose.yml up
 #### Overview
 
 All the configuration for the IoT Agent is stored in a single configuration file (typically installed in the root
-folder). Please refer to the `Static configuration`section of (user guide)[users_manual.md] for further information.
+folder). Please refer to the `Static configuration` section of [user guide](users_manual.md) for further information.
 
 #### Configuration with environment variables
 

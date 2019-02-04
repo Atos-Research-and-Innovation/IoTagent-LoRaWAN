@@ -2,11 +2,11 @@
 
 ## The Things Network (TTN)
 
-1. Register your LoRaWAN gateways following `https://www.thethingsnetwork.org/docs/gateways/registration.html`.
-2. Create one or several applications following `https://www.thethingsnetwork.org/docs/applications/add.html`.
-3. Register your LoRaWAN devices within your applications following
-   `https://www.thethingsnetwork.org/docs/devices/registration.html`.
-4. In order to use FIWARE IoT Agent for LoRaWAN protocol, you will need the following information:
+1.  Register your LoRaWAN gateways following `https://www.thethingsnetwork.org/docs/gateways/registration.html`.
+2.  Create one or several applications following `https://www.thethingsnetwork.org/docs/applications/add.html`.
+3.  Register your LoRaWAN devices within your applications following
+    `https://www.thethingsnetwork.org/docs/devices/registration.html`.
+4.  In order to use FIWARE IoT Agent for LoRaWAN protocol, you will need the following information:
 
 -   Application ID (step 2)
 -   Application key (step 2)
@@ -19,12 +19,12 @@
 
 ## LoRaServer.io
 
-1. Install/deploy LoRa Server project. Docker installation method is recommended:
-   https://www.loraserver.io/install/docker/
-2. Follow the [Getting started](https://www.loraserver.io/use/getting-started/) page to register your network-server and
-   to create a service-profile, gateway, device-profile, application. Finally, add your LoRaWAN devices. Register your
-   network-server: https://www.loraserver.io/lora-app-server/use/network-servers/
-3. In order to use FIWARE IoT Agent for LoRaWAN protocol, you will need the following information:
+1.  Install/deploy LoRa Server project. Docker installation method is recommended:
+    `https://www.loraserver.io/install/docker/`
+2.  Follow the [Getting started](https://www.loraserver.io/use/getting-started/) page to register your network-server
+    and to create a service-profile, gateway, device-profile, application. Finally, add your LoRaWAN devices. Register
+    your network-server: `https://www.loraserver.io/lora-app-server/use/network-servers/`
+3.  In order to use FIWARE IoT Agent for LoRaWAN protocol, you will need the following information:
 
 -   Application ID
 -   Application key
