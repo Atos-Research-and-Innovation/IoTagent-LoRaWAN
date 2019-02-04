@@ -74,7 +74,7 @@ node bin/iotagent-lora custom_config.js
 
 The bootstrap process should finish with:
 
-```
+```text
 info: Loading devices from registry
 info: LoRaWAN IoT Agent started
 ```
