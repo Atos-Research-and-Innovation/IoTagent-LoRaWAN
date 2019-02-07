@@ -1,6 +1,6 @@
 site_name: LoRaWAN IoT Agent 
 site_url: https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN
-repo_url: https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN.git
+repo_url: https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN
 site_description: FIWARE IoT Agent for LoRaWAN protocol document site
 docs_dir: docs/
 site_dir: html
