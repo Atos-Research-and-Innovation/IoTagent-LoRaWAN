@@ -5,7 +5,7 @@
 
 ## Installation
 
-The IoT Agent for LoRaWAN can be installed either by downloading the code from GitHub or using a Docker image.
+There are two ways of installing the JSON IoT Agent: using Git or Docker image.
 
 ### Using GIT
 
@@ -84,7 +84,7 @@ docker-compose -f docker/docker-compose.yml up
 #### Overview
 
 All the configuration for the IoT Agent is stored in a single configuration file (typically installed in the root
-folder). Please refer to the `Static configuration` section of [user guide](users_manual.md) for further information.
+folder). Please refer to the `Static configuration`section of [user guide](users_manual.md) for further information.
 
 #### Configuration with environment variables
 

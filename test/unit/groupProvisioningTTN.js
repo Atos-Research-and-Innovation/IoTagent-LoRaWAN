@@ -255,6 +255,13 @@ describe('Configuration provisioning API: Provision groups', function() {
                 body.devices.should.be.an('array');
                 body.devices.should.have.length(1);
                 body.devices[0].should.have.property('device_id', devId);
+                body.devices[0].should.have.property('internal_attributes');
+                body.devices[0].internal_attributes.should.be.an('array');
+                body.devices[0].internal_attributes.should.have.length(1);
+                body.devices[0].internal_attributes[0].should.be.an('object');
+                body.devices[0].internal_attributes[0].should.have.property('lorawan');
+                body.devices[0].internal_attributes[0].lorawan.should.be.an('object');
+                body.devices[0].internal_attributes[0].lorawan.should.have.property('dev_eui', '3339343771356214');
                 done();
             });
         });

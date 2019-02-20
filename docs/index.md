@@ -14,7 +14,7 @@ general information about FIWARE IoT Agents framework, its architecture and inte
 repository.
 
 This project is part of [FIWARE](https://www.fiware.org/). Check also the FIWARE Catalogue entry for the
-[IoTAgents](https://catalogue.fiware.org/enablers/backend-device-management-idas).
+[IoT Agents](https://github.com/Fiware/catalogue/tree/master/iot-agents).
 
 ## Description
 
