@@ -70,5 +70,8 @@ RUN \
 USER node
 ENV NODE_ENV=production
 
+# Expose 4041 for NORTH PORT
+EXPOSE ${IOTA_NORTH_PORT:-4041}
+
 ENTRYPOINT ["pm2-runtime", "bin/iotagent-lora"]
 CMD ["-- ", "config.js"]
