@@ -23,6 +23,9 @@ jobs:
         - docker run -d --net host -l mosquitto ansi/mosquitto
         - npm update -q
 
+      install:
+        - npm install
+
       before_script:
         - npm run lint
 
@@ -41,6 +44,9 @@ jobs:
         - docker run -d --net host -l mosquitto ansi/mosquitto
         - npm update -q
 
+      install:
+        - npm install
+
       before_script:
         - npm run lint
 
@@ -51,6 +57,9 @@ jobs:
       name: "Documentation Tests"
       node_js:
         - 10
+
+      install:
+        - npm install
 
       script:
         - npm run lint:md
