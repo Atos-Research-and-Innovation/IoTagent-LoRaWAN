@@ -216,35 +216,35 @@ describe('Static provisioning', function() {
         });
     });
 
-    // describe('When a new type is provisioned with LoRaWAN configuration but the application server has been already used for other type', function() {
-    //     it('Should not start the agent', function(done) {
-    //         var sensorType = {
-    //             service: 'factory',
-    //             subservice: '/robots',
-    //             attributes: [
-    //                 {
-    //                     name: 'Battery',
-    //                     type: 'number'
-    //                 }
-    //             ],
-    //             internalAttributes: {
-    //                 lorawan: {
-    //                     application_server: {
-    //                         host: 'localhost',
-    //                         provider: 'loraserver.io'
-    //                     },
-    //                     app_eui: '70B3D57ED000985F',
-    //                     application_id: '1',
-    //                     application_key: '9BE6B8EF16415B5F6ED4FBEAFE695C49'
-    //                 }
-    //             }
-    //         };
+    describe('When a new type is provisioned with LoRaWAN configuration but the application server has been already used for other type', function() {
+        it('Should not start the agent', function(done) {
+            var sensorType = {
+                service: 'factory',
+                subservice: '/robots',
+                attributes: [
+                    {
+                        name: 'Battery',
+                        type: 'number'
+                    }
+                ],
+                internalAttributes: {
+                    lorawan: {
+                        application_server: {
+                            host: 'localhost',
+                            provider: 'loraserver.io'
+                        },
+                        app_eui: '70B3D57ED000985F',
+                        application_id: '1',
+                        application_key: '9BE6B8EF16415B5F6ED4FBEAFE695C49'
+                    }
+                }
+            };
 
-    //         newConf.iota.types['Robot2'] = sensorType;
-    //         iotagentLora.start(newConf, function(error) {
-    //             should.exist(error);
-    //             return done();
-    //         });
-    //     });
-    // });
+            newConf.iota.types['Robot2'] = sensorType;
+            iotagentLora.start(newConf, function(error) {
+                should.exist(error);
+                return done();
+            });
+        });
+    });
 });
