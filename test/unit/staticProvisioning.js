@@ -234,7 +234,6 @@ describe('Static provisioning', function() {
                     }
                 }
             };
-
             iotAgentConfig.iota.types['Robot2'] = sensorType;
             iotagentLora.start(iotAgentConfig, function(error) {
                 should.exist(error);

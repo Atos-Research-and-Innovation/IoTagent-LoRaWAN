@@ -1,0 +1,47 @@
+{
+  "entity_type": "LoraDeviceGroup",
+  "attributes": [{
+      "object_id": "bp0",
+      "name": "barometric_pressure_0",
+      "type": "Number"
+    },
+    {
+      "object_id": "di3",
+      "name": "digital_in_3",
+      "type": "Number"
+    },
+    {
+      "object_id": "do4",
+      "name": "digital_out_4",
+      "type": "Number"
+    },
+    {
+      "object_id": "rh2",
+      "name": "relative_humidity_2",
+      "type": "Number"
+    },
+    {
+      "object_id": "t1",
+      "name": "temperature_1",
+      "type": "Number"
+    },
+    {
+      "object_id": "e1",
+      "name": "extra_1",
+      "type": "Number"
+    }
+  ],
+  "internal_attributes": {
+    "lorawan": {
+      "application_server": {
+        "host": "localhost",
+        "username": "ari_ioe_app_demo1",
+        "password": "ttn-account-v2.UitfM5cPazqW52_zbtgUS6wM5vp1MeLC9Yu-Cozjfp0",
+        "provider": "TTN"
+      },
+      "app_eui": "70B3D57ED000985F",
+      "application_id": "ari_ioe_app_demo1",
+      "application_key": "9BE6B8EF16415B5F6ED4FBEAFE695C49"
+    }
+  }
+}
