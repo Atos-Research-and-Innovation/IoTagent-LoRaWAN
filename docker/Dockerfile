@@ -1,8 +1,28 @@
+#
+# Copyright 2019 Atos Spain S.A
+#
+# This file is part of iotagent-lora
+#
+# iotagent-lora is free software: you can redistribute it and/or
+# modify it under the terms of the GNU Affero General Public License as
+# published by the Free Software Foundation, either version 3 of the License,
+# or (at your option) any later version.
+#
+# iotagent-lora is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+# See the GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public
+# License along with iotagent-lora. If not, see http://www.gnu.org/licenses/.
+#
+
 ARG NODE_VERSION=8.15.0-slim
 FROM node:${NODE_VERSION}
 ARG GITHUB_ACCOUNT=Atos-Research-and-Innovation
 ARG GITHUB_REPOSITORY=IoTagent-LoRaWAN
 ARG DOWNLOAD=latest
+ARG SOURCE_BRANCH=master
 
 # Copying Build time arguments to environment variables so they are persisted at run time and can be 
 # inspected within a running container.
@@ -13,6 +33,12 @@ ENV GITHUB_REPOSITORY=${GITHUB_REPOSITORY}
 ENV DOWNLOAD=${DOWNLOAD}
 
 MAINTAINER FIWARE IoTAgent Team. Atos Spain S.A
+
+# IMPORTANT: For production environments use Docker Secrets to protect values of the sensitive ENV 
+# variables defined below, by adding _FILE to the name of the relevant variable.
+#
+# - IOTA_AUTH_USER, IOTA_AUTH_PASSWORD when using Keystone Security: 
+# - IOTA_AUTH_CLIENT_ID, IOTA_AUTH_CLIENT_SECRET when using OAuth2 Security:
 
 #
 # The following RUN command retrieves the source code from GitHub.
@@ -31,8 +57,8 @@ MAINTAINER FIWARE IoTAgent Team. Atos Spain S.A
 #
 RUN if [ "${DOWNLOAD}" = "latest" ] ; \
 	then \
-		RELEASE="master"; \
-		echo "INFO: Building Latest Development"; \
+		RELEASE="${SOURCE_BRANCH}"; \
+		echo "INFO: Building Latest Development from ${SOURCE_BRANCH} branch."; \
 	elif [ "${DOWNLOAD}" = "stable" ]; \
 	then \
 		RELEASE=$(curl -s https://api.github.com/repos/"${GITHUB_ACCOUNT}"/"${GITHUB_REPOSITORY}"/releases/latest | grep 'tag_name' | cut -d\" -f4); \
@@ -41,13 +67,14 @@ RUN if [ "${DOWNLOAD}" = "latest" ] ; \
 	 	RELEASE="${DOWNLOAD}"; \
 	 	echo "INFO: Building Release: ${RELEASE}"; \
 	fi && \
+	RELEASE_CONCAT=$(echo "${RELEASE}" | tr / -); \
 	# Ensure that unzip is installed, and download the sources
 	apt-get update && \
 	apt-get install -y  --no-install-recommends unzip && \
 	wget --no-check-certificate -O source.zip https://github.com/"${GITHUB_ACCOUNT}"/"${GITHUB_REPOSITORY}"/archive/"${RELEASE}".zip && \
 	unzip source.zip && \
 	rm source.zip && \
-	mv "${GITHUB_REPOSITORY}-${RELEASE}" /opt/iotagent-lora && \
+	mv "${GITHUB_REPOSITORY}-${RELEASE_CONCAT}" /opt/iotagent-lora && \
 	# Remove unzip and clean apt cache
 	apt-get clean && \
 	apt-get remove -y unzip && \
@@ -65,7 +92,8 @@ RUN \
 	# Remove Git and clean apt cache
 	apt-get clean && \
 	apt-get remove -y git && \
-	apt-get -y autoremove
+	apt-get -y autoremove  && \
+	chmod +x docker/entrypoint.sh
 
 USER node
 ENV NODE_ENV=production
@@ -73,5 +101,5 @@ ENV NODE_ENV=production
 # Expose 4041 for NORTH PORT
 EXPOSE ${IOTA_NORTH_PORT:-4041}
 
-ENTRYPOINT ["pm2-runtime", "bin/iotagent-lora"]
+ENTRYPOINT ["docker/entrypoint.sh"]
 CMD ["-- ", "config.js"]

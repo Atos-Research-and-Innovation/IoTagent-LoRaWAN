@@ -99,7 +99,7 @@ Further settings for the IoT Agent for the LoRaWaN Protocol itself - such as spe
 Protocol - can be found in the IoT Agent for the LoRaWaN Protocol
 [Users Guide](https://fiware-lorawan.readthedocs.io/en/latest/users_manual/index.html#configuration-provisioning).
 
-## How to build your own image
+## How to build an image
 
 The [Dockerfile](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/master/docker/Dockerfile)
 associated with this image can be used to build an image in several ways:
@@ -124,12 +124,19 @@ docker build -t iot-agent . --build-arg DOWNLOAD=stable
 docker build -t iot-agent . --build-arg DOWNLOAD=1.7.0
 ```
 
--   To download code from your own fork of the GitHub repository add the `GITHUB_ACCOUNT` and `GITHUB_REPOSITORY`
-    arguments to the `docker build` command.
+## Building from your own fork
+
+To download code from your own fork of the GitHub repository add the `GITHUB_ACCOUNT`, `GITHUB_REPOSITORY` and
+`SOURCE_BRANCH` arguments (default `master`) to the `docker build` command.
 
 ```console
-docker build -t iot-agent . --build-arg GITHUB_ACCOUNT=<your account> --build-arg GITHUB_REPOSITORY=<your repo>
+docker build -t iot-agent . \
+    --build-arg GITHUB_ACCOUNT=<your account> \
+    --build-arg GITHUB_REPOSITORY=<your repo> \
+    --build-arg SOURCE_BRANCH=<your branch>
 ```
+
+## Building from your own source files
 
 Alternatively, if you want to build directly from your own sources, please copy the existing `Dockerfile` into file the
 root of the repository and amend it to copy over your local source using :
@@ -139,3 +146,21 @@ COPY . /opt/iotagent-lora/
 ```
 
 Full instructions can be found within the `Dockerfile` itself.
+
+### Docker Secrets
+
+As an alternative to passing sensitive information via environment variables, `_FILE` may be appended to some sensitive
+environment variables, causing the initialization script to load the values for those variables from files present in
+the container. In particular, this can be used to load passwords from Docker secrets stored in
+`/run/secrets/<secret_name>` files. For example:
+
+```console
+docker run --name iotagent -e IOTA_AUTH_PASSWORD_FILE=/run/secrets/password -d fiware/iotagent-lorawan
+```
+
+Currently, this `_FILE` suffix is supported for:
+
+-   `IOTA_AUTH_USER`
+-   `IOTA_AUTH_PASSWORD`
+-   `IOTA_AUTH_CLIENT_ID`
+-   `IOTA_AUTH_CLIENT_SECRET`
