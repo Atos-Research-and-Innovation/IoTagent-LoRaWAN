@@ -37,8 +37,8 @@ MAINTAINER FIWARE IoTAgent Team. Atos Spain S.A
 # IMPORTANT: For production environments use Docker Secrets to protect values of the sensitive ENV 
 # variables defined below, by adding _FILE to the name of the relevant variable.
 #
-# - IOTA_AUTH_USER, IOTA_AUTH_PASSWORD when using Keystone Security: 
-# - IOTA_AUTH_CLIENT_ID, IOTA_AUTH_CLIENT_SECRET when using OAuth2 Security:
+# - IOTA_AUTH_USER, IOTA_AUTH_PASSWORD - when using Keystone Security
+# - IOTA_AUTH_CLIENT_ID, IOTA_AUTH_CLIENT_SECRET - when using OAuth2 Security
 
 #
 # The following RUN command retrieves the source code from GitHub.
