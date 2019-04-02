@@ -267,6 +267,85 @@ describe('Configuration provisioning API: Provision groups', function() {
         });
     });
 
+    describe('When a configuration update request arrives to the IOT Agent', function() {
+        var options = {
+            url:
+                'http://localhost:' +
+                iotAgentConfig.iota.server.port +
+                '/iot/services?resource=70B3D57ED000985F&apikey',
+            method: 'PUT',
+            json: utils.readExampleFile('./test/groupProvisioning/updateGroup1TTN.json'),
+            headers: {
+                'fiware-service': service,
+                'fiware-servicepath': subservice
+            }
+        };
+        var devId = 'lora_unprovisioned_device';
+        var cbEntityName = devId + ':' + 'LoraDeviceGroup';
+        var optionsCB = {
+            url: 'http://' + orionServer + '/v2/entities/' + cbEntityName,
+            method: 'GET',
+            json: true,
+            headers: {
+                'fiware-service': service,
+                'fiware-servicepath': subservice
+            }
+        };
+
+        var optionsGetService = {
+            url: 'http://localhost:' + iotAgentConfig.iota.server.port + '/iot/services',
+            method: 'GET',
+            json: true,
+            headers: {
+                'fiware-service': service,
+                'fiware-servicepath': subservice
+            }
+        };
+        it('should update the group in the list', function(done) {
+            request(options, function(error, response, body) {
+                should.not.exist(error);
+                response.should.have.property('statusCode', 204);
+                setTimeout(function() {
+                    request(optionsGetService, function(error, response, body) {
+                        should.not.exist(error);
+                        response.should.have.property('statusCode', 200);
+                        body.should.have.property('count', 1);
+                        body.should.have.property('services');
+                        body.services.should.have.length(1);
+                        body.services[0].should.have.property('_id');
+                        body.services[0].should.have.property('attributes');
+                        body.services[0].attributes.should.be.an('array');
+                        body.services[0].attributes.should.have.length(6);
+                        done();
+                    });
+                }, 500);
+            });
+        });
+        it('Should go on processing active attributes', function(done) {
+            var attributesExample = utils.readExampleFile('./test/activeAttributes/cayenneLpp2.json');
+            attributesExample['dev_id'] = devId;
+            var client = mqtt.connect('mqtt://' + testMosquittoHost);
+            client.on('connect', function() {
+                client.publish(
+                    options.json['internal_attributes']['lorawan']['application_id'] + '/devices/' + devId + '/up',
+                    JSON.stringify(attributesExample)
+                );
+                setTimeout(function() {
+                    request(optionsCB, function(error, response, body) {
+                        should.not.exist(error);
+                        response.should.have.property('statusCode', 200);
+                        body.should.have.property('id', cbEntityName);
+                        body.should.have.property('temperature_1');
+                        body.temperature_1.should.have.property('type', 'Number');
+                        body.temperature_1.should.have.property('value', 21.2);
+                        client.end();
+                        return done();
+                    });
+                }, 1000);
+            });
+        });
+    });
+
     describe('After a restart', function() {
         var options = {
             url: 'http://localhost:' + iotAgentConfig.iota.server.port + '/iot/services',
