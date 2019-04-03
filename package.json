@@ -20,7 +20,7 @@
   "license": "GPL-3.0",
   "repository": {
     "type": "git",
-    "url": "https://gitlab.atosresearch.eu/ari/iotagent-lora.git"
+    "url": "https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN.git"
   },
   "author": "ATOS SPAIN S.A. IoE Lab, Resarch and Innovation department",
   "dependencies": {
