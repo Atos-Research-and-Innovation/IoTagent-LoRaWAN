@@ -66,6 +66,8 @@ jobs:
         - npm run lint:text
     - stage: release
       node_js: lts/*
+      install:
+        - npm install
       deploy:
         provider: script
         skip_cleanup: true
