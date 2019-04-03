@@ -11,59 +11,59 @@ services:
 
 jobs:
   include:
-    - stage: test
-      name: "Unit Tests: Node 8"
-      node_js:
-        - 8
+    # - stage: test
+    #   name: "Unit Tests: Node 8"
+    #   node_js:
+    #     - 8
 
-      before_install:
-        - docker pull fiware/orion:latest
-        - docker run -d --net host -l orion fiware/orion:latest
-        - docker pull ansi/mosquitto
-        - docker run -d --net host -l mosquitto ansi/mosquitto
-        - npm update -q
+    #   before_install:
+    #     - docker pull fiware/orion:latest
+    #     - docker run -d --net host -l orion fiware/orion:latest
+    #     - docker pull ansi/mosquitto
+    #     - docker run -d --net host -l mosquitto ansi/mosquitto
+    #     - npm update -q
 
-      install:
-        - npm install
+    #   install:
+    #     - npm install
 
-      before_script:
-        - npm run lint
+    #   before_script:
+    #     - npm run lint
 
-      after_script:
-        - npm run test:coveralls
+    #   after_script:
+    #     - npm run test:coveralls
 
-    - stage: test
-      name: "Unit Tests: Node 10"
-      node_js:
-        - 10
+    # - stage: test
+    #   name: "Unit Tests: Node 10"
+    #   node_js:
+    #     - 10
 
-      before_install:
-        - docker pull fiware/orion:latest
-        - docker run -d --net host -l orion fiware/orion:latest
-        - docker pull ansi/mosquitto
-        - docker run -d --net host -l mosquitto ansi/mosquitto
-        - npm update -q
+    #   before_install:
+    #     - docker pull fiware/orion:latest
+    #     - docker run -d --net host -l orion fiware/orion:latest
+    #     - docker pull ansi/mosquitto
+    #     - docker run -d --net host -l mosquitto ansi/mosquitto
+    #     - npm update -q
 
-      install:
-        - npm install
+    #   install:
+    #     - npm install
 
-      before_script:
-        - npm run lint
+    #   before_script:
+    #     - npm run lint
 
-      after_script:
-        - npm run test:coveralls
+    #   after_script:
+    #     - npm run test:coveralls
 
-    - stage: test
-      name: "Documentation Tests"
-      node_js:
-        - 10
+    # - stage: test
+    #   name: "Documentation Tests"
+    #   node_js:
+    #     - 10
 
-      install:
-        - npm install
+    #   install:
+    #     - npm install
 
-      script:
-        - npm run lint:md
-        - npm run lint:text
+    #   script:
+    #     - npm run lint:md
+    #     - npm run lint:text
     - stage: release
       node_js: lts/*
       script:
