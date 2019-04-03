@@ -14,12 +14,13 @@
     "prettier:text": "prettier 'README.md' 'docs/*.md' 'docs/**/*.md' --no-config --tab-width 4 --print-width 120 --write --prose-wrap always",
     "test:coverage": "istanbul cover _mocha -- --recursive 'test/**/*.js' --reporter spec --exit",
     "test:coveralls": "npm run test:coverage && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage",
-    "watch": "watch 'npm test && npm run lint' ./lib ./test"
+    "watch": "watch 'npm test && npm run lint' ./lib ./test",
+    "semantic-release": "semantic-release"
   },
   "license": "GPL-3.0",
   "repository": {
     "type": "git",
-    "url": "https://gitlab.atosresearch.eu/ari/iotagent-lora.git"
+    "url": "https://github.com/dcalvoalonso/IoTagent-LoRaWAN.git"
   },
   "author": "ATOS SPAIN S.A. IoE Lab, Resarch and Innovation department",
   "dependencies": {
@@ -31,6 +32,8 @@
     "winston": "^3.1.0"
   },
   "devDependencies": {
+    "@semantic-release/changelog": "^3.0.2",
+    "@semantic-release/git": "^7.0.8",
     "chai": "^4.2.0",
     "coveralls": "~3.0.2",
     "eslint": "^5.8.0",
@@ -49,11 +52,33 @@
     "prettier": "~1.14.2",
     "remark-cli": "^6.0.1",
     "remark-preset-lint-recommended": "^3.0.2",
+    "semantic-release": "^15.13.3",
     "textlint": "^11.0.1",
     "textlint-rule-common-misspellings": "^1.0.1",
     "textlint-rule-no-dead-link": "^4.4.1",
     "textlint-rule-terminology": "^1.1.30",
     "textlint-rule-write-good": "^1.6.2"
+  },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      [
+        "@semantic-release/npm",
+        {
+          "npmPublish": false
+        }
+      ],
+      "@semantic-release/github",
+      [
+        "@semantic-release/git", 
+        {
+          "assets": ["dist/**/*.{js,css}", "docs", "package.json"],
+          "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        }
+      ]
+    ],
+
   },
   "husky": {
     "hooks": {
