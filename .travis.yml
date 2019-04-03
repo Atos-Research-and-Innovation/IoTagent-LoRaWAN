@@ -64,3 +64,12 @@ jobs:
       script:
         - npm run lint:md
         - npm run lint:text
+    - stage: release
+      node_js: lts/*
+      script:
+        - echo "skipping tests"
+      deploy:
+        provider: script
+        skip_cleanup: true
+        script:
+          - npx semantic-release
