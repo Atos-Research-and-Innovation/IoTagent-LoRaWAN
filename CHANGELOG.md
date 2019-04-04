@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/compare/v1.1.0...v1.2.0) (2019-04-04)
+
+
+### Features
+
+* **docker:** add docker secrets ([5743352](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/commit/5743352)), closes [#58](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/issues/58)
+
 # 1.1.0 (2019-04-03)
 
 ### Features
