@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/compare/v1.2.0...v1.2.1) (2019-05-08)
+
+
+### Bug Fixes
+
+* **mqtt binding #65:** correct handling of reconnections ([#67](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/issues/67)) ([0fa3165](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/commit/0fa3165)), closes [#65](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/issues/65)
+
 # [1.2.0](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/compare/v1.1.0...v1.2.0) (2019-04-04)
 
 
