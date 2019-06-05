@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/compare/v1.2.1...v1.2.2) (2019-06-05)
+
+
+### Bug Fixes
+
+* forces new release ([3fceee9](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/commit/3fceee9))
+
 ## [1.2.1](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/compare/v1.2.0...v1.2.1) (2019-05-08)
 
 
