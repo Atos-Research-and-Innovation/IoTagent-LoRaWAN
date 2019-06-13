@@ -195,7 +195,7 @@ describe('Static provisioning', function() {
                 client.publish(
                     'application/' +
                         sensorType['internalAttributes']['lorawan']['application_id'] +
-                        '/node/' +
+                        '/device/' +
                         attributesExample.devEUI +
                         '/rx',
                     JSON.stringify(attributesExample)

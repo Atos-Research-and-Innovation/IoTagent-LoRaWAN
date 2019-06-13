@@ -149,7 +149,7 @@ describe('Device provisioning API: Provision devices', function() {
                 client.publish(
                     'application/' +
                         options.json.devices[0]['internal_attributes']['lorawan']['application_id'] +
-                        '/node/' +
+                        '/device/' +
                         options.json.devices[0]['internal_attributes']['lorawan']['dev_eui'].toLowerCase() +
                         '/rx',
                     JSON.stringify(attributesExample)
@@ -240,7 +240,7 @@ describe('Device provisioning API: Provision devices', function() {
                 client.publish(
                     'application/' +
                         options.json.devices[0]['internal_attributes']['lorawan']['application_id'] +
-                        '/node/' +
+                        '/device/' +
                         options.json.devices[0]['internal_attributes']['lorawan']['dev_eui'].toLowerCase() +
                         '/rx',
                     JSON.stringify(attributesExample)
@@ -266,7 +266,7 @@ describe('Device provisioning API: Provision devices', function() {
             var attributesExample = utils.readExampleFile('./test/activeAttributes/cayenneLpp_bad_json.json', true);
             var client = mqtt.connect('mqtt://' + testMosquittoHost);
             client.on('connect', function() {
-                client.publish('application/1/node/3339343752356A14/rx', JSON.stringify(attributesExample));
+                client.publish('application/1/device/3339343752356A14/rx', JSON.stringify(attributesExample));
                 setTimeout(function() {
                     client.end();
                     done();
@@ -281,7 +281,7 @@ describe('Device provisioning API: Provision devices', function() {
             );
             var client = mqtt.connect('mqtt://' + testMosquittoHost);
             client.on('connect', function() {
-                client.publish('application/1/node/3339343752356A14/rx', JSON.stringify(attributesExample));
+                client.publish('application/1/device/3339343752356A14/rx', JSON.stringify(attributesExample));
                 setTimeout(function() {
                     client.end();
                     done();

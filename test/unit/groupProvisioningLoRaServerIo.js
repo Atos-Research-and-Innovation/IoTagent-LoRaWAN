@@ -190,7 +190,7 @@ describe('Configuration provisioning API: Provision groups', function() {
                 client.publish(
                     'application/' +
                         options.json.services[0]['internal_attributes']['lorawan']['application_id'] +
-                        '/node/' +
+                        '/device/' +
                         attributesExample.devEUI +
                         '/rx',
                     JSON.stringify(attributesExample)
@@ -218,7 +218,7 @@ describe('Configuration provisioning API: Provision groups', function() {
                 client.publish(
                     'application/' +
                         options.json.services[0]['internal_attributes']['lorawan']['application_id'] +
-                        '/node/' +
+                        '/device/' +
                         attributesExample.devEUI +
                         '/rx',
                     JSON.stringify(attributesExample)
@@ -300,7 +300,7 @@ describe('Configuration provisioning API: Provision groups', function() {
                     client.publish(
                         'application/' +
                             options.json.services[0]['internal_attributes']['lorawan']['application_id'] +
-                            '/node/' +
+                            '/device/' +
                             attributesExample.devEUI +
                             '/rx',
                         JSON.stringify(attributesExample)
