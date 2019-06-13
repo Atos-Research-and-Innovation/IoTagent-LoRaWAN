@@ -1,3 +1,10 @@
+## [1.2.3](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/compare/v1.2.2...v1.2.3) (2019-06-13)
+
+
+### Bug Fixes
+
+* **loraserver.io #70:** MQTT topics updated to versions after v1 ([6e40ec9](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/commit/6e40ec9)), closes [#70](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/issues/70)
+
 ## [1.2.2](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/compare/v1.2.1...v1.2.2) (2019-06-05)
 
 
