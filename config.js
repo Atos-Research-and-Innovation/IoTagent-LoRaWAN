@@ -130,7 +130,35 @@ config.iota = {
      * Default resource of the IoT Agent. This value must be different for every IoT Agent connecting to the IoT
      * Manager.
      */
-    defaultResource: '/iot/d',
+    defaultResource: '/iot/lora',
+    //
+    // iotManager: {
+    //     /**
+    //      * Host where the IoT Manager is located.
+    //      */
+    //     host: 'localhost',
+    //
+    //     /**
+    //      * Port where the IoT Manager is listening.
+    //      */
+    //     port: 8082,
+    //
+    //     /**
+    //      * Path where the IoT Manager accepts subscriptions.
+    //      */
+    //     path: '/iot/protocols',
+    //
+    //     /**
+    //      * Protocol code identifying this IoT Agent.
+    //      */
+    //     protocol: 'MQTT_LORA',
+    //
+    //     /**
+    //      * Textual description of this IoT Agent.
+    //      */
+    //     description: 'MQTT Ultralight 2.0 IoT Agent (Node.js version)',
+    //     transports: ['HTTP']
+    // },
 
     /**
      * Defines the configuration for the Device Registry, where all the information about devices and configuration
