@@ -147,4 +147,10 @@ config.iota = {
     defaultType: 'Thing'
 };
 
+/**
+ * flag indicating whether the node server will be executed in multi-core option (true) or it will be a
+ * single-thread one (false).
+ */
+//config.multiCore = false;
+
 module.exports = config;
