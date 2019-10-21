@@ -9,8 +9,10 @@
 
 'use strict';
 
-var iotAgentLora = require('../lib/iotagent-lora');
-var winston = require('winston');
+var iotAgentLora = require('../lib/iotagent-lora'),
+    iotAgentLib = require('iotagent-node-lib'),
+    winston = require('winston'),
+    info = require('../package.json');
 
 function start () {
     var config;
@@ -21,7 +23,9 @@ function start () {
         config = require('../config');
     }
 
-    iotAgentLora.start(config, function (error) {
+    config.iota.iotaVersion = info.version;
+
+    iotAgentLib.startServer(config, iotAgentLora, function (error) {
         if (error) {
             winston.error('Error starting LoRaWAN IoT Agent: %s',
                 JSON.stringify(error));
