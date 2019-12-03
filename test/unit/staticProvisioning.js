@@ -19,24 +19,22 @@
  *
  */
 
-'use strict';
-
-var request = require('request');
-var async = require('async');
-var should = require('chai').should();
-var iotAgentConfig = require('../config-test.js');
-var utils = require('../utils');
-var iotagentLora = require('../../');
-var iotAgentLib = require('iotagent-node-lib');
-var mqtt = require('mqtt');
+const request = require('request');
+const async = require('async');
+const should = require('chai').should();
+const iotAgentConfig = require('../config-test.js');
+const utils = require('../utils');
+const iotagentLora = require('../../');
+const iotAgentLib = require('iotagent-node-lib');
+const mqtt = require('mqtt');
 
 describe('Static provisioning', function() {
-    var testMosquittoHost = 'localhost';
-    var orionHost = iotAgentConfig.iota.contextBroker.host;
-    var orionPort = iotAgentConfig.iota.contextBroker.port;
-    var orionServer = orionHost + ':' + orionPort;
-    var service = 'smartgondor';
-    var subservice = '/gardens';
+    let testMosquittoHost = 'localhost';
+    let orionHost = iotAgentConfig.iota.contextBroker.host;
+    let orionPort = iotAgentConfig.iota.contextBroker.port;
+    let orionServer = orionHost + ':' + orionPort;
+    const service = 'smartgondor';
+    const subservice = '/gardens';
     readEnvVariables();
 
     function readEnvVariables() {
@@ -89,7 +87,7 @@ describe('Static provisioning', function() {
 
     describe('When a new type is provisioned without LoRaWAN configuration', function() {
         it('Should start the agent without error', function(done) {
-            var sensorType = {
+            const sensorType = {
                 service: 'factory',
                 subservice: '/robots',
                 attributes: [
@@ -100,7 +98,7 @@ describe('Static provisioning', function() {
                 ]
             };
 
-            iotAgentConfig.iota.types['Robot'] = sensorType;
+            iotAgentConfig.iota.types.Robot = sensorType;
             iotagentLora.start(iotAgentConfig, function(error) {
                 should.not.exist(error);
                 return done();
@@ -109,10 +107,10 @@ describe('Static provisioning', function() {
     });
 
     describe('When a new type is provisioned with LoRaWAN configuration', function() {
-        var devId;
-        var cbEntityName;
-        var sensorType;
-        var optionsCB;
+        let devId;
+        let cbEntityName;
+        let sensorType;
+        let optionsCB;
         it('Should start the agent without error', function(done) {
             sensorType = {
                 service: 'factory',
@@ -160,7 +158,7 @@ describe('Static provisioning', function() {
             };
 
             devId = 'lora_n_003';
-            var type = 'Robot';
+            const type = 'Robot';
             cbEntityName = devId + ':' + type;
             optionsCB = {
                 url: 'http://' + orionServer + '/v2/entities/' + cbEntityName,
@@ -173,7 +171,7 @@ describe('Static provisioning', function() {
             };
 
             if (testMosquittoHost) {
-                sensorType['internalAttributes']['lorawan']['application_server']['host'] = testMosquittoHost;
+                sensorType.internalAttributes.lorawan.application_server.host = testMosquittoHost;
             }
 
             iotAgentConfig.iota.types[type] = sensorType;
@@ -185,12 +183,12 @@ describe('Static provisioning', function() {
         });
 
         it('Should register correctly new devices for the type and process their active attributes', function(done) {
-            var attributesExample = utils.readExampleFile('./test/activeAttributes/cayenneLpp.json');
-            attributesExample['dev_id'] = devId;
-            var client = mqtt.connect('mqtt://' + testMosquittoHost);
+            const attributesExample = utils.readExampleFile('./test/activeAttributes/cayenneLpp.json');
+            attributesExample.dev_id = devId;
+            const client = mqtt.connect('mqtt://' + testMosquittoHost);
             client.on('connect', function() {
                 client.publish(
-                    sensorType['internalAttributes']['lorawan']['application_id'] + '/devices/' + devId + '/up',
+                    sensorType.internalAttributes.lorawan.application_id + '/devices/' + devId + '/up',
                     JSON.stringify(attributesExample)
                 );
                 setTimeout(function() {
@@ -211,7 +209,7 @@ describe('Static provisioning', function() {
 
     describe('When a new type is provisioned with LoRaWAN configuration but the application server has been already used for other type', function() {
         it('Should not start the agent', function(done) {
-            var sensorType = {
+            const sensorType = {
                 service: 'factory',
                 subservice: '/robots',
                 attributes: [
@@ -234,7 +232,7 @@ describe('Static provisioning', function() {
                     }
                 }
             };
-            iotAgentConfig.iota.types['Robot2'] = sensorType;
+            iotAgentConfig.iota.types.Robot2 = sensorType;
             iotagentLora.start(iotAgentConfig, function(error) {
                 should.exist(error);
                 return done();
