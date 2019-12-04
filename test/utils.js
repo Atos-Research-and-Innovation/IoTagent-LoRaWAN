@@ -26,13 +26,14 @@ var request = require('request');
 var winston = require('winston');
 
 function readExampleFile(name, raw) {
-    var text = fs.readFileSync(name, 'UTF8');
-
-    if (raw) {
-        return text;
-    } else {
-        return JSON.parse(text);
+    let text = null;
+    try {
+        text = fs.readFileSync(name, 'UTF8');
+    } catch (e) {
+        /* eslint-disable no-console */
+        console.error(JSON.stringify(e));
     }
+    return raw ? text : JSON.parse(text);
 }
 
 function deleteEntityCB(cbConfig, service, servicePath, cbEntityName, callback) {
