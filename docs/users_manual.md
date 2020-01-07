@@ -17,13 +17,13 @@
     -   Username: It is the Application ID.
     -   Password (step 3)
 
-## LoRaServer.io
+## ChirpStack.io
 
 1.  Install/deploy LoRa Server project. Docker installation method is recommended:
-    `https://www.loraserver.io/install/docker/`
-2.  Follow the [Getting started](https://www.loraserver.io/use/getting-started/) page to register your network-server
+    `https://www.chirpstack.io/install/docker/`
+2.  Follow the [Getting started](https://www.chirpstack.io/use/getting-started/) page to register your network-server
     and to create a service-profile, gateway, device-profile, application. Finally, add your LoRaWAN devices. Register
-    your network-server: `https://www.loraserver.io/lora-app-server/use/network-servers/`
+    your network-server: `https://www.chirpstack.io/lora-app-server/use/network-servers/`
 3.  In order to use FIWARE IoT Agent for LoRaWAN protocol, you will need the following information:
 
 -   Application ID
