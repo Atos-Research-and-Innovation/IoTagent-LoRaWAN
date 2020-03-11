@@ -54,7 +54,7 @@ This option allows provisioning a specific device, describing its attributes and
 single Application Server, we can provision devices reporting different types of measurements.**
 
 ```bash
-curl localhost:4061/iot/devices -s -S --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'fiware-service: smartgondor' --header 'fiware-servicepath: /gardens' -d @- <<EOF
+curl localhost:4041/iot/devices -s -S --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'fiware-service: smartgondor' --header 'fiware-servicepath: /gardens' -d @- <<EOF
 {
   "devices": [
     {
@@ -92,7 +92,7 @@ curl localhost:4061/iot/devices -s -S --header 'Content-Type: application/json' 
       "internal_attributes": {
         "lorawan": {
           "application_server": {
-            "host": "eu.thethings.network",",
+            "host": "eu.thethings.network",
             "username": "ari_ioe_app_demo1",
             "password": "pwd1",
             "provider": "TTN"
@@ -110,10 +110,9 @@ curl localhost:4061/iot/devices -s -S --header 'Content-Type: application/json' 
 EOF
 ```
 
--   provider: Identifies the LoRaWAN stack. **Current possible value is TTN.**
--   data_model: Identifies the data model used by the device to report new observations. **Current possible values are
-    cayennelpp,cbor and application_server. The last one can be used in case the payload format decoding is done by the
-    application server. See [data models](./data_models.md) for further information.**
+-   `provider`: Identifies the LoRaWAN stack. **Current possible value are `TTN` and `loraserver.io`.**
+-   `data_model`: Identifies the data model used by the device to report new observations. **Current possible values are
+    `cayennelpp`, `cbor` and `application_server`. The last one can be used in case the payload format decoding is done by the application server. See [data models](./data_models.md) for further information.**
 
 The IoTa will automatically subscribe to new observation notifications from the device. Whenever a new update is
 received, it will be translated to NGSI and forwarded to the Orion Context Broker.
@@ -131,7 +130,7 @@ _configuration API_ can be used to pre-provision all of them with a single reque
 sharing the same configuration must be registered under the same Application Server.**
 
 ```bash
-curl localhost:4061/iot/services -s -S --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'fiware-service: smartgondor' --header 'fiware-servicepath: /gardens' -d @- <<EOF
+curl localhost:4041/iot/services -s -S --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'fiware-service: smartgondor' --header 'fiware-servicepath: /gardens' -d @- <<EOF
 {
 	"services": [
    {
