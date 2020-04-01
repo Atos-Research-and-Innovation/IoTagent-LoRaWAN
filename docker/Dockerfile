@@ -17,7 +17,7 @@
 # License along with iotagent-lora. If not, see http://www.gnu.org/licenses/.
 #
 
-ARG NODE_VERSION=10.17.0-slim
+ARG NODE_VERSION=10.19.0-slim
 FROM node:${NODE_VERSION}
 ARG GITHUB_ACCOUNT=Atos-Research-and-Innovation
 ARG GITHUB_REPOSITORY=IoTagent-LoRaWAN
