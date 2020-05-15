@@ -34,6 +34,12 @@ config.iota = {
     timestamp: true,
 
     /**
+     * When this flag is active, the IoTAgent will use JEXL as expression plugin.
+     */
+
+    useJEXL: false,
+
+    /**
      * Context Broker configuration. Defines the connection information to the instance of the Context Broker where
      * the IoT Agent will send the device data.
      */
