@@ -1,0 +1,35 @@
+version: "2"
+
+services:
+  mongodb:
+    expose:
+      - "27017"
+    hostname: mongodb
+    image: mongo:3.2
+    ports:
+      - "27017:27017"
+    stdin_open: true
+    tty: true
+
+  orion:
+    command: -dbhost mongodb -port 1026 -logLevel DEBUG
+    depends_on:
+      - mongodb
+    expose:
+      - "1026"
+    hostname: orion
+    image: fiware/orion:2.1.0
+    ports:
+      - "1026:1026"
+    stdin_open: true
+    tty: true
+
+  mosquitto:
+    expose:
+      - "1883"
+    hostname: mosquitto
+    image: eclipse-mosquitto:latest
+    ports:
+      - "1883:1883"
+    stdin_open: true
+    tty: true

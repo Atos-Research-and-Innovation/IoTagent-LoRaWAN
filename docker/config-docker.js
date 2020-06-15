@@ -15,7 +15,7 @@
  *
  * You should have received a copy of the GNU Affero General Public
  * License along with iotagent-lora.
- * If not, seehttp://www.gnu.org/licenses/.
+ * If not, see http://www.gnu.org/licenses/.
  *
  */
 
@@ -146,5 +146,11 @@ config.iota = {
      */
     defaultType: 'Thing'
 };
+
+/**
+ * flag indicating whether the node server will be executed in multi-core option (true) or it will be a
+ * single-thread one (false).
+ */
+//config.multiCore = false;
 
 module.exports = config;
