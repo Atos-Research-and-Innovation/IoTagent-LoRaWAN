@@ -130,6 +130,9 @@ If a group of devices reports the same observations (i.e., smart meters for a ne
 _configuration API_ can be used to pre-provision all of them with a single request.**With this approach, all the devices
 sharing the same configuration must be registered under the same Application Server.**
 
+**Note: in this case, you need to use the `app_eui` as the `resource` field, in order for devices to be correctly
+provisioned under this service.**
+
 ```bash
 curl localhost:4061/iot/services -s -S --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'fiware-service: smartgondor' --header 'fiware-servicepath: /gardens' -d @- <<EOF
 {
