@@ -24,7 +24,7 @@ ARG GITHUB_REPOSITORY=IoTagent-LoRaWAN
 ARG DOWNLOAD=latest
 ARG SOURCE_BRANCH=master
 
-# Copying Build time arguments to environment variables so they are persisted at run time and can be 
+# Copying Build time arguments to environment variables so they are persisted at run time and can be
 # inspected within a running container.
 # see: https://vsupalov.com/docker-build-time-env-values/  for a deeper explanation.
 
@@ -34,7 +34,7 @@ ENV DOWNLOAD=${DOWNLOAD}
 
 MAINTAINER FIWARE IoTAgent Team. Atos Spain S.A
 
-# IMPORTANT: For production environments use Docker Secrets to protect values of the sensitive ENV 
+# IMPORTANT: For production environments use Docker Secrets to protect values of the sensitive ENV
 # variables defined below, by adding _FILE to the name of the relevant variable.
 #
 # - IOTA_AUTH_USER, IOTA_AUTH_PASSWORD - when using Keystone Security
@@ -42,7 +42,7 @@ MAINTAINER FIWARE IoTAgent Team. Atos Spain S.A
 
 #
 # The following RUN command retrieves the source code from GitHub.
-# 
+#
 # To obtain the latest stable release run this Docker file with the parameters
 # --no-cache --build-arg DOWNLOAD=stable
 # To obtain any speciifc version of a release run this Docker file with the parameters
@@ -50,7 +50,7 @@ MAINTAINER FIWARE IoTAgent Team. Atos Spain S.A
 #
 # The default download is the latest tip of the master of the named repository on GitHub
 #
-# Alternatively for local development, just copy this Dockerfile into file the root of the repository and 
+# Alternatively for local development, just copy this Dockerfile into file the root of the repository and
 # replace the whole RUN statement by the following COPY statement in your local source using :
 #
 # COPY . /opt/iotagent-lora/
