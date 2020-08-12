@@ -68,7 +68,7 @@ describe('Static provisioning', function() {
                     iotAgentConfig.iota.contextBroker,
                     service,
                     subservice,
-                    'lora_unprovisioned_device:LoraDeviceGroup'
+                    'LoraDeviceGroup:lora_unprovisioned_device'
                 )
             ],
             done
@@ -85,7 +85,7 @@ describe('Static provisioning', function() {
                     iotAgentConfig.iota.contextBroker,
                     service,
                     subservice,
-                    'lora_unprovisioned_device:LoraDeviceGroup'
+                    'LoraDeviceGroup:lora_unprovisioned_device'
                 )
             ],
             done
@@ -166,7 +166,7 @@ describe('Static provisioning', function() {
 
             devId = 'lora_n_003';
             var type = 'Robot';
-            cbEntityName = devId + ':' + type;
+            cbEntityName = type + ':' + devId;
             optionsCB = {
                 url: 'http://' + orionServer + '/v2/entities/' + cbEntityName,
                 method: 'GET',
@@ -239,8 +239,52 @@ describe('Static provisioning', function() {
                     }
                 }
             };
-
             newConf.iota.types['Robot2'] = sensorType;
+            sensorType = {
+                service: 'factory',
+                subservice: '/robots',
+                attributes: [
+                    {
+                        object_id: 'bp0',
+                        name: 'barometric_pressure_0',
+                        type: 'hpa'
+                    },
+                    {
+                        object_id: 'di3',
+                        name: 'digital_in_3',
+                        type: 'Number'
+                    },
+                    {
+                        object_id: 'do4',
+                        name: 'digital_out_4',
+                        type: 'Number'
+                    },
+                    {
+                        object_id: 'rh2',
+                        name: 'relative_humidity_2',
+                        type: 'Number'
+                    },
+                    {
+                        object_id: 't1',
+                        name: 'temperature_1',
+                        type: 'Number'
+                    }
+                ],
+                internalAttributes: {
+                    lorawan: {
+                        application_server: {
+                            host: 'localhost',
+                            username: 'ari_ioe_app_demo1',
+                            password: 'ttn-account-v2.UitfM5cPazqW52_zbtgUS6wM5vp1MeLC9Yu-Cozjfp0',
+                            provider: 'TTN'
+                        },
+                        app_eui: '70B3D57ED000985F',
+                        application_id: '1',
+                        application_key: '9BE6B8EF16415B5F6ED4FBEAFE695C49'
+                    }
+                }
+            };
+            newConf.iota.types['Robot'] = sensorType;
             iotagentLora.start(newConf, function(error) {
                 should.exist(error);
                 return done();

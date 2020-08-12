@@ -63,14 +63,14 @@ describe('Configuration provisioning API: Provision groups', function() {
                     iotAgentConfig.iota.contextBroker,
                     service,
                     subservice,
-                    'lora_unprovisioned_device:LoraDeviceGroup'
+                    'LoraDeviceGroup:lora_unprovisioned_device'
                 ),
                 async.apply(
                     utils.deleteEntityCB,
                     iotAgentConfig.iota.contextBroker,
                     service,
                     subservice,
-                    'lora_unprovisioned_device2:LoraDeviceGroup'
+                    'LoraDeviceGroup:lora_unprovisioned_device2'
                 ),
                 async.apply(iotagentLora.start, iotAgentConfig)
             ],
@@ -88,14 +88,14 @@ describe('Configuration provisioning API: Provision groups', function() {
                     iotAgentConfig.iota.contextBroker,
                     service,
                     subservice,
-                    'lora_unprovisioned_device:LoraDeviceGroup'
+                    'LoraDeviceGroup:lora_unprovisioned_device'
                 ),
                 async.apply(
                     utils.deleteEntityCB,
                     iotAgentConfig.iota.contextBroker,
                     service,
                     subservice,
-                    'lora_unprovisioned_device2:LoraDeviceGroup'
+                    'LoraDeviceGroup:lora_unprovisioned_device2'
                 )
             ],
             done
@@ -135,7 +135,7 @@ describe('Configuration provisioning API: Provision groups', function() {
             }
         };
         var devId = 'lora_unprovisioned_device';
-        var cbEntityName = devId + ':' + options.json.services[0]['entity_type'];
+        var cbEntityName = options.json.services[0]['entity_type'] + ':' + devId;
         var optionsCB = {
             url: 'http://' + orionServer + '/v2/entities/' + cbEntityName,
             method: 'GET',
@@ -280,7 +280,7 @@ describe('Configuration provisioning API: Provision groups', function() {
         };
         it('Should keep on listening to devices from provisioned groups', function(done) {
             var devId = 'lora_unprovisioned_device2';
-            var cbEntityName = devId + ':' + options.json.services[0]['entity_type'];
+            var cbEntityName = options.json.services[0]['entity_type'] + ':' + devId;
             var optionsCB = {
                 url: 'http://' + orionServer + '/v2/entities/' + cbEntityName,
                 method: 'GET',
