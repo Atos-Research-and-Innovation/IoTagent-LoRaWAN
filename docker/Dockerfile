@@ -95,13 +95,6 @@ RUN \
 	apt-get remove -y git && \
 	apt-get -y autoremove
 
-USER node
-ENV NODE_ENV=development
-# Expose 4041 for NORTH PORT
-EXPOSE ${IOTA_NORTH_PORT:-4041}
-CMD ["node", "/opt/iotagent-lora/bin/iotagent-lora", "-- ", "config.js"]
-HEALTHCHECK --interval=30s --timeout=3s --start-period=10s \
-   CMD npm run healthcheck
 
 ########################################################################################
 #
@@ -112,7 +105,20 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=10s \
 # --target=pm2-install
 #
 ########################################################################################
-FROM node:${NODE_VERSION}-slim AS pm2-install
+FROM node:${NODE_VERSION}-slim AS pm2
+ARG GITHUB_ACCOUNT
+ARG GITHUB_REPOSITORY
+ARG NODE_VERSION
+
+LABEL "maintainer"="FIWARE IoTAgent Team. Atos Spain S.A"
+LABEL "org.opencontainers.image.authors"=""
+LABEL "org.opencontainers.image.documentation"="https://fiware-lorawan.readthedocs.io/en/latest/"
+LABEL "org.opencontainers.image.vendor"="Atos Spain S.A"
+LABEL "org.opencontainers.image.licenses"="AGPL-3.0-only"
+LABEL "org.opencontainers.image.title"="FIWARE IoT Agent for LoRaWAN with PM2 "
+LABEL "org.opencontainers.image.description"="FIWARE IoT Agent for LoRaWAN protocol (with CayenneLpp and CBOR data models)"
+LABEL "org.opencontainers.image.source"="https://github.com/${GITHUB_ACCOUNT}/${GITHUB_REPOSITORY}"
+LABEL "org.nodejs.version"="${NODE_VERSION}"
 
 COPY --from=builder /opt/iotagent-lora /opt/iotagent-lora
 RUN npm install pm2@4.4.0 -g --no-package-lock --no-optional
@@ -155,7 +161,7 @@ LABEL "org.opencontainers.image.authors"=""
 LABEL "org.opencontainers.image.documentation"="https://fiware-lorawan.readthedocs.io/en/latest/"
 LABEL "org.opencontainers.image.vendor"="Atos Spain S.A"
 LABEL "org.opencontainers.image.licenses"="AGPL-3.0-only"
-LABEL "org.opencontainers.image.title"="FIWARE IoT Agent for Sigfox"
+LABEL "org.opencontainers.image.title"="FIWARE IoT Agent for LoRaWAN (Distroless)"
 LABEL "org.opencontainers.image.description"="FIWARE IoT Agent for LoRaWAN protocol (with CayenneLpp and CBOR data models)"
 LABEL "org.opencontainers.image.source"="https://github.com/${GITHUB_ACCOUNT}/${GITHUB_REPOSITORY}"
 LABEL "org.nodejs.version"="${NODE_VERSION}"
@@ -172,3 +178,41 @@ CMD ["./bin/iotagent-lora", "-- ", "config.js"]
 HEALTHCHECK  --interval=30s --timeout=3s --start-period=10s \
   CMD ["/nodejs/bin/node", "./bin/healthcheck"]
 
+
+########################################################################################
+#
+# This build stage creates a node-slim image for production.
+#
+# IMPORTANT: For production environments use Docker Secrets to protect values of the 
+# sensitive ENV variables defined below, by adding _FILE to the name of the relevant 
+# variable.
+#
+# - IOTA_AUTH_USER, IOTA_AUTH_PASSWORD - when using Keystone Security 
+# - IOTA_AUTH_CLIENT_ID, IOTA_AUTH_CLIENT_SECRET - when using OAuth2 Security
+#
+########################################################################################
+FROM node:${NODE_VERSION}-slim AS slim
+ARG GITHUB_ACCOUNT
+ARG GITHUB_REPOSITORY
+ARG NODE_VERSION
+
+LABEL "maintainer"="FIWARE IoTAgent Team. Atos Spain S.A"
+LABEL "org.opencontainers.image.authors"=""
+LABEL "org.opencontainers.image.documentation"="https://fiware-lorawan.readthedocs.io/en/latest/"
+LABEL "org.opencontainers.image.vendor"="Atos Spain S.A"
+LABEL "org.opencontainers.image.licenses"="AGPL-3.0-only"
+LABEL "org.opencontainers.image.title"="FIWARE IoT Agent for LoRaWAN"
+LABEL "org.opencontainers.image.description"="FIWARE IoT Agent for LoRaWAN protocol (with CayenneLpp and CBOR data models)"
+LABEL "org.opencontainers.image.source"="https://github.com/${GITHUB_ACCOUNT}/${GITHUB_REPOSITORY}"
+LABEL "org.nodejs.version"="${NODE_VERSION}"
+
+COPY --from=builder /opt/iotagent-lora /opt/iotagent-lora
+WORKDIR /opt/iotagent-lora
+
+USER node
+ENV NODE_ENV=production
+# Expose 4041 for NORTH PORT
+EXPOSE ${IOTA_NORTH_PORT:-4041}
+CMD ["node", "/opt/iotagent-lora/bin/iotagent-lora", "-- ", "config.js"]
+HEALTHCHECK --interval=30s --timeout=3s --start-period=10s \
+   CMD ["npm", "run", "healthcheck"]
