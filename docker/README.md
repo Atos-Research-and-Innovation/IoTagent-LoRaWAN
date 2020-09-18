@@ -157,7 +157,7 @@ Manager by using the associated `pm2` Image.
 docker run --name iotagent -d fiware/iotagent-lorawan:<tag>-pm2
 ```
 
-The IoT Agent within the Docker image can be run from a distroless container Manager by using the associated
+The IoT Agent within the Docker image can be run from a distroless container by using the associated
 `distroless` Image.
 
 ```console
