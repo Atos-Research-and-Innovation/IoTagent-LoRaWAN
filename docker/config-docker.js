@@ -19,7 +19,7 @@
  *
  */
 
-var config = {};
+const config = {};
 
 config.iota = {
     /**

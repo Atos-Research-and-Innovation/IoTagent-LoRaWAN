@@ -19,24 +19,23 @@
  *
  */
 
-'use strict';
+/* eslint-disable no-unused-vars */
 
-var fs = require('fs');
-var request = require('request');
-var winston = require('winston');
+const fs = require('fs');
+const request = require('request');
+const winston = require('winston');
 
 function readExampleFile(name, raw) {
-    var text = fs.readFileSync(name, 'UTF8');
+    const text = fs.readFileSync(name, 'UTF8');
 
     if (raw) {
         return text;
-    } else {
-        return JSON.parse(text);
     }
+    return JSON.parse(text);
 }
 
 function deleteEntityCB(cbConfig, service, servicePath, cbEntityName, callback) {
-    var optionsCB = {
+    const optionsCB = {
         url: 'http://' + cbConfig.host + ':' + cbConfig.port + '/v2/entities/' + cbEntityName,
         method: 'DELETE',
         json: true,
