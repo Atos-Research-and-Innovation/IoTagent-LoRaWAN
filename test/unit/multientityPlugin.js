@@ -19,25 +19,25 @@
  *
  */
 
-'use strict';
+/* eslint-disable no-unused-vars */
 
-var request = require('request');
-var async = require('async');
-var should = require('chai').should();
-var iotAgentConfig = require('../config-test.js');
-var utils = require('../utils');
-var iotagentLora = require('../../');
-var iotAgentLib = require('iotagent-node-lib');
-var mqtt = require('mqtt');
-var CBOR = require('cbor-sync');
+const request = require('request');
+const async = require('async');
+const should = require('chai').should();
+const iotAgentConfig = require('../config-test.js');
+const utils = require('../utils');
+const iotagentLora = require('../../');
+const iotAgentLib = require('iotagent-node-lib');
+const mqtt = require('mqtt');
+const CBOR = require('cbor-sync');
 
 describe('Multientity plugin', function() {
-    var testMosquittoHost = 'localhost';
-    var orionHost = iotAgentConfig.iota.contextBroker.host;
-    var orionPort = iotAgentConfig.iota.contextBroker.port;
-    var orionServer = orionHost + ':' + orionPort;
-    var service = 'smartgondor';
-    var subservice = '/gardens';
+    let testMosquittoHost = 'localhost';
+    let orionHost = iotAgentConfig.iota.contextBroker.host;
+    let orionPort = iotAgentConfig.iota.contextBroker.port;
+    let orionServer = orionHost + ':' + orionPort;
+    const service = 'smartgondor';
+    const subservice = '/gardens';
 
     function readEnvVariables() {
         if (process.env.TEST_MOSQUITTO_HOST) {
@@ -86,10 +86,10 @@ describe('Multientity plugin', function() {
     });
 
     describe('When a device provisioning request with all the required data arrives to the IoT Agent. Multientity plugin', function() {
-        var multientityName = 'Mote001';
-        var multientityType = 'Mote';
+        const multientityName = 'Mote001';
+        const multientityType = 'Mote';
         before(function(done) {
-            var createEntityCB = {
+            const createEntityCB = {
                 url: 'http://' + orionServer + '/v2/entities/',
                 method: 'POST',
                 json: {
@@ -113,7 +113,7 @@ describe('Multientity plugin', function() {
             });
         });
 
-        var options = {
+        const options = {
             url: 'http://localhost:' + iotAgentConfig.iota.server.port + '/iot/devices',
             method: 'POST',
             json: utils.readExampleFile('./test/deviceProvisioning/provisionDeviceMultientityPluginTTN.json'),
@@ -122,7 +122,7 @@ describe('Multientity plugin', function() {
                 'fiware-servicepath': subservice
             }
         };
-        var optionsGetDevice = {
+        const optionsGetDevice = {
             url: 'http://localhost:' + iotAgentConfig.iota.server.port + '/iot/devices',
             method: 'GET',
             json: true,
@@ -135,9 +135,7 @@ describe('Multientity plugin', function() {
         it('should add the device to the devices list', function(done) {
             if (testMosquittoHost) {
                 /* eslint-disable-next-line  standard/computed-property-even-spacing */
-                options.json.devices[0]['internal_attributes']['lorawan']['application_server'][
-                    'host'
-                ] = testMosquittoHost;
+                options.json.devices[0].internal_attributes.lorawan.application_server.host = testMosquittoHost;
             }
 
             request(options, function(error, response, body) {
@@ -151,7 +149,7 @@ describe('Multientity plugin', function() {
                         body.should.have.property('devices');
                         body.devices.should.be.an('array');
                         body.devices.should.have.length(1);
-                        body.devices[0].should.have.property('device_id', options.json.devices[0]['device_id']);
+                        body.devices[0].should.have.property('device_id', options.json.devices[0].device_id);
                         done();
                     });
                 }, 500);
@@ -159,8 +157,8 @@ describe('Multientity plugin', function() {
         });
 
         it('should register the entity in the CB', function(done) {
-            var optionsCB = {
-                url: 'http://' + orionServer + '/v2/entities/' + options.json.devices[0]['entity_name'],
+            const optionsCB = {
+                url: 'http://' + orionServer + '/v2/entities/' + options.json.devices[0].entity_name,
                 method: 'GET',
                 json: true,
                 headers: {
@@ -172,13 +170,13 @@ describe('Multientity plugin', function() {
             request(optionsCB, function(error, response, body) {
                 should.not.exist(error);
                 response.should.have.property('statusCode', 200);
-                body.should.have.property('id', options.json.devices[0]['entity_name']);
+                body.should.have.property('id', options.json.devices[0].entity_name);
                 done();
             });
         });
 
         it('Should process correctly active attributes represented in CBOR model', function(done) {
-            var rawJSONPayload = {
+            const rawJSONPayload = {
                 barometric_pressure_0: 0,
                 digital_in_3: 101,
                 digital_out_4: 0,
@@ -186,8 +184,8 @@ describe('Multientity plugin', function() {
                 temperature_1: 27.2
             };
 
-            var optionsCB = {
-                url: 'http://' + orionServer + '/v2/entities/' + options.json.devices[0]['entity_name'],
+            const optionsCB = {
+                url: 'http://' + orionServer + '/v2/entities/' + options.json.devices[0].entity_name,
                 method: 'GET',
                 json: true,
                 headers: {
@@ -196,7 +194,7 @@ describe('Multientity plugin', function() {
                 }
             };
 
-            var optionsCBMultiEntity = {
+            const optionsCBMultiEntity = {
                 url: 'http://' + orionServer + '/v2/entities/' + multientityName,
                 method: 'GET',
                 json: true,
@@ -206,15 +204,15 @@ describe('Multientity plugin', function() {
                 }
             };
 
-            var encodedBuffer = CBOR.encode(rawJSONPayload);
-            var attributesExample = utils.readExampleFile('./test/activeAttributes/emptyCbor.json');
-            attributesExample['payload_raw'] = encodedBuffer.toString('base64');
-            var client = mqtt.connect('mqtt://' + testMosquittoHost);
+            const encodedBuffer = CBOR.encode(rawJSONPayload);
+            const attributesExample = utils.readExampleFile('./test/activeAttributes/emptyCbor.json');
+            attributesExample.payload_raw = encodedBuffer.toString('base64');
+            const client = mqtt.connect('mqtt://' + testMosquittoHost);
             client.on('connect', function() {
                 client.publish(
-                    options.json.devices[0]['internal_attributes']['lorawan']['application_id'] +
+                    options.json.devices[0].internal_attributes.lorawan.application_id +
                         '/devices/' +
-                        options.json.devices[0]['device_id'] +
+                        options.json.devices[0].device_id +
                         '/up',
                     JSON.stringify(attributesExample)
                 );
@@ -222,7 +220,7 @@ describe('Multientity plugin', function() {
                     request(optionsCB, function(error, response, body) {
                         should.not.exist(error);
                         response.should.have.property('statusCode', 200);
-                        body.should.have.property('id', options.json.devices[0]['entity_name']);
+                        body.should.have.property('id', options.json.devices[0].entity_name);
                         body.should.have.property('digital_in_3');
                         body.digital_in_3.should.have.property('type', 'Number');
                         body.digital_in_3.should.have.property('value', 101);

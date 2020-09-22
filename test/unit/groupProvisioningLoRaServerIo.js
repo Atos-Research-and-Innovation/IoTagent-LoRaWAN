@@ -19,24 +19,24 @@
  *
  */
 
-'use strict';
+/* eslint-disable no-unused-vars */
 
-var request = require('request');
-var async = require('async');
-var should = require('chai').should();
-var iotAgentConfig = require('../config-test.js');
-var utils = require('../utils');
-var iotagentLora = require('../../');
-var iotAgentLib = require('iotagent-node-lib');
-var mqtt = require('mqtt');
+const request = require('request');
+const async = require('async');
+const should = require('chai').should();
+const iotAgentConfig = require('../config-test.js');
+const utils = require('../utils');
+const iotagentLora = require('../../');
+const iotAgentLib = require('iotagent-node-lib');
+const mqtt = require('mqtt');
 
 describe('Configuration provisioning API: Provision groups', function() {
-    var testMosquittoHost = 'localhost';
-    var orionHost = iotAgentConfig.iota.contextBroker.host;
-    var orionPort = iotAgentConfig.iota.contextBroker.port;
-    var orionServer = orionHost + ':' + orionPort;
-    var service = 'smartgondor';
-    var subservice = '/gardens';
+    let testMosquittoHost = 'localhost';
+    let orionHost = iotAgentConfig.iota.contextBroker.host;
+    let orionPort = iotAgentConfig.iota.contextBroker.port;
+    let orionServer = orionHost + ':' + orionPort;
+    const service = 'smartgondor';
+    const subservice = '/gardens';
     readEnvVariables();
 
     function readEnvVariables() {
@@ -125,7 +125,7 @@ describe('Configuration provisioning API: Provision groups', function() {
     // });
 
     describe('When a configuration provisioning request with all the required data arrives to the IoT Agent', function() {
-        var options = {
+        const options = {
             url: 'http://localhost:' + iotAgentConfig.iota.server.port + '/iot/services',
             method: 'POST',
             json: utils.readExampleFile('./test/groupProvisioning/provisionGroup1LoRaServerIo.json'),
@@ -134,9 +134,9 @@ describe('Configuration provisioning API: Provision groups', function() {
                 'fiware-servicepath': subservice
             }
         };
-        var devId = 'lora_unprovisioned_device';
-        var cbEntityName = devId + ':' + options.json.services[0]['entity_type'];
-        var optionsCB = {
+        const devId = 'lora_unprovisioned_device';
+        const cbEntityName = devId + ':' + options.json.services[0].entity_type;
+        const optionsCB = {
             url: 'http://' + orionServer + '/v2/entities/' + cbEntityName,
             method: 'GET',
             json: true,
@@ -148,12 +148,10 @@ describe('Configuration provisioning API: Provision groups', function() {
 
         if (testMosquittoHost) {
             /* eslint-disable-next-line  standard/computed-property-even-spacing */
-            options.json.services[0]['internal_attributes']['lorawan']['application_server'][
-                'host'
-            ] = testMosquittoHost;
+            options.json.services[0].internal_attributes.lorawan.application_server.host = testMosquittoHost;
         }
 
-        var optionsGetService = {
+        const optionsGetService = {
             url: 'http://localhost:' + iotAgentConfig.iota.server.port + '/iot/services',
             method: 'GET',
             json: true,
@@ -174,7 +172,7 @@ describe('Configuration provisioning API: Provision groups', function() {
                         body.should.have.property('count', 1);
                         body.should.have.property('services');
                         body.services.should.have.length(1);
-                        body.services[0].should.have.property('entity_type', options.json.services[0]['entity_type']);
+                        body.services[0].should.have.property('entity_type', options.json.services[0].entity_type);
                         body.services[0].should.have.property('_id');
                         done();
                     });
@@ -183,13 +181,13 @@ describe('Configuration provisioning API: Provision groups', function() {
         });
 
         it('Should register correctly new devices for the group and process their active attributes', function(done) {
-            var attributesExample = utils.readExampleFile('./test/activeAttributes/cayenneLppLoRaServerIo.json');
-            attributesExample['deviceName'] = devId;
-            var client = mqtt.connect('mqtt://' + testMosquittoHost);
+            const attributesExample = utils.readExampleFile('./test/activeAttributes/cayenneLppLoRaServerIo.json');
+            attributesExample.deviceName = devId;
+            const client = mqtt.connect('mqtt://' + testMosquittoHost);
             client.on('connect', function() {
                 client.publish(
                     'application/' +
-                        options.json.services[0]['internal_attributes']['lorawan']['application_id'] +
+                        options.json.services[0].internal_attributes.lorawan.application_id +
                         '/device/' +
                         attributesExample.devEUI +
                         '/rx',
@@ -211,13 +209,13 @@ describe('Configuration provisioning API: Provision groups', function() {
         });
 
         it('Should go on processing active attributes', function(done) {
-            var attributesExample = utils.readExampleFile('./test/activeAttributes/cayenneLppLoRaServerIo.json');
-            attributesExample['deviceName'] = devId;
-            var client = mqtt.connect('mqtt://' + testMosquittoHost);
+            const attributesExample = utils.readExampleFile('./test/activeAttributes/cayenneLppLoRaServerIo.json');
+            attributesExample.deviceName = devId;
+            const client = mqtt.connect('mqtt://' + testMosquittoHost);
             client.on('connect', function() {
                 client.publish(
                     'application/' +
-                        options.json.services[0]['internal_attributes']['lorawan']['application_id'] +
+                        options.json.services[0].internal_attributes.lorawan.application_id +
                         '/device/' +
                         attributesExample.devEUI +
                         '/rx',
@@ -239,7 +237,7 @@ describe('Configuration provisioning API: Provision groups', function() {
         });
 
         it('should add the device to the devices list', function(done) {
-            var optionsGetDevice = {
+            const optionsGetDevice = {
                 url: 'http://localhost:' + iotAgentConfig.iota.server.port + '/iot/devices',
                 method: 'GET',
                 json: true,
@@ -269,7 +267,7 @@ describe('Configuration provisioning API: Provision groups', function() {
     });
 
     describe('After a restart', function() {
-        var options = {
+        const options = {
             url: 'http://localhost:' + iotAgentConfig.iota.server.port + '/iot/services',
             method: 'POST',
             json: utils.readExampleFile('./test/groupProvisioning/provisionGroup1LoRaServerIo.json'),
@@ -279,9 +277,9 @@ describe('Configuration provisioning API: Provision groups', function() {
             }
         };
         it('Should keep on listening to devices from provisioned groups', function(done) {
-            var devId = 'lora_unprovisioned_device2';
-            var cbEntityName = devId + ':' + options.json.services[0]['entity_type'];
-            var optionsCB = {
+            const devId = 'lora_unprovisioned_device2';
+            const cbEntityName = devId + ':' + options.json.services[0].entity_type;
+            const optionsCB = {
                 url: 'http://' + orionServer + '/v2/entities/' + cbEntityName,
                 method: 'GET',
                 json: true,
@@ -293,13 +291,13 @@ describe('Configuration provisioning API: Provision groups', function() {
 
             async.waterfall([iotagentLora.stop, async.apply(iotagentLora.start, iotAgentConfig)], function(err) {
                 should.not.exist(err);
-                var attributesExample = utils.readExampleFile('./test/activeAttributes/cayenneLppLoRaServerIo3.json');
-                attributesExample['deviceName'] = devId;
-                var client = mqtt.connect('mqtt://' + testMosquittoHost);
+                const attributesExample = utils.readExampleFile('./test/activeAttributes/cayenneLppLoRaServerIo3.json');
+                attributesExample.deviceName = devId;
+                const client = mqtt.connect('mqtt://' + testMosquittoHost);
                 client.on('connect', function() {
                     client.publish(
                         'application/' +
-                            options.json.services[0]['internal_attributes']['lorawan']['application_id'] +
+                            options.json.services[0].internal_attributes.lorawan.application_id +
                             '/device/' +
                             attributesExample.devEUI +
                             '/rx',

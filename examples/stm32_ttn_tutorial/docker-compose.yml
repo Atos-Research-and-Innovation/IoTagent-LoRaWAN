@@ -1,12 +1,11 @@
-version: '2'
+version: "2"
 
 volumes:
-  mongo_data:
-  cratedata:
-  redisdata:
+  ? mongo_data
+  ? cratedata
+  ? redisdata
 
 services:
-
   mongodb:
     expose:
       - "27017"
@@ -20,11 +19,11 @@ services:
       - "27017:27017"
 
   orion:
-    command:  -dbhost mongodb -port 1026 -logLevel DEBUG
+    command: -dbhost mongodb -port 1026 -logLevel DEBUG
     depends_on:
       - mongodb
     expose:
-        - "1026"
+      - "1026"
     hostname: orion
     image: fiware/orion:2.1.0
     ports:
@@ -40,48 +39,44 @@ services:
     hostname: iotagent-lora
     image: ioeari/iotagent-lora
     ports:
-      - "4061:4061"
+      - "4061:4041"
     stdin_open: true
     tty: true
-
-  quantumleap:
-    image: smartsdk/quantumleap:0.5
-    ports:
-      - "8668:8668"
-    depends_on:
-      - mongodb
-      - orion
-      - crate
-    environment:
-      - CRATE_HOST=crate
-      - USE_GEOCODING=True
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
-
-  crate:
-    image: crate:3.0.5
-    command: crate -Clicense.enterprise=false -Cauth.host_based.enabled=false
-      -Ccluster.name=democluster -Chttp.cors.enabled=true -Chttp.cors.allow-origin="*"
-    ports:
-      # Admin UI
-      - "4200:4200"
-      # Transport protocol
-      - "4300:4300"
-    volumes:
-      - cratedata:/data
-
-  grafana:
-    image: grafana/grafana:5.4.2
-    ports:
-      - "3000:3000"
-    environment:
-      - GF_INSTALL_PLUGINS=crate-datasource,grafana-clock-panel,grafana-worldmap-panel
-    depends_on:
-      - crate
-
-  redis:
-    image: redis:5.0.3
-    ports:
-      - "6379:6379"
-    volumes:
-      - redisdata:/data
+  # quantumleap:
+  #   image: smartsdk/quantumleap:0.5
+  #   ports:
+  #     - "8668:8668"
+  #   depends_on:
+  #     - mongodb
+  #     - orion
+  #     - crate
+  #   environment:
+  #     - CRATE_HOST=crate
+  #     - USE_GEOCODING=True
+  #     - REDIS_HOST=redis
+  #     - REDIS_PORT=6379
+  # crate:
+  #   image: crate:3.0.5
+  #   command: crate -Clicense.enterprise=false -Cauth.host_based.enabled=false
+  #     -Ccluster.name=democluster -Chttp.cors.enabled=true -Chttp.cors.allow-origin="*"
+  #   ports:
+  #     # Admin UI
+  #     - "4200:4200"
+  #     # Transport protocol
+  #     - "4300:4300"
+  #   volumes:
+  #     - cratedata:/data
+  # grafana:
+  #   image: grafana/grafana:5.4.2
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     - GF_INSTALL_PLUGINS=crate-datasource,grafana-clock-panel,grafana-worldmap-panel
+  #   depends_on:
+  #     - crate
+  # redis:
+  # image: redis:5.0.3
+  # ports:
+  #   - "6379:6379"
+  # volumes:
+  #   - redisdata:/data
