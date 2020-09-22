@@ -30,7 +30,7 @@ architecture, providing interoperability between FIWARE NGSI Context Brokers and
 ### Supported stacks
 
 -   [The Things Network](https://www.thethingsnetwork.org/)
--   [LoRaServer](https://www.loraserver.io/)
+-   [ChirpStack](https://www.chirpstack.io/)
 
 ### Data models
 
