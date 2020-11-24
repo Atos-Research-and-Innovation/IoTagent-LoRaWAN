@@ -34,6 +34,14 @@ services:
         host=`hostname --ip-address || echo '127.0.0.1'`;
         mongo --quiet $host/test --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' && echo 0 || echo 1
 
+  mosquitto:
+    image: eclipse-mosquitto:1.6.7
+    expose:
+      - "1883"
+    ports:
+      - "1883:1883"
+    hostname: mosquitto
+
 networks:
   default:
     ipam:
