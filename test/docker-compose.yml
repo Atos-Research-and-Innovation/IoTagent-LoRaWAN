@@ -1,46 +1,44 @@
-version: '2'
-
+version: "3.5"
 services:
+  # Orion is the context broker
+  orion:
+    image: fiware/orion
+    hostname: orion
+    container_name: fiware-orion
+    depends_on:
+      - mongo-db
+    networks:
+      - default
+    ports:
+      - "1026:1026" # localhost:1026
+    command: -dbhost mongo-db -logLevel DEBUG -noCache
+    healthcheck:
+      test: curl --fail -s http://orion:1026/version || exit 1
 
-  mongodb:
+  # Databases
+  mongo-db:
+    image: mongo:3.6
+    hostname: mongo-db
+    container_name: db-mongo
     expose:
       - "27017"
-    hostname: mongodb
-    image: mongo:3.2
-    stdin_open: true
-    tty: true
+    ports:
+      - "27017:27017"
+    networks:
+      - default
+    command: --bind_ip_all --smallfiles
+    volumes:
+      - mongo-db:/data
+    healthcheck:
+      test: |
+        host=`hostname --ip-address || echo '127.0.0.1'`;
+        mongo --quiet $host/test --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' && echo 0 || echo 1
 
-  orion:
-    command:  -dbhost mongodb -port 1026 -logLevel DEBUG
-    depends_on:
-      - mongodb
-    expose:
-        - "1026"
-    hostname: orion
-    image: fiware/orion:latest
-    stdin_open: true
-    tty: true
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: 172.18.1.0/24
 
-  mosquitto:
-    expose:
-        - "1883"
-    hostname: mosquitto
-    image: eclipse-mosquitto:latest
-    stdin_open: true
-    tty: true
-  
-  iotagent-lora:
-    depends_on:
-      - mongodb
-      - mosquitto
-      - orion
-    entrypoint: bin/iotagent-lora test/config-test.js
-    environment:
-      - IOTA_CB_HOST=orion
-      - IOTA_CB_PORT=1026
-      - TEST_MOSQUITTO_HOST=mosquitto
-      - TEST_MONGODB_HOST=mongodb
-    hostname: iotagent-lora
-    image: ioeari/iotagent-lora:${CI_BUILD_REF}
-    stdin_open: true
-    tty: true
+volumes:
+  mongo-db: ~

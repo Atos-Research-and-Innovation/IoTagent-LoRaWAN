@@ -55,18 +55,10 @@ jobs:
     name: Unit Tests
     runs-on: ubuntu-latest
     services:
-      mongodb:
-        image: mongo:3.6
-        ports:
-          - 27017:27017
       mosquitto:
         image: eclipse-mosquitto:1.6.7
         ports:
           - 1883:1883
-      orion:
-        image: fiware/orion
-        ports:
-          - 1026:1026
     strategy:
       matrix:
         node-version:
@@ -79,6 +71,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: "${{ matrix.node-version }}"
+      - name: "Start Services"
+        run: docker-compose -f ./test/docker-compose.yml up -d
       - name: "Unit Tests with Node.js ${{ matrix.node-version }}"
         run: |
           npm install
@@ -89,18 +83,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: unit-test
     services:
-      mongodb:
-        image: mongo:3.6
-        ports:
-          - 27017:27017
       mosquitto:
         image: eclipse-mosquitto:1.6.7
         ports:
           - 1883:1883
-      orion:
-        image: fiware/orion
-        ports:
-          - 1026:1026
     steps:
       - name: Git checkout
         uses: actions/checkout@v2
@@ -108,6 +94,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12.x
+      - name: "Start Services"
+        run: docker-compose -f ./test/docker-compose.yml up -d
+      - name: "Unit Tests with Node.js 12.x"
       - run: |
           npm install
           npm run test:coverage
