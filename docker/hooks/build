@@ -18,4 +18,9 @@
 # License along with iotagent-lora. If not, see http://www.gnu.org/licenses/.
 #
 
-docker build --build-arg SOURCE_BRANCH=$SOURCE_BRANCH -t $IMAGE_NAME .
+docker image build --build-arg SOURCE_BRANCH=$SOURCE_BRANCH \
+	--label "org.opencontainers.image.created"=$(date +%Y-%m-%d) \
+	--label "org.opencontainers.image.revision"=$SOURCE_COMMIT \
+	--label "org.opencontainers.image.version"=$DOCKER_TAG \
+	-t $IMAGE_NAME \
+	.
