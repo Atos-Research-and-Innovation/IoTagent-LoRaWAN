@@ -9,6 +9,7 @@
 [![Build Status](https://img.shields.io/travis/Atos-Research-and-Innovation/IoTagent-LoRaWAN.svg?branch=master)](https://travis-ci.org/Atos-Research-and-Innovation/IoTagent-LoRaWAN/branches)
 [![Coverage Status](https://coveralls.io/repos/github/Atos-Research-and-Innovation/IoTagent-LoRaWAN/badge.svg?branch=master)](https://coveralls.io/github/Atos-Research-and-Innovation/IoTagent-LoRaWAN?branch=master)
 ![Status](https://nexus.lab.fiware.org/static/badges/statuses/iot-lorawan.svg)
+[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/4638/badge)](https://bestpractices.coreinfrastructure.org/projects/4638)
 
 The Internet of Things Agent for LoRaWAN protocol enables data and commands to be exchanged between IoT devices and the
 [NGSI](https://swagger.lab.fiware.org/?url=https://raw.githubusercontent.com/Fiware/specifications/master/OpenAPI/ngsiv2/ngsiv2-openapi.json)
