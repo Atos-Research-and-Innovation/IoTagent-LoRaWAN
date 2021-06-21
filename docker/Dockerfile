@@ -1,5 +1,5 @@
 #
-# Copyright 2019 Atos Spain S.A
+# Copyright 2019 Atos
 #
 # This file is part of iotagent-lora
 #
@@ -110,10 +110,10 @@ ARG GITHUB_ACCOUNT
 ARG GITHUB_REPOSITORY
 ARG NODE_VERSION
 
-LABEL "maintainer"="FIWARE IoTAgent Team. Atos Spain S.A"
+LABEL "maintainer"="FIWARE IoTAgent Team. Atos"
 LABEL "org.opencontainers.image.authors"=""
 LABEL "org.opencontainers.image.documentation"="https://fiware-lorawan.readthedocs.io/en/latest/"
-LABEL "org.opencontainers.image.vendor"="Atos Spain S.A"
+LABEL "org.opencontainers.image.vendor"="Atos"
 LABEL "org.opencontainers.image.licenses"="AGPL-3.0-only"
 LABEL "org.opencontainers.image.title"="FIWARE IoT Agent for LoRaWAN with PM2 "
 LABEL "org.opencontainers.image.description"="FIWARE IoT Agent for LoRaWAN protocol (with CayenneLpp and CBOR data models)"
@@ -156,10 +156,10 @@ ARG GITHUB_ACCOUNT
 ARG GITHUB_REPOSITORY
 ARG NODE_VERSION
 
-LABEL "maintainer"="FIWARE IoTAgent Team. Atos Spain S.A"
+LABEL "maintainer"="FIWARE IoTAgent Team. Atos"
 LABEL "org.opencontainers.image.authors"=""
 LABEL "org.opencontainers.image.documentation"="https://fiware-lorawan.readthedocs.io/en/latest/"
-LABEL "org.opencontainers.image.vendor"="Atos Spain S.A"
+LABEL "org.opencontainers.image.vendor"="Atos"
 LABEL "org.opencontainers.image.licenses"="AGPL-3.0-only"
 LABEL "org.opencontainers.image.title"="FIWARE IoT Agent for LoRaWAN (Distroless)"
 LABEL "org.opencontainers.image.description"="FIWARE IoT Agent for LoRaWAN protocol (with CayenneLpp and CBOR data models)"
@@ -196,10 +196,10 @@ ARG GITHUB_ACCOUNT
 ARG GITHUB_REPOSITORY
 ARG NODE_VERSION
 
-LABEL "maintainer"="FIWARE IoTAgent Team. Atos Spain S.A"
+LABEL "maintainer"="FIWARE IoTAgent Team. Atos"
 LABEL "org.opencontainers.image.authors"=""
 LABEL "org.opencontainers.image.documentation"="https://fiware-lorawan.readthedocs.io/en/latest/"
-LABEL "org.opencontainers.image.vendor"="Atos Spain S.A"
+LABEL "org.opencontainers.image.vendor"="Atos"
 LABEL "org.opencontainers.image.licenses"="AGPL-3.0-only"
 LABEL "org.opencontainers.image.title"="FIWARE IoT Agent for LoRaWAN"
 LABEL "org.opencontainers.image.description"="FIWARE IoT Agent for LoRaWAN protocol (with CayenneLpp and CBOR data models)"
