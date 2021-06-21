@@ -20,6 +20,7 @@ the product:
 
 -   Support to application servers MQTT configured with SSL certificates.
 -   Start actions to support NGSI-LD specification.
+-   Catch up the pending issues and pull requests
 
 ### Long term (some time in the future)
 
