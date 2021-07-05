@@ -11,7 +11,7 @@ order given. The development team will be doing their best to follow the propose
 in mind that plans to work on a given feature or task may be revised. All information is provided as general guidelines
 only, and this section may be revised to provide newer information at any time.
 
-This section has been last updated in March 2020. Please take into account is content could be obsolete.
+This section has been last updated in July 2021. 
 
 ### Short term (next release of the product)
 
