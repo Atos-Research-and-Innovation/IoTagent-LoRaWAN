@@ -20,15 +20,16 @@ the product:
 
 -   Catch up the pending issues and pull requests
 -   Define other elements in roadmap by new supporting team
+-   Examples with new devices and end-nodes.
+-   Inclusion of metadata provided by application servers in the payloads sent to the Context Broker (e.g., location,
+    frequency, airtime, etc).
+-   Examples of deployment using Kubernetes
 
-### Long term (some time in the future)
+### Long term 
 
 The following list of features are proposals regarding the longer-term evolution of the product even though the
 development of these features has not yet been scheduled for a release in the near future. Please feel free to contact
 us if you wish to get involved in the implementation or influence the roadmap:
 
--   Examples with new devices and end-nodes.
--   Inclusion of metadata provided by application servers in the payloads sent to the Context Broker (e.g., location,
-    frequency, airtime, etc).
--   Examples of deployment using Kubernetes.
+-   To be defined
 
