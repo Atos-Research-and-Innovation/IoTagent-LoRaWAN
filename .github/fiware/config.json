@@ -1,0 +1,19 @@
+{
+    "enabler": "FIWARE IoT Agent for the LoRaWaN Protocol",
+    "chapter": "iotagents",
+    "academy": "",
+    "readthedocs": "https://fiware.github.io/CanisMajor/",
+    "helpdesk": "",
+    "coveralls": "https://coveralls.io/github/Atos-Research-and-Innovation/IoTagent-LoRaWAN",
+    "github": ["Atos-Research-and-Innovation/IoTagent-LoRaWAN"],
+    "dockerregistry": ["hub.docker.com"],
+    "docker": [""],
+    "email": "",
+    "status": "incubating",
+    "compose": "",
+    "exclude": [""],
+    "stackexchange": [""],
+    "unit-test": "",
+    "smoke-test": "",
+    "dockerfile": "https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/blob/master/docker/Dockerfile"
+}
