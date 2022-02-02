@@ -1,0 +1,30 @@
+# This action works with pull requests and pushes
+name: Test
+
+on:
+  ? pull_request
+  push:
+    branches:
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [10, 12]
+    steps:
+      - uses: actions/checkout@v2
+      - run: docker pull mongo:3.2
+      - run: docker run -d --net host -l mongodb mongo:3.2
+      - run: docker pull fiware/orion:latest
+      - run: docker run -d --net host -l orion fiware/orion:latest
+      - run: docker pull ansi/mosquitto
+      - run: docker run -d --net host -l mosquitto ansi/mosquitto
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm install --also=dev
+      - env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+        run: npm run test:coveralls
