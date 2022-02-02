@@ -2,7 +2,6 @@
 name: Code Linter
 
 on:
-  workflow_dispatch: #enable manual trigger
   ? pull_request
   push:
     branches:
