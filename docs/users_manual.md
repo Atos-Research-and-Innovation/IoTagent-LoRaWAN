@@ -278,7 +278,7 @@ We will proceed as follow:
 
 1. We will deploy a stack including the relevant services to test the end-to-end functionality of the LoRaWAN IoT Agent
 1. We will register 1 device group simulating a TTN device.
-1. We will send messages to the MQTT broker simulating the two devices sending data.
+1. We will send messages to the MQTT broker simulating the device sending data.
 1. We will verify that the data have been correctly decoded and forwarded to the Context Broker.
 
 You will find the scripts related to this walkthrough in the [examples/dummy-devices](examples/dummy-devices) folder.
@@ -297,7 +297,7 @@ From the [examples/dummy-devices](examples/dummy-devices) folder, run the follow
 bash start.sh
 ```
 
-This command will start the IoT stack, and register a dummy service represeting weather observation devices:
+This command will start the IoT stack, and register a dummy service representing weather observation devices:
 
 ```json
 {
@@ -350,7 +350,7 @@ From the [examples/dummy-devices](examples/dummy-devices) folder, run the follow
 bash test-data.sh
 ```
 
-This script will send a JSON message to the mqtt queue as defined by TTN api, e.g.:
+This script will send a JSON message to the mqtt broker as defined by TTN api, e.g.:
 
 ```json
 {
@@ -367,6 +367,8 @@ This script will send a JSON message to the mqtt queue as defined by TTN api, e.
 ```
 
 The `payload_raw` field contains a base64 encoded version of the binary encoding of the CayenneLPP payload.
+
+The topic used by TTN v2 API has the following format: `{application_id}/devices/{device_id}/up`.
 
 Using the service group defined above, the CayenneLPP payload will be decoded and mapped to the NGSI format, the
 resulting NGSI entity should be something like:
