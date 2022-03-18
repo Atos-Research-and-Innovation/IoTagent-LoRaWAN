@@ -1,0 +1,52 @@
+version: "3"
+
+volumes:
+  ? mongo_data
+  ? mqtt_data
+
+services:
+  mongodb:
+    ports:
+      - "27017:27017"
+    hostname: mongodb
+    image: mongo:4
+    stdin_open: true
+    tty: true
+    volumes:
+      - mongo_data:/data/db
+
+  mqtt:
+    image: eclipse-mosquitto
+    hostname: mqtt
+    volumes:
+      - ./mosquitto/config:/mosquitto/config:rw
+      - mqtt_data:/mosquitto/data/:rw
+    ports:
+      - 1883:1883
+      - 9001:9001
+
+  orion:
+    command: -dbhost mongodb -port 1026 -logLevel DEBUG
+    platform: linux/amd64
+    depends_on:
+      - mongodb
+    hostname: orion
+    image: fiware/orion:latest
+    ports:
+      - "1026:1026"
+    stdin_open: true
+    tty: true
+
+  iotagent-lora:
+    platform: linux/amd64
+    depends_on:
+      - mongodb
+      - orion
+      - mqtt
+    entrypoint: bin/iotagent-lora docker/config-docker.js
+    hostname: iotagent-lora
+    image: ioeari/iotagent-lora
+    ports:
+      - "4041:4041"
+    stdin_open: true
+    tty: true
