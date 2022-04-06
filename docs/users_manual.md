@@ -262,3 +262,163 @@ config.iota = {
 
 module.exports = config;
 ```
+
+## Testing the LoRaWAN IoT Agent with dummy devices
+
+This section of the _Users Manual_ provides guidance on deploy a dummy device and testing it without having a real
+account on TTN.
+
+Such testing can be very useful especially to people looking in testing the code and contributing to it.
+
+As a matter of fact, the LoRaWAN IoT Agent leverages the MTTQ services provided by TTN or ChirpStack to retrieve data
+from the sensors and pushing them to the Context Broker. Essentially this means, that using a simple MTTQ broker and a
+MQTT client you can actually simulate the connection of the LoRaWAN IoT Agent to TTN or ChirpStack.
+
+We will proceed as follow:
+
+1. We will deploy a stack including the relevant services to test the end-to-end functionality of the LoRaWAN IoT Agent
+1. We will register 1 device group simulating a TTN device.
+1. We will send messages to the MQTT broker simulating the device sending data.
+1. We will verify that the data have been correctly decoded and forwarded to the Context Broker.
+
+You will find the scripts related to this walkthrough in the [examples/dummy-devices](examples/dummy-devices) folder.
+
+### Deploy the testing IoT stack and registering a device group
+
+To run this walkthrough you need to deploy:
+
+-   IoT LoRaWAN IoT Agent
+-   Mosquito MQTT
+-   Orion Context Broker
+
+From the [examples/dummy-devices](examples/dummy-devices) folder, run the following command:
+
+```bash
+bash start.sh
+```
+
+This command will start the IoT stack, and register a dummy service representing weather observation devices:
+
+```json
+{
+    "services": [
+        {
+            "entity_type": "WeatherObserved",
+            "apikey": "",
+            "resource": "70B3D57ED00006B2",
+            "attributes": [
+                {
+                    "object_id": "temperature_1",
+                    "name": "temperature",
+                    "type": "Number"
+                },
+                {
+                    "object_id": "barometric_pressure_0",
+                    "name": "pressure",
+                    "type": "Number"
+                },
+                {
+                    "object_id": "relative_humidity_2",
+                    "name": "relative_humidity",
+                    "type": "Number"
+                }
+            ],
+            "internal_attributes": {
+                "lorawan": {
+                    "application_server": {
+                        "host": "mqtt",
+                        "username": "admin",
+                        "password": "password",
+                        "provider": "TTN"
+                    },
+                    "app_eui": "70B3D57ED00006B2",
+                    "application_id": "demoTTN",
+                    "application_key": "BE6996EEE2B2D6AFFD951383C1F3C3BD",
+                    "data_model": "cayennelpp"
+                }
+            }
+        }
+    ]
+}
+```
+
+### Send a message to the MQTT and verify that the value is passed to orion
+
+From the [examples/dummy-devices](examples/dummy-devices) folder, run the following command:
+
+```bash
+bash test-data.sh
+```
+
+This script will send a JSON message to the mqtt broker as defined by TTN api, e.g.:
+
+```json
+{
+  "app_id": "demoTTN",
+  "dev_id": "myDevice",
+  "hardware_serial": "0102030405060708",
+  "port": 1,
+  "counter": 2,
+  "is_retry": false,
+  "confirmed": false,
+  "payload_raw": "AHMnSwFnARYCaFADAGQEAQAFAdc=",
+  ...
+}
+```
+
+The `payload_raw` field contains a base64 encoded version of the binary encoding of the CayenneLPP payload.
+
+The topic used by TTN v2 API has the following format: `{application_id}/devices/{device_id}/up`.
+
+Using the service group defined above, the CayenneLPP payload will be decoded and mapped to the NGSI format, the
+resulting NGSI entity should be something like:
+
+```json
+{
+    "id": "myDevice:WeatherObserved",
+    "type": "WeatherObserved",
+    "TimeInstant": {
+        "type": "DateTime",
+        "value": "2022-03-18T00:42:03.924Z",
+        "metadata": {}
+    },
+    "pressure": {
+        "type": "Number",
+        "value": 1005.9,
+        "metadata": {
+            "TimeInstant": {
+                "type": "DateTime",
+                "value": "2022-03-18T00:42:03.924Z"
+            }
+        }
+    },
+    "relative_humidity": {
+        "type": "Number",
+        "value": 40,
+        "metadata": {
+            "TimeInstant": {
+                "type": "DateTime",
+                "value": "2022-03-18T00:42:03.924Z"
+            }
+        }
+    },
+    "temperature": {
+        "type": "Number",
+        "value": 27.8,
+        "metadata": {
+            "TimeInstant": {
+                "type": "DateTime",
+                "value": "2022-03-18T00:42:03.924Z"
+            }
+        }
+    }
+}
+```
+
+### Removing your stacks
+
+From the [examples/dummy-devices](examples/dummy-devices) folder, run the following command:
+
+```bash
+bash stop.sh
+```
