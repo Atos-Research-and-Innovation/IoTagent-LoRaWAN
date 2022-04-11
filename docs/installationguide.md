@@ -14,7 +14,7 @@ In order to install the LoRaWAN IoT Agent, just clone the project and install th
 #### Requirements
 
 -   [Node.js](https://nodejs.org/en/)
--   [MongoDB](https://docs.mongodb.com/manual/installation/)
+-   [MongoDB](https://www.mongodb.com/docs/manual/installation/)
 -   [FIWARE Orion Context Broker](https://github.com/telefonicaid/fiware-orion)
 
 #### Cloning the GitHub repository

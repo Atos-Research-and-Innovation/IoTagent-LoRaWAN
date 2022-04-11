@@ -20,10 +20,10 @@ This project is part of [FIWARE](https://www.fiware.org/). Check also the FIWARE
 
 ### Architecture
 
-As it is explained in [What is LoRaWAN™](https://lora-alliance.org/sites/default/files/2018-04/what-is-lorawan.pdf), the
-proposed _Network Architecture_ for a LoRaWAN based system relies on a mesh network architecture composed of _End
-nodes_, _Concentrators_, _Network Servers_ and _Application Servers_. This IoTA is fully compliant with this
-architecture, providing interoperability between FIWARE NGSI Context Brokers and LoRaWAN devices.
+As it is explained in [What is LoRaWAN™](https://lora-alliance.org/about-lorawan/), the proposed _Network Architecture_
+for a LoRaWAN based system relies on a mesh network architecture composed of _End nodes_, _Concentrators_, _Network
+Servers_ and _Application Servers_. This IoTA is fully compliant with this architecture, providing interoperability
+between FIWARE NGSI Context Brokers and LoRaWAN devices.
 
 ![General](https://raw.githubusercontent.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/master/docs/img/iotagent_lorawan_arch.png)
 
@@ -34,15 +34,15 @@ architecture, providing interoperability between FIWARE NGSI Context Brokers and
 
 ### Data models
 
--   [CayenneLpp](https://www.thethingsnetwork.org/docs/devices/arduino/api/cayennelpp.html)
--   [CBOR](https://tools.ietf.org/html/rfc7049)
+-   [CayenneLpp](https://developers.mydevices.com/cayenne/docs/lora/#lora-cayenne-low-power-payload)
+-   [CBOR](https://datatracker.ietf.org/doc/html/rfc7049)
 
 ## Installation
 
 ### Requirements
 
 -   [Node.js](https://nodejs.org/en/)
--   [MongoDB](https://docs.mongodb.com/manual/installation/)
+-   [MongoDB](https://www.mongodb.com/docs/manual/installation/)
 -   [FIWARE Orion Context Broker](https://github.com/telefonicaid/fiware-orion)
 
 ### Cloning the GitHub repository

@@ -276,12 +276,14 @@ MQTT client you can actually simulate the connection of the LoRaWAN IoT Agent to
 
 We will proceed as follow:
 
-1. We will deploy a stack including the relevant services to test the end-to-end functionality of the LoRaWAN IoT Agent
-1. We will register 1 device group simulating a TTN device.
-1. We will send messages to the MQTT broker simulating the device sending data.
-1. We will verify that the data have been correctly decoded and forwarded to the Context Broker.
+1.  We will deploy a stack including the relevant services to test the end-to-end functionality of the LoRaWAN IoT Agent
+1.  We will register 1 device group simulating a TTN device.
+1.  We will send messages to the MQTT broker simulating the device sending data.
+1.  We will verify that the data have been correctly decoded and forwarded to the Context Broker.
 
-You will find the scripts related to this walkthrough in the [examples/dummy-devices](examples/dummy-devices) folder.
+You will find the scripts related to this walkthrough in the
+[examples/dummy-devices](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/tree/master/examples/dummy-devices)
+folder.
 
 ### Deploy the testing IoT stack and registering a device group
 
@@ -291,7 +293,9 @@ To run this walkthrough you need to deploy:
 -   Mosquito MQTT
 -   Orion Context Broker
 
-From the [examples/dummy-devices](examples/dummy-devices) folder, run the following command:
+From the
+[examples/dummy-devices](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/tree/master/examples/dummy-devices)
+folder, run the following command:
 
 ```bash
 bash start.sh
@@ -344,7 +348,9 @@ This command will start the IoT stack, and register a dummy service representing
 
 ### Send a message to the MQTT and verify that the value is passed to orion
 
-From the [examples/dummy-devices](examples/dummy-devices) folder, run the following command:
+From the
+[examples/dummy-devices](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/tree/master/examples/dummy-devices)
+folder, run the following command:
 
 ```bash
 bash test-data.sh
@@ -417,7 +423,9 @@ resulting NGSI entity should be something like:
 
 ### Removing your stacks
 
-From the [examples/dummy-devices](examples/dummy-devices) folder, run the following command:
+From the
+[examples/dummy-devices](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/tree/master/examples/dummy-devices)
+folder, run the following command:
 
 ```bash
 bash stop.sh
