@@ -7,7 +7,7 @@
     "coveralls": "https://coveralls.io/github/Atos-Research-and-Innovation/IoTagent-LoRaWAN",
     "github": ["Atos-Research-and-Innovation/IoTagent-LoRaWAN"],
     "dockerregistry": ["hub.docker.com"],
-    "docker": [""],
+    "docker": ["fiware/iotagent-lorawan"],
     "email": "",
     "status": "incubating",
     "compose": "",
