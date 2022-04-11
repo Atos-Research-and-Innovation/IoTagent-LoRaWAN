@@ -22,31 +22,31 @@
 const config = {};
 
 config.iota = {
-    timestamp: false,
-    logLevel: 'FATAL',
-    contextBroker: {
-        host: 'localhost',
-        port: '1026',
-        ngsiVersion: 'v2'
-    },
-    server: {
-        port: 4041
-    },
-    types: {},
-    service: 'howtoService',
-    subservice: '/howto',
-    providerUrl: 'http://localhost:4061',
-    deviceRegistrationDuration: 'P1M',
-    defaultType: 'Thing',
-    defaultResource: '/iot/d',
-    deviceRegistry: {
-        type: 'mongodb'
-    },
-    mongodb: {
-        host: 'localhost',
-        port: '27017',
-        db: 'iotagentLoraTest'
-    }
+	timestamp: false,
+	logLevel: 'FATAL',
+	contextBroker: {
+		host: 'localhost',
+		port: '1026',
+		ngsiVersion: 'v2'
+	},
+	server: {
+		port: 4041
+	},
+	types: {},
+	service: 'howtoService',
+	subservice: '/howto',
+	providerUrl: 'http://localhost:4061',
+	deviceRegistrationDuration: 'P1M',
+	defaultType: 'Thing',
+	defaultResource: '/iot/d',
+	deviceRegistry: {
+		type: 'mongodb'
+	},
+	mongodb: {
+		host: 'localhost',
+		port: '27017',
+		db: 'iotagentLoraTest'
+	}
 };
 
 module.exports = config;
