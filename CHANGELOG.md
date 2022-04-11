@@ -1,3 +1,16 @@
+## [1.2.4](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/compare/v1.2.3...v1.2.4) (2021-01-22)
+
+
+### Bug Fixes
+
+* loraserverioAppService.js : In the MQTT subscription, the text 'rx', which is obsolete for
+  ChirpStack since version 3.11.0 (11/18/2020), has been replaced by '/event/up', which is 
+  what ChirpStack is currently publishing. As a consequence, if (splittedMqttTopic.length !== 5)
+  also had to be changed from 5 to 6, since otherwise it gives a 'Bad format for a LoRaServer.io 
+  topic'.
+  Reference: https://www.chirpstack.io/application-server/integrations/mqtt/
+
+
 ## [1.2.3](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/compare/v1.2.2...v1.2.3) (2019-06-13)
 
 
