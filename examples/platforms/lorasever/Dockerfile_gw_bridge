@@ -1,2 +1,0 @@
-FROM loraserver/lora-gateway-bridge:latest
-COPY /configuration/lora-gateway-bridge /etc/lora-gateway-bridge
