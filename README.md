@@ -40,22 +40,22 @@ This project is part of [FIWARE](https://www.fiware.org/). For more information 
 
 ### Architecture
 
-As explained in [What is LoRaWAN™](https://lora-alliance.org/sites/default/files/2018-04/what-is-lorawan.pdf), the
-proposed _Network Architecture_ for a LoRaWAN based system relies on a mesh network architecture composed of _End
-nodes_, _Concentrators_, _Network Servers_ and _Application Servers_. This IoTA is fully compliant with this
-architecture, providing interoperability between FIWARE NGSI Context Brokers and LoRaWAN devices.
+As explained in [What is LoRaWAN™](https://lora-alliance.org/about-lorawan/), the proposed _Network Architecture_ for a
+LoRaWAN based system relies on a mesh network architecture composed of _End nodes_, _Concentrators_, _Network Servers_
+and _Application Servers_. This IoTA is fully compliant with this architecture, providing interoperability between
+FIWARE NGSI Context Brokers and LoRaWAN devices.
 
 ![General](https://raw.githubusercontent.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/master/docs/img/iotagent_lorawan_arch.png)
 
 ### Supported stacks
 
 -   [The Things Network](https://www.thethingsnetwork.org/)
--   [LoRaServer](https://www.loraserver.io/)
+-   [Chirpstack](https://www.chirpstack.io/)
 
 ### Data models
 
--   [CayenneLpp](https://www.thethingsnetwork.org/docs/devices/arduino/api/cayennelpp.html)
--   [CBOR](https://tools.ietf.org/html/rfc7049)
+-   [CayenneLpp](https://developers.mydevices.com/cayenne/docs/lora/#lora-cayenne-low-power-payload)
+-   [CBOR](https://datatracker.ietf.org/doc/html/rfc7049)
 -   Proprietary format decoded by LoRaWAN application server.
 
 ## Install
@@ -73,8 +73,8 @@ Information about how to use the IoT Agent can be found in the
 ## API
 
 Apiary reference for the Configuration API can be found
-[here](http://docs.telefonicaiotiotagents.apiary.io/#reference/configuration-api). More information about IoT Agents and
-their APIs can be found in the IoT Agent Library [documentation](https://iotagent-node-lib.rtfd.io/).
+[here](https://telefonicaiotiotagents.docs.apiary.io/#reference/configuration-api). More information about IoT Agents
+and their APIs can be found in the IoT Agent Library [documentation](https://iotagent-node-lib.readthedocs.io/).
 
 ## Roadmap
 

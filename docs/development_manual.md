@@ -10,7 +10,7 @@ functionalities.
 The following requirements must be installed and executed in order to launch the tests:
 
 -   [Node.js](https://nodejs.org/en/)
--   [MongoDB](https://docs.mongodb.com/manual/installation/)
+-   [MongoDB](https://www.mongodb.com/docs/manual/installation/)
 -   [FIWARE Orion Context Broker](https://github.com/telefonicaid/fiware-orion)
 -   [Mosquitto Broker](https://mosquitto.org/download/)
 

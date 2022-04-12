@@ -66,8 +66,8 @@ The tutorial allows the deployment of the following system, comprising a basic F
 
 -   **A LoRaWAN end-node** based on an STM32 LoRaWAN development board. In particular, the B-L072Z-LRWAN1 model is used.
     The device will run an application reading the value from an onboard temperature sensor, encode the information
-    using [CayenneLpp data model](https://www.thethingsnetwork.org/docs/devices/arduino/api/cayennelpp.html) and forward
-    the result to **The Things Network** LoRaWAN stack through a _concentrator_ or _gateway_.
+    using [CayenneLpp data model](https://developers.mydevices.com/cayenne/docs/lora/#lora-cayenne-low-power-payload)
+    and forward the result to **The Things Network** LoRaWAN stack through a _concentrator_ or _gateway_.
 -   **The LoRaWAN gateway** plays the role of a concentrator which forwards the messages to the _LoRaWAN network
     server_, included in \*_The Things Network_ stack.\*
 -   **The Things Network\* stack** implements the functionalities of the _LoRaWAN network server_ and _LoRaWAN
