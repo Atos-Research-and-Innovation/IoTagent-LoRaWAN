@@ -26,33 +26,33 @@ const request = require('request');
 const winston = require('winston');
 
 function readExampleFile(name, raw) {
-    let text = null;
-    try {
-        text = fs.readFileSync(name, 'UTF8');
-    } catch (e) {
-        /* eslint-disable no-console */
-        console.error(JSON.stringify(e));
-    }
-    return raw ? text : JSON.parse(text);
+	let text = null;
+	try {
+		text = fs.readFileSync(name, 'UTF8');
+	} catch (e) {
+		/* eslint-disable no-console */
+		console.error(JSON.stringify(e));
+	}
+	return raw ? text : JSON.parse(text);
 }
 
 function deleteEntityCB(cbConfig, service, servicePath, cbEntityName, callback) {
-    const optionsCB = {
-        url: 'http://' + cbConfig.host + ':' + cbConfig.port + '/v2/entities/' + cbEntityName,
-        method: 'DELETE',
-        json: true,
-        headers: {
-            'fiware-service': service,
-            'fiware-servicepath': servicePath
-        }
-    };
+	const optionsCB = {
+		url: 'http://' + cbConfig.host + ':' + cbConfig.port + '/v2/entities/' + cbEntityName,
+		method: 'DELETE',
+		json: true,
+		headers: {
+			'fiware-service': service,
+			'fiware-servicepath': servicePath
+		}
+	};
 
-    request(optionsCB, function(error, response, body) {
-        if (error) {
-            winston.error(error);
-        }
-        return callback();
-    });
+	request(optionsCB, function(error, response, body) {
+		if (error) {
+			winston.error(error);
+		}
+		return callback();
+	});
 }
 
 exports.readExampleFile = readExampleFile;
