@@ -49,7 +49,7 @@ FIWARE NGSI Context Brokers and LoRaWAN devices.
 
 ### Supported stacks
 
--   [The Things Network](https://www.thethingsnetwork.org/)
+-   [The Things Network](https://www.thethingsnetwork.org/) v3 API
 -   [Chirpstack](https://www.chirpstack.io/) 3.11.0+
 
 ### Data models

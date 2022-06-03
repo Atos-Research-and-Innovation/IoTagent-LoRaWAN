@@ -449,7 +449,7 @@ This script will send a JSON message to the mqtt broker as defined by TTN api, e
 
 The `payload_raw` field contains a base64 encoded version of the binary encoding of the CayenneLPP payload.
 
-The topic used by TTN v2 API has the following format: `{application_id}/devices/{device_id}/up`.
+The topic used by TTN v3 API has the following format: `v3/{application_id}/devices/{device_id}/up`.
 
 Using the service group defined above, the CayenneLPP payload will be decoded and mapped to the NGSI format, the
 resulting NGSI entity should be something like:

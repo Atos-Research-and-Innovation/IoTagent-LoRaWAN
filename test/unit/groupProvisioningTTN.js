@@ -186,7 +186,11 @@ describe('Configuration provisioning API: Provision groups (TTN)', function () {
 			const client = mqtt.connect('mqtt://' + testMosquittoHost);
 			client.on('connect', function () {
 				client.publish(
-					options.json.services[0].internal_attributes.lorawan.application_id + '/devices/' + devId + '/up',
+					'v3/' +
+						options.json.services[0].internal_attributes.lorawan.application_id +
+						'/devices/' +
+						devId +
+						'/up',
 					JSON.stringify(attributesExample)
 				);
 				setTimeout(function () {
@@ -210,7 +214,11 @@ describe('Configuration provisioning API: Provision groups (TTN)', function () {
 			const client = mqtt.connect('mqtt://' + testMosquittoHost);
 			client.on('connect', function () {
 				client.publish(
-					options.json.services[0].internal_attributes.lorawan.application_id + '/devices/' + devId + '/up',
+					'v3/' +
+						options.json.services[0].internal_attributes.lorawan.application_id +
+						'/devices/' +
+						devId +
+						'/up',
 					JSON.stringify(attributesExample)
 				);
 				setTimeout(function () {
@@ -318,7 +326,7 @@ describe('Configuration provisioning API: Provision groups (TTN)', function () {
 			const client = mqtt.connect('mqtt://' + testMosquittoHost);
 			client.on('connect', function () {
 				client.publish(
-					options.json.internal_attributes.lorawan.application_id + '/devices/' + devId + '/up',
+					'v3/' + options.json.internal_attributes.lorawan.application_id + '/devices/' + devId + '/up',
 					JSON.stringify(attributesExample)
 				);
 				setTimeout(function () {
@@ -367,7 +375,8 @@ describe('Configuration provisioning API: Provision groups (TTN)', function () {
 				const client = mqtt.connect('mqtt://' + testMosquittoHost);
 				client.on('connect', function () {
 					client.publish(
-						options.json.services[0].internal_attributes.lorawan.application_id +
+						'v3/' +
+							options.json.services[0].internal_attributes.lorawan.application_id +
 							'/devices/' +
 							devId +
 							'/up',
@@ -461,7 +470,11 @@ describe('Configuration provisioning API: Provision groups (TTN)', function () {
 			const client = mqtt.connect('mqtt://' + testMosquittoHost);
 			client.on('connect', function () {
 				client.publish(
-					options.json.services[0].internal_attributes.lorawan.application_id + '/devices/' + devId + '/up',
+					'v3/' +
+						options.json.services[0].internal_attributes.lorawan.application_id +
+						'/devices/' +
+						devId +
+						'/up',
 					JSON.stringify(attributesExample)
 				);
 				setTimeout(function () {
@@ -533,7 +546,7 @@ describe('Configuration provisioning API: Provision groups (TTN)', function () {
 			const attributesExample = utils.readExampleFile('./test/activeAttributes/cayenneLpp.json');
 			const client = mqtt.connect('mqtt://' + testMosquittoHost);
 			client.on('connect', function () {
-				client.publish('ari_ioe_app_demo1/devices/LORA-N-005/up', JSON.stringify(attributesExample));
+				client.publish('v3/ari_ioe_app_demo1/devices/LORA-N-005/up', JSON.stringify(attributesExample));
 				setTimeout(function () {
 					request(optionsCB, function (error, response, body) {
 						should.not.exist(error);

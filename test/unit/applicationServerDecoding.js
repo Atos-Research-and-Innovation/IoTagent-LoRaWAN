@@ -170,7 +170,8 @@ describe('CBOR Attributes', function () {
 			const client = mqtt.connect('mqtt://' + testMosquittoHost);
 			client.on('connect', function () {
 				client.publish(
-					options.json.devices[0].internal_attributes.lorawan.application_id +
+					'v3/' +
+						options.json.devices[0].internal_attributes.lorawan.application_id +
 						'/devices/' +
 						options.json.devices[0].device_id +
 						'/up',
@@ -215,7 +216,7 @@ describe('CBOR Attributes', function () {
 			attributesExample.payload_fields = rawJSONPayload;
 			const client = mqtt.connect('mqtt://' + testMosquittoHost);
 			client.on('connect', function () {
-				client.publish('ari_ioe_app_demo1/devices/lora_n_003/up', JSON.stringify(attributesExample));
+				client.publish('v3/ari_ioe_app_demo1/devices/lora_n_003/up', JSON.stringify(attributesExample));
 				setTimeout(function () {
 					request(optionsCB, function (error, response, body) {
 						should.not.exist(error);
