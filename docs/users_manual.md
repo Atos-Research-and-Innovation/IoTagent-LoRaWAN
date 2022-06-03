@@ -3,37 +3,37 @@
 ## The Things Network (TTN)
 
 1.  Register your LoRaWAN gateways following `https://www.thethingsnetwork.org/docs/gateways/registration.html`.
-2.  Create one or several applications following `https://www.thethingsnetwork.org/docs/applications/add.html`.
-3.  Register your LoRaWAN devices within your applications following
+1.  Create one or several applications following `https://www.thethingsnetwork.org/docs/applications/add.html`.
+1.  Register your LoRaWAN devices within your applications following
     `https://www.thethingsnetwork.org/docs/devices/registration.html`.
-4.  In order to use FIWARE IoT Agent for LoRaWAN protocol, you will need the following information:
+1.  In order to use FIWARE IoT Agent for LoRaWAN protocol, you will need the following information:
 
--   Application ID (step 2)
--   Application key (step 2)
--   Device EUI (step 3)
--   App EUI (step 3)
--   Application server information
-    -   Host (step 3)
-    -   Username: It is the Application ID.
-    -   Password (step 3)
+    -   Application ID (step 2)
+    -   Application key (step 2)
+    -   Device EUI (step 3)
+    -   App EUI (step 3)
+    -   Application server information
+        -   Host (step 3)
+        -   Username: It is the Application ID.
+        -   Password (step 3)
 
 ## ChirpStack.io
 
 1.  Install/deploy LoRa Server project. Docker installation method is recommended:
     `https://www.chirpstack.io/install/docker/`
-2.  Follow the [Getting started](https://www.chirpstack.io/use/getting-started/) page to register your network-server
+1.  Follow the [Getting started](https://www.chirpstack.io/use/getting-started/) page to register your network-server
     and to create a service-profile, gateway, device-profile, application. Finally, add your LoRaWAN devices. Register
     your network-server: `https://www.chirpstack.io/lora-app-server/use/network-servers/`
-3.  In order to use FIWARE IoT Agent for LoRaWAN protocol, you will need the following information:
+1.  In order to use FIWARE IoT Agent for LoRaWAN protocol, you will need the following information:
 
--   Application ID
--   Application key
--   Device EUI
--   App EUI
--   Application server information
-    -   Host where MQTT broker is running.
-    -   Username if it is defined.
-    -   Password if it is defined.
+    -   Application ID
+    -   Application key
+    -   Device EUI
+    -   App EUI
+    -   Application server information
+        -   Host where MQTT broker is running.
+        -   Username if it is defined.
+        -   Password if it is defined.
 
 # API Walkthrough
 
@@ -47,6 +47,9 @@ All of them use a relatively simple device or node reporting the following measu
 -   The temperature
 -   A generic digital input
 -   A generic digital output
+
+The example below uses TTN (as you can see in the `provider` configuration), to use chirpstack you should pass
+`chirpstack` (or `loraserver.io` for backward compatibility) in the `provider` attribute.
 
 ## Device provisioning
 

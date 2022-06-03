@@ -14,6 +14,13 @@ The following requirements must be installed and executed in order to launch the
 -   [FIWARE Orion Context Broker](https://github.com/telefonicaid/fiware-orion)
 -   [Mosquitto Broker](https://mosquitto.org/download/)
 
+You can use the `docker-compose-dev.yml` file to set up the required services as follows:
+
+```bash
+cd docker
+docker compose -f docker-compose-dev.yml up -d
+```
+
 To run the tests:
 
 ```bash

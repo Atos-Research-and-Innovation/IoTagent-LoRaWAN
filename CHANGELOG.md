@@ -1,5 +1,16 @@
 ## [1.2.4](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/compare/v1.2.3...v1.2.4) (2021-01-22)
 
+### Features
+
+-   refactor chirpstack support
+    ([a4c3aa6](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/commit/a4c3aa6)):
+    -   change the provider id to support chirpstack
+    -   rename files to refer to chirpstack
+-   simplify set-up of local dev environment
+    ([fd3fcae](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/commit/fd3fcae)): provide a docker
+    compose and a docker build for developers
+-   use node 12 ([c1aa136](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/commit/c1aa136)).
+
 ### Bug Fixes
 
 -   fix failing test due to PR #120

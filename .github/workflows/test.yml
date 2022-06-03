@@ -17,13 +17,9 @@ jobs:
       COVERALLS_REPO_TOKEN: ${{secrets.COVERALLS_REPO_TOKEN_SECRET}}
     steps:
       - uses: actions/checkout@v2
-      - run: docker network create test
-      - run: docker pull mongo:3.2
-      - run: docker run -d --network=test -p 27017:27017 --name mongodb mongo:3.2
-      - run: docker pull fiware/orion:2.2.0
-      - run: docker run -d --network=test -p 1026:1026 --name orion fiware/orion:2.2.0 -dbhost mongodb -port 1026 -logLevel DEBUG
-      - run: docker pull ansi/mosquitto
-      - run: docker run -d --network=test -p 1883:1883 --name mosquitto ansi/mosquitto
+      - run: |
+          cd docker
+          docker compose -f docker-compose-dev.yml up -d
       - uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node }}

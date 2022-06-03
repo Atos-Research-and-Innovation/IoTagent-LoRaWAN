@@ -35,7 +35,7 @@
             "lorawan": {
               "application_server": {
                 "host": "localhost",
-                "provider": "loraserver.io"
+                "provider": "chirpstack"
               },
               "app_eui": "70B3D57ED000985F",
               "application_id": "1",

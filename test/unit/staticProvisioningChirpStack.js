@@ -28,7 +28,7 @@ const iotagentLora = require('../../');
 const iotAgentLib = require('iotagent-node-lib');
 const mqtt = require('mqtt');
 
-describe('Static provisioning (LoRaServerIo)', function () {
+describe('Static provisioning (ChirpStack)', function () {
 	let testMosquittoHost = 'localhost';
 	let orionHost = iotAgentConfig.iota.contextBroker.host;
 	let orionPort = iotAgentConfig.iota.contextBroker.port;
@@ -151,7 +151,7 @@ describe('Static provisioning (LoRaServerIo)', function () {
 					lorawan: {
 						application_server: {
 							host: 'localhost',
-							provider: 'loraserver.io'
+							provider: 'chirpstack'
 						},
 						app_eui: '70B3D57ED000985F',
 						application_id: '1',
@@ -229,7 +229,7 @@ describe('Static provisioning (LoRaServerIo)', function () {
 					lorawan: {
 						application_server: {
 							host: 'localhost',
-							provider: 'loraserver.io'
+							provider: 'chirpstack'
 						},
 						app_eui: '70B3D57ED000985F',
 						application_id: '1',
