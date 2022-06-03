@@ -2,7 +2,7 @@
 name: Test
 
 on:
-  ? pull_request
+  pull_request:
   push:
     branches:
       - master
@@ -13,18 +13,47 @@ jobs:
     strategy:
       matrix:
         node: [10, 12]
+    env:
+      COVERALLS_REPO_TOKEN: ${{secrets.COVERALLS_REPO_TOKEN_SECRET}}
     steps:
       - uses: actions/checkout@v2
+      - run: docker network create test
       - run: docker pull mongo:3.2
-      - run: docker run -d --net host -l mongodb mongo:3.2
-      - run: docker pull fiware/orion:latest
-      - run: docker run -d --net host -l orion fiware/orion:latest
+      - run: docker run -d --network=test -p 27017:27017 --name mongodb mongo:3.2
+      - run: docker pull fiware/orion:2.2.0
+      - run: docker run -d --network=test -p 1026:1026 --name orion fiware/orion:2.2.0 -dbhost mongodb -port 1026 -logLevel DEBUG
       - run: docker pull ansi/mosquitto
-      - run: docker run -d --net host -l mosquitto ansi/mosquitto
+      - run: docker run -d --network=test -p 1883:1883 --name mosquitto ansi/mosquitto
       - uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node }}
-      - run: npm install --also=dev
-      - env:
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN_SECRET }}
-        run: npm run test:coveralls
+      - name: "Unit Tests with Node.js ${{ matrix.node }}"
+        run: |
+          npm install
+          npm test
+  code-coverage:
+    name: Coveralls Code Coverage
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v2
+      - name: "Test Coverage with Node.js 12.x"
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - uses: actions/checkout@v2
+      - run: docker network create test
+      - run: docker pull mongo:3.2
+      - run: docker run -d --network=test -p 27017:27017 --name mongodb mongo:3.2
+      - run: docker pull fiware/orion:2.2.0
+      - run: docker run -d --network=test -p 1026:1026 --name orion fiware/orion:2.2.0 -dbhost mongodb -port 1026 -logLevel DEBUG
+      - run: docker pull ansi/mosquitto
+      - run: docker run -d --network=test -p 1883:1883 --name mosquitto ansi/mosquitto
+      - run: |
+          npm install
+          npm run test:coverage
+      - name: Push to Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}

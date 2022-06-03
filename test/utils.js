@@ -47,7 +47,7 @@ function deleteEntityCB(cbConfig, service, servicePath, cbEntityName, callback) 
 		}
 	};
 
-	request(optionsCB, function(error, response, body) {
+	request(optionsCB, function (error, response, body) {
 		if (error) {
 			winston.error(error);
 		}

@@ -28,7 +28,7 @@ const iotagentLora = require('../../');
 const iotAgentLib = require('iotagent-node-lib');
 const mqtt = require('mqtt');
 
-describe('Static provisioning', function() {
+describe('Static provisioning', function () {
 	let testMosquittoHost = 'localhost';
 	let orionHost = iotAgentConfig.iota.contextBroker.host;
 	let orionPort = iotAgentConfig.iota.contextBroker.port;
@@ -53,7 +53,7 @@ describe('Static provisioning', function() {
 		orionServer = orionHost + ':' + orionPort;
 	}
 
-	beforeEach(function(done) {
+	beforeEach(function (done) {
 		async.series(
 			[
 				async.apply(
@@ -68,7 +68,7 @@ describe('Static provisioning', function() {
 		);
 	});
 
-	afterEach(function(done) {
+	afterEach(function (done) {
 		async.series(
 			[
 				iotAgentLib.clearAll,
@@ -85,8 +85,8 @@ describe('Static provisioning', function() {
 		);
 	});
 
-	describe('When a new type is provisioned without LoRaWAN configuration', function() {
-		it('Should start the agent without error', function(done) {
+	describe('When a new type is provisioned without LoRaWAN configuration', function () {
+		it('Should start the agent without error', function (done) {
 			const sensorType = {
 				service: 'factory',
 				subservice: '/robots',
@@ -99,19 +99,19 @@ describe('Static provisioning', function() {
 			};
 
 			iotAgentConfig.iota.types.Robot = sensorType;
-			iotagentLora.start(iotAgentConfig, function(error) {
+			iotagentLora.start(iotAgentConfig, function (error) {
 				should.not.exist(error);
 				return done();
 			});
 		});
 	});
 
-	describe('When a new type is provisioned with LoRaWAN configuration', function() {
+	describe('When a new type is provisioned with LoRaWAN configuration', function () {
 		let devId;
 		let cbEntityName;
 		let sensorType;
 		let optionsCB;
-		it('Should start the agent without error', function(done) {
+		it('Should start the agent without error', function (done) {
 			sensorType = {
 				service: 'factory',
 				subservice: '/robots',
@@ -176,23 +176,23 @@ describe('Static provisioning', function() {
 
 			iotAgentConfig.iota.types[type] = sensorType;
 
-			iotagentLora.start(iotAgentConfig, function(error) {
+			iotagentLora.start(iotAgentConfig, function (error) {
 				should.not.exist(error);
 				return done();
 			});
 		});
 
-		it('Should register correctly new devices for the type and process their active attributes', function(done) {
+		it('Should register correctly new devices for the type and process their active attributes', function (done) {
 			const attributesExample = utils.readExampleFile('./test/activeAttributes/cayenneLpp.json');
 			attributesExample.dev_id = devId;
 			const client = mqtt.connect('mqtt://' + testMosquittoHost);
-			client.on('connect', function() {
+			client.on('connect', function () {
 				client.publish(
 					sensorType.internalAttributes.lorawan.application_id + '/devices/' + devId + '/up',
 					JSON.stringify(attributesExample)
 				);
-				setTimeout(function() {
-					request(optionsCB, function(error, response, body) {
+				setTimeout(function () {
+					request(optionsCB, function (error, response, body) {
 						should.not.exist(error);
 						response.should.have.property('statusCode', 200);
 						body.should.have.property('id', cbEntityName);
@@ -207,8 +207,8 @@ describe('Static provisioning', function() {
 		});
 	});
 
-	describe('When a new type is provisioned with LoRaWAN configuration but the application server has been already used for other type', function() {
-		it('Should not start the agent', function(done) {
+	describe('When a new type is provisioned with LoRaWAN configuration but the application server has been already used for other type', function () {
+		it('Should not start the agent', function (done) {
 			const sensorType = {
 				service: 'factory',
 				subservice: '/robots',
@@ -233,7 +233,7 @@ describe('Static provisioning', function() {
 				}
 			};
 			iotAgentConfig.iota.types.Robot2 = sensorType;
-			iotagentLora.start(iotAgentConfig, function(error) {
+			iotagentLora.start(iotAgentConfig, function (error) {
 				should.exist(error);
 				return done();
 			});

@@ -1,43 +1,45 @@
 ## [1.2.4](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/compare/v1.2.3...v1.2.4) (2021-01-22)
 
-
 ### Bug Fixes
 
-* loraserverioAppService.js : In the MQTT subscription, the text 'rx', which is obsolete for
-  ChirpStack since version 3.11.0 (11/18/2020), has been replaced by '/event/up', which is 
-  what ChirpStack is currently publishing. As a consequence, if (splittedMqttTopic.length !== 5)
-  also had to be changed from 5 to 6, since otherwise it gives a 'Bad format for a LoRaServer.io 
-  topic'.
-  Reference: https://www.chirpstack.io/application-server/integrations/mqtt/
+-   fix failing test due to PR #120
+    ([b0cb421](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/commit/b0cb421))
 
+-   loraserverioAppService.js : In the MQTT subscription, the text 'rx', which is obsolete for ChirpStack since version
+    3.11.0 (11/18/2020), has been replaced by '/event/up', which is what ChirpStack is currently publishing. As a
+    consequence, if (splittedMqttTopic.length !== 5) also had to be changed from 5 to 6, since otherwise it gives a 'Bad
+    format for a LoRaServer.io topic'. Reference: https://www.chirpstack.io/application-server/integrations/mqtt/
 
 ## [1.2.3](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/compare/v1.2.2...v1.2.3) (2019-06-13)
 
-
 ### Bug Fixes
 
-* **loraserver.io #70:** MQTT topics updated to versions after v1 ([6e40ec9](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/commit/6e40ec9)), closes [#70](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/issues/70)
+-   **loraserver.io #70:** MQTT topics updated to versions after v1
+    ([6e40ec9](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/commit/6e40ec9)), closes
+    [#70](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/issues/70)
 
 ## [1.2.2](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/compare/v1.2.1...v1.2.2) (2019-06-05)
 
-
 ### Bug Fixes
 
-* forces new release ([3fceee9](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/commit/3fceee9))
+-   forces new release ([3fceee9](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/commit/3fceee9))
 
 ## [1.2.1](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/compare/v1.2.0...v1.2.1) (2019-05-08)
 
-
 ### Bug Fixes
 
-* **mqtt binding #65:** correct handling of reconnections ([#67](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/issues/67)) ([0fa3165](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/commit/0fa3165)), closes [#65](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/issues/65)
+-   **mqtt binding #65:** correct handling of reconnections
+    ([#67](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/issues/67))
+    ([0fa3165](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/commit/0fa3165)), closes
+    [#65](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/issues/65)
 
 # [1.2.0](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/compare/v1.1.0...v1.2.0) (2019-04-04)
 
-
 ### Features
 
-* **docker:** add docker secrets ([5743352](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/commit/5743352)), closes [#58](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/issues/58)
+-   **docker:** add docker secrets
+    ([5743352](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/commit/5743352)), closes
+    [#58](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/issues/58)
 
 # 1.1.0 (2019-04-03)
 

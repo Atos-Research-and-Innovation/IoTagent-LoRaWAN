@@ -31,7 +31,7 @@ const iotAgentLib = require('iotagent-node-lib');
 const mqtt = require('mqtt');
 const CBOR = require('cbor-sync');
 
-describe('Multientity plugin', function() {
+describe('Multientity plugin', function () {
 	let testMosquittoHost = 'localhost';
 	let orionHost = iotAgentConfig.iota.contextBroker.host;
 	let orionPort = iotAgentConfig.iota.contextBroker.port;
@@ -61,7 +61,7 @@ describe('Multientity plugin', function() {
 		}
 	}
 
-	before(function(done) {
+	before(function (done) {
 		readEnvVariables();
 		async.series(
 			[
@@ -73,7 +73,7 @@ describe('Multientity plugin', function() {
 		);
 	});
 
-	after(function(done) {
+	after(function (done) {
 		async.series(
 			[
 				iotAgentLib.clearAll,
@@ -85,10 +85,10 @@ describe('Multientity plugin', function() {
 		);
 	});
 
-	describe('When a device provisioning request with all the required data arrives to the IoT Agent. Multientity plugin', function() {
+	describe('When a device provisioning request with all the required data arrives to the IoT Agent. Multientity plugin', function () {
 		const multientityName = 'Mote001';
 		const multientityType = 'Mote';
-		before(function(done) {
+		before(function (done) {
 			const createEntityCB = {
 				url: 'http://' + orionServer + '/v2/entities/',
 				method: 'POST',
@@ -106,7 +106,7 @@ describe('Multientity plugin', function() {
 				}
 			};
 
-			request(createEntityCB, function(error, response, body) {
+			request(createEntityCB, function (error, response, body) {
 				should.not.exist(error);
 				response.should.have.property('statusCode', 201);
 				done();
@@ -132,17 +132,16 @@ describe('Multientity plugin', function() {
 			}
 		};
 
-		it('should add the device to the devices list', function(done) {
+		it('should add the device to the devices list', function (done) {
 			if (testMosquittoHost) {
-				/* eslint-disable-next-line  standard/computed-property-even-spacing */
 				options.json.devices[0].internal_attributes.lorawan.application_server.host = testMosquittoHost;
 			}
 
-			request(options, function(error, response, body) {
+			request(options, function (error, response, body) {
 				should.not.exist(error);
 				response.should.have.property('statusCode', 201);
-				setTimeout(function() {
-					request(optionsGetDevice, function(error, response, body) {
+				setTimeout(function () {
+					request(optionsGetDevice, function (error, response, body) {
 						should.not.exist(error);
 						response.should.have.property('statusCode', 200);
 						body.should.have.property('count', 1);
@@ -156,7 +155,7 @@ describe('Multientity plugin', function() {
 			});
 		});
 
-		it('should register the entity in the CB', function(done) {
+		it('should register the entity in the CB', function (done) {
 			const optionsCB = {
 				url: 'http://' + orionServer + '/v2/entities/' + options.json.devices[0].entity_name,
 				method: 'GET',
@@ -167,7 +166,7 @@ describe('Multientity plugin', function() {
 				}
 			};
 
-			request(optionsCB, function(error, response, body) {
+			request(optionsCB, function (error, response, body) {
 				should.not.exist(error);
 				response.should.have.property('statusCode', 200);
 				body.should.have.property('id', options.json.devices[0].entity_name);
@@ -175,7 +174,7 @@ describe('Multientity plugin', function() {
 			});
 		});
 
-		it('Should process correctly active attributes represented in CBOR model', function(done) {
+		it('Should process correctly active attributes represented in CBOR model', function (done) {
 			const rawJSONPayload = {
 				barometric_pressure_0: 0,
 				digital_in_3: 101,
@@ -208,7 +207,7 @@ describe('Multientity plugin', function() {
 			const attributesExample = utils.readExampleFile('./test/activeAttributes/emptyCbor.json');
 			attributesExample.payload_raw = encodedBuffer.toString('base64');
 			const client = mqtt.connect('mqtt://' + testMosquittoHost);
-			client.on('connect', function() {
+			client.on('connect', function () {
 				client.publish(
 					options.json.devices[0].internal_attributes.lorawan.application_id +
 						'/devices/' +
@@ -216,15 +215,15 @@ describe('Multientity plugin', function() {
 						'/up',
 					JSON.stringify(attributesExample)
 				);
-				setTimeout(function() {
-					request(optionsCB, function(error, response, body) {
+				setTimeout(function () {
+					request(optionsCB, function (error, response, body) {
 						should.not.exist(error);
 						response.should.have.property('statusCode', 200);
 						body.should.have.property('id', options.json.devices[0].entity_name);
 						body.should.have.property('digital_in_3');
 						body.digital_in_3.should.have.property('type', 'Number');
 						body.digital_in_3.should.have.property('value', 101);
-						request(optionsCBMultiEntity, function(error, response, body) {
+						request(optionsCBMultiEntity, function (error, response, body) {
 							should.not.exist(error);
 							response.should.have.property('statusCode', 200);
 							body.should.have.property('id', multientityName);
