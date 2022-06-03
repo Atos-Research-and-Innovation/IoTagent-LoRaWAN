@@ -170,7 +170,105 @@ describe('Device provisioning API: Provision devices (ChirpStack)', function () 
 		});
 	});
 
-	describe('When a device provisioning request with all the required data arrives to the IoT Agent and the Application Server already exists', function () {
+	describe('When a device provisioning request with all the required data arrives to the IoT Agent (mqtts)', function() {
+		const options = {
+			url: 'http://localhost:' + iotAgentConfig.iota.server.port + '/iot/devices',
+			method: 'POST',
+			json: utils.readExampleFile('./test/deviceProvisioning/provisionDevice1LoRaServerIoMqtts.json'),
+			headers: {
+				'fiware-service': service,
+				'fiware-servicepath': subservice
+			}
+		};
+
+		if (testMosquittoHost) {
+			options.json.devices[0].internal_attributes.lorawan.application_server.host = testMosquittoHost;
+		}
+
+		const optionsGetDevice = {
+			url: 'http://localhost:' + iotAgentConfig.iota.server.port + '/iot/devices',
+			method: 'GET',
+			json: true,
+			headers: {
+				'fiware-service': service,
+				'fiware-servicepath': subservice
+			}
+		};
+
+		const optionsCB = {
+			url: 'http://' + orionServer + '/v2/entities/' + options.json.devices[0].entity_name,
+			method: 'GET',
+			json: true,
+			headers: {
+				'fiware-service': service,
+				'fiware-servicepath': subservice
+			}
+		};
+
+		it('should add the device to the devices list', function(done) {
+			request(options, function(error, response, body) {
+				should.not.exist(error);
+				response.should.have.property('statusCode', 201);
+				setTimeout(function() {
+					request(optionsGetDevice, function(error, response, body) {
+						should.not.exist(error);
+						response.should.have.property('statusCode', 200);
+						body.should.have.property('count', 2);
+						body.should.have.property('devices');
+						body.devices.should.be.an('array');
+						body.devices.should.have.length(2);
+						body.devices[1].should.have.property('device_id', options.json.devices[0].device_id);
+						done();
+					});
+				}, 500);
+			});
+		});
+
+		it('should register the entity in the CB', function(done) {
+			request(optionsCB, function(error, response, body) {
+				should.not.exist(error);
+				response.should.have.property('statusCode', 200);
+				body.should.have.property('id', options.json.devices[0].entity_name);
+				done();
+			});
+		});
+
+		it('Should process correctly active attributes', function(done) {
+			const attributesExample = utils.readExampleFile('./test/activeAttributes/cayenneLppLoRaServerIoMqtts.json');
+			const protocol = options.json.devices[0].internal_attributes.lorawan.application_server.protocol;
+			const port = options.json.devices[0].internal_attributes.lorawan.application_server.port;
+			const client = mqtt.connect(
+				protocol + '://' + testMosquittoHost + ':' + port,
+				{
+					rejectUnauthorized: false
+				}
+			);
+			client.on('connect', function() {
+				client.publish(
+					'application/' +
+						options.json.devices[0].internal_attributes.lorawan.application_id +
+						'/device/' +
+						options.json.devices[0].internal_attributes.lorawan.dev_eui.toLowerCase() +
+						'/event/up',
+					JSON.stringify(attributesExample)
+				);
+				setTimeout(function() {
+					request(optionsCB, function(error, response, body) {
+						should.not.exist(error);
+						response.should.have.property('statusCode', 200);
+						body.should.have.property('id', options.json.devices[0].entity_name);
+						body.should.have.property('temperature_1');
+						body.temperature_1.should.have.property('type', 'Number');
+						body.temperature_1.should.have.property('value', 27.2);
+						client.end();
+						done();
+					});
+				}, 500);
+			});
+		});
+	});
+
+	describe('When a device provisioning request with all the required data arrives to the IoT Agent and the Application Server already exists', function() {
 		const options = {
 			url: 'http://localhost:' + iotAgentConfig.iota.server.port + '/iot/devices',
 			method: 'POST',
@@ -213,11 +311,11 @@ describe('Device provisioning API: Provision devices (ChirpStack)', function () 
 					request(optionsGetDevice, function (error, response, body) {
 						should.not.exist(error);
 						response.should.have.property('statusCode', 200);
-						body.should.have.property('count', 2);
+						body.should.have.property('count', 3);
 						body.should.have.property('devices');
 						body.devices.should.be.an('array');
-						body.devices.should.have.length(2);
-						body.devices[1].should.have.property('device_id', options.json.devices[0].device_id);
+						body.devices.should.have.length(3);
+						body.devices[2].should.have.property('device_id', options.json.devices[0].device_id);
 						done();
 					});
 				}, 500);

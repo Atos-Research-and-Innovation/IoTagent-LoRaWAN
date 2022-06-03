@@ -6,3 +6,6 @@ package-lock.json
 examples/devices/stm32/.metadata/
 .eslintcache
 .nyc_output
+docker/mosquitto/config-ssl/certs/ca.*
+docker/mosquitto/config-ssl/certs/server.*
+docker/mosquitto/config-ssl/certs/client.*

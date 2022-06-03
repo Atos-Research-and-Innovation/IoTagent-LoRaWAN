@@ -18,7 +18,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          cd docker
+          cd docker/mosquitto/config-ssl/certs
+          bash generate-ca.sh
+          cd ../../..
           docker compose -f docker-compose-dev.yml up -d
       - uses: actions/setup-node@v2
         with:

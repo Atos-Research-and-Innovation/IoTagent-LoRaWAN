@@ -95,7 +95,7 @@ curl localhost:4061/iot/devices -s -S --header 'Content-Type: application/json' 
       "internal_attributes": {
         "lorawan": {
           "application_server": {
-            "host": "eu.thethings.network",",
+            "host": "eu.thethings.network",
             "username": "ari_ioe_app_demo1",
             "password": "pwd1",
             "provider": "TTN"
@@ -132,6 +132,9 @@ curl localhost:1026/v2/entities/LORA-N-003 -s -S -H 'Accept: application/json' -
 If a group of devices reports the same observations (i.e., smart meters for a neighborhood or building), the
 _configuration API_ can be used to pre-provision all of them with a single request.**With this approach, all the devices
 sharing the same configuration must be registered under the same Application Server.**
+
+**Note: in this case, you need to use the `app_eui` as the `resource` field, in order for devices to be correctly
+provisioned under this service.**
 
 ```bash
 curl localhost:4061/iot/services -s -S --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'fiware-service: smartgondor' --header 'fiware-servicepath: /gardens' -d @- <<EOF
@@ -193,6 +196,75 @@ In this case, the IoTA will subscribe to any observation coming from the LoRaWAN
 update arrives, it will create the corresponding device internally and also in the Context Broker using the
 pre-provisioned configuration. Finally, it will forward appropriate context update requests to the Context Broker to
 update the attributes' values.
+
+## Connecting to secure lora servers
+
+If the lora server can only be accessed through a secure protocol like MQTTS for example, both protocol and port can be
+defined in the `application_server` field of the configuration.
+
+```bash
+curl localhost:4061/iot/services -s -S --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'fiware-service: smartgondor' --header 'fiware-servicepath: /gardens' -d @- <<EOF
+{
+	"services": [
+   {
+    "entity_type": "LoraDeviceGroup",
+    "apikey": "",
+    "resource": "4569343567897875",
+    "attributes": [
+      {
+        "object_id": "bp0",
+        "name": "barometric_pressure_0",
+        "type": "Number"
+      },
+      {
+        "object_id": "di3",
+        "name": "digital_in_3",
+        "type": "Number"
+      },
+      {
+        "object_id": "do4",
+        "name": "digital_out_4",
+        "type": "Number"
+      },
+      {
+        "object_id": "rh2",
+        "name": "relative_humidity_2",
+        "type": "Number"
+      },
+      {
+        "object_id": "t1",
+        "name": "temperature_1",
+        "type": "Number"
+      }
+    ],
+    "internal_attributes": {
+        "lorawan": {
+          "application_server": {
+            "host": "some.secure.server",
+            "protocol": "mqtts",
+            "port": 8883,
+            "username": "ari_ioe_app_demo1",
+            "password": "pwd1",
+            "provider": "TTN",
+            "options": {
+              "keepalive": 60
+            }
+          },
+          "app_eui": "4569343567897875",
+          "application_id": "ari_ioe_app_demo1",
+          "application_key": "444B8EF16415B5F6ED777EAFE695C49",
+          "data_model": "cayennelpp"
+    }
+  }
+]
+}
+EOF
+```
+
+Both the `protocol` and `port` can be specified (otherwise they default to the default mqtt protocol and port), as well
+as the `options` field, which is an object containing some additional options used by the agent's MQTT client. For a
+full reference of all the options available, see the
+[MQTT Client Documentation](https://github.com/mqttjs/MQTT.js/#mqttclientstreambuilder-options)
 
 ## Static configuration
 
