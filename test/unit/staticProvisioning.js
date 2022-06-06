@@ -208,7 +208,7 @@ describe('Static provisioning', function () {
 	});
 
 	describe('When a new type is provisioned with LoRaWAN configuration but the application server has been already used for other type', function () {
-		it('Should not start the agent', function (done) {
+		it('Should start the agent', function (done) {
 			const sensorType = {
 				service: 'factory',
 				subservice: '/robots',
@@ -234,7 +234,7 @@ describe('Static provisioning', function () {
 			};
 			iotAgentConfig.iota.types.Robot2 = sensorType;
 			iotagentLora.start(iotAgentConfig, function (error) {
-				should.exist(error);
+				should.not.exist(error);
 				return done();
 			});
 		});

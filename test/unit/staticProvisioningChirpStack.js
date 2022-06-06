@@ -215,7 +215,7 @@ describe('Static provisioning (ChirpStack)', function () {
 	});
 
 	describe('When a new type is provisioned with LoRaWAN configuration but the application server has been already used for other type', function () {
-		it('Should not start the agent', function (done) {
+		it('Should start the agent', function (done) {
 			const sensorType = {
 				service: 'factory',
 				subservice: '/robots',
@@ -240,7 +240,7 @@ describe('Static provisioning (ChirpStack)', function () {
 
 			newConf.iota.types.Robot2 = sensorType;
 			iotagentLora.start(newConf, function (error) {
-				should.exist(error);
+				should.not.exist(error);
 				return done();
 			});
 		});

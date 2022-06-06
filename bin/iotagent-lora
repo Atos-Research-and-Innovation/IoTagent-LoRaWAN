@@ -9,11 +9,16 @@
 
 'use strict';
 
-var iotAgentLora = require('../lib/iotagent-lora');
-var winston = require('winston');
+let iotAgent = require('../lib/iotagent-lora'),
+    iotAgentLib = require('iotagent-node-lib'),
+    info = require('../package.json'),
+    context = {
+        op: 'IoTAgentLoRaWAN.Executable'
+    },
+    logger = require('logops');
 
-function start () {
-    var config;
+function start() {
+    let config;
 
     if (process.argv.length === 3) {
         config = require('../' + process.argv[2]);
@@ -21,12 +26,14 @@ function start () {
         config = require('../config');
     }
 
-    iotAgentLora.start(config, function (error) {
+    config.iota.iotaVersion = info.version;
+
+    iotAgentLib.startServer(config, iotAgent, function (error) {
         if (error) {
-            winston.error('Error starting LoRaWAN IoT Agent: %s',
+            logger.error(context, 'Error starting LoRaWAN IoT Agent: [%s] Exiting process',
                 JSON.stringify(error));
         } else {
-            winston.info('LoRaWAN IoT Agent started');
+            logger.info(context, 'LoRaWAN IoT Agent started');
         }
     });
 }

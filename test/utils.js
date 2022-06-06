@@ -23,7 +23,7 @@
 
 const fs = require('fs');
 const request = require('request');
-const winston = require('winston');
+const logger = require('logops');
 
 function readExampleFile(name, raw) {
 	let text = null;
@@ -49,7 +49,7 @@ function deleteEntityCB(cbConfig, service, servicePath, cbEntityName, callback) 
 
 	request(optionsCB, function (error, response, body) {
 		if (error) {
-			winston.error(error);
+			logger.error(error);
 		}
 		return callback();
 	});
