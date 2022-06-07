@@ -23,10 +23,22 @@ services:
       - LoRaWAN
 
   mqtt:
-    image: ansi/mosquitto
-    hostname: mosquitto
+    image: eclipse-mosquitto
+    hostname: mqtt
+    volumes:
+      - ./mosquitto/config:/mosquitto/config:rw
     ports:
       - 1883:1883
+    networks:
+      - LoRaWAN
+
+  mqtts:
+    image: eclipse-mosquitto
+    hostname: mqtts
+    volumes:
+      - ./mosquitto/config-ssl:/mosquitto/config:rw
+    ports:
+      - 8883:8883
     networks:
       - LoRaWAN
 

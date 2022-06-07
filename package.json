@@ -27,7 +27,7 @@
     "async": "^2.6.1",
     "cbor-sync": "^1.0.3",
     "iotagent-node-lib": "https://github.com/telefonicaid/iotagent-node-lib.git#master",
-    "mqtt": "^2.18.8",
+    "mqtt": "^4.1.0",
     "request": "^2.88.0",
     "winston": "^3.1.0",
     "yarn": "^1.22.18"
