@@ -11,6 +11,11 @@
     compose and a docker build for developers
 -   use node 12 ([c1aa136](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/commit/c1aa136)).
 
+### Continuous Integration
+
+-   CHANGELOG workflow: Adds a workflow to ensure that the CHANGELOG is updated with every PR
+    ([f6744c8](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/pull/145/commits/f6744c85e777f7fa47c486bd56d32fa329f9ef88))
+
 ### Bug Fixes
 
 -   fix failing test due to PR #120
