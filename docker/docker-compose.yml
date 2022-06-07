@@ -1,32 +1,18 @@
-version: '2'
-
-volumes:
-  mongo_data:
+version: "3.7"
 
 services:
-
   mongodb:
-    expose:
-      - "27017"
-    hostname: mongodb
-    image: mongo:3.2
-    stdin_open: true
-    tty: true
+    extends:
+      file: docker-compose-dev.yml
+      service: mongodb
     volumes:
       - mongo_data:/data/db
 
   orion:
-    command:  -dbhost mongodb -port 1026 -logLevel DEBUG
-    depends_on:
-      - mongodb
-    expose:
-        - "1026"
-    hostname: orion
-    image: fiware/orion:latest
-    ports:
-      - "1026:1026"
-    stdin_open: true
-    tty: true
+    extends:
+      file: docker-compose-dev.yml
+      service: orion
+    command: -dbhost mongodb -port 1026 -logLevel INFO
 
   iotagent-lora:
     depends_on:
@@ -37,5 +23,11 @@ services:
     image: ioeari/iotagent-lora
     ports:
       - "4061:4061"
-    stdin_open: true
-    tty: true
+    networks:
+      - LoRaWAN
+
+volumes:
+  ? mongo_data
+
+networks:
+  LoRaWAN: {}

@@ -30,7 +30,7 @@ const iotAgentLib = require('iotagent-node-lib');
 const mqtt = require('mqtt');
 const should = require('chai').should();
 
-describe('Device provisioning API: Provision devices (LoRaServerIo)', function () {
+describe('Device provisioning API: Provision devices (ChirpStack)', function () {
 	let testMosquittoHost = 'localhost';
 	let orionHost = iotAgentConfig.iota.contextBroker.host;
 	let orionPort = iotAgentConfig.iota.contextBroker.port;
