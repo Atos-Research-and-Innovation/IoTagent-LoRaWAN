@@ -17,7 +17,7 @@
         -   Username: It is the Application ID.
         -   Password (step 3)
 
-**N.B.**: With TTN v3 Application ID may be different and include the tenant id as follows:
+**N.B.**: With TTN v3 Application ID may be different and include the Tenant ID as follows:
 `{application id}@{tenant id}` (cf
 .[here](https://www.thethingsindustries.com/docs/integrations/mqtt/#note-on-using-the-tenant-id)). If you are using The
 Things Stack Open Source, your Application ID will be as before: `{application id}`.
