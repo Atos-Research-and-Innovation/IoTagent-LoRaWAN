@@ -44,13 +44,11 @@ jobs:
         with:
           node-version: 12.x
       - uses: actions/checkout@v2
-      - run: docker network create test
-      - run: docker pull mongo:3.2
-      - run: docker run -d --network=test -p 27017:27017 --name mongodb mongo:3.2
-      - run: docker pull fiware/orion:2.2.0
-      - run: docker run -d --network=test -p 1026:1026 --name orion fiware/orion:2.2.0 -dbhost mongodb -port 1026 -logLevel DEBUG
-      - run: docker pull ansi/mosquitto
-      - run: docker run -d --network=test -p 1883:1883 --name mosquitto ansi/mosquitto
+      - run: |
+          cd docker/mosquitto/config-ssl/certs
+          bash generate-ca.sh
+          cd ../../..
+          docker compose -f docker-compose-dev.yml up -d
       - run: |
           npm install
           npm run test:coverage
