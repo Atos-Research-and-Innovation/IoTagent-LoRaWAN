@@ -5,3 +5,4 @@ package-lock.json
 .vscode
 examples/devices/stm32/.metadata/
 .eslintcache
+.nyc_output
