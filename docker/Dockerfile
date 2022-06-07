@@ -70,7 +70,7 @@ RUN if [ "${DOWNLOAD}" = "latest" ] ; \
 	RELEASE_CONCAT=$(echo "${RELEASE}" | tr / -); \
 	# Ensure that unzip is installed, and download the sources
 	apt-get update && \
-	apt-get install -y  --no-install-recommends unzip && \
+	apt-get install -y  --no-install-recommends unzip wget && \
 	wget --no-check-certificate -O source.zip https://github.com/"${GITHUB_ACCOUNT}"/"${GITHUB_REPOSITORY}"/archive/"${RELEASE}".zip && \
 	unzip source.zip && \
 	rm source.zip && \
