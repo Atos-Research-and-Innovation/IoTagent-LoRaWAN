@@ -22,12 +22,12 @@ services:
     hostname: iotagent-lora
     image: ioeari/iotagent-lora
     ports:
-      - "4061:4061"
+      - "4041:4041"
     networks:
       - LoRaWAN
 
 volumes:
-  ? mongo_data
+  mongo_data:
 
 networks:
   LoRaWAN: {}

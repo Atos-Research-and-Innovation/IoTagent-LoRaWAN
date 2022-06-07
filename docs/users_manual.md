@@ -17,6 +17,11 @@
         -   Username: It is the Application ID.
         -   Password (step 3)
 
+**N.B.**: With TTN v3 Application ID may be different and include the tenant id as follows:
+`{application id}@{tenant id}` (cf
+.[here](https://www.thethingsindustries.com/docs/integrations/mqtt/#note-on-using-the-tenant-id)). If you are using The
+Things Stack Open Source, your Application ID will be as before: `{application id}`.
+
 ## ChirpStack.io
 
 1.  Install/deploy LoRa Server project. Docker installation method is recommended:
@@ -281,10 +286,10 @@ config.iota = {
     contextBroker: {
         host: "localhost",
         port: "1026",
-        ngsiVersion: "v2"
+        ngsiVersion: "v2",
     },
     server: {
-        port: 4041
+        port: 4041,
     },
     service: "howtoService",
     subservice: "/howto",
@@ -293,12 +298,12 @@ config.iota = {
     defaultType: "Thing",
     defaultResource: "/iot/d",
     deviceRegistry: {
-        type: "mongodb"
+        type: "mongodb",
     },
     mongodb: {
         host: "localhost",
         port: "27017",
-        db: "iotagentLoraTest"
+        db: "iotagentLoraTest",
     },
     types: {
         Mote: {
@@ -308,31 +313,31 @@ config.iota = {
                 {
                     object_id: "bp0",
                     name: "barometric_pressure_0",
-                    type: "hpa"
+                    type: "hpa",
                 },
                 {
                     object_id: "di3",
                     name: "digital_in_3",
-                    type: "Number"
+                    type: "Number",
                 },
                 {
                     object_id: "do4",
                     name: "digital_out_4",
-                    type: "Number"
+                    type: "Number",
                 },
                 {
                     object_id: "rh2",
                     name: "relative_humidity_2",
-                    type: "Number"
+                    type: "Number",
                 },
                 {
                     object_id: "t1",
                     name: "temperature_1",
-                    type: "Number"
-                }
-            ]
-        }
-    }
+                    type: "Number",
+                },
+            ],
+        },
+    },
 };
 
 module.exports = config;
