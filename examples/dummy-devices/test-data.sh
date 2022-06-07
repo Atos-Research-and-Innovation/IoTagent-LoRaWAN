@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 echo 'sending dummy data to mqtt queue using TTN format'
-docker exec -ti dummy-devices-mqtt-1 mosquitto_pub -h mqtt -u admin -P password -t demoTTN/devices/myDevice/up -m '{
+docker exec -ti dummy-devices-mqtt-1 mosquitto_pub -h mqtt -u admin -P password -t v3/demoTTN/devices/myDevice/up -m '{
   "app_id": "demoTTN",
   "dev_id": "myDevice",
   "hardware_serial": "0102030405060708",

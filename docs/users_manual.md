@@ -17,6 +17,11 @@
         -   Username: It is the Application ID.
         -   Password (step 3)
 
+**N.B.**: With TTN v3 Application ID may be different and include the Tenant ID as follows:
+`{application id}@{tenant id}` (cf
+.[here](https://www.thethingsindustries.com/docs/integrations/mqtt/#note-on-using-the-tenant-id)). If you are using The
+Things Stack Open Source, your Application ID will be as before: `{application id}`.
+
 ## ChirpStack.io
 
 1.  Install/deploy LoRa Server project. Docker installation method is recommended:
@@ -281,10 +286,10 @@ config.iota = {
     contextBroker: {
         host: "localhost",
         port: "1026",
-        ngsiVersion: "v2"
+        ngsiVersion: "v2",
     },
     server: {
-        port: 4041
+        port: 4041,
     },
     service: "howtoService",
     subservice: "/howto",
@@ -293,12 +298,12 @@ config.iota = {
     defaultType: "Thing",
     defaultResource: "/iot/d",
     deviceRegistry: {
-        type: "mongodb"
+        type: "mongodb",
     },
     mongodb: {
         host: "localhost",
         port: "27017",
-        db: "iotagentLoraTest"
+        db: "iotagentLoraTest",
     },
     types: {
         Mote: {
@@ -308,31 +313,31 @@ config.iota = {
                 {
                     object_id: "bp0",
                     name: "barometric_pressure_0",
-                    type: "hpa"
+                    type: "hpa",
                 },
                 {
                     object_id: "di3",
                     name: "digital_in_3",
-                    type: "Number"
+                    type: "Number",
                 },
                 {
                     object_id: "do4",
                     name: "digital_out_4",
-                    type: "Number"
+                    type: "Number",
                 },
                 {
                     object_id: "rh2",
                     name: "relative_humidity_2",
-                    type: "Number"
+                    type: "Number",
                 },
                 {
                     object_id: "t1",
                     name: "temperature_1",
-                    type: "Number"
-                }
-            ]
-        }
-    }
+                    type: "Number",
+                },
+            ],
+        },
+    },
 };
 
 module.exports = config;
@@ -449,7 +454,7 @@ This script will send a JSON message to the mqtt broker as defined by TTN api, e
 
 The `payload_raw` field contains a base64 encoded version of the binary encoding of the CayenneLPP payload.
 
-The topic used by TTN v2 API has the following format: `{application_id}/devices/{device_id}/up`.
+The topic used by TTN v3 API has the following format: `v3/{application_id}/devices/{device_id}/up`.
 
 Using the service group defined above, the CayenneLPP payload will be decoded and mapped to the NGSI format, the
 resulting NGSI entity should be something like:

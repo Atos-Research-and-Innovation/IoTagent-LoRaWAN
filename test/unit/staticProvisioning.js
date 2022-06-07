@@ -188,7 +188,7 @@ describe('Static provisioning', function () {
 			const client = mqtt.connect('mqtt://' + testMosquittoHost);
 			client.on('connect', function () {
 				client.publish(
-					sensorType.internalAttributes.lorawan.application_id + '/devices/' + devId + '/up',
+					'v3/' + sensorType.internalAttributes.lorawan.application_id + '/devices/' + devId + '/up',
 					JSON.stringify(attributesExample)
 				);
 				setTimeout(function () {

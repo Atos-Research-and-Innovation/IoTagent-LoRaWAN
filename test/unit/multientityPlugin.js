@@ -209,7 +209,8 @@ describe('Multientity plugin', function () {
 			const client = mqtt.connect('mqtt://' + testMosquittoHost);
 			client.on('connect', function () {
 				client.publish(
-					options.json.devices[0].internal_attributes.lorawan.application_id +
+					'v3/' +
+						options.json.devices[0].internal_attributes.lorawan.application_id +
 						'/devices/' +
 						options.json.devices[0].device_id +
 						'/up',

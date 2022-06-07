@@ -2,6 +2,8 @@
 
 ### Features
 
+-   support ttn v3
+    ([185fd9b](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/pull/147/commits/185fd9bf1aad26b3816d74a4d67b90e36530af83))
 -   refactor chirpstack support
     ([a4c3aa6](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/commit/a4c3aa6)):
     -   change the provider id to support chirpstack
