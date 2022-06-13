@@ -33,6 +33,9 @@
     "winston": "^3.7.2",
     "yarn": "^1.22.18"
   },
+  "engines": {
+    "node": ">=12"
+  },
   "devDependencies": {
     "@semantic-release/changelog": "^3.0.2",
     "@semantic-release/git": "^7.0.8",
