@@ -35,6 +35,7 @@
 -   **loraserver.io #70:** MQTT topics updated to versions after v1
     ([6e40ec9](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/commit/6e40ec9)), closes
     [#70](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/issues/70)
+-   **update build badge #152:**([22d0a70](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/pull/153/commits/22d0a706e8da4a1a46754fd8a0a599b7ed2c5c32))
 
 ## [1.2.2](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/compare/v1.2.1...v1.2.2) (2019-06-05)
 
