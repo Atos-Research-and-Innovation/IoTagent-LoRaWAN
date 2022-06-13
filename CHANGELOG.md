@@ -35,6 +35,10 @@
     consequence, if (splittedMqttTopic.length !== 5) also had to be changed from 5 to 6, since otherwise it gives a 'Bad
     format for a LoRaServer.io topic'. Reference: https://www.chirpstack.io/application-server/integrations/mqtt/
 
+### Documentation
+
+-   Document docker images release procedure (#82).
+
 ## [1.2.4](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/compare/v1.2.3...v1.2.4) (2021-01-22)
 
 ## [1.2.3](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/compare/v1.2.2...v1.2.3) (2019-06-13)
