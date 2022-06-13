@@ -66,6 +66,19 @@ Information about how to install the LoRaWAN IoT Agent can be found at the corre
 
 A `Dockerfile` is also available for your use - further information can be found [here](docker/README.md)
 
+### Docker Images
+
+Docker images are available on
+[docker hub](https://hub.docker.com/r/orchestracities/quantumleap/):
+
+- `latest` refers to the last release. This behaviour will be introduced
+    since `1.2.5` release.
+- `edge` refers to the version in master, this behaviour is introduced
+    since `1.2.5-next` activities.
+- `*.*.*` refers to specific releases.
+- additionally (usage is not recommended), we release images
+  for each branch on [this repository](https://hub.docker.com/r/ioeari/iotagent-lora).
+
 ## Usage
 
 Information about how to use the IoT Agent can be found in the
