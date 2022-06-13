@@ -1,6 +1,6 @@
 {
   "name": "iotagent-lora",
-  "version": "1.2.3",
+  "version": "1.2.5-next",
   "description": "IoT Agent for LoRaWAN protocol",
   "main": "lib/iotagent-lora",
   "scripts": {
@@ -27,9 +27,10 @@
     "async": "^2.6.1",
     "cbor-sync": "^1.0.3",
     "iotagent-node-lib": "https://github.com/telefonicaid/iotagent-node-lib.git#master",
-    "mqtt": "^4.1.0",
+    "lodash": "^4.17.21",
+    "mqtt": "^4.2.7",
     "request": "^2.88.0",
-    "winston": "^3.1.0",
+    "winston": "^3.7.2",
     "yarn": "^1.22.18"
   },
   "devDependencies": {
@@ -43,6 +44,7 @@
     "eslint-plugin-prettier": "~3.1.4",
     "husky": "~4.2.5",
     "lint-staged": "~10.2.11",
+    "logops": "2.1.2",
     "mocha": "8.0.1",
     "nock": "13.0.3",
     "nyc": "~15.1.0",

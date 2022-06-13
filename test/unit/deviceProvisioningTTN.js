@@ -249,6 +249,9 @@ describe('Device provisioning API: Provision devices (TTN)', function () {
 						body.devices.should.be.an('array');
 						body.devices.should.have.length(1);
 						body.devices[0].should.have.property('device_id', options.json.devices[0].device_id);
+						body.devices[0].should.have.property('attributes');
+						body.devices[0].attributes.should.be.an('array');
+						body.devices[0].attributes.should.have.length(4);
 						done();
 					});
 				}, 500);
@@ -288,6 +291,99 @@ describe('Device provisioning API: Provision devices (TTN)', function () {
 						done();
 					});
 				}, 500);
+			});
+		});
+	});
+
+	describe('When an existing device is updated', function () {
+		const deviceId = 'lora_n_003';
+
+		const options = {
+			url: 'http://localhost:' + iotAgentConfig.iota.server.port + '/iot/devices/' + deviceId,
+			method: 'PUT',
+			json: utils.readExampleFile('./test/deviceProvisioning/updateDevice1TTN.json'),
+			headers: {
+				'fiware-service': service,
+				'fiware-servicepath': subservice
+			}
+		};
+
+		if (testMosquittoHost) {
+			options.json.internal_attributes.lorawan.application_server.host = testMosquittoHost;
+		}
+
+		const optionsGetDevice = {
+			url: 'http://localhost:' + iotAgentConfig.iota.server.port + '/iot/devices',
+			method: 'GET',
+			json: true,
+			headers: {
+				'fiware-service': service,
+				'fiware-servicepath': subservice
+			}
+		};
+
+		const optionsCB = {
+			url: 'http://' + orionServer + '/v2/entities/' + options.json.entity_name,
+			method: 'GET',
+			json: true,
+			headers: {
+				'fiware-service': service,
+				'fiware-servicepath': subservice
+			}
+		};
+
+		it('should update the device in the devices list', function (done) {
+			request(options, function (error, response, body) {
+				should.not.exist(error);
+				response.should.have.property('statusCode', 204);
+				setTimeout(function () {
+					request(optionsGetDevice, function (error, response, body) {
+						should.not.exist(error);
+						response.should.have.property('statusCode', 200);
+						body.should.have.property('count', 1);
+						body.should.have.property('devices');
+						body.devices.should.be.an('array');
+						body.devices.should.have.length(1);
+						body.devices[0].should.have.property('device_id', deviceId);
+						body.devices[0].should.have.property('attributes');
+						body.devices[0].attributes.should.be.an('array');
+						body.devices[0].attributes.should.have.length(5);
+						done();
+					});
+				}, 500);
+			});
+		});
+
+		it('should re-register the entity in the CB', function (done) {
+			request(optionsCB, function (error, response, body) {
+				should.not.exist(error);
+				response.should.have.property('statusCode', 200);
+				body.should.have.property('id', options.json.entity_name);
+				body.should.have.property('digital_in_3');
+				done();
+			});
+		});
+
+		it('Should process correctly active attributes', function (done) {
+			const attributesExample = utils.readExampleFile('./test/activeAttributes/cayenneLpp.json');
+			const client = mqtt.connect('mqtt://' + testMosquittoHost);
+			client.on('connect', function () {
+				client.publish(
+					'v3/' + options.json.internal_attributes.lorawan.application_id + '/devices/' + deviceId + '/up',
+					JSON.stringify(attributesExample)
+				);
+				setTimeout(function () {
+					request(optionsCB, function (error, response, body) {
+						should.not.exist(error);
+						response.should.have.property('statusCode', 200);
+						body.should.have.property('id', options.json.entity_name);
+						body.should.have.property('digital_in_3');
+						body.digital_in_3.should.have.property('type', 'Number');
+						//body.digital_in_3.should.have.property('value', 100);
+						client.end();
+						done();
+					});
+				}, 1000);
 			});
 		});
 	});

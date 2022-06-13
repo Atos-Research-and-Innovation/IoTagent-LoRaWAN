@@ -174,6 +174,9 @@ describe('Configuration provisioning API: Provision groups (TTN)', function () {
 						body.services.should.have.length(1);
 						body.services[0].should.have.property('entity_type', options.json.services[0].entity_type);
 						body.services[0].should.have.property('_id');
+						body.services[0].should.have.property('attributes');
+						body.services[0].attributes.should.be.an('array');
+						body.services[0].attributes.should.have.length(4);
 						done();
 					});
 				}, 500);
@@ -314,7 +317,7 @@ describe('Configuration provisioning API: Provision groups (TTN)', function () {
 						body.services[0].should.have.property('_id');
 						body.services[0].should.have.property('attributes');
 						body.services[0].attributes.should.be.an('array');
-						body.services[0].attributes.should.have.length(6);
+						body.services[0].attributes.should.have.length(5);
 						done();
 					});
 				}, 500);
@@ -334,9 +337,9 @@ describe('Configuration provisioning API: Provision groups (TTN)', function () {
 						should.not.exist(error);
 						response.should.have.property('statusCode', 200);
 						body.should.have.property('id', cbEntityName);
-						body.should.have.property('temperature_1');
-						body.temperature_1.should.have.property('type', 'Number');
-						body.temperature_1.should.have.property('value', 21.2);
+						body.should.have.property('digital_in_3');
+						body.digital_in_3.should.have.property('type', 'Number');
+						body.digital_in_3.should.have.property('value', 100);
 						client.end();
 						return done();
 					});
