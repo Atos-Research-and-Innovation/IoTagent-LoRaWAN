@@ -7,8 +7,7 @@
 <br>
 [![Documentation badge](https://img.shields.io/readthedocs/fiware-lorawan.svg)](http://fiware-lorawan.readthedocs.io/en/latest/?badge=latest)
 [![Build Status](
-https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/actions/workflows/test.yml/badge.svg)](
-[https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/actions/workflows/test.yml/badge.svg](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/actions?query=branch%3Amaster)
+https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/actions/workflows/test.yml/badge.svg)](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/actions?query=branch%3Amaster)
 [![Coverage Status](https://coveralls.io/repos/github/Atos-Research-and-Innovation/IoTagent-LoRaWAN/badge.svg?branch=master)](https://coveralls.io/github/Atos-Research-and-Innovation/IoTagent-LoRaWAN?branch=master)
 ![Status](https://nexus.lab.fiware.org/static/badges/statuses/iot-lorawan.svg)
 [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/4827/badge)](https://bestpractices.coreinfrastructure.org/projects/4827)
