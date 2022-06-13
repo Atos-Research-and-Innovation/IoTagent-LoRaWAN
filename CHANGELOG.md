@@ -2,6 +2,7 @@
 
 ### Features
 
+-   use specific version of iot agent node lib (#132)
 -   replace winston with default logging facility
     ([37aacdb](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/pull/150/commits/37aacdbfcd983b4f67b14e49d6d05e0cfb7badd1))
 -   reconnect lost mqtt connection
