@@ -2,7 +2,7 @@
 
 ### Features
 
--   support Node v14 (#155)
+-   support Node v14 and v16, default to Node v14, deprecate Node v10 (#155)
 
 ### Continuous Integration
 
