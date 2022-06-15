@@ -69,7 +69,7 @@ A `Dockerfile` is also available for your use - further information can be found
 ### Docker Images
 
 Docker images are available on
-[docker hub](https://hub.docker.com/r/orchestracities/quantumleap/):
+[docker hub](https://hub.docker.com/r/fiware/iotagent-lorawan/):
 
 -   `latest` refers to the last release. This behaviour will be introduced
     since `1.2.5` release.
