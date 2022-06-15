@@ -61,7 +61,7 @@ describe('Static provisioning', function () {
 					iotAgentConfig.iota.contextBroker,
 					service,
 					subservice,
-					'lora_unprovisioned_device:LoraDeviceGroup'
+					'urn:LoraDeviceGroup:lora_unprovisioned_device'
 				)
 			],
 			done
@@ -78,7 +78,7 @@ describe('Static provisioning', function () {
 					iotAgentConfig.iota.contextBroker,
 					service,
 					subservice,
-					'lora_unprovisioned_device:LoraDeviceGroup'
+					'urn:LoraDeviceGroup:lora_unprovisioned_device'
 				)
 			],
 			done
@@ -159,7 +159,7 @@ describe('Static provisioning', function () {
 
 			devId = 'lora_n_003';
 			const type = 'Robot';
-			cbEntityName = devId + ':' + type;
+			cbEntityName = 'urn:' + type + ':' + devId;
 			optionsCB = {
 				url: 'http://' + orionServer + '/v2/entities/' + cbEntityName,
 				method: 'GET',
