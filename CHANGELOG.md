@@ -1,50 +1,39 @@
-## [1.2.5-next](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/compare/v1.2.4...master) (2022-06-30)
+## [1.2.5](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/compare/v1.2.4...1.2.5) (2022-06-15)
 
 ### Features
 
--   update default config.js
-    ([ffff59d](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/pull/148/commits/ffff59d85febfa6119582cdb7976fbb718945067))
--   support configuration of custom JEXL transformations
-    ([ffff59d](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/pull/148/commits/ffff59d85febfa6119582cdb7976fbb718945067))
--   use specific version of iot agent node lib (#132)
--   replace winston with default logging facility
-    ([37aacdb](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/pull/150/commits/37aacdbfcd983b4f67b14e49d6d05e0cfb7badd1))
--   reconnect lost mqtt connection
-    ([37aacdb](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/pull/150/commits/37aacdbfcd983b4f67b14e49d6d05e0cfb7badd1))
--   support ttn v3
-    ([185fd9b](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/pull/147/commits/185fd9bf1aad26b3816d74a4d67b90e36530af83))
--   refactor chirpstack support
-    ([a4c3aa6](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/commit/a4c3aa6)):
-    -   change the provider id to support chirpstack
-    -   rename files to refer to chirpstack
--   simplify set-up of local dev environment
-    ([fd3fcae](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/commit/fd3fcae)): provide a docker
-    compose and a docker build for developers
--   use node 12 ([c1aa136](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/commit/c1aa136)).
+-   update default config.js (#132)
+-   use specific version of iot agent node lib: 2.21.0 (#132)
+-   support configuration of custom JEXL transformations (#133)
+-   replace winston with default logging facility (#150)
+-   reconnect lost mqtt connection (#134)
+-   support ttn v3 (#111)
+-   support mqtts and other fine grained mqtt application server configuration (#146)
+-   refactor chirpstack support (#144)
+-   simplify set-up of local dev environment (#144)
+-   use node 12 (#121).
 
 ### Continuous Integration
 
--   CHANGELOG workflow: Adds a workflow to ensure that the CHANGELOG is updated with every PR
-    ([f6744c8](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/pull/145/commits/f6744c85e777f7fa47c486bd56d32fa329f9ef88))
+-   adds a workflow to ensure that the CHANGELOG is updated with every PR (#145)
+-   new docker build workflow (#124)
+-   add document and code linting workflow (#123)
+-   add cla signature workflow (#122)
 
 ### Bug Fixes
 
--   follow NGSI-LD naming schema for self provisioning #138 :
-    ([ecd0d36](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/pull/149/commits/ecd0d36350fdcffd1d0f817baa33f1b13d925456))
--   update build badge
-    #152:([22d0a70](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/pull/153/commits/22d0a706e8da4a1a46754fd8a0a599b7ed2c5c32))
--   propagate group configuration updates
-    ([37aacdb](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/pull/150/commits/37aacdbfcd983b4f67b14e49d6d05e0cfb7badd1))
--   fix failing test due to PR #120
-    ([b0cb421](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/commit/b0cb421))
--   loraserverioAppService.js : In the MQTT subscription, the text 'rx', which is obsolete for ChirpStack since version
-    3.11.0 (11/18/2020), has been replaced by '/event/up', which is what ChirpStack is currently publishing. As a
-    consequence, if (splittedMqttTopic.length !== 5) also had to be changed from 5 to 6, since otherwise it gives a 'Bad
-    format for a LoRaServer.io topic'. Reference: https://www.chirpstack.io/application-server/integrations/mqtt/
+-   follow NGSI-LD naming schema for self provisioning (#138)
+-   update build badge (#152)
+-   propagate group configuration updates (#134)
+-   fix failing test due to PR #120 (#143)
+-   lint and prettify code (#142)
+-   lint documents (#141)
+-   loraserverioAppService.js (#120)
 
 ### Documentation
 
--   Document docker images release procedure (#82).
+-   document docker images release procedure (#82).
+-   document how to simulate ttn device (#108).
 
 ## [1.2.4](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/compare/v1.2.3...v1.2.4) (2021-01-22)
 
