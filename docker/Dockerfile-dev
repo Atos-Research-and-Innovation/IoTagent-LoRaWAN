@@ -17,7 +17,7 @@
 # License along with iotagent-lora. If not, see http://www.gnu.org/licenses/.
 #
 
-ARG NODE_VERSION=erbium-slim
+ARG NODE_VERSION=fermium-slim
 
 FROM node:${NODE_VERSION}
 
