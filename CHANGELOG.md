@@ -6,6 +6,7 @@
     ([ffff59d](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/pull/148/commits/ffff59d85febfa6119582cdb7976fbb718945067))
 -   support configuration of custom JEXL transformations
     ([ffff59d](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/pull/148/commits/ffff59d85febfa6119582cdb7976fbb718945067))
+-   use specific version of iot agent node lib (#132)
 -   replace winston with default logging facility
     ([37aacdb](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/pull/150/commits/37aacdbfcd983b4f67b14e49d6d05e0cfb7badd1))
 -   reconnect lost mqtt connection
@@ -40,6 +41,10 @@
     3.11.0 (11/18/2020), has been replaced by '/event/up', which is what ChirpStack is currently publishing. As a
     consequence, if (splittedMqttTopic.length !== 5) also had to be changed from 5 to 6, since otherwise it gives a 'Bad
     format for a LoRaServer.io topic'. Reference: https://www.chirpstack.io/application-server/integrations/mqtt/
+
+### Documentation
+
+-   Document docker images release procedure (#82).
 
 ## [1.2.4](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/compare/v1.2.3...v1.2.4) (2021-01-22)
 

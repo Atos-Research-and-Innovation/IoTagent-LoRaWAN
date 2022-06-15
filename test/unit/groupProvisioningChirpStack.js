@@ -63,14 +63,14 @@ describe('Configuration provisioning API: Provision groups (ChirpStack)', functi
 					iotAgentConfig.iota.contextBroker,
 					service,
 					subservice,
-					'lora_unprovisioned_device:LoraDeviceGroup'
+					'urn:LoraDeviceGroup:lora_unprovisioned_device'
 				),
 				async.apply(
 					utils.deleteEntityCB,
 					iotAgentConfig.iota.contextBroker,
 					service,
 					subservice,
-					'lora_unprovisioned_device2:LoraDeviceGroup'
+					'urn:LoraDeviceGroup:lora_unprovisioned_device2'
 				),
 				async.apply(iotagentLora.start, iotAgentConfig)
 			],
@@ -88,14 +88,14 @@ describe('Configuration provisioning API: Provision groups (ChirpStack)', functi
 					iotAgentConfig.iota.contextBroker,
 					service,
 					subservice,
-					'lora_unprovisioned_device:LoraDeviceGroup'
+					'urn:LoraDeviceGroup:lora_unprovisioned_device'
 				),
 				async.apply(
 					utils.deleteEntityCB,
 					iotAgentConfig.iota.contextBroker,
 					service,
 					subservice,
-					'lora_unprovisioned_device2:LoraDeviceGroup'
+					'urn:LoraDeviceGroup:lora_unprovisioned_device2'
 				)
 			],
 			done
@@ -135,7 +135,7 @@ describe('Configuration provisioning API: Provision groups (ChirpStack)', functi
 			}
 		};
 		const devId = 'lora_unprovisioned_device';
-		const cbEntityName = devId + ':' + options.json.services[0].entity_type;
+		const cbEntityName = 'urn:' + options.json.services[0].entity_type + ':' + devId;
 		const optionsCB = {
 			url: 'http://' + orionServer + '/v2/entities/' + cbEntityName,
 			method: 'GET',
@@ -277,7 +277,7 @@ describe('Configuration provisioning API: Provision groups (ChirpStack)', functi
 		};
 		it('Should keep on listening to devices from provisioned groups', function (done) {
 			const devId = 'lora_unprovisioned_device2';
-			const cbEntityName = devId + ':' + options.json.services[0].entity_type;
+			const cbEntityName = 'urn:' + options.json.services[0].entity_type + ':' + devId;
 			const optionsCB = {
 				url: 'http://' + orionServer + '/v2/entities/' + cbEntityName,
 				method: 'GET',
