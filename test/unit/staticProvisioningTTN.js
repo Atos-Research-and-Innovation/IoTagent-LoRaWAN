@@ -164,7 +164,7 @@ describe('Static provisioning (TTN)', function () {
 
 			devId = 'lora_n_003';
 			const type = 'Robot';
-			cbEntityName = devId + ':' + type;
+			cbEntityName = 'urn:' + type + ':' + devId;
 			optionsCB = {
 				url: 'http://' + orionServer + '/v2/entities/' + cbEntityName,
 				method: 'GET',

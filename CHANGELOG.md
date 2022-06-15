@@ -25,6 +25,8 @@
 
 ### Bug Fixes
 
+-   follow NGSI-LD naming schema for self provisioning #138 :
+    ([ecd0d36](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/pull/149/commits/ecd0d36350fdcffd1d0f817baa33f1b13d925456))
 -   update build badge
     #152:([22d0a70](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/pull/153/commits/22d0a706e8da4a1a46754fd8a0a599b7ed2c5c32))
 -   propagate group configuration updates
