@@ -4,6 +4,8 @@
 
 ### Continuous Integration
 
+-   add code ql workflow (#162)
+
 ### Bug Fixes
 
 ### Documentation
