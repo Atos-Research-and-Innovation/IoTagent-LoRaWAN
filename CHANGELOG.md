@@ -1,3 +1,13 @@
+## [1.2.6-next](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/compare/v1.2.5...master) (2022-08-31)
+
+### Features
+
+### Continuous Integration
+
+### Bug Fixes
+
+### Documentation
+
 ## [1.2.5](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/compare/v1.2.4...1.2.5) (2022-06-15)
 
 ### Features
