@@ -2,6 +2,10 @@
 
 ### Features
 
+-   update default config.js
+    ([ffff59d](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/pull/148/commits/ffff59d85febfa6119582cdb7976fbb718945067))
+-   support configuration of custom JEXL transformations
+    ([ffff59d](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/pull/148/commits/ffff59d85febfa6119582cdb7976fbb718945067))
 -   use specific version of iot agent node lib (#132)
 -   replace winston with default logging facility
     ([37aacdb](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/pull/150/commits/37aacdbfcd983b4f67b14e49d6d05e0cfb7badd1))

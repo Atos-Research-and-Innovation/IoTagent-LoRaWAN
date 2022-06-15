@@ -234,7 +234,24 @@ config.iota = {
 	/**
 	 * Default type, for IOTA installations that won't require preregistration.
 	 */
-	defaultType: 'Thing'
+	defaultType: 'Thing',
+	/**
+	 * flag indicating whether the incoming measures to the IoTAgent should be processed as per the "attributes" field.
+	 */
+	explicitAttrs: false
 };
+
+/**
+ * map {name: function} of extra transformations avaliable at JEXL plugin
+ *  see https://github.com/telefonicaid/iotagent-node-lib/tree/master/doc/expressionLanguage.md#available-functions
+ */
+
+config.jexlTransformations = {};
+
+/**
+ * flag indicating whether the node server will be executed in multi-core option (true) or it will be a
+ * single-thread one (false).
+ */
+//config.multiCore = false;
 
 module.exports = config;
