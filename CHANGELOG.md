@@ -10,6 +10,8 @@
 
 ### Bug Fixes
 
+- Fix wrong docker hub link (#164)
+
 ### Documentation
 
 ## [1.2.5](https://github.com/Atos-Research-and-Innovation/IoTagent-LoRaWAN/compare/v1.2.4...1.2.5) (2022-06-15)
