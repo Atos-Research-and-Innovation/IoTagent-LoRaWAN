@@ -11,6 +11,7 @@
 ### Bug Fixes
 
 - Fix wrong docker hub link (#164)
+- Fix example dummy-sensor script
 
 ### Documentation
 
