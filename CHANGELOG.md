@@ -10,7 +10,9 @@
 
 ### Bug Fixes
 
-- Fix wrong docker hub link (#164)
+-   Fix wrong docker hub link (#164)
+-   Fix example dummy-sensor script
+-   Fix issue removing a device (#165)
 
 ### Documentation
 

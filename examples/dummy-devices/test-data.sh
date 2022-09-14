@@ -16,6 +16,6 @@ sleep 5
 
 echo 'read sent data from orion'
 
-curl --location --request GET 'http://localhost:1026/v2/entities/myDevice:WeatherObserved' \
+curl --location --request GET 'http://localhost:1026/v2/entities/urn:WeatherObserved:myDevice' \
 --header 'fiware-service: smartgondor' \
---header 'fiware-servicePath: /environment'
+--header 'fiware-servicePath: /environment'  | jq
