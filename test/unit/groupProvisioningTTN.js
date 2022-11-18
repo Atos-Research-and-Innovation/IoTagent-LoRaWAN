@@ -468,7 +468,7 @@ describe('Configuration provisioning API: Provision groups (TTN)', function () {
 
 			const encodedBuffer = CBOR.encode(rawJSONPayload);
 			const attributesExample = utils.readExampleFile('./test/activeAttributes/emptyCbor.json');
-			attributesExample.payload_raw = encodedBuffer.toString('base64');
+			attributesExample.uplink_message.frm_payload = encodedBuffer.toString('base64');
 			attributesExample.dev_id = devId;
 			const client = mqtt.connect('mqtt://' + testMosquittoHost);
 			client.on('connect', function () {

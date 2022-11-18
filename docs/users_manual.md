@@ -440,19 +440,48 @@ This script will send a JSON message to the mqtt broker as defined by TTN api, e
 
 ```json
 {
-  "app_id": "demoTTN",
-  "dev_id": "myDevice",
-  "hardware_serial": "0102030405060708",
-  "port": 1,
-  "counter": 2,
-  "is_retry": false,
-  "confirmed": false,
-  "payload_raw": "AHMnSwFnARYCaFADAGQEAQAFAdc=",
+  "end_device_ids": {
+    "device_id": "myDevice",
+    "application_ids": {
+      "application_id": "demoTTN"
+    },
+    "dev_eui": "70B3D57ED00561EC",
+    "join_eui": "8CF957200005727C",
+    "dev_addr": "0102030405060708"
+  },
   ...
+  "received_at": "2022-11-18T10:33:42.184221407Z",
+  "uplink_message": {
+    "session_key_id": "AYSKRe0U59x4b0lMtYqubw==",
+    "f_port": 8,
+    "f_cnt": 46,
+    "frm_payload": "AHMnSwFnARYCaFADAGQEAQAFAdc=",
+    ...
+    "settings": {
+      "data_rate": {
+        "lora": {
+          "bandwidth": 125000,
+          "spreading_factor": 7,
+          "coding_rate": "4/5"
+        }
+      },
+      "frequency": "867900000",
+      "timestamp": 915329612
+    },
+    "received_at": "2022-11-18T10:33:41.976442498Z",
+    "confirmed": true,
+    "consumed_airtime": "0.087296s",
+    "network_ids": {
+      "net_id": "000013",
+      "tenant_id": "ttn",
+      "cluster_id": "eu1",
+      "cluster_address": "eu1.cloud.thethings.network"
+    }
+  }
 }
 ```
 
-The `payload_raw` field contains a base64 encoded version of the binary encoding of the CayenneLPP payload.
+The `frm_payload` field contains a base64 encoded version of the binary encoding of the CayenneLPP payload.
 
 The topic used by TTN v3 API has the following format: `v3/{application_id}/devices/{device_id}/up`.
 

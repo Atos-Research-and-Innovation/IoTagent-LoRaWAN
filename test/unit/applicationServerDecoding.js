@@ -165,7 +165,7 @@ describe('CBOR Attributes', function () {
 			};
 
 			const attributesExample = utils.readExampleFile('./test/activeAttributes/emptyCbor.json');
-			attributesExample.payload_raw = null;
+			attributesExample.uplink_message.frm_payload = null;
 			attributesExample.payload_fields = rawJSONPayload;
 			const client = mqtt.connect('mqtt://' + testMosquittoHost);
 			client.on('connect', function () {

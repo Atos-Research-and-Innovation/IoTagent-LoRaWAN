@@ -9,7 +9,9 @@ docker exec -ti dummy-devices-mqtt-1 mosquitto_pub -h mqtt -u admin -P password 
   "counter": 2,
   "is_retry": false,
   "confirmed": false,
-  "payload_raw": "AHMnSwFnARYCaFADAGQEAQAFAdc="
+  "uplink_message": {
+    "frm_payload": "AHMnSwFnARYCaFADAGQEAQAFAdc="
+  }
 }'
 
 sleep 5
