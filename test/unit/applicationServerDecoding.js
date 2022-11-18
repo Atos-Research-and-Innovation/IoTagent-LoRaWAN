@@ -166,7 +166,7 @@ describe('CBOR Attributes', function () {
 
 			const attributesExample = utils.readExampleFile('./test/activeAttributes/emptyCbor.json');
 			attributesExample.uplink_message.frm_payload = null;
-			attributesExample.payload_fields = rawJSONPayload;
+			attributesExample.uplink_message.decoded_payload = rawJSONPayload;
 			const client = mqtt.connect('mqtt://' + testMosquittoHost);
 			client.on('connect', function () {
 				client.publish(
@@ -213,7 +213,7 @@ describe('CBOR Attributes', function () {
 			};
 
 			const attributesExample = utils.readExampleFile('./test/activeAttributes/emptyCbor.json');
-			attributesExample.payload_fields = rawJSONPayload;
+			attributesExample.uplink_message.decoded_payload = rawJSONPayload;
 			const client = mqtt.connect('mqtt://' + testMosquittoHost);
 			client.on('connect', function () {
 				client.publish('v3/ari_ioe_app_demo1/devices/lora_n_003/up', JSON.stringify(attributesExample));
