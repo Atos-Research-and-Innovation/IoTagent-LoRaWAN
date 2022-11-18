@@ -167,7 +167,7 @@ describe('CBOR Attributes', function () {
 
 			const encodedBuffer = CBOR.encode(rawJSONPayload);
 			const attributesExample = utils.readExampleFile('./test/activeAttributes/emptyCbor.json');
-			attributesExample.payload_raw = encodedBuffer.toString('base64');
+			attributesExample.uplink_message.frm_payload = encodedBuffer.toString('base64');
 			const client = mqtt.connect('mqtt://' + testMosquittoHost);
 			client.on('connect', function () {
 				client.publish(
@@ -215,7 +215,7 @@ describe('CBOR Attributes', function () {
 
 			const encodedBuffer = CBOR.encode(rawJSONPayload);
 			const attributesExample = utils.readExampleFile('./test/activeAttributes/emptyCbor.json');
-			attributesExample.payload_raw = encodedBuffer.toString('base64');
+			attributesExample.uplink_message.frm_payload = encodedBuffer.toString('base64');
 			const client = mqtt.connect('mqtt://' + testMosquittoHost);
 			client.on('connect', function () {
 				client.publish('v3/ari_ioe_app_demo1/devices/lora_n_003/up', JSON.stringify(attributesExample));
@@ -238,7 +238,7 @@ describe('CBOR Attributes', function () {
 	describe('Active attributes are reported with incorrect format', function () {
 		it('Should process correctly active attributes', function (done) {
 			const attributesExample = utils.readExampleFile('./test/activeAttributes/emptyCbor.json');
-			attributesExample.payload_raw = 'no_cbor_payload';
+			attributesExample.uplink_message.frm_payload = 'no_cbor_payload';
 			const client = mqtt.connect('mqtt://' + testMosquittoHost);
 			client.on('connect', function () {
 				client.publish('v3/ari_ioe_app_demo1/devices/lora_n_003/up', JSON.stringify(attributesExample));

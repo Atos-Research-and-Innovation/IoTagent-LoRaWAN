@@ -13,6 +13,7 @@
 -   Fix wrong docker hub link (#164)
 -   Fix example dummy-sensor script
 -   Fix issue removing a device (#165)
+-   Fix CayenneLpp message support for TTN v3 (#170)
 
 ### Documentation
 
