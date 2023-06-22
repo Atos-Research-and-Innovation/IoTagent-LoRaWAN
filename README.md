@@ -2,7 +2,7 @@
 
 [![FIWARE IoT Agents](https://nexus.lab.fiware.org/static/badges/chapters/iot-agents.svg)](https://www.fiware.org/developers/catalogue/)
 [![License: APGL](https://img.shields.io/github/license/Atos-Research-and-Innovation/IoTagent-LoRaWAN.svg)](https://opensource.org/licenses/AGPL-3.0)
-[![Docker](https://img.shields.io/docker/pulls/fiware/iotagent-lorawan.svg)](https://hub.docker.com/r/fiware/iotagent-lorawan/)
+[![Docker badge](https://img.shields.io/badge/quay.io-fiware%2Fiotagent--lorawan-grey?logo=red%20hat&labelColor=EE0000)](https://quay.io/repository/fiware/iotagent-lorawan)
 [![](https://img.shields.io/badge/tag-fiware+iot-orange.svg?logo=stackoverflow)](https://stackoverflow.com/questions/tagged/fiware+iot)
 <br>
 [![Documentation badge](https://img.shields.io/readthedocs/fiware-lorawan.svg)](http://fiware-lorawan.readthedocs.io/en/latest/?badge=latest)
@@ -23,7 +23,7 @@ library's GitHub repository.
 This project is part of [FIWARE](https://www.fiware.org/). For more information check the FIWARE Catalogue entry for the
 [IoT Agents](https://github.com/Fiware/catalogue/tree/master/iot-agents).
 
-| :books: [Documentation](https://fiware-lorawan.readthedocs.io) | :mortar_board: [Academy](https://fiware-academy.readthedocs.io/en/latest/iot-agents/idas) | :whale: [Docker Hub](https://hub.docker.com/r/fiware/iotagent-lorawan/) | :dart: [Roadmap](docs/roadmap.md) |
+| :books: [Documentation](https://fiware-lorawan.readthedocs.io) | :mortar_board: [Academy](https://fiware-academy.readthedocs.io/en/latest/iot-agents/idas) | <img style="height:1em" src="https://quay.io/static/img/quay_favicon.png"/> [quay.io](https://quay.io/repository/fiware/iotagent-lorawan) | :dart: [Roadmap](docs/roadmap.md) |
 | -------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- | --------------------------------- |
 
 
@@ -118,12 +118,15 @@ This project is part of [FIWARE](https://fiware.org/) and has been rated as foll
 
 FIWARE IoT Agent for LoRaWAN protocol is licensed under [Affero General Public License (GPL) version 3](./LICENSE).
 
-© 2019 Atos Spain S.A
+© 2019-2023 Atos Spain S.A
 
 The following third-party library is used under license:
 
-1.  [iotagent-node-lib](https://github.com/telefonicaid/iotagent-node-lib) - **AGPL** © 2014-2019 Telefonica
+1.  [iotagent-node-lib](https://github.com/telefonicaid/iotagent-node-lib) - **AGPL** © 2014-2023 Telefonica
     Investigación y Desarrollo
+
+<details>
+<summary><strong>Further information on the use of the AGPL open source license</strong></summary>
 
 ### Are there any legal issues with AGPL 3.0? Is it safe for me to use?
 
@@ -139,3 +142,5 @@ public statement as follows:
 > incorporate enhancements is considered a derivative work of the product. Software that merely uses or aggregates (i.e.
 > links to) an otherwise unmodified version of existing software is not considered a derivative work, and therefore it
 > does not need to be released as under the same license, or even released as open source.
+
+</details>
