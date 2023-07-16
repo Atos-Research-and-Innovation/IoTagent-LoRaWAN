@@ -1,7 +1,8 @@
 ##!/usr/bin/env bash
 
 #start stack
-docker compose up -d
+#docker compose up -d
+docker-compose up -d
 
 # wait service to be up
 wait=0

@@ -29,6 +29,8 @@
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 
+#define REGION_AS923 1
+#define USE_B_L072Z_LRWAN1 1
 /*!
  * CAYENNE_LPP is myDevices Application server.
  */
@@ -42,7 +44,8 @@
 /*!
  * Defines the application data transmission duty cycle. 5s, value in [ms].
  */
-#define APP_TX_DUTYCYCLE                            10000
+//#define APP_TX_DUTYCYCLE                            10000
+#define APP_TX_DUTYCYCLE                            120000
 /*!
  * LoRaWAN Adaptive Data Rate
  * @note Please note that when ADR is enabled the end-device should be static
@@ -259,42 +262,52 @@ static void Send( void* context )
   TimerStart( &TxLedTimer );  
 #endif
 
-  BSP_sensor_Read( &sensor_data );
+  //BSP_sensor_Read( &sensor_data );
 
 #ifdef CAYENNE_LPP
-  uint8_t cchannel=0;
+  uint8_t cchannel=3;
   //temperature = ( int16_t )( sensor_data.temperature * 10 );     /* in �C * 10 */
-  pressure    = ( uint16_t )( sensor_data.pressure * 100 / 10 );  /* in hPa / 10 */
-  humidity    = ( uint16_t )( sensor_data.humidity * 2 );        /* in %*2     */
+  //pressure    = ( uint16_t )( sensor_data.pressure * 100 / 10 );  /* in hPa / 10 */
+  //humidity    = ( uint16_t )( sensor_data.humidity * 2 );        /* in %*2     */
+  //temperature = 0x255;
+  pressure    = 2;
+  humidity    = 3;
   uint32_t i = 0;
-  uint16_t temperatureDegreeC = HW_GetTemperatureLevel();
-  uint16_t temperatureDegreeC_Int= (temperatureDegreeC)>>8;
-  uint16_t temperatureDegreeC_Frac= ((temperatureDegreeC-(temperatureDegreeC_Int<<8))*100)>>8;
-  temperature = ( int16_t )( temperatureDegreeC_Int* 10 + temperatureDegreeC_Frac/10);
-  batteryLevel = HW_GetBatteryLevel( );                     /* 1 (very low) to 254 (fully charged) */
+  //uint16_t temperatureDegreeC = HW_GetTemperatureLevel();
+  //uint16_t temperatureDegreeC = temperature;
+  //uint16_t temperatureDegreeC_Int= (temperatureDegreeC)>>8;
+  //uint16_t temperatureDegreeC_Frac= ((temperatureDegreeC-(temperatureDegreeC_Int<<8))*100)>>8;
+  //temperature = ( int16_t )( temperatureDegreeC_Int* 10 + temperatureDegreeC_Frac/10);
+  //temperature = 0x255;
+  temperature = 0x100;
+  //batteryLevel = HW_GetBatteryLevel( );                     /* 1 (very low) to 254 (fully charged) */
+  batteryLevel = 200;
 
   AppData.Port = LPP_APP_PORT;
-
+/*
   AppData.Buff[i++] = cchannel++;
   AppData.Buff[i++] = LPP_DATATYPE_BAROMETER;
   AppData.Buff[i++] = ( pressure >> 8 ) & 0xFF;
   AppData.Buff[i++] = pressure & 0xFF;
+*/
   AppData.Buff[i++] = cchannel++;
   AppData.Buff[i++] = LPP_DATATYPE_TEMPERATURE; 
   AppData.Buff[i++] = ( temperature >> 8 ) & 0xFF;
   AppData.Buff[i++] = temperature & 0xFF;
-  AppData.Buff[i++] = cchannel++;
-  AppData.Buff[i++] = LPP_DATATYPE_HUMIDITY;
-  AppData.Buff[i++] = humidity & 0xFF;
+  //AppData.Buff[i++] = cchannel++;
+  //AppData.Buff[i++] = LPP_DATATYPE_HUMIDITY;
+  //AppData.Buff[i++] = humidity & 0xFF;
 #if defined( REGION_US915 ) || defined ( REGION_AU915 )
   /* The maximum payload size does not allow to send more data for lowest DRs */
 #else
+/*
   AppData.Buff[i++] = cchannel++;
   AppData.Buff[i++] = LPP_DATATYPE_DIGITAL_INPUT; 
   AppData.Buff[i++] = batteryLevel*100/254;
   AppData.Buff[i++] = cchannel++;
   AppData.Buff[i++] = LPP_DATATYPE_DIGITAL_OUTPUT; 
   AppData.Buff[i++] = AppLedStateOn;
+*/
 #endif  /* REGION_XX915 */
 #else  /* not CAYENNE_LPP */
 

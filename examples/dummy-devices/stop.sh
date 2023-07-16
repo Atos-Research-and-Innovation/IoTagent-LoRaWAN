@@ -9,4 +9,5 @@ curl --location --request DELETE 'localhost:4041/iot/devices/myDevice' \
 --header 'fiware-service: smartgondor' \
 --header 'fiware-servicepath: /environment'
 
-docker compose down -v
+#docker compose down -v
+docker-compose down -v

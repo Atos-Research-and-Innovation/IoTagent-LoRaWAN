@@ -37,7 +37,8 @@ services:
       - orion
     entrypoint: bin/iotagent-lora docker/config-docker.js
     hostname: iotagent-lora
-    image: ioeari/iotagent-lora
+    #image: ioeari/iotagent-lora
+    image: iot-agent:latest
     ports:
       - "4061:4041"
     stdin_open: true
