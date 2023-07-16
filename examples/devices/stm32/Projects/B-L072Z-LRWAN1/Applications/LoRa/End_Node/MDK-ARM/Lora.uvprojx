@@ -335,7 +335,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls>--C99</MiscControls>
-              <Define>STM32L072xx,USE_B_L072Z_LRWAN1,USE_HAL_DRIVER, REGION_EU868</Define>
+              <Define>STM32L072xx,USE_B_L072Z_LRWAN1,USE_HAL_DRIVER, REGION_AS923</Define>
               <Undefine></Undefine>
               <IncludePath>..\LoRaWAN\App\inc;..\Core\inc;..\..\..\..\..\..\Drivers\BSP\CMWX1ZZABZ-0xx;..\..\..\..\..\..\Drivers\STM32L0xx_HAL_Driver\Inc;..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32L0xx\Include;..\..\..\..\..\..\Drivers\CMSIS\Include;..\..\..\..\..\..\Middlewares\Third_Party\LoRaWAN\Crypto;..\..\..\..\..\..\Middlewares\Third_Party\LoRaWAN\Mac;..\..\..\..\..\..\Middlewares\Third_Party\LoRaWAN\Phy;..\..\..\..\..\..\Middlewares\Third_Party\LoRaWAN\Utilities;..\..\..\..\..\..\Middlewares\Third_Party\LoRaWAN\Core;..\..\..\..\..\..\Drivers\BSP\Components\Common;..\..\..\..\..\..\Drivers\BSP\Components\hts221;..\..\..\..\..\..\Drivers\BSP\Components\lps22hb;..\..\..\..\..\..\Drivers\BSP\Components\lps25hb;..\..\..\..\..\..\Drivers\BSP\Components\sx1276;..\..\..\..\..\..\Drivers\BSP\X_NUCLEO_IKS01A1;..\..\..\..\..\..\Drivers\BSP\X_NUCLEO_IKS01A2;..\..\..\..\..\..\Drivers\BSP\B-L072Z-LRWAN1;..\..\..\..\..\..\Middlewares\Third_Party\LoRaWAN\Mac\region</IncludePath>
             </VariousControls>
