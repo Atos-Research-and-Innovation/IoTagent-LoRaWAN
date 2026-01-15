@@ -26,7 +26,7 @@ services:
       - 9001:9001
 
   orion:
-    command: -dbhost mongodb -port 1026 -logLevel DEBUG
+    command: -dbURI mongodb://mongodb:27017 -logLevel INFO -logForHumans
     platform: linux/amd64
     depends_on:
       - mongodb
